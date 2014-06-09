@@ -1,0 +1,1168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Modelo.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="11.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ModeloStoreContainer">
+          <EntitySet Name="DETALLE_GESTIONES_USUARIO" EntityType="Modelo.Store.DETALLE_GESTIONES_USUARIO" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="DETALLE_OFICINA_GESTIONES" EntityType="Modelo.Store.DETALLE_OFICINA_GESTIONES" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="DETALLE_SUCURSAL_OFICINA" EntityType="Modelo.Store.DETALLE_SUCURSAL_OFICINA" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.Store.DETALLE_TRAMITE" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="GESTIONES" EntityType="Modelo.Store.GESTIONES" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="OFICINAS" EntityType="Modelo.Store.OFICINAS" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="PROCESOS" EntityType="Modelo.Store.PROCESOS" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="PUESTO" EntityType="Modelo.Store.PUESTO" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="RECEPCION_REQUISITOS" EntityType="Modelo.Store.RECEPCION_REQUISITOS" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="REQUISITOS" EntityType="Modelo.Store.REQUISITOS" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="SALTOS" EntityType="Modelo.Store.SALTOS" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="SUCURSALES" EntityType="Modelo.Store.SUCURSALES" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="TRAMITES" EntityType="Modelo.Store.TRAMITES" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="USUARIOS" EntityType="Modelo.Store.USUARIOS" store:Type="Tables" Schema="APPCA" />
+          <AssociationSet Name="DETALLE_GESTIONES_USUARIO_FK1" Association="Modelo.Store.DETALLE_GESTIONES_USUARIO_FK1">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="DETALLE_GESTIONES_USUARIO" EntitySet="DETALLE_GESTIONES_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_OFICINA_GESTIONES_FK1" Association="Modelo.Store.DETALLE_OFICINA_GESTIONES_FK1">
+            <End Role="OFICINAS" EntitySet="OFICINAS" />
+            <End Role="DETALLE_OFICINA_GESTIONES" EntitySet="DETALLE_OFICINA_GESTIONES" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_OFICINA_GESTIONES_FK2" Association="Modelo.Store.DETALLE_OFICINA_GESTIONES_FK2">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="DETALLE_OFICINA_GESTIONES" EntitySet="DETALLE_OFICINA_GESTIONES" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_SUCURSAL_OFICINA_FK1" Association="Modelo.Store.DETALLE_SUCURSAL_OFICINA_FK1">
+            <End Role="SUCURSALES" EntitySet="SUCURSALES" />
+            <End Role="DETALLE_SUCURSAL_OFICINA" EntitySet="DETALLE_SUCURSAL_OFICINA" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_SUCURSAL_OFICINA_FK2" Association="Modelo.Store.DETALLE_SUCURSAL_OFICINA_FK2">
+            <End Role="OFICINAS" EntitySet="OFICINAS" />
+            <End Role="DETALLE_SUCURSAL_OFICINA" EntitySet="DETALLE_SUCURSAL_OFICINA" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.Store.DETALLE_TRAMITE_FK1">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
+          </AssociationSet>
+          <AssociationSet Name="PROCESOS_FK1" Association="Modelo.Store.PROCESOS_FK1">
+            <End Role="SALTOS" EntitySet="SALTOS" />
+            <End Role="PROCESOS" EntitySet="PROCESOS" />
+          </AssociationSet>
+          <AssociationSet Name="PUESTO_FK1" Association="Modelo.Store.PUESTO_FK1">
+            <End Role="OFICINAS" EntitySet="OFICINAS" />
+            <End Role="PUESTO" EntitySet="PUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="RECEPCION_REQUISITOS_FK1" Association="Modelo.Store.RECEPCION_REQUISITOS_FK1">
+            <End Role="REQUISITOS" EntitySet="REQUISITOS" />
+            <End Role="RECEPCION_REQUISITOS" EntitySet="RECEPCION_REQUISITOS" />
+          </AssociationSet>
+          <AssociationSet Name="RECEPCION_REQUISITOS_FK2" Association="Modelo.Store.RECEPCION_REQUISITOS_FK2">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="RECEPCION_REQUISITOS" EntitySet="RECEPCION_REQUISITOS" />
+          </AssociationSet>
+          <AssociationSet Name="REQUISITOS_FK1" Association="Modelo.Store.REQUISITOS_FK1">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="REQUISITOS" EntitySet="REQUISITOS" />
+          </AssociationSet>
+          <AssociationSet Name="SALTOS_FK1" Association="Modelo.Store.SALTOS_FK1">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="SALTOS" EntitySet="SALTOS" />
+          </AssociationSet>
+          <AssociationSet Name="SALTOS_FK2" Association="Modelo.Store.SALTOS_FK2">
+            <End Role="PUESTO" EntitySet="PUESTO" />
+            <End Role="SALTOS" EntitySet="SALTOS" />
+          </AssociationSet>
+          <AssociationSet Name="TRAMITES_FK2" Association="Modelo.Store.TRAMITES_FK2">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIOS_FK1" Association="Modelo.Store.USUARIOS_FK1">
+            <End Role="DETALLE_SUCURSAL_OFICINA" EntitySet="DETALLE_SUCURSAL_OFICINA" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIOS_FK2" Association="Modelo.Store.USUARIOS_FK2">
+            <End Role="PUESTO" EntitySet="PUESTO" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DETALLE_GESTIONES_USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+            <PropertyRef Name="IDPETICION" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="number" Nullable="false" />
+          <Property Name="IDPETICION" Type="number" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_OFICINA_GESTIONES">
+          <Key>
+            <PropertyRef Name="IDDETALLE_OFICINA_GESTION" />
+          </Key>
+          <Property Name="IDDETALLE_OFICINA_GESTION" Type="number" Nullable="false" />
+          <Property Name="IDOFICINA" Type="number" />
+          <Property Name="IDGESTION" Type="number" />
+        </EntityType>
+        <EntityType Name="DETALLE_SUCURSAL_OFICINA">
+          <Key>
+            <PropertyRef Name="IDDETALLE_SUCURSAL_OFICINA" />
+          </Key>
+          <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="number" Nullable="false" />
+          <Property Name="IDSUCURSAL" Type="number" />
+          <Property Name="IDOFICINA" Type="number" />
+        </EntityType>
+        <EntityType Name="DETALLE_TRAMITE">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_TRAMITE" />
+          </Key>
+          <Property Name="ID_DETALLE_TRAMITE" Type="number" Nullable="false" />
+          <Property Name="IDTRAMITE" Type="number" Nullable="false" />
+          <Property Name="IDSALTO" Type="number" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="number" Nullable="false" />
+          <Property Name="FECHA_RECEPCION" Type="date" Nullable="false" />
+          <Property Name="FECHA_ENTREGA" Type="date" />
+          <Property Name="DECISION" Type="number" />
+        </EntityType>
+        <EntityType Name="GESTIONES">
+          <Key>
+            <PropertyRef Name="IDGESTION" />
+          </Key>
+          <Property Name="IDGESTION" Type="number" Nullable="false" />
+          <Property Name="CODIGO" Type="varchar2" MaxLength="5" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="60" />
+          <Property Name="TIEMPO" Type="number" />
+        </EntityType>
+        <EntityType Name="OFICINAS">
+          <Key>
+            <PropertyRef Name="IDOFICINA" />
+          </Key>
+          <Property Name="IDOFICINA" Type="number" Nullable="false" />
+          <Property Name="NOMBRE_OFICINA" Type="varchar2" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="PROCESOS">
+          <Key>
+            <PropertyRef Name="IDPROCESO" />
+          </Key>
+          <Property Name="IDPROCESO" Type="number" Nullable="false" />
+          <Property Name="NUMERO" Type="number" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="150" />
+          <Property Name="IDSALTO" Type="number" />
+        </EntityType>
+        <EntityType Name="PUESTO">
+          <Key>
+            <PropertyRef Name="IDPUESTO" />
+          </Key>
+          <Property Name="IDPUESTO" Type="number" Nullable="false" />
+          <Property Name="NOMBRE_PUESTO" Type="varchar2" MaxLength="50" />
+          <Property Name="IDOFICINA" Type="number" />
+        </EntityType>
+        <EntityType Name="RECEPCION_REQUISITOS">
+          <Key>
+            <PropertyRef Name="ID_REC_REQUISITO" />
+          </Key>
+          <Property Name="ID_REC_REQUISITO" Type="number" Nullable="false" />
+          <Property Name="IDTRAMITE" Type="number" />
+          <Property Name="IDREQUISITO" Type="number" />
+          <Property Name="RECIBIDO" Type="number" />
+        </EntityType>
+        <EntityType Name="REQUISITOS">
+          <Key>
+            <PropertyRef Name="IDREQUISITO" />
+          </Key>
+          <Property Name="IDREQUISITO" Type="number" Nullable="false" />
+          <Property Name="IDGESTION" Type="number" />
+          <Property Name="NOMBRE_REQUISITO" Type="varchar2" MaxLength="30" />
+          <Property Name="OPCIONAL" Type="number" />
+        </EntityType>
+        <EntityType Name="SALTOS">
+          <Key>
+            <PropertyRef Name="IDSALTO" />
+          </Key>
+          <Property Name="IDSALTO" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NUMERO_SALTO" Type="number" />
+          <Property Name="IDGESTION" Type="number" />
+          <Property Name="IDPUESTO" Type="number" />
+          <Property Name="DECISION" Type="number" />
+          <Property Name="IDSALTOV" Type="number" />
+          <Property Name="IDSALTOF" Type="number" />
+          <Property Name="ULTIMOSALTO" Type="number" />
+          <Property Name="MINUTOS" Type="number" />
+          <Property Name="DESCRIPCION_DECISION" Type="varchar2" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="SUCURSALES">
+          <Key>
+            <PropertyRef Name="IDSUCURSAL" />
+          </Key>
+          <Property Name="IDSUCURSAL" Type="number" Nullable="false" />
+          <Property Name="IDEMPRESA" Type="number" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="DIRECCION" Type="varchar2" Nullable="false" MaxLength="60" />
+          <Property Name="IDMUNICIPIO" Type="number" Nullable="false" />
+          <Property Name="LATITUD" Type="number" />
+          <Property Name="LONGITUD" Type="number" />
+        </EntityType>
+        <EntityType Name="TRAMITES">
+          <Key>
+            <PropertyRef Name="IDTRAMITE" />
+          </Key>
+          <Property Name="IDTRAMITE" Type="number" Nullable="false" />
+          <Property Name="IDRSPONSABLE" Type="number" Nullable="false" />
+          <Property Name="IDGESTION" Type="number" Nullable="false" />
+          <Property Name="CODIGOTRAMITE" Type="varchar2" MaxLength="13" />
+          <Property Name="ACTIVO" Type="number" Nullable="false" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="NOTA" Type="nvarchar2" MaxLength="200" />
+          <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="number" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="number" Nullable="false" />
+          <Property Name="USUARIO" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="CONTRASENA" Type="varchar2" MaxLength="40" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="35" />
+          <Property Name="APELLIDOS" Type="varchar2" MaxLength="35" />
+          <Property Name="ESTADO" Type="number" />
+          <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="number" />
+          <Property Name="IDPUESTO" Type="number" />
+        </EntityType>
+        <Association Name="DETALLE_GESTIONES_USUARIO_FK1">
+          <End Role="USUARIOS" Type="Modelo.Store.USUARIOS" Multiplicity="1" />
+          <End Role="DETALLE_GESTIONES_USUARIO" Type="Modelo.Store.DETALLE_GESTIONES_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="DETALLE_GESTIONES_USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_OFICINA_GESTIONES_FK1">
+          <End Role="OFICINAS" Type="Modelo.Store.OFICINAS" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DETALLE_OFICINA_GESTIONES" Type="Modelo.Store.DETALLE_OFICINA_GESTIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OFICINAS">
+              <PropertyRef Name="IDOFICINA" />
+            </Principal>
+            <Dependent Role="DETALLE_OFICINA_GESTIONES">
+              <PropertyRef Name="IDOFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_OFICINA_GESTIONES_FK2">
+          <End Role="GESTIONES" Type="Modelo.Store.GESTIONES" Multiplicity="0..1" />
+          <End Role="DETALLE_OFICINA_GESTIONES" Type="Modelo.Store.DETALLE_OFICINA_GESTIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="DETALLE_OFICINA_GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_SUCURSAL_OFICINA_FK1">
+          <End Role="SUCURSALES" Type="Modelo.Store.SUCURSALES" Multiplicity="0..1" />
+          <End Role="DETALLE_SUCURSAL_OFICINA" Type="Modelo.Store.DETALLE_SUCURSAL_OFICINA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSALES">
+              <PropertyRef Name="IDSUCURSAL" />
+            </Principal>
+            <Dependent Role="DETALLE_SUCURSAL_OFICINA">
+              <PropertyRef Name="IDSUCURSAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_SUCURSAL_OFICINA_FK2">
+          <End Role="OFICINAS" Type="Modelo.Store.OFICINAS" Multiplicity="0..1" />
+          <End Role="DETALLE_SUCURSAL_OFICINA" Type="Modelo.Store.DETALLE_SUCURSAL_OFICINA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OFICINAS">
+              <PropertyRef Name="IDOFICINA" />
+            </Principal>
+            <Dependent Role="DETALLE_SUCURSAL_OFICINA">
+              <PropertyRef Name="IDOFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_TRAMITE_FK1">
+          <End Role="TRAMITES" Type="Modelo.Store.TRAMITES" Multiplicity="1" />
+          <End Role="DETALLE_TRAMITE" Type="Modelo.Store.DETALLE_TRAMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="DETALLE_TRAMITE">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROCESOS_FK1">
+          <End Role="SALTOS" Type="Modelo.Store.SALTOS" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PROCESOS" Type="Modelo.Store.PROCESOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALTOS">
+              <PropertyRef Name="IDSALTO" />
+            </Principal>
+            <Dependent Role="PROCESOS">
+              <PropertyRef Name="IDSALTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PUESTO_FK1">
+          <End Role="OFICINAS" Type="Modelo.Store.OFICINAS" Multiplicity="0..1" />
+          <End Role="PUESTO" Type="Modelo.Store.PUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OFICINAS">
+              <PropertyRef Name="IDOFICINA" />
+            </Principal>
+            <Dependent Role="PUESTO">
+              <PropertyRef Name="IDOFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RECEPCION_REQUISITOS_FK1">
+          <End Role="REQUISITOS" Type="Modelo.Store.REQUISITOS" Multiplicity="0..1" />
+          <End Role="RECEPCION_REQUISITOS" Type="Modelo.Store.RECEPCION_REQUISITOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REQUISITOS">
+              <PropertyRef Name="IDREQUISITO" />
+            </Principal>
+            <Dependent Role="RECEPCION_REQUISITOS">
+              <PropertyRef Name="IDREQUISITO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RECEPCION_REQUISITOS_FK2">
+          <End Role="TRAMITES" Type="Modelo.Store.TRAMITES" Multiplicity="0..1" />
+          <End Role="RECEPCION_REQUISITOS" Type="Modelo.Store.RECEPCION_REQUISITOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="RECEPCION_REQUISITOS">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REQUISITOS_FK1">
+          <End Role="GESTIONES" Type="Modelo.Store.GESTIONES" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REQUISITOS" Type="Modelo.Store.REQUISITOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="REQUISITOS">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SALTOS_FK1">
+          <End Role="GESTIONES" Type="Modelo.Store.GESTIONES" Multiplicity="0..1" />
+          <End Role="SALTOS" Type="Modelo.Store.SALTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="SALTOS">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SALTOS_FK2">
+          <End Role="PUESTO" Type="Modelo.Store.PUESTO" Multiplicity="0..1" />
+          <End Role="SALTOS" Type="Modelo.Store.SALTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUESTO">
+              <PropertyRef Name="IDPUESTO" />
+            </Principal>
+            <Dependent Role="SALTOS">
+              <PropertyRef Name="IDPUESTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRAMITES_FK2">
+          <End Role="GESTIONES" Type="Modelo.Store.GESTIONES" Multiplicity="1" />
+          <End Role="TRAMITES" Type="Modelo.Store.TRAMITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="TRAMITES">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIOS_FK1">
+          <End Role="DETALLE_SUCURSAL_OFICINA" Type="Modelo.Store.DETALLE_SUCURSAL_OFICINA" Multiplicity="0..1" />
+          <End Role="USUARIOS" Type="Modelo.Store.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_SUCURSAL_OFICINA">
+              <PropertyRef Name="IDDETALLE_SUCURSAL_OFICINA" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="IDDETALLE_SUCURSAL_OFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIOS_FK2">
+          <End Role="PUESTO" Type="Modelo.Store.PUESTO" Multiplicity="0..1" />
+          <End Role="USUARIOS" Type="Modelo.Store.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUESTO">
+              <PropertyRef Name="IDPUESTO" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="IDPUESTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Modelo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Entidades" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DETALLE_GESTIONES_USUARIO" EntityType="Modelo.DETALLE_GESTIONES_USUARIO" />
+          <EntitySet Name="DETALLE_OFICINA_GESTIONES" EntityType="Modelo.DETALLE_OFICINA_GESTIONES" />
+          <EntitySet Name="DETALLE_SUCURSAL_OFICINA" EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" />
+          <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.DETALLE_TRAMITE" />
+          <EntitySet Name="OFICINAS" EntityType="Modelo.OFICINAS" />
+          <EntitySet Name="PROCESOS" EntityType="Modelo.PROCESOS" />
+          <EntitySet Name="PUESTO" EntityType="Modelo.PUESTO" />
+          <EntitySet Name="RECEPCION_REQUISITOS" EntityType="Modelo.RECEPCION_REQUISITOS" />
+          <EntitySet Name="REQUISITOS" EntityType="Modelo.REQUISITOS" />
+          <EntitySet Name="TRAMITES" EntityType="Modelo.TRAMITES" />
+          <EntitySet Name="USUARIOS" EntityType="Modelo.USUARIOS" />
+          <AssociationSet Name="DETALLE_GESTIONES_USUARIO_FK1" Association="Modelo.DETALLE_GESTIONES_USUARIO_FK1">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="DETALLE_GESTIONES_USUARIO" EntitySet="DETALLE_GESTIONES_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_OFICINA_GESTIONES_FK1" Association="Modelo.DETALLE_OFICINA_GESTIONES_FK1">
+            <End Role="OFICINAS" EntitySet="OFICINAS" />
+            <End Role="DETALLE_OFICINA_GESTIONES" EntitySet="DETALLE_OFICINA_GESTIONES" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_SUCURSAL_OFICINA_FK2" Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK2">
+            <End Role="OFICINAS" EntitySet="OFICINAS" />
+            <End Role="DETALLE_SUCURSAL_OFICINA" EntitySet="DETALLE_SUCURSAL_OFICINA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIOS_FK1" Association="Modelo.USUARIOS_FK1">
+            <End Role="DETALLE_SUCURSAL_OFICINA" EntitySet="DETALLE_SUCURSAL_OFICINA" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
+          </AssociationSet>
+          <AssociationSet Name="PUESTO_FK1" Association="Modelo.PUESTO_FK1">
+            <End Role="OFICINAS" EntitySet="OFICINAS" />
+            <End Role="PUESTO" EntitySet="PUESTO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIOS_FK2" Association="Modelo.USUARIOS_FK2">
+            <End Role="PUESTO" EntitySet="PUESTO" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="RECEPCION_REQUISITOS_FK1" Association="Modelo.RECEPCION_REQUISITOS_FK1">
+            <End Role="REQUISITOS" EntitySet="REQUISITOS" />
+            <End Role="RECEPCION_REQUISITOS" EntitySet="RECEPCION_REQUISITOS" />
+          </AssociationSet>
+          <AssociationSet Name="RECEPCION_REQUISITOS_FK2" Association="Modelo.RECEPCION_REQUISITOS_FK2">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="RECEPCION_REQUISITOS" EntitySet="RECEPCION_REQUISITOS" />
+          </AssociationSet>
+          <EntitySet Name="SUCURSALES" EntityType="Modelo.SUCURSALES" />
+          <AssociationSet Name="DETALLE_SUCURSAL_OFICINA_FK1" Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK1">
+            <End Role="SUCURSALES" EntitySet="SUCURSALES" />
+            <End Role="DETALLE_SUCURSAL_OFICINA" EntitySet="DETALLE_SUCURSAL_OFICINA" />
+          </AssociationSet>
+          <EntitySet Name="GESTIONES" EntityType="Modelo.GESTIONES" />
+          <AssociationSet Name="DETALLE_OFICINA_GESTIONES_FK2" Association="Modelo.DETALLE_OFICINA_GESTIONES_FK2">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="DETALLE_OFICINA_GESTIONES" EntitySet="DETALLE_OFICINA_GESTIONES" />
+          </AssociationSet>
+          <AssociationSet Name="REQUISITOS_FK1" Association="Modelo.REQUISITOS_FK1">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="REQUISITOS" EntitySet="REQUISITOS" />
+          </AssociationSet>
+          <AssociationSet Name="TRAMITES_FK2" Association="Modelo.TRAMITES_FK2">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+          </AssociationSet>
+          <EntitySet Name="SALTOS" EntityType="Modelo.SALTOS" />
+          <AssociationSet Name="SALTOS_FK1" Association="Modelo.SALTOS_FK1">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
+            <End Role="SALTOS" EntitySet="SALTOS" />
+          </AssociationSet>
+          <AssociationSet Name="PROCESOS_FK1" Association="Modelo.PROCESOS_FK1">
+            <End Role="SALTOS" EntitySet="SALTOS" />
+            <End Role="PROCESOS" EntitySet="PROCESOS" />
+          </AssociationSet>
+          <AssociationSet Name="SALTOS_FK2" Association="Modelo.SALTOS_FK2">
+            <End Role="PUESTO" EntitySet="PUESTO" />
+            <End Role="SALTOS" EntitySet="SALTOS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DETALLE_GESTIONES_USUARIO">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+            <PropertyRef Name="IDPETICION" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDPETICION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="USUARIOS" Relationship="Modelo.DETALLE_GESTIONES_USUARIO_FK1" FromRole="DETALLE_GESTIONES_USUARIO" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="DETALLE_OFICINA_GESTIONES">
+          <Key>
+            <PropertyRef Name="IDDETALLE_OFICINA_GESTION" />
+          </Key>
+          <Property Name="IDDETALLE_OFICINA_GESTION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDOFICINA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDGESTION" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="OFICINAS" Relationship="Modelo.DETALLE_OFICINA_GESTIONES_FK1" FromRole="DETALLE_OFICINA_GESTIONES" ToRole="OFICINAS" />
+          <NavigationProperty Name="GESTIONES" Relationship="Modelo.DETALLE_OFICINA_GESTIONES_FK2" FromRole="DETALLE_OFICINA_GESTIONES" ToRole="GESTIONES" />
+        </EntityType>
+        <EntityType Name="DETALLE_SUCURSAL_OFICINA">
+          <Key>
+            <PropertyRef Name="IDDETALLE_SUCURSAL_OFICINA" />
+          </Key>
+          <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDSUCURSAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDOFICINA" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="OFICINAS" Relationship="Modelo.DETALLE_SUCURSAL_OFICINA_FK2" FromRole="DETALLE_SUCURSAL_OFICINA" ToRole="OFICINAS" />
+          <NavigationProperty Name="USUARIOS" Relationship="Modelo.USUARIOS_FK1" FromRole="DETALLE_SUCURSAL_OFICINA" ToRole="USUARIOS" />
+          <NavigationProperty Name="SUCURSALES" Relationship="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" FromRole="DETALLE_SUCURSAL_OFICINA" ToRole="SUCURSALES" />
+        </EntityType>
+        <EntityType Name="DETALLE_TRAMITE">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_TRAMITE" />
+          </Key>
+          <Property Name="ID_DETALLE_TRAMITE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDTRAMITE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDSALTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="FECHA_RECEPCION" Type="DateTime" Nullable="false" />
+          <Property Name="FECHA_ENTREGA" Type="DateTime" />
+          <Property Name="DECISION" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="TRAMITES" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="DETALLE_TRAMITE" ToRole="TRAMITES" />
+        </EntityType>
+        <EntityType Name="OFICINAS">
+          <Key>
+            <PropertyRef Name="IDOFICINA" />
+          </Key>
+          <Property Name="IDOFICINA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NOMBRE_OFICINA" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="DETALLE_OFICINA_GESTIONES" Relationship="Modelo.DETALLE_OFICINA_GESTIONES_FK1" FromRole="OFICINAS" ToRole="DETALLE_OFICINA_GESTIONES" />
+          <NavigationProperty Name="DETALLE_SUCURSAL_OFICINA" Relationship="Modelo.DETALLE_SUCURSAL_OFICINA_FK2" FromRole="OFICINAS" ToRole="DETALLE_SUCURSAL_OFICINA" />
+          <NavigationProperty Name="PUESTO" Relationship="Modelo.PUESTO_FK1" FromRole="OFICINAS" ToRole="PUESTO" />
+        </EntityType>
+        <EntityType Name="PROCESOS">
+          <Key>
+            <PropertyRef Name="IDPROCESO" />
+          </Key>
+          <Property Name="IDPROCESO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NUMERO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="IDSALTO" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="SALTOS" Relationship="Modelo.PROCESOS_FK1" FromRole="PROCESOS" ToRole="SALTOS" />
+        </EntityType>
+        <EntityType Name="PUESTO">
+          <Key>
+            <PropertyRef Name="IDPUESTO" />
+          </Key>
+          <Property Name="IDPUESTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NOMBRE_PUESTO" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IDOFICINA" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="OFICINAS" Relationship="Modelo.PUESTO_FK1" FromRole="PUESTO" ToRole="OFICINAS" />
+          <NavigationProperty Name="USUARIOS" Relationship="Modelo.USUARIOS_FK2" FromRole="PUESTO" ToRole="USUARIOS" />
+          <NavigationProperty Name="SALTOS" Relationship="Modelo.SALTOS_FK2" FromRole="PUESTO" ToRole="SALTOS" />
+        </EntityType>
+        <EntityType Name="RECEPCION_REQUISITOS">
+          <Key>
+            <PropertyRef Name="ID_REC_REQUISITO" />
+          </Key>
+          <Property Name="ID_REC_REQUISITO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDTRAMITE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDREQUISITO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="RECIBIDO" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK1" FromRole="RECEPCION_REQUISITOS" ToRole="REQUISITOS" />
+          <NavigationProperty Name="TRAMITES" Relationship="Modelo.RECEPCION_REQUISITOS_FK2" FromRole="RECEPCION_REQUISITOS" ToRole="TRAMITES" />
+        </EntityType>
+        <EntityType Name="REQUISITOS">
+          <Key>
+            <PropertyRef Name="IDREQUISITO" />
+          </Key>
+          <Property Name="IDREQUISITO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDGESTION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="NOMBRE_REQUISITO" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="OPCIONAL" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="RECEPCION_REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK1" FromRole="REQUISITOS" ToRole="RECEPCION_REQUISITOS" />
+          <NavigationProperty Name="GESTIONES" Relationship="Modelo.REQUISITOS_FK1" FromRole="REQUISITOS" ToRole="GESTIONES" />
+        </EntityType>
+        <EntityType Name="TRAMITES">
+          <Key>
+            <PropertyRef Name="IDTRAMITE" />
+          </Key>
+          <Property Name="IDTRAMITE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDRSPONSABLE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="IDGESTION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="CODIGOTRAMITE" Type="String" MaxLength="13" Unicode="false" FixedLength="false" />
+          <Property Name="ACTIVO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" />
+          <Property Name="NOTA" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="DETALLE_TRAMITE" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_TRAMITE" />
+          <NavigationProperty Name="RECEPCION_REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK2" FromRole="TRAMITES" ToRole="RECEPCION_REQUISITOS" />
+          <NavigationProperty Name="GESTIONES" Relationship="Modelo.TRAMITES_FK2" FromRole="TRAMITES" ToRole="GESTIONES" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="IDUSUARIO" />
+          </Key>
+          <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="CONTRASENA" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="35" Unicode="false" FixedLength="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="35" Unicode="false" FixedLength="false" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="IDPUESTO" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="DETALLE_GESTIONES_USUARIO" Relationship="Modelo.DETALLE_GESTIONES_USUARIO_FK1" FromRole="USUARIOS" ToRole="DETALLE_GESTIONES_USUARIO" />
+          <NavigationProperty Name="DETALLE_SUCURSAL_OFICINA" Relationship="Modelo.USUARIOS_FK1" FromRole="USUARIOS" ToRole="DETALLE_SUCURSAL_OFICINA" />
+          <NavigationProperty Name="PUESTO" Relationship="Modelo.USUARIOS_FK2" FromRole="USUARIOS" ToRole="PUESTO" />
+        </EntityType>
+        <Association Name="DETALLE_GESTIONES_USUARIO_FK1">
+          <End Role="USUARIOS" Type="Modelo.USUARIOS" Multiplicity="1" />
+          <End Role="DETALLE_GESTIONES_USUARIO" Type="Modelo.DETALLE_GESTIONES_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="IDUSUARIO" />
+            </Principal>
+            <Dependent Role="DETALLE_GESTIONES_USUARIO">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_OFICINA_GESTIONES_FK1">
+          <End Role="OFICINAS" Type="Modelo.OFICINAS" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DETALLE_OFICINA_GESTIONES" Type="Modelo.DETALLE_OFICINA_GESTIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OFICINAS">
+              <PropertyRef Name="IDOFICINA" />
+            </Principal>
+            <Dependent Role="DETALLE_OFICINA_GESTIONES">
+              <PropertyRef Name="IDOFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_SUCURSAL_OFICINA_FK2">
+          <End Role="OFICINAS" Type="Modelo.OFICINAS" Multiplicity="0..1" />
+          <End Role="DETALLE_SUCURSAL_OFICINA" Type="Modelo.DETALLE_SUCURSAL_OFICINA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OFICINAS">
+              <PropertyRef Name="IDOFICINA" />
+            </Principal>
+            <Dependent Role="DETALLE_SUCURSAL_OFICINA">
+              <PropertyRef Name="IDOFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIOS_FK1">
+          <End Role="DETALLE_SUCURSAL_OFICINA" Type="Modelo.DETALLE_SUCURSAL_OFICINA" Multiplicity="0..1" />
+          <End Role="USUARIOS" Type="Modelo.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_SUCURSAL_OFICINA">
+              <PropertyRef Name="IDDETALLE_SUCURSAL_OFICINA" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="IDDETALLE_SUCURSAL_OFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_TRAMITE_FK1">
+          <End Role="TRAMITES" Type="Modelo.TRAMITES" Multiplicity="1" />
+          <End Role="DETALLE_TRAMITE" Type="Modelo.DETALLE_TRAMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="DETALLE_TRAMITE">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PUESTO_FK1">
+          <End Role="OFICINAS" Type="Modelo.OFICINAS" Multiplicity="0..1" />
+          <End Role="PUESTO" Type="Modelo.PUESTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OFICINAS">
+              <PropertyRef Name="IDOFICINA" />
+            </Principal>
+            <Dependent Role="PUESTO">
+              <PropertyRef Name="IDOFICINA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIOS_FK2">
+          <End Role="PUESTO" Type="Modelo.PUESTO" Multiplicity="0..1" />
+          <End Role="USUARIOS" Type="Modelo.USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUESTO">
+              <PropertyRef Name="IDPUESTO" />
+            </Principal>
+            <Dependent Role="USUARIOS">
+              <PropertyRef Name="IDPUESTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RECEPCION_REQUISITOS_FK1">
+          <End Role="REQUISITOS" Type="Modelo.REQUISITOS" Multiplicity="0..1" />
+          <End Role="RECEPCION_REQUISITOS" Type="Modelo.RECEPCION_REQUISITOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REQUISITOS">
+              <PropertyRef Name="IDREQUISITO" />
+            </Principal>
+            <Dependent Role="RECEPCION_REQUISITOS">
+              <PropertyRef Name="IDREQUISITO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RECEPCION_REQUISITOS_FK2">
+          <End Role="TRAMITES" Type="Modelo.TRAMITES" Multiplicity="0..1" />
+          <End Role="RECEPCION_REQUISITOS" Type="Modelo.RECEPCION_REQUISITOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="RECEPCION_REQUISITOS">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SUCURSALES">
+          <Key>
+            <PropertyRef Name="IDSUCURSAL" />
+          </Key>
+          <Property Type="Decimal" Name="IDSUCURSAL" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDEMPRESA" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DIRECCION" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="IDMUNICIPIO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="LATITUD" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="LONGITUD" Precision="38" Scale="0" />
+          <NavigationProperty Name="DETALLE_SUCURSAL_OFICINA" Relationship="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" FromRole="SUCURSALES" ToRole="DETALLE_SUCURSAL_OFICINA" />
+        </EntityType>
+        <Association Name="DETALLE_SUCURSAL_OFICINA_FK1">
+          <End Type="Modelo.SUCURSALES" Role="SUCURSALES" Multiplicity="0..1" />
+          <End Type="Modelo.DETALLE_SUCURSAL_OFICINA" Role="DETALLE_SUCURSAL_OFICINA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUCURSALES">
+              <PropertyRef Name="IDSUCURSAL" />
+            </Principal>
+            <Dependent Role="DETALLE_SUCURSAL_OFICINA">
+              <PropertyRef Name="IDSUCURSAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GESTIONES">
+          <Key>
+            <PropertyRef Name="IDGESTION" />
+          </Key>
+          <Property Type="Decimal" Name="IDGESTION" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="CODIGO" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NOMBRE" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="TIEMPO" Precision="38" Scale="0" />
+          <NavigationProperty Name="DETALLE_OFICINA_GESTIONES" Relationship="Modelo.DETALLE_OFICINA_GESTIONES_FK2" FromRole="GESTIONES" ToRole="DETALLE_OFICINA_GESTIONES" />
+          <NavigationProperty Name="REQUISITOS" Relationship="Modelo.REQUISITOS_FK1" FromRole="GESTIONES" ToRole="REQUISITOS" />
+          <NavigationProperty Name="TRAMITES" Relationship="Modelo.TRAMITES_FK2" FromRole="GESTIONES" ToRole="TRAMITES" />
+          <NavigationProperty Name="SALTOS" Relationship="Modelo.SALTOS_FK1" FromRole="GESTIONES" ToRole="SALTOS" />
+        </EntityType>
+        <Association Name="DETALLE_OFICINA_GESTIONES_FK2">
+          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="0..1" />
+          <End Type="Modelo.DETALLE_OFICINA_GESTIONES" Role="DETALLE_OFICINA_GESTIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="DETALLE_OFICINA_GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REQUISITOS_FK1">
+          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="0..1" />
+          <End Type="Modelo.REQUISITOS" Role="REQUISITOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="REQUISITOS">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRAMITES_FK2">
+          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="1" />
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="TRAMITES">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SALTOS">
+          <Key>
+            <PropertyRef Name="IDSALTO" />
+          </Key>
+          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="NUMERO_SALTO" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDGESTION" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDPUESTO" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="DECISION" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDSALTOV" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDSALTOF" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ULTIMOSALTO" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="MINUTOS" Precision="38" Scale="0" />
+          <Property Type="String" Name="DESCRIPCION_DECISION" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GESTIONES" Relationship="Modelo.SALTOS_FK1" FromRole="SALTOS" ToRole="GESTIONES" />
+          <NavigationProperty Name="PROCESOS" Relationship="Modelo.PROCESOS_FK1" FromRole="SALTOS" ToRole="PROCESOS" />
+          <NavigationProperty Name="PUESTO" Relationship="Modelo.SALTOS_FK2" FromRole="SALTOS" ToRole="PUESTO" />
+        </EntityType>
+        <Association Name="SALTOS_FK1">
+          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="0..1" />
+          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="SALTOS">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROCESOS_FK1">
+          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="0..1" />
+          <End Type="Modelo.PROCESOS" Role="PROCESOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALTOS">
+              <PropertyRef Name="IDSALTO" />
+            </Principal>
+            <Dependent Role="PROCESOS">
+              <PropertyRef Name="IDSALTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SALTOS_FK2">
+          <End Type="Modelo.PUESTO" Role="PUESTO" Multiplicity="0..1" />
+          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUESTO">
+              <PropertyRef Name="IDPUESTO" />
+            </Principal>
+            <Dependent Role="SALTOS">
+              <PropertyRef Name="IDPUESTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModeloStoreContainer" CdmEntityContainer="Entidades">
+          <EntitySetMapping Name="DETALLE_GESTIONES_USUARIO">
+            <EntityTypeMapping TypeName="Modelo.DETALLE_GESTIONES_USUARIO">
+              <MappingFragment StoreEntitySet="DETALLE_GESTIONES_USUARIO">
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDPETICION" ColumnName="IDPETICION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_OFICINA_GESTIONES">
+            <EntityTypeMapping TypeName="Modelo.DETALLE_OFICINA_GESTIONES">
+              <MappingFragment StoreEntitySet="DETALLE_OFICINA_GESTIONES">
+                <ScalarProperty Name="IDDETALLE_OFICINA_GESTION" ColumnName="IDDETALLE_OFICINA_GESTION" />
+                <ScalarProperty Name="IDOFICINA" ColumnName="IDOFICINA" />
+                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_SUCURSAL_OFICINA">
+            <EntityTypeMapping TypeName="Modelo.DETALLE_SUCURSAL_OFICINA">
+              <MappingFragment StoreEntitySet="DETALLE_SUCURSAL_OFICINA">
+                <ScalarProperty Name="IDDETALLE_SUCURSAL_OFICINA" ColumnName="IDDETALLE_SUCURSAL_OFICINA" />
+                <ScalarProperty Name="IDSUCURSAL" ColumnName="IDSUCURSAL" />
+                <ScalarProperty Name="IDOFICINA" ColumnName="IDOFICINA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_TRAMITE">
+            <EntityTypeMapping TypeName="Modelo.DETALLE_TRAMITE">
+              <MappingFragment StoreEntitySet="DETALLE_TRAMITE">
+                <ScalarProperty Name="ID_DETALLE_TRAMITE" ColumnName="ID_DETALLE_TRAMITE" />
+                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
+                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
+                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
+                <ScalarProperty Name="DECISION" ColumnName="DECISION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OFICINAS">
+            <EntityTypeMapping TypeName="Modelo.OFICINAS">
+              <MappingFragment StoreEntitySet="OFICINAS">
+                <ScalarProperty Name="IDOFICINA" ColumnName="IDOFICINA" />
+                <ScalarProperty Name="NOMBRE_OFICINA" ColumnName="NOMBRE_OFICINA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROCESOS">
+            <EntityTypeMapping TypeName="Modelo.PROCESOS">
+              <MappingFragment StoreEntitySet="PROCESOS">
+                <ScalarProperty Name="IDPROCESO" ColumnName="IDPROCESO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PUESTO">
+            <EntityTypeMapping TypeName="Modelo.PUESTO">
+              <MappingFragment StoreEntitySet="PUESTO">
+                <ScalarProperty Name="IDPUESTO" ColumnName="IDPUESTO" />
+                <ScalarProperty Name="NOMBRE_PUESTO" ColumnName="NOMBRE_PUESTO" />
+                <ScalarProperty Name="IDOFICINA" ColumnName="IDOFICINA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECEPCION_REQUISITOS">
+            <EntityTypeMapping TypeName="Modelo.RECEPCION_REQUISITOS">
+              <MappingFragment StoreEntitySet="RECEPCION_REQUISITOS">
+                <ScalarProperty Name="ID_REC_REQUISITO" ColumnName="ID_REC_REQUISITO" />
+                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
+                <ScalarProperty Name="IDREQUISITO" ColumnName="IDREQUISITO" />
+                <ScalarProperty Name="RECIBIDO" ColumnName="RECIBIDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REQUISITOS">
+            <EntityTypeMapping TypeName="Modelo.REQUISITOS">
+              <MappingFragment StoreEntitySet="REQUISITOS">
+                <ScalarProperty Name="IDREQUISITO" ColumnName="IDREQUISITO" />
+                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
+                <ScalarProperty Name="NOMBRE_REQUISITO" ColumnName="NOMBRE_REQUISITO" />
+                <ScalarProperty Name="OPCIONAL" ColumnName="OPCIONAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRAMITES">
+            <EntityTypeMapping TypeName="Modelo.TRAMITES">
+              <MappingFragment StoreEntitySet="TRAMITES">
+                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
+                <ScalarProperty Name="IDRSPONSABLE" ColumnName="IDRSPONSABLE" />
+                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
+                <ScalarProperty Name="CODIGOTRAMITE" ColumnName="CODIGOTRAMITE" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
+                <ScalarProperty Name="IDDETALLE_SUCURSAL_OFICINA" ColumnName="IDDETALLE_SUCURSAL_OFICINA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="Modelo.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="IDDETALLE_SUCURSAL_OFICINA" ColumnName="IDDETALLE_SUCURSAL_OFICINA" />
+                <ScalarProperty Name="IDPUESTO" ColumnName="IDPUESTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUCURSALES">
+            <EntityTypeMapping TypeName="Modelo.SUCURSALES">
+              <MappingFragment StoreEntitySet="SUCURSALES">
+                <ScalarProperty Name="LONGITUD" ColumnName="LONGITUD" />
+                <ScalarProperty Name="LATITUD" ColumnName="LATITUD" />
+                <ScalarProperty Name="IDMUNICIPIO" ColumnName="IDMUNICIPIO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="IDEMPRESA" ColumnName="IDEMPRESA" />
+                <ScalarProperty Name="IDSUCURSAL" ColumnName="IDSUCURSAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GESTIONES">
+            <EntityTypeMapping TypeName="Modelo.GESTIONES">
+              <MappingFragment StoreEntitySet="GESTIONES">
+                <ScalarProperty Name="TIEMPO" ColumnName="TIEMPO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALTOS">
+            <EntityTypeMapping TypeName="Modelo.SALTOS">
+              <MappingFragment StoreEntitySet="SALTOS">
+                <ScalarProperty Name="DESCRIPCION_DECISION" ColumnName="DESCRIPCION_DECISION" />
+                <ScalarProperty Name="MINUTOS" ColumnName="MINUTOS" />
+                <ScalarProperty Name="ULTIMOSALTO" ColumnName="ULTIMOSALTO" />
+                <ScalarProperty Name="IDSALTOF" ColumnName="IDSALTOF" />
+                <ScalarProperty Name="IDSALTOV" ColumnName="IDSALTOV" />
+                <ScalarProperty Name="DECISION" ColumnName="DECISION" />
+                <ScalarProperty Name="IDPUESTO" ColumnName="IDPUESTO" />
+                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
+                <ScalarProperty Name="NUMERO_SALTO" ColumnName="NUMERO_SALTO" />
+                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="appcaSeguimiento">
+        <EntityTypeShape EntityType="Modelo.DETALLE_GESTIONES_USUARIO" Width="1.5" PointX="9.75" PointY="3.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.DETALLE_OFICINA_GESTIONES" Width="1.5" PointX="3" PointY="2" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" Width="1.5" PointX="3" PointY="4.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.DETALLE_TRAMITE" Width="1.5" PointX="12" PointY="8.5" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.OFICINAS" Width="1.5" PointX="0.75" PointY="5.25" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.PROCESOS" Width="1.5" PointX="7.5" PointY="7.875" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.PUESTO" Width="1.5" PointX="3" PointY="7.875" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.RECEPCION_REQUISITOS" Width="1.5" PointX="15" PointY="8.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.REQUISITOS" Width="1.5" PointX="12.75" PointY="4.875" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.TRAMITES" Width="1.5" PointX="9.75" PointY="8.375" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Modelo.USUARIOS" Width="1.5" PointX="7.5" PointY="2.875" Height="3.3263964843750031" IsExpanded="true" />
+        <AssociationConnector Association="Modelo.DETALLE_GESTIONES_USUARIO_FK1" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="4.547841796875" />
+          <ConnectorPoint PointX="9.75" PointY="4.547841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.DETALLE_OFICINA_GESTIONES_FK1" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="5.25" />
+          <ConnectorPoint PointX="1.5" PointY="2.9901432291666667" />
+          <ConnectorPoint PointX="3" PointY="2.9901432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK2" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.9612939453125" />
+          <ConnectorPoint PointX="2.5729166666666665" PointY="5.9612939453124989" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="5.9612939453125" />
+          <ConnectorPoint PointX="3" PointY="5.9612939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.USUARIOS_FK1" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="5.2545475260416659" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="5.254547526041665" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="5.2545475260416659" />
+          <ConnectorPoint PointX="7.5" PointY="5.2545475260416659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.25" PointY="9.7785953776041659" />
+          <ConnectorPoint PointX="12" PointY="9.7785953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.PUESTO_FK1" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="7.2302864583333317" />
+          <ConnectorPoint PointX="2.5973244349011222" PointY="7.5776108932344517" />
+          <ConnectorPoint PointX="2.8714255650988791" PointY="7.8517120234322109" />
+          <ConnectorPoint PointX="2.875" PointY="7.8552864583333317" />
+          <ConnectorPoint PointX="2.875" PointY="7.75" />
+          <ConnectorPoint PointX="3" PointY="7.875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.USUARIOS_FK2" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="7.875" />
+          <ConnectorPoint PointX="4.875" PointY="7.5" />
+          <ConnectorPoint PointX="4.875" PointY="4.03352176302084" />
+          <ConnectorPoint PointX="7.5" PointY="4.03352176302084" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.RECEPCION_REQUISITOS_FK1" ManuallyRouted="false">
+          <ConnectorPoint PointX="14.25" PointY="5.9612939453125" />
+          <ConnectorPoint PointX="15.75" PointY="5.9612939453125" />
+          <ConnectorPoint PointX="15.75" PointY="8.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.RECEPCION_REQUISITOS_FK2" ManuallyRouted="false">
+          <ConnectorPoint PointX="11.25" PointY="11.314392903645832" />
+          <ConnectorPoint PointX="15.75" PointY="11.314392903645832" />
+          <ConnectorPoint PointX="15.75" PointY="10.922587890625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Modelo.SUCURSALES" Width="1.5" PointX="0.75" PointY="12" Height="2.5571907552083388" />
+        <AssociationConnector Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" >
+          <ConnectorPoint PointX="2.25" PointY="12.032306692307694" />
+          <ConnectorPoint PointX="2.65625" PointY="11.626056692307694" />
+          <ConnectorPoint PointX="2.65625" PointY="5.1993949726562487" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="5.1993949726562478" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="5.1993949726562487" />
+          <ConnectorPoint PointX="3" PointY="5.1993949726562487" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Modelo.GESTIONES" Width="1.5" PointX="0.75" PointY="8.5" Height="2.5571907552083388" />
+        <AssociationConnector Association="Modelo.DETALLE_OFICINA_GESTIONES_FK2" >
+          <ConnectorPoint PointX="2.2257692307692305" PointY="8.5" />
+          <ConnectorPoint PointX="2.5973244349011204" PointY="8.12844479586811" />
+          <ConnectorPoint PointX="2.7151755650988791" PointY="8.0105936656703527" />
+          <ConnectorPoint PointX="2.75" PointY="7.9757692307692309" />
+          <ConnectorPoint PointX="2.75" PointY="3.4005119401041668" />
+          <ConnectorPoint PointX="3" PointY="3.4005119401041668" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.REQUISITOS_FK1" >
+          <ConnectorPoint PointX="2.25" PointY="8.5265374615384619" />
+          <ConnectorPoint PointX="2.5973244349011204" PointY="8.17921302663734" />
+          <ConnectorPoint PointX="2.7151755650988791" PointY="8.0613618964395837" />
+          <ConnectorPoint PointX="2.8125" PointY="7.9640374615384619" />
+          <ConnectorPoint PointX="2.8125" PointY="7.422587890625" />
+          <ConnectorPoint PointX="12.375" PointY="7.422587890625" />
+          <ConnectorPoint PointX="12.75" PointY="7.047587890625" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.TRAMITES_FK2" >
+          <ConnectorPoint PointX="1.5" PointY="11.057190755208332" />
+          <ConnectorPoint PointX="1.5" PointY="11.420146484375" />
+          <ConnectorPoint PointX="2.5729166666666665" PointY="11.420146484375" />
+          <ConnectorPoint PointX="2.7395833333333335" PointY="11.420146484375" />
+          <ConnectorPoint PointX="9.75" PointY="11.420146484375" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Modelo.SALTOS" Width="1.5" PointX="5.25" PointY="7.75" Height="3.5186979166666674" />
+        <AssociationConnector Association="Modelo.SALTOS_FK1" >
+          <ConnectorPoint PointX="2.25" PointY="10.583639322916666" />
+          <ConnectorPoint PointX="2.5729166666666665" PointY="10.583639322916666" />
+          <ConnectorPoint PointX="2.7395833333333335" PointY="10.583639322916666" />
+          <ConnectorPoint PointX="5.25" PointY="10.583639322916666" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.PROCESOS_FK1" >
+          <ConnectorPoint PointX="6.75" PointY="8.8651432291666659" />
+          <ConnectorPoint PointX="7.5" PointY="8.8651432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Modelo.SALTOS_FK2" >
+          <ConnectorPoint PointX="4.5" PointY="8.9925464453125" />
+          <ConnectorPoint PointX="5.25" PointY="8.9925464453125" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
