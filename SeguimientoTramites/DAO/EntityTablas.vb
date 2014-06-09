@@ -8,19 +8,23 @@
                    Select users).ToList()
 
         If usu.Count = 1 Then
-            For Each u In usu
-                With SesionActiva
-                    .IdUsuario = u.IDUSUARIO
-                    .Nombre = String.Format("{0} {1}", u.NOMBRE, u.APELLIDOS)
-                    .Usuario = u.USUARIO
-                    .Sucursal = u.DETALLE_SUCURSAL_OFICINA.SUCURSALES.NOMBRE
-                    .Oficina = u.DETALLE_SUCURSAL_OFICINA.OFICINAS.NOMBRE_OFICINA
-                    .IdSucursalOficina = u.IDDETALLE_SUCURSAL_OFICINA
-                    .IdPuesto = u.IDPUESTO
-                    .NombrePuesto = u.PUESTO.NOMBRE_PUESTO
-                End With
-            Next
-            Return True
+            Try
+                For Each u In usu
+                    With SesionActiva
+                        .IdUsuario = u.IDUSUARIO
+                        .Nombre = String.Format("{0} {1}", u.NOMBRE, u.APELLIDOS)
+                        .Usuario = u.USUARIO
+                        .Sucursal = u.DETALLE_SUCURSAL_OFICINA.SUCURSALES.NOMBRE
+                        .Oficina = u.DETALLE_SUCURSAL_OFICINA.OFICINAS.NOMBRE_OFICINA
+                        .IdSucursalOficina = u.IDDETALLE_SUCURSAL_OFICINA
+                        .IdPuesto = u.IDPUESTO
+                        .NombrePuesto = u.PUESTO.NOMBRE_PUESTO
+                    End With
+                Next
+                Return True
+            Catch ex As Exception
+                Return False 'Usuario sin puesto genera un error, devolvemos False
+            End Try
         Else
             Return False
         End If
@@ -29,27 +33,23 @@
 
 #Region "Recepcion de tramites"
     Public Shared Sub TramitesRecibir(ByVal grid As DataGridView)
-        'saltos que el usuario puede atender
-        Dim saltos = (From s In ctx.SALTOS
-                     Where s.IDPUESTO = SesionActiva.IdPuesto And s.NUMERO_SALTO > 1
-                     Select s.NUMERO_SALTO, s.IDGESTION).ToList
-        'Se buscan los ID de los saltos anteriores
-        Dim listIdSalto As List(Of Decimal) = New List(Of Decimal)
-        Dim numSalto As Integer
-        Dim idGest As Integer
 
-        For Each s In saltos
-            numSalto = s.NUMERO_SALTO - 1
-            idGest = s.IDGESTION
-            listIdSalto.Add((From sid In ctx.SALTOS Where sid.NUMERO_SALTO = numSalto And sid.IDGESTION = idGest Select sid.IDSALTO).SingleOrDefault)
-        Next
+        ' Lista de los saltos que puede atender
+        Dim saltosAtender = (From s In ctx.SALTOS
+                             Where s.IDPUESTO = SesionActiva.IdPuesto And s.NUMERO_SALTO > 1
+                             Select s.IDSALTO).ToList
 
+
+       
         'Se buscan los tramites que se pueden recibir
         Dim tramites = (From dt In ctx.DETALLE_TRAMITE
                        Join u In ctx.USUARIOS On dt.IDUSUARIO Equals u.IDUSUARIO
                        Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
-                       Where listIdSalto.Contains(dt.IDSALTO) And dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing And (s.DECISION = 0 OrElse (s.DECISION = 1 And Not dt.DECISION Is Nothing))
+                       Where dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso saltosAtender.Contains(dt.DESTINO)
+                       Order By dt.TRAMITES.CODIGOTRAMITE
                        Select dt.TRAMITES.CODIGOTRAMITE, Gestion = dt.TRAMITES.GESTIONES.NOMBRE, u.NOMBRE, u.APELLIDOS, s.NUMERO_SALTO).ToList()
+
+        's.DECISION = 0 OrElse (s.DECISION = 1 And Not dt.DESTINO Is Nothing AndAlso saltosAtender.Contains(dt.DESTINO)))
 
 
         grid.Rows.Clear()
@@ -63,7 +63,7 @@
         Dim tramites = (From dt In ctx.DETALLE_TRAMITE
                         Join s In ctx.SALTOS
                         On dt.IDSALTO Equals s.IDSALTO
-                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And s.DECISION = 1 And dt.DECISION Is Nothing
+                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And s.DECISION = 1 And dt.DESTINO Is Nothing
                         Order By dt.ID_DETALLE_TRAMITE
                         Select dt.ID_DETALLE_TRAMITE, s.IDSALTO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
@@ -88,7 +88,7 @@
         Dim detalle = (From d In ctx.DETALLE_TRAMITE Where d.ID_DETALLE_TRAMITE = iddetalle Select d).FirstOrDefault
 
         With detalle
-            .DECISION = iddecision
+            .DESTINO = iddecision
         End With
 
         ctx.SaveChanges()
