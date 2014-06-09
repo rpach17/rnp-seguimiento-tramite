@@ -113,13 +113,13 @@
           <Key>
             <PropertyRef Name="ID_DETALLE_TRAMITE" />
           </Key>
-          <Property Name="ID_DETALLE_TRAMITE" Type="number" Nullable="false" />
+          <Property Name="ID_DETALLE_TRAMITE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="IDTRAMITE" Type="number" Nullable="false" />
           <Property Name="IDSALTO" Type="number" Nullable="false" />
           <Property Name="IDUSUARIO" Type="number" Nullable="false" />
           <Property Name="FECHA_RECEPCION" Type="date" Nullable="false" />
           <Property Name="FECHA_ENTREGA" Type="date" />
-          <Property Name="DECISION" Type="number" />
+          <Property Name="DESTINO" Type="number" />
         </EntityType>
         <EntityType Name="GESTIONES">
           <Key>
@@ -176,7 +176,7 @@
           <Key>
             <PropertyRef Name="IDSALTO" />
           </Key>
-          <Property Name="IDSALTO" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IDSALTO" Type="number" Nullable="false" />
           <Property Name="NUMERO_SALTO" Type="number" />
           <Property Name="IDGESTION" Type="number" />
           <Property Name="IDPUESTO" Type="number" />
@@ -431,7 +431,6 @@
           <EntitySet Name="DETALLE_GESTIONES_USUARIO" EntityType="Modelo.DETALLE_GESTIONES_USUARIO" />
           <EntitySet Name="DETALLE_OFICINA_GESTIONES" EntityType="Modelo.DETALLE_OFICINA_GESTIONES" />
           <EntitySet Name="DETALLE_SUCURSAL_OFICINA" EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" />
-          <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.DETALLE_TRAMITE" />
           <EntitySet Name="OFICINAS" EntityType="Modelo.OFICINAS" />
           <EntitySet Name="PROCESOS" EntityType="Modelo.PROCESOS" />
           <EntitySet Name="PUESTO" EntityType="Modelo.PUESTO" />
@@ -454,10 +453,6 @@
           <AssociationSet Name="USUARIOS_FK1" Association="Modelo.USUARIOS_FK1">
             <End Role="DETALLE_SUCURSAL_OFICINA" EntitySet="DETALLE_SUCURSAL_OFICINA" />
             <End Role="USUARIOS" EntitySet="USUARIOS" />
-          </AssociationSet>
-          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
-            <End Role="TRAMITES" EntitySet="TRAMITES" />
-            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
           </AssociationSet>
           <AssociationSet Name="PUESTO_FK1" Association="Modelo.PUESTO_FK1">
             <End Role="OFICINAS" EntitySet="OFICINAS" />
@@ -506,6 +501,11 @@
             <End Role="PUESTO" EntitySet="PUESTO" />
             <End Role="SALTOS" EntitySet="SALTOS" />
           </AssociationSet>
+          <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.DETALLE_TRAMITE" />
+          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DETALLE_GESTIONES_USUARIO">
           <Key>
@@ -536,19 +536,6 @@
           <NavigationProperty Name="OFICINAS" Relationship="Modelo.DETALLE_SUCURSAL_OFICINA_FK2" FromRole="DETALLE_SUCURSAL_OFICINA" ToRole="OFICINAS" />
           <NavigationProperty Name="USUARIOS" Relationship="Modelo.USUARIOS_FK1" FromRole="DETALLE_SUCURSAL_OFICINA" ToRole="USUARIOS" />
           <NavigationProperty Name="SUCURSALES" Relationship="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" FromRole="DETALLE_SUCURSAL_OFICINA" ToRole="SUCURSALES" />
-        </EntityType>
-        <EntityType Name="DETALLE_TRAMITE">
-          <Key>
-            <PropertyRef Name="ID_DETALLE_TRAMITE" />
-          </Key>
-          <Property Name="ID_DETALLE_TRAMITE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="IDTRAMITE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="IDSALTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="IDUSUARIO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="FECHA_RECEPCION" Type="DateTime" Nullable="false" />
-          <Property Name="FECHA_ENTREGA" Type="DateTime" />
-          <Property Name="DECISION" Type="Decimal" Precision="38" Scale="0" />
-          <NavigationProperty Name="TRAMITES" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="DETALLE_TRAMITE" ToRole="TRAMITES" />
         </EntityType>
         <EntityType Name="OFICINAS">
           <Key>
@@ -615,9 +602,9 @@
           <Property Name="FECHA" Type="DateTime" Nullable="false" />
           <Property Name="NOTA" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <NavigationProperty Name="DETALLE_TRAMITE" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_TRAMITE" />
           <NavigationProperty Name="RECEPCION_REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK2" FromRole="TRAMITES" ToRole="RECEPCION_REQUISITOS" />
           <NavigationProperty Name="GESTIONES" Relationship="Modelo.TRAMITES_FK2" FromRole="TRAMITES" ToRole="GESTIONES" />
+          <NavigationProperty Name="DETALLE_TRAMITE" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_TRAMITE" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -682,18 +669,6 @@
             </Principal>
             <Dependent Role="USUARIOS">
               <PropertyRef Name="IDDETALLE_SUCURSAL_OFICINA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DETALLE_TRAMITE_FK1">
-          <End Role="TRAMITES" Type="Modelo.TRAMITES" Multiplicity="1" />
-          <End Role="DETALLE_TRAMITE" Type="Modelo.DETALLE_TRAMITE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRAMITES">
-              <PropertyRef Name="IDTRAMITE" />
-            </Principal>
-            <Dependent Role="DETALLE_TRAMITE">
-              <PropertyRef Name="IDTRAMITE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -873,6 +848,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DETALLE_TRAMITE">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_TRAMITE" />
+          </Key>
+          <Property Type="Decimal" Name="ID_DETALLE_TRAMITE" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="IDTRAMITE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDUSUARIO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="FECHA_RECEPCION" Nullable="false" />
+          <Property Type="DateTime" Name="FECHA_ENTREGA" />
+          <Property Type="Decimal" Name="DESTINO" Precision="38" Scale="0" />
+          <NavigationProperty Name="TRAMITES" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="DETALLE_TRAMITE" ToRole="TRAMITES" />
+        </EntityType>
+        <Association Name="DETALLE_TRAMITE_FK1">
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="1" />
+          <End Type="Modelo.DETALLE_TRAMITE" Role="DETALLE_TRAMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="DETALLE_TRAMITE">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -902,19 +902,6 @@
                 <ScalarProperty Name="IDDETALLE_SUCURSAL_OFICINA" ColumnName="IDDETALLE_SUCURSAL_OFICINA" />
                 <ScalarProperty Name="IDSUCURSAL" ColumnName="IDSUCURSAL" />
                 <ScalarProperty Name="IDOFICINA" ColumnName="IDOFICINA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_TRAMITE">
-            <EntityTypeMapping TypeName="Modelo.DETALLE_TRAMITE">
-              <MappingFragment StoreEntitySet="DETALLE_TRAMITE">
-                <ScalarProperty Name="ID_DETALLE_TRAMITE" ColumnName="ID_DETALLE_TRAMITE" />
-                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
-                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
-                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
-                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
-                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
-                <ScalarProperty Name="DECISION" ColumnName="DECISION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1032,6 +1019,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_TRAMITE">
+            <EntityTypeMapping TypeName="Modelo.DETALLE_TRAMITE">
+              <MappingFragment StoreEntitySet="DETALLE_TRAMITE">
+                <ScalarProperty Name="DESTINO" ColumnName="DESTINO" />
+                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
+                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
+                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
+                <ScalarProperty Name="ID_DETALLE_TRAMITE" ColumnName="ID_DETALLE_TRAMITE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1056,7 +1056,6 @@
         <EntityTypeShape EntityType="Modelo.DETALLE_GESTIONES_USUARIO" Width="1.5" PointX="9.75" PointY="3.75" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.DETALLE_OFICINA_GESTIONES" Width="1.5" PointX="3" PointY="2" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" Width="1.5" PointX="3" PointY="4.5" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="Modelo.DETALLE_TRAMITE" Width="1.5" PointX="12" PointY="8.5" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.OFICINAS" Width="1.5" PointX="0.75" PointY="5.25" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.PROCESOS" Width="1.5" PointX="7.5" PointY="7.875" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.PUESTO" Width="1.5" PointX="3" PointY="7.875" Height="2.1725878906249996" IsExpanded="true" />
@@ -1085,10 +1084,6 @@
           <ConnectorPoint PointX="4.958333333333333" PointY="5.2545475260416659" />
           <ConnectorPoint PointX="7.5" PointY="5.2545475260416659" />
         </AssociationConnector>
-        <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.25" PointY="9.7785953776041659" />
-          <ConnectorPoint PointX="12" PointY="9.7785953776041659" />
-        </AssociationConnector>
         <AssociationConnector Association="Modelo.PUESTO_FK1" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="7.2302864583333317" />
           <ConnectorPoint PointX="2.5973244349011222" PointY="7.5776108932344517" />
@@ -1109,17 +1104,15 @@
           <ConnectorPoint PointX="15.75" PointY="8.75" />
         </AssociationConnector>
         <AssociationConnector Association="Modelo.RECEPCION_REQUISITOS_FK2" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.25" PointY="11.314392903645832" />
-          <ConnectorPoint PointX="15.75" PointY="11.314392903645832" />
+          <ConnectorPoint PointX="11.25" PointY="11.376892903645835" />
+          <ConnectorPoint PointX="15.75" PointY="11.376892903645835" />
           <ConnectorPoint PointX="15.75" PointY="10.922587890625" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Modelo.SUCURSALES" Width="1.5" PointX="0.75" PointY="12" Height="2.5571907552083388" />
         <AssociationConnector Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" >
-          <ConnectorPoint PointX="2.25" PointY="12.032306692307694" />
-          <ConnectorPoint PointX="2.65625" PointY="11.626056692307694" />
-          <ConnectorPoint PointX="2.65625" PointY="5.1993949726562487" />
-          <ConnectorPoint PointX="2.6666666666666665" PointY="5.1993949726562478" />
-          <ConnectorPoint PointX="2.8333333333333335" PointY="5.1993949726562487" />
+          <ConnectorPoint PointX="2.25" PointY="12.001152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="11.626152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="5.1993949726562487" />
           <ConnectorPoint PointX="3" PointY="5.1993949726562487" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Modelo.GESTIONES" Width="1.5" PointX="0.75" PointY="8.5" Height="2.5571907552083388" />
@@ -1141,10 +1134,10 @@
           <ConnectorPoint PointX="12.75" PointY="7.047587890625" />
         </AssociationConnector>
         <AssociationConnector Association="Modelo.TRAMITES_FK2" >
-          <ConnectorPoint PointX="1.5" PointY="11.057190755208332" />
+          <ConnectorPoint PointX="1.5" PointY="11.057190755208339" />
           <ConnectorPoint PointX="1.5" PointY="11.420146484375" />
-          <ConnectorPoint PointX="2.5729166666666665" PointY="11.420146484375" />
-          <ConnectorPoint PointX="2.7395833333333335" PointY="11.420146484375" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="11.420146484375" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="11.420146484375" />
           <ConnectorPoint PointX="9.75" PointY="11.420146484375" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Modelo.SALTOS" Width="1.5" PointX="5.25" PointY="7.75" Height="3.5186979166666674" />
@@ -1161,6 +1154,11 @@
         <AssociationConnector Association="Modelo.SALTOS_FK2" >
           <ConnectorPoint PointX="4.5" PointY="8.9925464453125" />
           <ConnectorPoint PointX="5.25" PointY="8.9925464453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Modelo.DETALLE_TRAMITE" Width="1.5" PointX="12" PointY="8.625" Height="2.5571907552083388" />
+        <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" >
+          <ConnectorPoint PointX="11.25" PointY="9.90359537760417" />
+          <ConnectorPoint PointX="12" PointY="9.90359537760417" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -18,13 +18,12 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 
-<Assembly: EdmSchemaAttribute("941c2689-2017-4367-8b1b-b363d14df463")>
+<Assembly: EdmSchemaAttribute("d5256ae6-76e8-4b23-b372-8a45b9972dff")>
 #Region "EDM Relationship Metadata"
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_GESTIONES_USUARIO_FK1", "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(USUARIOS), "DETALLE_GESTIONES_USUARIO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_GESTIONES_USUARIO), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_OFICINA_GESTIONES_FK1", "OFICINAS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(OFICINAS), "DETALLE_OFICINA_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_OFICINA_GESTIONES), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_SUCURSAL_OFICINA_FK2", "OFICINAS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(OFICINAS), "DETALLE_SUCURSAL_OFICINA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_SUCURSAL_OFICINA), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "USUARIOS_FK1", "DETALLE_SUCURSAL_OFICINA", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(DETALLE_SUCURSAL_OFICINA), "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(USUARIOS), True)>
-<Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_TRAMITE_FK1", "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TRAMITES), "DETALLE_TRAMITE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_TRAMITE), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "PUESTO_FK1", "OFICINAS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(OFICINAS), "PUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(PUESTO), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "USUARIOS_FK2", "PUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(PUESTO), "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(USUARIOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "RECEPCION_REQUISITOS_FK1", "REQUISITOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(REQUISITOS), "RECEPCION_REQUISITOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(RECEPCION_REQUISITOS), True)>
@@ -36,6 +35,7 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("Modelo", "SALTOS_FK1", "GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(GESTIONES), "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SALTOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "PROCESOS_FK1", "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(SALTOS), "PROCESOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(PROCESOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "SALTOS_FK2", "PUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(PUESTO), "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SALTOS), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_TRAMITE_FK1", "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TRAMITES), "DETALLE_TRAMITE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_TRAMITE), True)>
 
 #End Region
 
@@ -128,20 +128,6 @@ Public Partial Class Entidades
     End Property
 
     Private _DETALLE_SUCURSAL_OFICINA As ObjectSet(Of DETALLE_SUCURSAL_OFICINA)
-
-    ''' <summary>
-    ''' No Metadata Documentation available.
-    ''' </summary>
-    Public ReadOnly Property DETALLE_TRAMITE() As ObjectSet(Of DETALLE_TRAMITE)
-        Get
-            If (_DETALLE_TRAMITE Is Nothing) Then
-                _DETALLE_TRAMITE = MyBase.CreateObjectSet(Of DETALLE_TRAMITE)("DETALLE_TRAMITE")
-            End If
-            Return _DETALLE_TRAMITE
-        End Get
-    End Property
-
-    Private _DETALLE_TRAMITE As ObjectSet(Of DETALLE_TRAMITE)
 
     ''' <summary>
     ''' No Metadata Documentation available.
@@ -283,6 +269,20 @@ Public Partial Class Entidades
 
     Private _SALTOS As ObjectSet(Of SALTOS)
 
+    ''' <summary>
+    ''' No Metadata Documentation available.
+    ''' </summary>
+    Public ReadOnly Property DETALLE_TRAMITE() As ObjectSet(Of DETALLE_TRAMITE)
+        Get
+            If (_DETALLE_TRAMITE Is Nothing) Then
+                _DETALLE_TRAMITE = MyBase.CreateObjectSet(Of DETALLE_TRAMITE)("DETALLE_TRAMITE")
+            End If
+            Return _DETALLE_TRAMITE
+        End Get
+    End Property
+
+    Private _DETALLE_TRAMITE As ObjectSet(Of DETALLE_TRAMITE)
+
     #End Region
 
     #Region "AddTo Methods"
@@ -306,13 +306,6 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToDETALLE_SUCURSAL_OFICINA(ByVal dETALLE_SUCURSAL_OFICINA As DETALLE_SUCURSAL_OFICINA)
         MyBase.AddObject("DETALLE_SUCURSAL_OFICINA", dETALLE_SUCURSAL_OFICINA)
-    End Sub
-
-    ''' <summary>
-    ''' Deprecated Method for adding a new object to the DETALLE_TRAMITE EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
-    ''' </summary>
-    Public Sub AddToDETALLE_TRAMITE(ByVal dETALLE_TRAMITE As DETALLE_TRAMITE)
-        MyBase.AddObject("DETALLE_TRAMITE", dETALLE_TRAMITE)
     End Sub
 
     ''' <summary>
@@ -383,6 +376,13 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToSALTOS(ByVal sALTOS As SALTOS)
         MyBase.AddObject("SALTOS", sALTOS)
+    End Sub
+
+    ''' <summary>
+    ''' Deprecated Method for adding a new object to the DETALLE_TRAMITE EntitySet. Consider using the .Add method of the associated ObjectSet(Of T) property instead.
+    ''' </summary>
+    Public Sub AddToDETALLE_TRAMITE(ByVal dETALLE_TRAMITE As DETALLE_TRAMITE)
+        MyBase.AddObject("DETALLE_TRAMITE", dETALLE_TRAMITE)
     End Sub
 
     #End Region
@@ -1061,24 +1061,24 @@ Public Partial Class DETALLE_TRAMITE
     ''' </summary>
     <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
-    Public Property DECISION() As Nullable(Of Global.System.Decimal)
+    Public Property DESTINO() As Nullable(Of Global.System.Decimal)
         Get
-            Return _DECISION
+            Return _DESTINO
         End Get
         Set
-            OnDECISIONChanging(value)
-            ReportPropertyChanging("DECISION")
-            _DECISION = StructuralObject.SetValidValue(value)
-            ReportPropertyChanged("DECISION")
-            OnDECISIONChanged()
+            OnDESTINOChanging(value)
+            ReportPropertyChanging("DESTINO")
+            _DESTINO = StructuralObject.SetValidValue(value)
+            ReportPropertyChanged("DESTINO")
+            OnDESTINOChanged()
         End Set
     End Property
 
-    Private _DECISION As Nullable(Of Global.System.Decimal)
-    Private Partial Sub OnDECISIONChanging(value As Nullable(Of Global.System.Decimal))
+    Private _DESTINO As Nullable(Of Global.System.Decimal)
+    Private Partial Sub OnDESTINOChanging(value As Nullable(Of Global.System.Decimal))
     End Sub
 
-    Private Partial Sub OnDECISIONChanged()
+    Private Partial Sub OnDESTINOChanged()
     End Sub
 
     #End Region
@@ -3029,24 +3029,6 @@ Public Partial Class TRAMITES
     <XmlIgnoreAttribute()>
     <SoapIgnoreAttribute()>
     <DataMemberAttribute()>
-    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DETALLE_TRAMITE_FK1", "DETALLE_TRAMITE")>
-     Public Property DETALLE_TRAMITE() As EntityCollection(Of DETALLE_TRAMITE)
-        Get
-            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of DETALLE_TRAMITE)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_TRAMITE")
-        End Get
-        Set
-            If (Not value Is Nothing)
-                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of DETALLE_TRAMITE)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_TRAMITE", value)
-            End If
-        End Set
-    End Property
-
-    ''' <summary>
-    ''' No Metadata Documentation available.
-    ''' </summary>
-    <XmlIgnoreAttribute()>
-    <SoapIgnoreAttribute()>
-    <DataMemberAttribute()>
     <EdmRelationshipNavigationPropertyAttribute("Modelo", "RECEPCION_REQUISITOS_FK2", "RECEPCION_REQUISITOS")>
      Public Property RECEPCION_REQUISITOS() As EntityCollection(Of RECEPCION_REQUISITOS)
         Get
@@ -3086,6 +3068,24 @@ Public Partial Class TRAMITES
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of GESTIONES)("Modelo.TRAMITES_FK2", "GESTIONES", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No Metadata Documentation available.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DETALLE_TRAMITE_FK1", "DETALLE_TRAMITE")>
+     Public Property DETALLE_TRAMITE() As EntityCollection(Of DETALLE_TRAMITE)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of DETALLE_TRAMITE)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_TRAMITE")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of DETALLE_TRAMITE)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_TRAMITE", value)
             End If
         End Set
     End Property

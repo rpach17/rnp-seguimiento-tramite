@@ -22,18 +22,20 @@ Partial Class frmPrincipal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.OpcionesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSesiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SeguimientoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RecepciónDeDocumentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcesarDocumentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblInfoConexion = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblInfoUbicacion = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.SeguimientoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RecepciónDeDocumentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProcesarDocumentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tmNotificacion = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -58,15 +60,36 @@ Partial Class frmPrincipal
         '
         'CerrarSesiónToolStripMenuItem
         '
+        Me.CerrarSesiónToolStripMenuItem.Image = Global.SeguimientoTramites.My.Resources.Resources.door_in
         Me.CerrarSesiónToolStripMenuItem.Name = "CerrarSesiónToolStripMenuItem"
         Me.CerrarSesiónToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
         Me.CerrarSesiónToolStripMenuItem.Text = "Cerrar sesión"
         '
         'SalirToolStripMenuItem
         '
+        Me.SalirToolStripMenuItem.Image = Global.SeguimientoTramites.My.Resources.Resources.cross
         Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
         Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
         Me.SalirToolStripMenuItem.Text = "Salir"
+        '
+        'SeguimientoToolStripMenuItem
+        '
+        Me.SeguimientoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecepciónDeDocumentosToolStripMenuItem, Me.ProcesarDocumentosToolStripMenuItem})
+        Me.SeguimientoToolStripMenuItem.Name = "SeguimientoToolStripMenuItem"
+        Me.SeguimientoToolStripMenuItem.Size = New System.Drawing.Size(97, 43)
+        Me.SeguimientoToolStripMenuItem.Text = "Seguimiento"
+        '
+        'RecepciónDeDocumentosToolStripMenuItem
+        '
+        Me.RecepciónDeDocumentosToolStripMenuItem.Name = "RecepciónDeDocumentosToolStripMenuItem"
+        Me.RecepciónDeDocumentosToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
+        Me.RecepciónDeDocumentosToolStripMenuItem.Text = "Recepción de documentos"
+        '
+        'ProcesarDocumentosToolStripMenuItem
+        '
+        Me.ProcesarDocumentosToolStripMenuItem.Name = "ProcesarDocumentosToolStripMenuItem"
+        Me.ProcesarDocumentosToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
+        Me.ProcesarDocumentosToolStripMenuItem.Text = "Procesar documentos"
         '
         'StatusStrip1
         '
@@ -103,24 +126,10 @@ Partial Class frmPrincipal
         Me.lblInfoUbicacion.Size = New System.Drawing.Size(121, 17)
         Me.lblInfoUbicacion.Text = "ToolStripStatusLabel3"
         '
-        'SeguimientoToolStripMenuItem
+        'tmNotificacion
         '
-        Me.SeguimientoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecepciónDeDocumentosToolStripMenuItem, Me.ProcesarDocumentosToolStripMenuItem})
-        Me.SeguimientoToolStripMenuItem.Name = "SeguimientoToolStripMenuItem"
-        Me.SeguimientoToolStripMenuItem.Size = New System.Drawing.Size(97, 43)
-        Me.SeguimientoToolStripMenuItem.Text = "Seguimiento"
-        '
-        'RecepciónDeDocumentosToolStripMenuItem
-        '
-        Me.RecepciónDeDocumentosToolStripMenuItem.Name = "RecepciónDeDocumentosToolStripMenuItem"
-        Me.RecepciónDeDocumentosToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
-        Me.RecepciónDeDocumentosToolStripMenuItem.Text = "Recepción de documentos"
-        '
-        'ProcesarDocumentosToolStripMenuItem
-        '
-        Me.ProcesarDocumentosToolStripMenuItem.Name = "ProcesarDocumentosToolStripMenuItem"
-        Me.ProcesarDocumentosToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
-        Me.ProcesarDocumentosToolStripMenuItem.Text = "Procesar documentos"
+        Me.tmNotificacion.Interval = 1800000
+        Me.tmNotificacion.Tag = "Interval = 30 minutos"
         '
         'frmPrincipal
         '
@@ -154,4 +163,5 @@ Partial Class frmPrincipal
     Friend WithEvents SeguimientoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RecepciónDeDocumentosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProcesarDocumentosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tmNotificacion As System.Windows.Forms.Timer
 End Class

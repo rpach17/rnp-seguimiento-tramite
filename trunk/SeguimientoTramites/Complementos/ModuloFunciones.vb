@@ -44,4 +44,10 @@ Module ModuloFunciones
             Return ex.Message
         End Try
     End Function
+
+    Public Function MinutosAHoras(ByVal mins As Integer) As String
+        Dim minutos As Integer = 0
+        Dim horas As Integer = Math.DivRem(mins, 60, minutos)
+        Return String.Format("{0:00}:{1:00} {2}", horas, minutos, IIf(horas > 0, "horas", "minutos"))
+    End Function
 End Module
