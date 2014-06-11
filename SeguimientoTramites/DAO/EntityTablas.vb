@@ -111,16 +111,17 @@
                                                Order By dt.ID_DETALLE_TRAMITE Descending
                                                Select dt.DESTINO).SingleOrDefault()
 
-                Dim usuarios = (From u In ctx.USUARIOS
-                                Join s In ctx.SALTOS On s.IDPUESTO Equals u.PUESTO.IDPUESTO
-                                Group Join dt In ctx.DETALLE_TRAMITE On dt.IDUSUARIO Equals u.IDUSUARIO
-                                Into udt = Group
-                                From dt In udt.DefaultIfEmpty()
-                                Where s.IDSALTO = PasoTramite And dt.FECHA_ENTREGA Is Nothing And Not dt.DESTINO = 0
-                                Group By u.NOMBRE, u.APELLIDOS
-                Into TotalTramites = Count()
-                                Select NOMBRE, APELLIDOS, TotalTramites).tolist()
-                grid.DataSource = usuarios
+                Dim Usuarios As List(Of USUARIOS) = New List(Of USUARIOS)
+
+                Usuarios = (From u In ctx.USUARIOS
+                           Join s In ctx.SALTOS On u.IDPUESTO Equals s.IDPUESTO
+                           Where s.IDSALTO = PasoTramite
+                           Select u).ToList()
+
+                For Each us In Usuarios
+                    Dim c = (From dt In ctx.DETALLE_TRAMITE Where dt.IDUSUARIO = us.IDUSUARIO And dt.FECHA_ENTREGA Is Nothing Select dt).Count
+                    grid.Rows.Add(us.IDUSUARIO.ToString, us.NOMBRE, us.APELLIDOS, c.ToString)
+                Next
 
                 If grid.Rows.Count() = 0 Then
                     lbl.Text = ""
