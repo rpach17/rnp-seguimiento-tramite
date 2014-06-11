@@ -121,13 +121,17 @@
                 Into TotalTramites = Count()
                                 Select NOMBRE, APELLIDOS, TotalTramites).tolist()
                 grid.DataSource = usuarios
+
+                If grid.Rows.Count() = 0 Then
+                    lbl.Text = ""
+                End If
             ElseIf destinos = 0 Then
-                lbl.Text = "Esta listo para que el ciudadno lo retire"
+                lbl.Text = "Está listo para que el ciudadno lo retire"
             Else
                 lbl.Text = "Debe terminar el proceso"
             End If
         Else
-            lbl.Text = "Tramite No existe"
+            lbl.Text = "Trámite no existe"
         End If
 
 
