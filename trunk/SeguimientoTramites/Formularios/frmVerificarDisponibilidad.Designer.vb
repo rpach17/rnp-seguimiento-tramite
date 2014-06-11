@@ -27,13 +27,16 @@ Partial Class frmVerificarDisponibilidad
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.txtCodigoTramite = New System.Windows.Forms.TextBox()
+        Me.dgvTramites = New System.Windows.Forms.DataGridView()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel1.Controls.Add(Me.dgvTramites)
         Me.Panel1.Controls.Add(Me.btnRecibirTramites)
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Location = New System.Drawing.Point(6, 6)
@@ -80,6 +83,18 @@ Partial Class frmVerificarDisponibilidad
         Me.txtCodigoTramite.Size = New System.Drawing.Size(197, 27)
         Me.txtCodigoTramite.TabIndex = 0
         '
+        'dgvTramites
+        '
+        Me.dgvTramites.AllowUserToAddRows = False
+        Me.dgvTramites.AllowUserToDeleteRows = False
+        Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTramites.Location = New System.Drawing.Point(30, 98)
+        Me.dgvTramites.Name = "dgvTramites"
+        Me.dgvTramites.ReadOnly = True
+        Me.dgvTramites.Size = New System.Drawing.Size(597, 204)
+        Me.dgvTramites.TabIndex = 4
+        '
         'frmVerificarDisponibilidad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -92,6 +107,7 @@ Partial Class frmVerificarDisponibilidad
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -100,4 +116,5 @@ Partial Class frmVerificarDisponibilidad
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents txtCodigoTramite As System.Windows.Forms.TextBox
+    Friend WithEvents dgvTramites As System.Windows.Forms.DataGridView
 End Class

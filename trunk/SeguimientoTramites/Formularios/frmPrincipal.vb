@@ -91,4 +91,9 @@ Public Class frmPrincipal
     Private Sub tmNotificacion_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmNotificacion.Tick
         CargarTramitesAtrasados()
     End Sub
+
+    Private Sub VerificarDisponibilidadToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VerificarDisponibilidadToolStripMenuItem.Click
+        frmVerificarDisponibilidad.MdiParent = Me
+        frmVerificarDisponibilidad.Show()
+    End Sub
 End Class
