@@ -23,14 +23,18 @@ Partial Class frmVerificarDisponibilidad
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.dgvTramites = New System.Windows.Forms.DataGridView()
         Me.btnRecibirTramites = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.txtCodigoTramite = New System.Windows.Forms.TextBox()
-        Me.dgvTramites = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -43,6 +47,19 @@ Partial Class frmVerificarDisponibilidad
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(654, 375)
         Me.Panel1.TabIndex = 4
+        '
+        'dgvTramites
+        '
+        Me.dgvTramites.AllowUserToAddRows = False
+        Me.dgvTramites.AllowUserToDeleteRows = False
+        Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
+        Me.dgvTramites.Location = New System.Drawing.Point(30, 98)
+        Me.dgvTramites.Name = "dgvTramites"
+        Me.dgvTramites.ReadOnly = True
+        Me.dgvTramites.Size = New System.Drawing.Size(597, 204)
+        Me.dgvTramites.TabIndex = 4
         '
         'btnRecibirTramites
         '
@@ -83,17 +100,33 @@ Partial Class frmVerificarDisponibilidad
         Me.txtCodigoTramite.Size = New System.Drawing.Size(197, 27)
         Me.txtCodigoTramite.TabIndex = 0
         '
-        'dgvTramites
+        'Column1
         '
-        Me.dgvTramites.AllowUserToAddRows = False
-        Me.dgvTramites.AllowUserToDeleteRows = False
-        Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTramites.Location = New System.Drawing.Point(30, 98)
-        Me.dgvTramites.Name = "dgvTramites"
-        Me.dgvTramites.ReadOnly = True
-        Me.dgvTramites.Size = New System.Drawing.Size(597, 204)
-        Me.dgvTramites.TabIndex = 4
+        Me.Column1.HeaderText = "ID"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.Width = 43
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Nombre"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 69
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Apellido"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        Me.Column3.Width = 69
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Número trámites"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 99
         '
         'frmVerificarDisponibilidad
         '
@@ -105,9 +138,9 @@ Partial Class frmVerificarDisponibilidad
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Verificar disponibilidad"
         Me.Panel1.ResumeLayout(False)
+        CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -117,4 +150,8 @@ Partial Class frmVerificarDisponibilidad
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents txtCodigoTramite As System.Windows.Forms.TextBox
     Friend WithEvents dgvTramites As System.Windows.Forms.DataGridView
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
