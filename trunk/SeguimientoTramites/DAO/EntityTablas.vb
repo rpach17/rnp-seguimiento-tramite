@@ -97,22 +97,37 @@
 
 #Region "Disponibilidad"
 
-    Public Shared Sub Disponibilidad(ByVal codtramite As String, ByVal grid As DataGridView)
+    Public Shared Sub Disponibilidad(ByVal codtramite As String, ByVal grid As DataGridView, ByRef lbl As Label)
+        Dim tramite As Integer = (From t In ctx.TRAMITES Where t.CODIGOTRAMITE = codtramite Select t).Count()
 
-        Dim PasoTramite As Integer = (From dt In ctx.DETALLE_TRAMITE
-                                       Where dt.TRAMITES.CODIGOTRAMITE = codtramite And dt.FECHA_ENTREGA Is Nothing
-                                       Order By dt.ID_DETALLE_TRAMITE Descending
-                                       Select dt.DESTINO).SingleOrDefault()
+        If tramite > 0 Then
+            Dim destino = (From dt In ctx.DETALLE_TRAMITE
+                           Where dt.TRAMITES.CODIGOTRAMITE = codtramite And dt.FECHA_ENTREGA Is Nothing
+                           Order By dt.ID_DETALLE_TRAMITE Descending
+                           Select dt.DESTINO).FirstOrDefault
 
-        Dim usuarios = (From u In ctx.USUARIOS
-                        Join s In ctx.SALTOS On s.IDPUESTO Equals u.PUESTO.IDPUESTO
-                        Join dt In ctx.DETALLE_TRAMITE On dt.IDUSUARIO Equals u.IDUSUARIO
-                        Where s.IDSALTO = PasoTramite And dt.FECHA_ENTREGA Is Nothing And Not dt.DESTINO = 0
-                        Group By u.NOMBRE, u.APELLIDOS
-                        Into TotalTramites = Count()
-                        Select NOMBRE, APELLIDOS, TotalTramites).tolist()
+            If Not destino Is Nothing Then
+                Dim PasoTramite As Integer = (From dt In ctx.DETALLE_TRAMITE
+                                               Where dt.TRAMITES.CODIGOTRAMITE = codtramite And dt.FECHA_ENTREGA Is Nothing
+                                               Order By dt.ID_DETALLE_TRAMITE Descending
+                                               Select dt.DESTINO).SingleOrDefault()
 
-        grid.DataSource = usuarios
+                Dim usuarios = (From u In ctx.USUARIOS
+                                Join s In ctx.SALTOS On s.IDPUESTO Equals u.PUESTO.IDPUESTO
+                                Join dt In ctx.DETALLE_TRAMITE On dt.IDUSUARIO Equals u.IDUSUARIO
+                                Where s.IDSALTO = PasoTramite And dt.FECHA_ENTREGA Is Nothing And Not dt.DESTINO = 0
+                                Group By u.NOMBRE, u.APELLIDOS
+                                Into TotalTramites = Count()
+                                Select NOMBRE, APELLIDOS, TotalTramites).tolist()
+                grid.DataSource = usuarios
+            Else
+                lbl.Text = "Debe tomar una decicion"
+            End If
+        Else
+            lbl.Text = "Tramiite No existe"
+        End If
+
+
     End Sub
 
 #End Region
