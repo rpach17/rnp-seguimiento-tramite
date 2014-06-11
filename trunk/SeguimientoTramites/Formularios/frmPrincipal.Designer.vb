@@ -36,6 +36,7 @@ Partial Class frmPrincipal
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblInfoUbicacion = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmNotificacion = New System.Windows.Forms.Timer(Me.components)
+        Me.VerificarDisponibilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -74,7 +75,7 @@ Partial Class frmPrincipal
         '
         'SeguimientoToolStripMenuItem
         '
-        Me.SeguimientoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecepciónDeDocumentosToolStripMenuItem, Me.ProcesarDocumentosToolStripMenuItem})
+        Me.SeguimientoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RecepciónDeDocumentosToolStripMenuItem, Me.ProcesarDocumentosToolStripMenuItem, Me.VerificarDisponibilidadToolStripMenuItem})
         Me.SeguimientoToolStripMenuItem.Name = "SeguimientoToolStripMenuItem"
         Me.SeguimientoToolStripMenuItem.Size = New System.Drawing.Size(97, 43)
         Me.SeguimientoToolStripMenuItem.Text = "Seguimiento"
@@ -131,6 +132,12 @@ Partial Class frmPrincipal
         Me.tmNotificacion.Interval = 1800000
         Me.tmNotificacion.Tag = "Interval = 30 minutos"
         '
+        'VerificarDisponibilidadToolStripMenuItem
+        '
+        Me.VerificarDisponibilidadToolStripMenuItem.Name = "VerificarDisponibilidadToolStripMenuItem"
+        Me.VerificarDisponibilidadToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
+        Me.VerificarDisponibilidadToolStripMenuItem.Text = "Verificar disponibilidad"
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -164,4 +171,5 @@ Partial Class frmPrincipal
     Friend WithEvents RecepciónDeDocumentosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProcesarDocumentosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tmNotificacion As System.Windows.Forms.Timer
+    Friend WithEvents VerificarDisponibilidadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
