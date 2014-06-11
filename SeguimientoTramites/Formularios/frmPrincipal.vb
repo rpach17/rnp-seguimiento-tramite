@@ -27,18 +27,27 @@ Public Class frmPrincipal
             End Try
         Next
 
-        frmRecepcionDocs.MdiParent = Me
-        frmRecepcionDocs.Show()
+        With frmRecepcionDocs
+            .MdiParent = Me
+            .Show()
+            .Focus()
+        End With
     End Sub
 
     Private Sub RecepciónDeDocumentosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecepciónDeDocumentosToolStripMenuItem.Click
-        frmRecepcionDocs.MdiParent = Me
-        frmRecepcionDocs.Show()
+        With frmRecepcionDocs
+            .MdiParent = Me
+            .Show()
+            .Focus()
+        End With
     End Sub
 
     Private Sub ProcesarDocumentosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProcesarDocumentosToolStripMenuItem.Click
-        frmProcesarDocumentos.MdiParent = Me
-        frmProcesarDocumentos.Show()
+        With frmProcesarDocumentos
+            .MdiParent = Me
+            .Show()
+            .Focus()
+        End With
     End Sub
 
     Private Sub CerrarSesiónToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSesiónToolStripMenuItem.Click
@@ -93,7 +102,10 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub VerificarDisponibilidadToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VerificarDisponibilidadToolStripMenuItem.Click
-        frmVerificarDisponibilidad.MdiParent = Me
-        frmVerificarDisponibilidad.Show()
+        With frmVerificarDisponibilidad
+            .MdiParent = Me
+            .Show()
+            .Focus()
+        End With
     End Sub
 End Class

@@ -118,6 +118,7 @@
                            Where s.IDSALTO = PasoTramite
                            Select u).ToList()
 
+                grid.Rows.Clear()
                 For Each us In Usuarios
                     Dim c = (From dt In ctx.DETALLE_TRAMITE Where dt.IDUSUARIO = us.IDUSUARIO And dt.FECHA_ENTREGA Is Nothing AndAlso Not dt.DESTINO = 0 Select dt).Count
                     grid.Rows.Add(us.IDUSUARIO.ToString, us.NOMBRE, us.APELLIDOS, c.ToString)
