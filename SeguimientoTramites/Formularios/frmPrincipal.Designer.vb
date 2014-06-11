@@ -30,13 +30,13 @@ Partial Class frmPrincipal
         Me.SeguimientoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecepciónDeDocumentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesarDocumentosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerificarDisponibilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblInfoConexion = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblInfoUbicacion = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmNotificacion = New System.Windows.Forms.Timer(Me.components)
-        Me.VerificarDisponibilidadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -92,6 +92,12 @@ Partial Class frmPrincipal
         Me.ProcesarDocumentosToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
         Me.ProcesarDocumentosToolStripMenuItem.Text = "Procesar documentos"
         '
+        'VerificarDisponibilidadToolStripMenuItem
+        '
+        Me.VerificarDisponibilidadToolStripMenuItem.Name = "VerificarDisponibilidadToolStripMenuItem"
+        Me.VerificarDisponibilidadToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
+        Me.VerificarDisponibilidadToolStripMenuItem.Text = "Verificar disponibilidad"
+        '
         'StatusStrip1
         '
         Me.StatusStrip1.BackColor = System.Drawing.SystemColors.Control
@@ -131,12 +137,6 @@ Partial Class frmPrincipal
         '
         Me.tmNotificacion.Interval = 1800000
         Me.tmNotificacion.Tag = "Interval = 30 minutos"
-        '
-        'VerificarDisponibilidadToolStripMenuItem
-        '
-        Me.VerificarDisponibilidadToolStripMenuItem.Name = "VerificarDisponibilidadToolStripMenuItem"
-        Me.VerificarDisponibilidadToolStripMenuItem.Size = New System.Drawing.Size(238, 24)
-        Me.VerificarDisponibilidadToolStripMenuItem.Text = "Verificar disponibilidad"
         '
         'frmPrincipal
         '
