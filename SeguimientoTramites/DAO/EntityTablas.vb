@@ -101,12 +101,11 @@
         Dim tramite As Integer = (From t In ctx.TRAMITES Where t.CODIGOTRAMITE = codtramite Select t).Count()
 
         If tramite > 0 Then
-            Dim destino = (From dt In ctx.DETALLE_TRAMITE
+            Dim destinos = (From dt In ctx.DETALLE_TRAMITE
                            Where dt.TRAMITES.CODIGOTRAMITE = codtramite And dt.FECHA_ENTREGA Is Nothing
                            Order By dt.ID_DETALLE_TRAMITE Descending
-                           Select dt.DESTINO).FirstOrDefault
-
-            If Not destino Is Nothing Then
+                           Select dt.DESTINO).SingleOrDefault
+            If Not destinos Is Nothing Then
                 Dim PasoTramite As Integer = (From dt In ctx.DETALLE_TRAMITE
                                                Where dt.TRAMITES.CODIGOTRAMITE = codtramite And dt.FECHA_ENTREGA Is Nothing
                                                Order By dt.ID_DETALLE_TRAMITE Descending
@@ -120,11 +119,13 @@
                                 Into TotalTramites = Count()
                                 Select NOMBRE, APELLIDOS, TotalTramites).tolist()
                 grid.DataSource = usuarios
+            ElseIf destinos = 0 Then
+                lbl.Text = "Esta listo para que el ciudadno lo retire"
             Else
-                lbl.Text = "Debe tomar una decicion"
+                lbl.Text = "Debe terminar el proceso"
             End If
         Else
-            lbl.Text = "Tramiite No existe"
+            lbl.Text = "Tramite No existe"
         End If
 
 
