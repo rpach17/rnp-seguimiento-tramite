@@ -176,8 +176,8 @@
           <Key>
             <PropertyRef Name="IDSALTO" />
           </Key>
-          <Property Name="IDSALTO" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NUMERO_SALTO" Type="number" />
+          <Property Name="IDSALTO" Type="number" Nullable="false" />
+          <Property Name="NUMERO_SALTO" Type="number" Nullable="false" />
           <Property Name="IDGESTION" Type="number" />
           <Property Name="IDPUESTO" Type="number" />
           <Property Name="DECISION" Type="number" />
@@ -186,6 +186,7 @@
           <Property Name="ULTIMOSALTO" Type="number" />
           <Property Name="MINUTOS" Type="number" />
           <Property Name="DESCRIPCION_DECISION" Type="varchar2" MaxLength="60" />
+          <Property Name="DESCRIPCION_SALTO" Type="varchar2" MaxLength="50" />
         </EntityType>
         <EntityType Name="SUCURSALES">
           <Key>
@@ -488,6 +489,11 @@
             <End Role="GESTIONES" EntitySet="GESTIONES" />
             <End Role="TRAMITES" EntitySet="TRAMITES" />
           </AssociationSet>
+          <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.DETALLE_TRAMITE" />
+          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
+          </AssociationSet>
           <EntitySet Name="SALTOS" EntityType="Modelo.SALTOS" />
           <AssociationSet Name="SALTOS_FK1" Association="Modelo.SALTOS_FK1">
             <End Role="GESTIONES" EntitySet="GESTIONES" />
@@ -500,11 +506,6 @@
           <AssociationSet Name="SALTOS_FK2" Association="Modelo.SALTOS_FK2">
             <End Role="PUESTO" EntitySet="PUESTO" />
             <End Role="SALTOS" EntitySet="SALTOS" />
-          </AssociationSet>
-          <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.DETALLE_TRAMITE" />
-          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
-            <End Role="TRAMITES" EntitySet="TRAMITES" />
-            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="DETALLE_GESTIONES_USUARIO">
@@ -794,60 +795,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="SALTOS">
-          <Key>
-            <PropertyRef Name="IDSALTO" />
-          </Key>
-          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Decimal" Name="NUMERO_SALTO" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDGESTION" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDPUESTO" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="DECISION" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDSALTOV" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDSALTOF" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="ULTIMOSALTO" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="MINUTOS" Precision="38" Scale="0" />
-          <Property Type="String" Name="DESCRIPCION_DECISION" MaxLength="60" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GESTIONES" Relationship="Modelo.SALTOS_FK1" FromRole="SALTOS" ToRole="GESTIONES" />
-          <NavigationProperty Name="PROCESOS" Relationship="Modelo.PROCESOS_FK1" FromRole="SALTOS" ToRole="PROCESOS" />
-          <NavigationProperty Name="PUESTO" Relationship="Modelo.SALTOS_FK2" FromRole="SALTOS" ToRole="PUESTO" />
-        </EntityType>
-        <Association Name="SALTOS_FK1">
-          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="0..1" />
-          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GESTIONES">
-              <PropertyRef Name="IDGESTION" />
-            </Principal>
-            <Dependent Role="SALTOS">
-              <PropertyRef Name="IDGESTION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PROCESOS_FK1">
-          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="0..1" />
-          <End Type="Modelo.PROCESOS" Role="PROCESOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SALTOS">
-              <PropertyRef Name="IDSALTO" />
-            </Principal>
-            <Dependent Role="PROCESOS">
-              <PropertyRef Name="IDSALTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="SALTOS_FK2">
-          <End Type="Modelo.PUESTO" Role="PUESTO" Multiplicity="0..1" />
-          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PUESTO">
-              <PropertyRef Name="IDPUESTO" />
-            </Principal>
-            <Dependent Role="SALTOS">
-              <PropertyRef Name="IDPUESTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DETALLE_TRAMITE">
           <Key>
             <PropertyRef Name="ID_DETALLE_TRAMITE" />
@@ -870,6 +817,63 @@
             </Principal>
             <Dependent Role="DETALLE_TRAMITE">
               <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SALTOS">
+          <Key>
+            <PropertyRef Name="IDSALTO" />
+          </Key>
+          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="NUMERO_SALTO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDGESTION" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDPUESTO" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="DECISION" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDSALTOV" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDSALTOF" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ULTIMOSALTO" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="MINUTOS" Precision="38" Scale="0" />
+          <Property Type="String" Name="DESCRIPCION_DECISION" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DESCRIPCION_SALTO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GESTIONES" Relationship="Modelo.SALTOS_FK1" FromRole="SALTOS" ToRole="GESTIONES" />
+          <NavigationProperty Name="PROCESOS" Relationship="Modelo.PROCESOS_FK1" FromRole="SALTOS" ToRole="PROCESOS" />
+          <NavigationProperty Name="PUESTO" Relationship="Modelo.SALTOS_FK2" FromRole="SALTOS" ToRole="PUESTO" />
+        </EntityType>
+        <Association Name="SALTOS_FK1">
+          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="0..1" />
+          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="SALTOS">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROCESOS_FK1">
+          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Modelo.PROCESOS" Role="PROCESOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALTOS">
+              <PropertyRef Name="IDSALTO" />
+            </Principal>
+            <Dependent Role="PROCESOS">
+              <PropertyRef Name="IDSALTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SALTOS_FK2">
+          <End Type="Modelo.PUESTO" Role="PUESTO" Multiplicity="0..1" />
+          <End Type="Modelo.SALTOS" Role="SALTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUESTO">
+              <PropertyRef Name="IDPUESTO" />
+            </Principal>
+            <Dependent Role="SALTOS">
+              <PropertyRef Name="IDPUESTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1003,22 +1007,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SALTOS">
-            <EntityTypeMapping TypeName="Modelo.SALTOS">
-              <MappingFragment StoreEntitySet="SALTOS">
-                <ScalarProperty Name="DESCRIPCION_DECISION" ColumnName="DESCRIPCION_DECISION" />
-                <ScalarProperty Name="MINUTOS" ColumnName="MINUTOS" />
-                <ScalarProperty Name="ULTIMOSALTO" ColumnName="ULTIMOSALTO" />
-                <ScalarProperty Name="IDSALTOF" ColumnName="IDSALTOF" />
-                <ScalarProperty Name="IDSALTOV" ColumnName="IDSALTOV" />
-                <ScalarProperty Name="DECISION" ColumnName="DECISION" />
-                <ScalarProperty Name="IDPUESTO" ColumnName="IDPUESTO" />
-                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
-                <ScalarProperty Name="NUMERO_SALTO" ColumnName="NUMERO_SALTO" />
-                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_TRAMITE">
             <EntityTypeMapping TypeName="Modelo.DETALLE_TRAMITE">
               <MappingFragment StoreEntitySet="DETALLE_TRAMITE">
@@ -1029,6 +1017,23 @@
                 <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
                 <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
                 <ScalarProperty Name="ID_DETALLE_TRAMITE" ColumnName="ID_DETALLE_TRAMITE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALTOS">
+            <EntityTypeMapping TypeName="Modelo.SALTOS">
+              <MappingFragment StoreEntitySet="SALTOS">
+                <ScalarProperty Name="DESCRIPCION_SALTO" ColumnName="DESCRIPCION_SALTO" />
+                <ScalarProperty Name="DESCRIPCION_DECISION" ColumnName="DESCRIPCION_DECISION" />
+                <ScalarProperty Name="MINUTOS" ColumnName="MINUTOS" />
+                <ScalarProperty Name="ULTIMOSALTO" ColumnName="ULTIMOSALTO" />
+                <ScalarProperty Name="IDSALTOF" ColumnName="IDSALTOF" />
+                <ScalarProperty Name="IDSALTOV" ColumnName="IDSALTOV" />
+                <ScalarProperty Name="DECISION" ColumnName="DECISION" />
+                <ScalarProperty Name="IDPUESTO" ColumnName="IDPUESTO" />
+                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
+                <ScalarProperty Name="NUMERO_SALTO" ColumnName="NUMERO_SALTO" />
+                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1140,26 +1145,15 @@
           <ConnectorPoint PointX="2.7083333333333335" PointY="11.420146484375" />
           <ConnectorPoint PointX="9.75" PointY="11.420146484375" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Modelo.SALTOS" Width="1.5" PointX="5.25" PointY="7.75" Height="3.5186979166666674" />
-        <AssociationConnector Association="Modelo.SALTOS_FK1" >
-          <ConnectorPoint PointX="2.25" PointY="10.583639322916666" />
-          <ConnectorPoint PointX="2.5729166666666665" PointY="10.583639322916666" />
-          <ConnectorPoint PointX="2.7395833333333335" PointY="10.583639322916666" />
-          <ConnectorPoint PointX="5.25" PointY="10.583639322916666" />
-        </AssociationConnector>
-        <AssociationConnector Association="Modelo.PROCESOS_FK1" >
-          <ConnectorPoint PointX="6.75" PointY="8.8651432291666659" />
-          <ConnectorPoint PointX="7.5" PointY="8.8651432291666659" />
-        </AssociationConnector>
-        <AssociationConnector Association="Modelo.SALTOS_FK2" >
-          <ConnectorPoint PointX="4.5" PointY="8.9925464453125" />
-          <ConnectorPoint PointX="5.25" PointY="8.9925464453125" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="Modelo.DETALLE_TRAMITE" Width="1.5" PointX="12" PointY="8.625" Height="2.5571907552083388" />
         <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" >
           <ConnectorPoint PointX="11.25" PointY="9.90359537760417" />
           <ConnectorPoint PointX="12" PointY="9.90359537760417" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="Modelo.SALTOS" Width="1.5" PointX="5.375" PointY="7.75" />
+        <AssociationConnector Association="Modelo.SALTOS_FK1" />
+        <AssociationConnector Association="Modelo.PROCESOS_FK1" />
+        <AssociationConnector Association="Modelo.SALTOS_FK2" />
       </Diagram>
     </Diagrams>
   </Designer>
