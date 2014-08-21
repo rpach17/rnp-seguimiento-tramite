@@ -42,7 +42,7 @@ Partial Class frmNotificacion
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(399, 5)
+        Me.Button1.Location = New System.Drawing.Point(399, 6)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(25, 25)
         Me.Button1.TabIndex = 3
@@ -51,7 +51,7 @@ Partial Class frmNotificacion
         '
         'Label2
         '
-        Me.Label2.BackColor = System.Drawing.Color.Black
+        Me.Label2.BackColor = System.Drawing.Color.Red
         Me.Label2.Location = New System.Drawing.Point(395, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(37, 38)
@@ -73,7 +73,9 @@ Partial Class frmNotificacion
         '
         Me.dgvTramites.AllowUserToAddRows = False
         Me.dgvTramites.AllowUserToDeleteRows = False
-        Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvTramites.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvTramites.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
         Me.dgvTramites.Location = New System.Drawing.Point(12, 47)
@@ -88,28 +90,24 @@ Partial Class frmNotificacion
         Me.Column1.HeaderText = "Código"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
-        Me.Column1.Width = 65
         '
         'Column2
         '
         Me.Column2.HeaderText = "Tiempo excedido"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
-        Me.Column2.Width = 104
         '
         'Column3
         '
         Me.Column3.HeaderText = "Número de paso"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
-        Me.Column3.Width = 80
         '
         'Column4
         '
         Me.Column4.HeaderText = "Duración del paso"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
-        Me.Column4.Width = 87
         '
         'Timer1
         '

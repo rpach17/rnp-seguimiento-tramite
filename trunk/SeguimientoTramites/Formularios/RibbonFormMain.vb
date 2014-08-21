@@ -1,32 +1,23 @@
-﻿Imports Oracle.DataAccess.Client
+﻿Imports DevExpress.XtraTabbedMdi
+Imports Oracle.DataAccess.Client
 Imports Oracle.DataAccess.Types
 
-Public Class frmPrincipal
+Public Class RibbonFormMain
     Dim cnn As New OracleConnection(My.Settings.MiConexion)
 
-    Private Sub frmPrincipal_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        Try
-            frmNotificacion.Close()
-        Catch ex As Exception
-        End Try
+    Private Sub GestionarPanel()
+        If XTabManager.Pages.Count = 0 Then
+            ClientPanel.Visible = True
+        Else
+            ClientPanel.Visible = False
+        End If
     End Sub
 
-    Private Sub frmPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        CargarTramitesAtrasados()
-        tmNotificacion.Enabled = True
+    Private Sub XTabManager_Pages(ByVal sender As Object, ByVal e As MdiTabPageEventArgs) Handles XTabManager.PageAdded, XTabManager.PageRemoved
+        GestionarPanel()
+    End Sub
 
-        lblInfoConexion.Text = String.Format("{0} ({1})", SesionActiva.Nombre, SesionActiva.Usuario)
-        lblInfoUbicacion.Text = String.Format("{0}, {1}", SesionActiva.Sucursal, SesionActiva.Oficina)
-
-        Dim ctlMDI As MdiClient
-        For Each ctl As Control In Controls
-            Try
-                ctlMDI = DirectCast(ctl, MdiClient)
-                ctlMDI.BackColor = BackColor
-            Catch ex As InvalidCastException
-            End Try
-        Next
-
+    Private Sub BarButtonItem1_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem1.ItemClick
         With frmRecepcionDocs
             .MdiParent = Me
             .Show()
@@ -34,15 +25,7 @@ Public Class frmPrincipal
         End With
     End Sub
 
-    Private Sub RecepciónDeDocumentosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecepciónDeDocumentosToolStripMenuItem.Click
-        With frmRecepcionDocs
-            .MdiParent = Me
-            .Show()
-            .Focus()
-        End With
-    End Sub
-
-    Private Sub ProcesarDocumentosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProcesarDocumentosToolStripMenuItem.Click
+    Private Sub BarButtonItem2_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem2.ItemClick
         With frmProcesarDocumentos
             .MdiParent = Me
             .Show()
@@ -50,9 +33,28 @@ Public Class frmPrincipal
         End With
     End Sub
 
-    Private Sub CerrarSesiónToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSesiónToolStripMenuItem.Click
+    Private Sub BarButtonItem3_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick
+        With frmVerificarDisponibilidad
+            .MdiParent = Me
+            .Show()
+            .Focus()
+        End With
+    End Sub
+
+    Private Sub BarButtonItem6_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem6.ItemClick
         frmLogin.Show()
         Close()
+    End Sub
+
+    Private Sub BarButtonItem7_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem7.ItemClick
+        Application.Exit()
+    End Sub
+
+    Private Sub RibbonFormMain_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+        Try
+            frmNotificacion.Close()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Sub CargarTramitesAtrasados()
@@ -97,19 +99,15 @@ Public Class frmPrincipal
         End Try
     End Sub
 
-    Private Sub tmNotificacion_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmNotificacion.Tick
+    Private Sub tmNotificacion_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmNotificacion.Tick
         CargarTramitesAtrasados()
     End Sub
 
-    Private Sub VerificarDisponibilidadToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VerificarDisponibilidadToolStripMenuItem.Click
-        With frmVerificarDisponibilidad
-            .MdiParent = Me
-            .Show()
-            .Focus()
-        End With
-    End Sub
+    Private Sub RibbonFormMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        CargarTramitesAtrasados()
+        tmNotificacion.Enabled = True
 
-    Private Sub SalirToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirToolStripMenuItem.Click
-
+        lblConectadoComo.Caption = String.Format("{0} ({1})", SesionActiva.Nombre, SesionActiva.Usuario)
+        lblUbicacion.Caption = String.Format("{0}, {1}", SesionActiva.Sucursal, SesionActiva.Oficina)
     End Sub
 End Class

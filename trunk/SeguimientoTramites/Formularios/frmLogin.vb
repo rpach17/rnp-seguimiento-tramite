@@ -20,13 +20,13 @@
                 .Sucursal = "General"
                 .Oficina = "No disponible"
             End With
-            frmPrincipal.Show()
+            RibbonFormMain.Show()
             Close()
             Exit Sub
         End If
 
         If EntityTablas.Login(txtUser.Text, SHA1(txtPass.Text)) Then
-            frmPrincipal.Show()
+            RibbonFormMain.Show()
             Close()
         Else
             Dim s As String = "Error al iniciar sesión. Posibles razones:" & vbCrLf & vbCrLf & _

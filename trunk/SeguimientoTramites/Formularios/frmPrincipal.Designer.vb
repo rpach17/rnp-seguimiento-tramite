@@ -61,14 +61,12 @@ Partial Class frmPrincipal
         '
         'CerrarSesiónToolStripMenuItem
         '
-        Me.CerrarSesiónToolStripMenuItem.Image = Global.SeguimientoTramites.My.Resources.Resources.door_in
         Me.CerrarSesiónToolStripMenuItem.Name = "CerrarSesiónToolStripMenuItem"
         Me.CerrarSesiónToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
         Me.CerrarSesiónToolStripMenuItem.Text = "Cerrar sesión"
         '
         'SalirToolStripMenuItem
         '
-        Me.SalirToolStripMenuItem.Image = Global.SeguimientoTramites.My.Resources.Resources.cross
         Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
         Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
         Me.SalirToolStripMenuItem.Text = "Salir"

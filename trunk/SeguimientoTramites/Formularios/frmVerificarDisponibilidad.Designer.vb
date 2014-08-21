@@ -24,14 +24,14 @@ Partial Class frmVerificarDisponibilidad
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.dgvTramites = New System.Windows.Forms.DataGridView()
-        Me.btnRecibirTramites = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblInfo = New System.Windows.Forms.Label()
-        Me.txtCodigoTramite = New System.Windows.Forms.TextBox()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnRecibirTramites = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.txtCodigoTramite = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -40,10 +40,11 @@ Partial Class frmVerificarDisponibilidad
         'Panel1
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.Controls.Add(Me.dgvTramites)
         Me.Panel1.Controls.Add(Me.btnRecibirTramites)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(6, 6)
+        Me.Panel1.Location = New System.Drawing.Point(27, 18)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(654, 375)
         Me.Panel1.TabIndex = 4
@@ -53,6 +54,7 @@ Partial Class frmVerificarDisponibilidad
         Me.dgvTramites.AllowUserToAddRows = False
         Me.dgvTramites.AllowUserToDeleteRows = False
         Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvTramites.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
         Me.dgvTramites.Location = New System.Drawing.Point(30, 98)
@@ -60,6 +62,34 @@ Partial Class frmVerificarDisponibilidad
         Me.dgvTramites.ReadOnly = True
         Me.dgvTramites.Size = New System.Drawing.Size(597, 204)
         Me.dgvTramites.TabIndex = 4
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "ID"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.Width = 43
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Nombre"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 69
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Apellido"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        Me.Column3.Width = 69
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Número trámites"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Width = 99
         '
         'btnRecibirTramites
         '
@@ -100,39 +130,11 @@ Partial Class frmVerificarDisponibilidad
         Me.txtCodigoTramite.Size = New System.Drawing.Size(197, 27)
         Me.txtCodigoTramite.TabIndex = 0
         '
-        'Column1
-        '
-        Me.Column1.HeaderText = "ID"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 43
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Nombre"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 69
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Apellido"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 69
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Número trámites"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 99
-        '
         'frmVerificarDisponibilidad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(667, 388)
+        Me.ClientSize = New System.Drawing.Size(709, 412)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmVerificarDisponibilidad"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
