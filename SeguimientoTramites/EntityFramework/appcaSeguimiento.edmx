@@ -176,7 +176,7 @@
           <Key>
             <PropertyRef Name="IDSALTO" />
           </Key>
-          <Property Name="IDSALTO" Type="number" Nullable="false" />
+          <Property Name="IDSALTO" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NUMERO_SALTO" Type="number" />
           <Property Name="IDGESTION" Type="number" />
           <Property Name="IDPUESTO" Type="number" />

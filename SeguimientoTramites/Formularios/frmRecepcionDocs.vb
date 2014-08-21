@@ -13,14 +13,18 @@ Public Class frmRecepcionDocs
         End If
     End Sub
 
-    Private Sub frmRecepcionDocs_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmRecepcionDocs_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         EntityTablas.TramitesRecibir(dgvTramites)
     End Sub
 
-    Private Sub txtCodigoTramite_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCodigoTramite.TextChanged
+    Private Sub txtCodigoTramite_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtCodigoTramite.TextChanged
         Dim cant As Integer = txtCodigoTramite.TextLength
         If cant = 12 Then
             RecepcionarTramite(txtCodigoTramite.Text)
+        ElseIf cant > 12 Then
+            txtCodigoTramite.Text = txtCodigoTramite.Text.Substring(cant - 12, 12)
+        ElseIf cant = 0 Then
+            lblInfo.Text = ""
         Else
             lblInfo.Text = "Ingrese código de trámite completo"
         End If
@@ -65,12 +69,50 @@ Public Class frmRecepcionDocs
         End Try
     End Sub
 
+    Private Sub RecepcionarTramiteGrid(ByVal barcode As String)
+        Try
+            Using myCMD As New OracleCommand() With
+                {
+                    .Connection = cnn,
+                    .CommandText = "SP_RECEPCION_TRAMITE",
+                    .CommandType = CommandType.StoredProcedure
+                }
+
+                With myCMD.Parameters
+                    .Add("VCODIGO", OracleDbType.NVarchar2, 12, Nothing, ParameterDirection.Input).Value = barcode
+                    .Add("VIDUSUARIO", OracleDbType.Decimal, 12, Nothing, ParameterDirection.Input).Value = SesionActiva.IdUsuario
+                    .Add("VIDDETALLE_SUCURSAL_OFICINA", OracleDbType.Decimal, 12, Nothing, ParameterDirection.Input).Value = SesionActiva.IdSucursalOficina
+                    .Add("EXISTE", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
+                    .Add("VACTIVO", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
+                    .Add("MISMAOFICINA", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
+                End With
+
+                cnn.Open()
+                myCMD.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            lblInfo.Text = ex.Message
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
     Private Sub btnRecibirTramites_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRecibirTramites.Click
+        If dgvTramites.RowCount = 0 Then
+            lblInfo.Text = "No hay trámites"
+            Exit Sub
+        End If
+
         For Each fila As DataGridViewRow In dgvTramites.Rows
             If Convert.ToBoolean(fila.Cells(4).Value) Then
                 Dim barcode As String = fila.Cells(0).Value
-                RecepcionarTramite(barcode)
+                RecepcionarTramiteGrid(barcode)
             End If
         Next
+
+        txtCodigoTramite.Text = ""
+        EntityTablas.TramitesRecibir(dgvTramites)
+        txtCodigoTramite.Focus()
+        lblInfo.Text = "Los trámites fueron recibidos"
     End Sub
 End Class
