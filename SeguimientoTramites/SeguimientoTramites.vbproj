@@ -139,6 +139,12 @@
     <Compile Include="Formularios\frmDecidir.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\frmErroresGestiones.Designer.vb">
+      <DependentUpon>frmErroresGestiones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmErroresGestiones.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmDecidir.resx">
       <DependentUpon>frmDecidir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmErroresGestiones.resx">
+      <DependentUpon>frmErroresGestiones.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>

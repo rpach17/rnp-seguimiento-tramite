@@ -110,4 +110,5 @@ Public Class RibbonFormMain
         lblConectadoComo.Caption = String.Format("{0} ({1})", SesionActiva.Nombre, SesionActiva.Usuario)
         lblUbicacion.Caption = String.Format("{0}, {1}", SesionActiva.Sucursal, SesionActiva.Oficina)
     End Sub
+
 End Class
