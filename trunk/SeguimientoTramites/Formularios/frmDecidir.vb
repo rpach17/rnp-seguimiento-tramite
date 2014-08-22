@@ -20,6 +20,7 @@
 
     Private Sub frmDecidir_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         EntityTablas.DatosDecisionSalto(ids, lblDescripcion, rdoV, rdoF)
+        lblError.Visible = False
     End Sub
 
     Private Sub btnDecidir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDecidir.Click
@@ -28,9 +29,39 @@
         End If
 
         If rdoF.Checked Then
-            EntityTablas.ActualizarDetalleTramite(iddt, rdoF.Tag)
+            If cboError.SelectedValue > 0 Then
+                EntityTablas.ActualizarDetalleTramite(iddt, rdoF.Tag)
+                EntityTablas.ErrorTramite(iddt, cboError.SelectedValue)
+            Else
+                MsgBox("Debe seleccionar un error")
+                Exit Sub
+            End If
+        End If
+        Close()
+    End Sub
+
+    Private Sub rdoF_CheckedChanged(sender As Object, e As EventArgs) Handles rdoF.CheckedChanged, rdoV.CheckedChanged
+        If rdoV.Checked Then
+            lblError.Visible = False
+            cboError.Enabled = False
+            btnAgregarError.Enabled = False
         End If
 
-        Close()
+        If rdoF.Checked Then
+            lblError.Visible = True
+            cboError.Enabled = True
+            btnAgregarError.Enabled = True
+            EntityTablas.CargarError(cboError, ids)
+        End If
+    End Sub
+
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnAgregarError.Click
+        With frmErroresGestiones
+            .Ids1 = ids
+            .StartPosition = FormStartPosition.CenterScreen
+            .ShowDialog()
+        End With
+        EntityTablas.CargarError(cboError, ids)
     End Sub
 End Class

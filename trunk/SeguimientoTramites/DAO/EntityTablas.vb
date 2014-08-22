@@ -93,6 +93,19 @@
 
         ctx.SaveChanges()
     End Sub
+
+    Shared Sub ErrorTramite(ByVal iddt As Integer, ByVal ide As Integer)
+        Dim tramite As TRAMITES = (From t In ctx.TRAMITES
+                                  From dt In t.DETALLE_TRAMITE
+                                  Where dt.ID_DETALLE_TRAMITE = iddt
+                                  Select t).FirstOrDefault
+        Dim err As ERRORES_GESTIONES = (From e In ctx.ERRORES_GESTIONES Where e.IDERROR = ide Select e).FirstOrDefault
+
+        tramite.ERRORES_GESTIONES.Add(err)
+        ctx.SaveChanges()
+
+    End Sub
+
 #End Region
 
 #Region "Disponibilidad"
@@ -136,6 +149,44 @@
             lbl.Text = "Trámite no existe"
         End If
 
+
+    End Sub
+
+#End Region
+
+#Region "Error Tramite"
+    Public Shared Sub CargarError(ByVal cbo As ComboBox, ByVal salto As Integer)
+        Dim err = (From e In ctx.ERRORES_GESTIONES
+                   From s In e.GESTIONES.SALTOS
+                   Where s.IDSALTO = salto And e.IDGESTION = s.IDGESTION
+                   Order By e.DESCRIPCION
+                   Select e).ToList()
+
+        cbo.DataSource = err
+        cbo.DisplayMember = "DESCRIPCION"
+        cbo.ValueMember = "IDERROR"
+        cbo.SelectedValue = -1
+    End Sub
+
+    Public Shared Function Gestion(ByVal ids As Integer) As GESTIONES
+        Dim ges = (From g In ctx.GESTIONES
+                   From s In g.SALTOS
+                   Where s.IDSALTO = ids And g.IDGESTION = s.IDGESTION
+                   Select g).FirstOrDefault
+        Return ges
+    End Function
+
+    Public Shared Sub AgregarError(ByVal codigo As String, ByVal descripcion As String, ByVal idSalto As Integer)
+        Dim gestion As Integer = (From s In ctx.SALTOS Where s.IDSALTO = idSalto Select s.IDGESTION).FirstOrDefault
+
+        Dim err As New ERRORES_GESTIONES With _
+            {
+                .CODIGOERROR = codigo,
+                .DESCRIPCION = descripcion,
+                .IDGESTION = gestion
+            }
+        ctx.ERRORES_GESTIONES.AddObject(err)
+        ctx.SaveChanges()
 
     End Sub
 

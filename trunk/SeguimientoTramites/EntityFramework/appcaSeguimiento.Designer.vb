@@ -18,7 +18,7 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 
-<Assembly: EdmSchemaAttribute("a83bb958-60ae-4e37-952f-931e1f80fa21")>
+<Assembly: EdmSchemaAttribute("2ecc3ce0-75b3-4b69-9ae7-cb211725d16b")>
 #Region "Metadatos de relaciones en EDM"
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_GESTIONES_USUARIO_FK1", "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(USUARIOS), "DETALLE_GESTIONES_USUARIO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_GESTIONES_USUARIO), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_OFICINA_GESTIONES_FK1", "OFICINAS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(OFICINAS), "DETALLE_OFICINA_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_OFICINA_GESTIONES), True)>
@@ -36,6 +36,8 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("Modelo", "SALTOS_FK1", "GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(GESTIONES), "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SALTOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "PROCESOS_FK1", "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(SALTOS), "PROCESOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(PROCESOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "SALTOS_FK2", "PUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(PUESTO), "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SALTOS), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "ERRORES_GESTIONES_FK1", "GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(GESTIONES), "ERRORES_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(ERRORES_GESTIONES), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_ERRORES_GESTIONES", "ERRORES_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(ERRORES_GESTIONES), "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(TRAMITES))>
 
 #End Region
 
@@ -283,6 +285,20 @@ Public Partial Class Entidades
 
     Private _SALTOS As ObjectSet(Of SALTOS)
 
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    Public ReadOnly Property ERRORES_GESTIONES() As ObjectSet(Of ERRORES_GESTIONES)
+        Get
+            If (_ERRORES_GESTIONES Is Nothing) Then
+                _ERRORES_GESTIONES = MyBase.CreateObjectSet(Of ERRORES_GESTIONES)("ERRORES_GESTIONES")
+            End If
+            Return _ERRORES_GESTIONES
+        End Get
+    End Property
+
+    Private _ERRORES_GESTIONES As ObjectSet(Of ERRORES_GESTIONES)
+
     #End Region
 
     #Region "Métodos AddTo"
@@ -383,6 +399,13 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToSALTOS(ByVal sALTOS As SALTOS)
         MyBase.AddObject("SALTOS", sALTOS)
+    End Sub
+
+    ''' <summary>
+    ''' Método desusado para agregar un nuevo objeto al EntitySet ERRORES_GESTIONES. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
+    ''' </summary>
+    Public Sub AddToERRORES_GESTIONES(ByVal eRRORES_GESTIONES As ERRORES_GESTIONES)
+        MyBase.AddObject("ERRORES_GESTIONES", eRRORES_GESTIONES)
     End Sub
 
     #End Region
@@ -1123,6 +1146,189 @@ End Class
 ''' <summary>
 ''' No hay documentación de metadatos disponible.
 ''' </summary>
+<EdmEntityTypeAttribute(NamespaceName:="Modelo", Name:="ERRORES_GESTIONES")>
+<Serializable()>
+<DataContractAttribute(IsReference:=True)>
+Public Partial Class ERRORES_GESTIONES
+    Inherits EntityObject
+    #Region "Método de generador"
+
+    ''' <summary>
+    ''' Crear un nuevo objeto ERRORES_GESTIONES.
+    ''' </summary>
+    ''' <param name="iDERROR">Valor inicial de la propiedad IDERROR.</param>
+    Public Shared Function CreateERRORES_GESTIONES(iDERROR As Global.System.Decimal) As ERRORES_GESTIONES
+        Dim eRRORES_GESTIONES as ERRORES_GESTIONES = New ERRORES_GESTIONES
+        eRRORES_GESTIONES.IDERROR = iDERROR
+        Return eRRORES_GESTIONES
+    End Function
+
+    #End Region
+
+    #Region "Propiedades primitivas"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property IDERROR() As Global.System.Decimal
+        Get
+            Return _IDERROR
+        End Get
+        Set
+            If (_IDERROR <> Value) Then
+                OnIDERRORChanging(value)
+                ReportPropertyChanging("IDERROR")
+                _IDERROR = StructuralObject.SetValidValue(value)
+                ReportPropertyChanged("IDERROR")
+                OnIDERRORChanged()
+            End If
+        End Set
+    End Property
+
+    Private _IDERROR As Global.System.Decimal
+    Private Partial Sub OnIDERRORChanging(value As Global.System.Decimal)
+    End Sub
+
+    Private Partial Sub OnIDERRORChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property CODIGOERROR() As Global.System.String
+        Get
+            Return _CODIGOERROR
+        End Get
+        Set
+            OnCODIGOERRORChanging(value)
+            ReportPropertyChanging("CODIGOERROR")
+            _CODIGOERROR = StructuralObject.SetValidValue(value, true)
+            ReportPropertyChanged("CODIGOERROR")
+            OnCODIGOERRORChanged()
+        End Set
+    End Property
+
+    Private _CODIGOERROR As Global.System.String
+    Private Partial Sub OnCODIGOERRORChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnCODIGOERRORChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property DESCRIPCION() As Global.System.String
+        Get
+            Return _DESCRIPCION
+        End Get
+        Set
+            OnDESCRIPCIONChanging(value)
+            ReportPropertyChanging("DESCRIPCION")
+            _DESCRIPCION = StructuralObject.SetValidValue(value, true)
+            ReportPropertyChanged("DESCRIPCION")
+            OnDESCRIPCIONChanged()
+        End Set
+    End Property
+
+    Private _DESCRIPCION As Global.System.String
+    Private Partial Sub OnDESCRIPCIONChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnDESCRIPCIONChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property IDGESTION() As Nullable(Of Global.System.Decimal)
+        Get
+            Return _IDGESTION
+        End Get
+        Set
+            OnIDGESTIONChanging(value)
+            ReportPropertyChanging("IDGESTION")
+            _IDGESTION = StructuralObject.SetValidValue(value)
+            ReportPropertyChanged("IDGESTION")
+            OnIDGESTIONChanged()
+        End Set
+    End Property
+
+    Private _IDGESTION As Nullable(Of Global.System.Decimal)
+    Private Partial Sub OnIDGESTIONChanging(value As Nullable(Of Global.System.Decimal))
+    End Sub
+
+    Private Partial Sub OnIDGESTIONChanged()
+    End Sub
+
+    #End Region
+
+    #Region "Propiedades de navegación"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "ERRORES_GESTIONES_FK1", "GESTIONES")>
+    Public Property GESTIONES() As GESTIONES
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of GESTIONES)("Modelo.ERRORES_GESTIONES_FK1", "GESTIONES").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of GESTIONES)("Modelo.ERRORES_GESTIONES_FK1", "GESTIONES").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property GESTIONESReference() As EntityReference(Of GESTIONES)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of GESTIONES)("Modelo.ERRORES_GESTIONES_FK1", "GESTIONES")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of GESTIONES)("Modelo.ERRORES_GESTIONES_FK1", "GESTIONES", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DETALLE_ERRORES_GESTIONES", "TRAMITES")>
+     Public Property TRAMITES() As EntityCollection(Of TRAMITES)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of TRAMITES)("Modelo.DETALLE_ERRORES_GESTIONES", "TRAMITES")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of TRAMITES)("Modelo.DETALLE_ERRORES_GESTIONES", "TRAMITES", value)
+            End If
+        End Set
+    End Property
+
+    #End Region
+
+End Class
+
+''' <summary>
+''' No hay documentación de metadatos disponible.
+''' </summary>
 <EdmEntityTypeAttribute(NamespaceName:="Modelo", Name:="GESTIONES")>
 <Serializable()>
 <DataContractAttribute(IsReference:=True)>
@@ -1318,6 +1524,24 @@ Public Partial Class GESTIONES
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of SALTOS)("Modelo.SALTOS_FK1", "SALTOS", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "ERRORES_GESTIONES_FK1", "ERRORES_GESTIONES")>
+     Public Property ERRORES_GESTIONES() As EntityCollection(Of ERRORES_GESTIONES)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of ERRORES_GESTIONES)("Modelo.ERRORES_GESTIONES_FK1", "ERRORES_GESTIONES")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of ERRORES_GESTIONES)("Modelo.ERRORES_GESTIONES_FK1", "ERRORES_GESTIONES", value)
             End If
         End Set
     End Property
@@ -3113,6 +3337,24 @@ Public Partial Class TRAMITES
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of DETALLE_TRAMITE)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_TRAMITE", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DETALLE_ERRORES_GESTIONES", "ERRORES_GESTIONES")>
+     Public Property ERRORES_GESTIONES() As EntityCollection(Of ERRORES_GESTIONES)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of ERRORES_GESTIONES)("Modelo.DETALLE_ERRORES_GESTIONES", "ERRORES_GESTIONES")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of ERRORES_GESTIONES)("Modelo.DETALLE_ERRORES_GESTIONES", "ERRORES_GESTIONES", value)
             End If
         End Set
     End Property
