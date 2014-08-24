@@ -304,6 +304,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-rnp.ico" />
+    <None Include="Resources\page_white_go.png" />
+    <None Include="Resources\document_prepare.png" />
     <None Include="Resources\715.GIF" />
   </ItemGroup>
   <ItemGroup>
