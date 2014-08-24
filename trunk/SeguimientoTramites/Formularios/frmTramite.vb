@@ -41,7 +41,7 @@ Public Class frmTramite
         'Para limpiar el control Flow
         FlowLayoutPanel1.Controls.Clear()
 
-        Dim lista As List(Of REQUISITOS) = eAPPCA.ObtenerRequisitos(IdGestion)
+        Dim lista As List(Of REQUISITOS) = EntityTablas.ObtenerRequisitos(IdGestion)
         For Each requisito In lista
             Dim chk As New CheckBox
             chk.Tag = requisito.IDREQUISITO
@@ -93,7 +93,7 @@ Public Class frmTramite
         Dim cant As Integer = txtIdentidad.TextLength
 
         If cant = 13 Then
-            result = eAPPCA.BuscarResponsable(txtIdentidad.Text, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtTelefonoFijo, txtTelefonoMovil, txtCorreo, lblInfo)
+            result = EntityTablas.BuscarResponsable(txtIdentidad.Text, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtTelefonoFijo, txtTelefonoMovil, txtCorreo, lblInfo)
         Else
             lblInfo.Visible = False
         End If
@@ -142,7 +142,7 @@ Public Class frmTramite
             
             End If
 
-            crearTramite(eAPPCA.ActualizarResponsable(txtIdentidad.Text, txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text))
+            crearTramite(EntityTablas.ActualizarResponsable(txtIdentidad.Text, txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text))
 
         ElseIf result = 2 Then  'Nuevo codigo para insert
             If txtCorreo.Text.Trim <> "" Then
@@ -153,7 +153,7 @@ Public Class frmTramite
                 End If
             End If
 
-            crearTramite(eAPPCA.NuevoResponsable(New RESPONSABLE With _
+            crearTramite(EntityTablas.NuevoResponsable(New RESPONSABLE With _
                                                  {
                                                      .NUMERO_IDENTIDAD = txtIdentidad.Text,
                                                      .TELEFONO = txtTelefonoFijo.Text,
@@ -188,7 +188,7 @@ Public Class frmTramite
                             .RECIBIDO = 1
                         }
 
-                        eAPPCA.AgregarRequisito(requi)
+                        EntityTablas.AgregarRequisito(requi)
                     End If
                 Next
 
@@ -197,6 +197,10 @@ Public Class frmTramite
                 '    'rpt.Print()
                 'End Using
                 Dim url As String = String.Format("http://tramite.rnp.hn/{0}", myCMD.Parameters("VCODIGO").Value.ToString)
+
+
+
+
                 Using rpt As New rptReciboTramite(myCMD.Parameters("VCODIGO").Value.ToString, myCMD.Parameters("NGESTION").Value.ToString, myCMD.Parameters("VFECHA").Value.ToString, txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text, url)
                     Using preview As New ReportPrintTool(rpt)
                         preview.Print()
@@ -212,7 +216,7 @@ Public Class frmTramite
                 End Using
             End Using
             MsgBox("El trámite ha sido registrado con éxito", MsgBoxStyle.Information, "Trámite")
-            frmTrm.btnCrear.Enabled = False
+            'frmTrm.btnCrear.Enabled = False
             'frmVentanilla.btnTramite.Enabled = False
             Close()
         Catch ex As Exception
