@@ -26,6 +26,23 @@ Module ModuloFunciones
         End Using
     End Function
 
+    Public Function ValidarCorreo(ByVal correo As String) As Boolean
+        If correo.IndexOf("@") > -1 Then
+            If correo.IndexOf(".", correo.IndexOf("@")) > correo.IndexOf("@") Then
+                Return True
+            End If
+        End If
+
+        Return False
+    End Function
+    Public Function DameID(ByVal miGrid As DataGridView, Optional ByVal colID As Integer = 0)
+        Try
+            Return miGrid.CurrentRow().Cells(colID).Value
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function ObtenerDatoGrid(ByVal grid As DataGridView, Optional ByVal columna As Integer = 0)
         Try
             Return grid.CurrentRow().Cells(columna).Value

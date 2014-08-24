@@ -13,11 +13,13 @@
           <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.Store.DETALLE_TRAMITE" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="ERRORES_GESTIONES" EntityType="Modelo.Store.ERRORES_GESTIONES" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="GESTIONES" EntityType="Modelo.Store.GESTIONES" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="IDENTIFICACION" EntityType="Modelo.Store.IDENTIFICACION" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="OFICINAS" EntityType="Modelo.Store.OFICINAS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="PROCESOS" EntityType="Modelo.Store.PROCESOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="PUESTO" EntityType="Modelo.Store.PUESTO" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="RECEPCION_REQUISITOS" EntityType="Modelo.Store.RECEPCION_REQUISITOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="REQUISITOS" EntityType="Modelo.Store.REQUISITOS" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="RESPONSABLE" EntityType="Modelo.Store.RESPONSABLE" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="SALTOS" EntityType="Modelo.Store.SALTOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="SUCURSALES" EntityType="Modelo.Store.SUCURSALES" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="TRAMITES" EntityType="Modelo.Store.TRAMITES" store:Type="Tables" Schema="APPCA" />
@@ -85,6 +87,10 @@
           <AssociationSet Name="SALTOS_FK2" Association="Modelo.Store.SALTOS_FK2">
             <End Role="PUESTO" EntitySet="PUESTO" />
             <End Role="SALTOS" EntitySet="SALTOS" />
+          </AssociationSet>
+          <AssociationSet Name="TRAMITES_FK1" Association="Modelo.Store.TRAMITES_FK1">
+            <End Role="RESPONSABLE" EntitySet="RESPONSABLE" />
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
           </AssociationSet>
           <AssociationSet Name="TRAMITES_FK2" Association="Modelo.Store.TRAMITES_FK2">
             <End Role="GESTIONES" EntitySet="GESTIONES" />
@@ -161,6 +167,17 @@
           <Property Name="NOMBRE" Type="varchar2" MaxLength="60" />
           <Property Name="TIEMPO" Type="number" />
         </EntityType>
+        <EntityType Name="IDENTIFICACION">
+          <Key>
+            <PropertyRef Name="IDENTIDAD" />
+          </Key>
+          <Property Name="IDENTIDAD" Type="varchar2" Nullable="false" MaxLength="13" />
+          <Property Name="FORMID" Type="varchar2" Nullable="false" MaxLength="8" />
+          <Property Name="PRIMER_NOMBRE" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="SEGUNDO_NOMBRE" Type="varchar2" MaxLength="30" />
+          <Property Name="PRIMER_APELLIDO" Type="varchar2" Nullable="false" MaxLength="30" />
+          <Property Name="SEGUNDO_APELLIDO" Type="varchar2" MaxLength="30" />
+        </EntityType>
         <EntityType Name="OFICINAS">
           <Key>
             <PropertyRef Name="IDOFICINA" />
@@ -202,6 +219,18 @@
           <Property Name="IDGESTION" Type="number" />
           <Property Name="NOMBRE_REQUISITO" Type="varchar2" MaxLength="30" />
           <Property Name="OPCIONAL" Type="number" />
+        </EntityType>
+        <EntityType Name="RESPONSABLE">
+          <Key>
+            <PropertyRef Name="IDRESPONSABLE" />
+          </Key>
+          <Property Name="IDRESPONSABLE" Type="number" Nullable="false" />
+          <Property Name="NUMERO_IDENTIDAD" Type="varchar2" MaxLength="13" />
+          <Property Name="TELEFONO" Type="varchar2" MaxLength="9" />
+          <Property Name="CELULAR" Type="varchar2" MaxLength="9" />
+          <Property Name="CORREO" Type="varchar2" MaxLength="50" />
+          <Property Name="PASS" Type="varchar2" MaxLength="40" />
+          <Property Name="ACTIVO" Type="number" Nullable="false" />
         </EntityType>
         <EntityType Name="SALTOS">
           <Key>
@@ -455,6 +484,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TRAMITES_FK1">
+          <End Role="RESPONSABLE" Type="Modelo.Store.RESPONSABLE" Multiplicity="1" />
+          <End Role="TRAMITES" Type="Modelo.Store.TRAMITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESPONSABLE">
+              <PropertyRef Name="IDRESPONSABLE" />
+            </Principal>
+            <Dependent Role="TRAMITES">
+              <PropertyRef Name="IDRSPONSABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="TRAMITES_FK2">
           <End Role="GESTIONES" Type="Modelo.Store.GESTIONES" Multiplicity="1" />
           <End Role="TRAMITES" Type="Modelo.Store.TRAMITES" Multiplicity="*" />
@@ -583,6 +624,12 @@
             <End Role="ERRORES_GESTIONES" EntitySet="ERRORES_GESTIONES" />
             <End Role="TRAMITES" EntitySet="TRAMITES" />
           </AssociationSet>
+          <EntitySet Name="RESPONSABLE" EntityType="Modelo.RESPONSABLE" />
+          <AssociationSet Name="TRAMITES_FK1" Association="Modelo.TRAMITES_FK1">
+            <End Role="RESPONSABLE" EntitySet="RESPONSABLE" />
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+          </AssociationSet>
+          <EntitySet Name="IDENTIFICACION" EntityType="Modelo.IDENTIFICACION" />
         </EntityContainer>
         <EntityType Name="DETALLE_GESTIONES_USUARIO">
           <Key>
@@ -683,6 +730,7 @@
           <NavigationProperty Name="GESTIONES" Relationship="Modelo.TRAMITES_FK2" FromRole="TRAMITES" ToRole="GESTIONES" />
           <NavigationProperty Name="DETALLE_TRAMITE" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_TRAMITE" />
           <NavigationProperty Name="ERRORES_GESTIONES" Relationship="Modelo.DETALLE_ERRORES_GESTIONES" FromRole="TRAMITES" ToRole="ERRORES_GESTIONES" />
+          <NavigationProperty Name="RESPONSABLE" Relationship="Modelo.TRAMITES_FK1" FromRole="TRAMITES" ToRole="RESPONSABLE" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -982,6 +1030,42 @@
           <End Type="Modelo.ERRORES_GESTIONES" Role="ERRORES_GESTIONES" Multiplicity="*" />
           <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
         </Association>
+        <EntityType Name="RESPONSABLE">
+          <Key>
+            <PropertyRef Name="IDRESPONSABLE" />
+          </Key>
+          <Property Type="Decimal" Name="IDRESPONSABLE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="NUMERO_IDENTIDAD" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TELEFONO" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CELULAR" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CORREO" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PASS" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ACTIVO" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="TRAMITES" Relationship="Modelo.TRAMITES_FK1" FromRole="RESPONSABLE" ToRole="TRAMITES" />
+        </EntityType>
+        <Association Name="TRAMITES_FK1">
+          <End Type="Modelo.RESPONSABLE" Role="RESPONSABLE" Multiplicity="1" />
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESPONSABLE">
+              <PropertyRef Name="IDRESPONSABLE" />
+            </Principal>
+            <Dependent Role="TRAMITES">
+              <PropertyRef Name="IDRSPONSABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IDENTIFICACION">
+          <Key>
+            <PropertyRef Name="IDENTIDAD" />
+          </Key>
+          <Property Type="String" Name="IDENTIDAD" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FORMID" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PRIMER_NOMBRE" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SEGUNDO_NOMBRE" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PRIMER_APELLIDO" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SEGUNDO_APELLIDO" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1160,6 +1244,31 @@
               <ScalarProperty Name="IDERROR" ColumnName="IDERROR" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="RESPONSABLE">
+            <EntityTypeMapping TypeName="Modelo.RESPONSABLE">
+              <MappingFragment StoreEntitySet="RESPONSABLE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="NUMERO_IDENTIDAD" ColumnName="NUMERO_IDENTIDAD" />
+                <ScalarProperty Name="IDRESPONSABLE" ColumnName="IDRESPONSABLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IDENTIFICACION">
+            <EntityTypeMapping TypeName="Modelo.IDENTIFICACION">
+              <MappingFragment StoreEntitySet="IDENTIFICACION">
+                <ScalarProperty Name="SEGUNDO_APELLIDO" ColumnName="SEGUNDO_APELLIDO" />
+                <ScalarProperty Name="PRIMER_APELLIDO" ColumnName="PRIMER_APELLIDO" />
+                <ScalarProperty Name="SEGUNDO_NOMBRE" ColumnName="SEGUNDO_NOMBRE" />
+                <ScalarProperty Name="PRIMER_NOMBRE" ColumnName="PRIMER_NOMBRE" />
+                <ScalarProperty Name="FORMID" ColumnName="FORMID" />
+                <ScalarProperty Name="IDENTIDAD" ColumnName="IDENTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1280,6 +1389,9 @@
         <EntityTypeShape EntityType="Modelo.ERRORES_GESTIONES" Width="1.5" PointX="4.625" PointY="12.125" />
         <AssociationConnector Association="Modelo.ERRORES_GESTIONES_FK1" />
         <AssociationConnector Association="Modelo.DETALLE_ERRORES_GESTIONES" />
+        <EntityTypeShape EntityType="Modelo.RESPONSABLE" Width="1.5" PointX="9.875" PointY="12.875" />
+        <AssociationConnector Association="Modelo.TRAMITES_FK1" />
+        <EntityTypeShape EntityType="Modelo.IDENTIFICACION" Width="1.5" PointX="7.875" PointY="12.875" />
       </Diagram>
     </Diagrams>
   </Designer>

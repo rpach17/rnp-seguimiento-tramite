@@ -145,6 +145,12 @@
     <Compile Include="Formularios\frmErroresGestiones.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\frmListadoGestiones.designer.vb">
+      <DependentUpon>frmListadoGestiones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmListadoGestiones.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmErroresGestiones.resx">
       <DependentUpon>frmErroresGestiones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmListadoGestiones.resx">
+      <DependentUpon>frmListadoGestiones.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
@@ -401,6 +410,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reportes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

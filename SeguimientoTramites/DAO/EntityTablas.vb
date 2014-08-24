@@ -108,6 +108,126 @@
 
 #End Region
 
+#Region "Tramites"
+    Shared Function BuscarResponsable(ByVal identidad As String, _
+                                 ByVal txtPN As TextBox, _
+                                 ByVal txtSN As TextBox, _
+                                 ByVal txtPA As TextBox, _
+                                 ByVal txtSA As TextBox, _
+                                 ByVal txtT As MaskedTextBox, _
+                                 ByVal txtC As MaskedTextBox, _
+                                 ByVal txtEmail As TextBox, _
+                                 ByVal lbl As Label) As Integer
+
+        ' 1- Si existe localmente (Para hacer UPDATE)
+        ' 2- No existe y vienen los datos del RNP (INSERT)
+        ' 0- No existe en local ni en DB de RNP (Mostrar mensaje)
+
+        Dim conteo As Integer = (From r In ctx.RESPONSABLE.ToList
+                                Where r.NUMERO_IDENTIDAD = identidad
+                                Select r).Count
+
+        If conteo = 1 Then
+            Dim respon = (From r In ctx.RESPONSABLE
+                          Join i In ctx.IDENTIFICACION On r.NUMERO_IDENTIDAD Equals i.IDENTIDAD
+                               Where r.NUMERO_IDENTIDAD = identidad
+                               Select i.PRIMER_NOMBRE, i.SEGUNDO_NOMBRE, i.PRIMER_APELLIDO, _
+                               i.SEGUNDO_APELLIDO, r.TELEFONO, r.CELULAR, r.CORREO).SingleOrDefault
+
+            txtPN.Text = respon.PRIMER_NOMBRE
+            txtSN.Text = respon.SEGUNDO_NOMBRE
+            txtPA.Text = respon.PRIMER_APELLIDO
+            txtSA.Text = respon.SEGUNDO_APELLIDO
+            txtT.Text = respon.TELEFONO
+            txtC.Text = respon.CELULAR
+            txtEmail.Text = respon.CORREO
+
+            Return 1
+        Else
+            Dim CuentaID As Integer = (From i In ctx.IDENTIFICACION
+                                      Where i.IDENTIDAD = identidad
+                                      Select i).Count
+            If CuentaID = 1 Then
+                Dim respon = (From i In ctx.IDENTIFICACION
+                               Where i.IDENTIDAD = identidad
+                               Select i.PRIMER_NOMBRE, i.SEGUNDO_NOMBRE, i.PRIMER_APELLIDO, i.SEGUNDO_APELLIDO).SingleOrDefault
+
+                txtPN.Text = respon.PRIMER_NOMBRE
+                txtSN.Text = respon.SEGUNDO_NOMBRE
+                txtPA.Text = respon.PRIMER_APELLIDO
+                txtSA.Text = respon.SEGUNDO_APELLIDO
+                Return 2
+                Exit Function
+            End If
+            'Buscar en las BD del registro
+            lbl.Visible = True
+
+            Return 0
+        End If
+    End Function
+
+    Public Shared Function NuevoResponsable(ByVal res As RESPONSABLE)
+        Try
+            ctx.RESPONSABLE.AddObject(res)
+            ctx.SaveChanges()
+            Return res.IDRESPONSABLE 'Después de SaveChanges(), EntityFramework carga el objeto 'res' con los datos y así retornamos el ID recien agregado
+        Catch ex As UpdateException
+            Return ex.Message
+        End Try
+    End Function
+
+
+    Shared Function ActualizarResponsable(ByVal identidad As String, ByVal tel As String, ByVal cel As String, ByVal correo As String) As Integer
+        Dim r As RESPONSABLE = (From re In ctx.RESPONSABLE
+                                   Where re.NUMERO_IDENTIDAD = identidad
+                                   Select re).SingleOrDefault
+        r.TELEFONO = tel
+        r.CELULAR = cel
+        r.CORREO = correo
+
+        ctx.SaveChanges()
+
+        Return r.IDRESPONSABLE
+    End Function
+
+
+    Shared Function ObtenerRequisitos(ByVal idGestion As Integer) As List(Of REQUISITOS)
+        Return (From req In ctx.REQUISITOS Where req.IDGESTION = idGestion Order By req.IDREQUISITO Select req).ToList()
+    End Function
+
+    Shared Sub AgregarRequisito(ByVal req As RECEPCION_REQUISITOS)
+        Try
+            ctx.RECEPCION_REQUISITOS.AddObject(req)
+            ctx.SaveChanges()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Shared Sub ListadoGestiones(ByVal grid As DataGridView, Optional ByVal buscar As String = "")
+
+        If buscar = "" Then
+            Dim gestiones = (From o In ctx.DETALLE_SUCURSAL_OFICINA
+                                    Join g In ctx.DETALLE_OFICINA_GESTIONES
+                                    On o.IDOFICINA Equals g.IDOFICINA
+                                    Where o.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina
+                                    Select g.GESTIONES.IDGESTION, g.GESTIONES.NOMBRE).ToList
+
+            grid.DataSource = gestiones
+            grid.Columns(0).Visible = False
+        Else
+            Dim gestiones = (From o In ctx.DETALLE_SUCURSAL_OFICINA
+                                    Join g In ctx.DETALLE_OFICINA_GESTIONES
+                                    On o.IDOFICINA Equals g.IDOFICINA
+                                    Where o.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso g.GESTIONES.NOMBRE.StartsWith(buscar)
+                                    Select g.GESTIONES.IDGESTION, g.GESTIONES.NOMBRE).ToList
+
+            grid.DataSource = gestiones
+            grid.Columns(0).Visible = False
+        End If
+    End Sub
+#End Region
+
 #Region "Disponibilidad"
 
     Public Shared Sub Disponibilidad(ByVal codtramite As String, ByVal grid As DataGridView, ByRef lbl As Label)
