@@ -176,6 +176,12 @@
     <Compile Include="Formularios\frmRecepcionDocs.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\frmTramite.designer.vb">
+      <DependentUpon>frmTramite.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmTramite.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmVerificarDisponibilidad.Designer.vb">
       <DependentUpon>frmVerificarDisponibilidad.vb</DependentUpon>
     </Compile>
@@ -231,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmRecepcionDocs.resx">
       <DependentUpon>frmRecepcionDocs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmTramite.resx">
+      <DependentUpon>frmTramite.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmVerificarDisponibilidad.resx">
       <DependentUpon>frmVerificarDisponibilidad.vb</DependentUpon>
