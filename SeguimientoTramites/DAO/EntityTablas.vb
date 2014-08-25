@@ -226,6 +226,33 @@
             grid.Columns(0).Visible = False
         End If
     End Sub
+
+    Public Shared Sub TramitesEntregar(ByVal grid As DataGridView, Optional ByVal busqueda As String = "")
+        'Lista de los saltos recibidos y son ultimo salto
+        Dim tramiteEntregar
+        If busqueda = "" Then
+            tramiteEntregar = (From t In ctx.DETALLE_TRAMITE
+                               Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
+                               Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1
+                               Order By t.TRAMITES.CODIGOTRAMITE
+                               Select t.ID_DETALLE_TRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+        Else
+            tramiteEntregar = (From t In ctx.DETALLE_TRAMITE
+                               Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
+                               Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1 AndAlso (t.TRAMITES.CODIGOTRAMITE.StartsWith(busqueda) OrElse t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD.StartsWith(busqueda))
+                               Order By t.TRAMITES.CODIGOTRAMITE
+                               Select t.ID_DETALLE_TRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+        End If
+
+        grid.Rows.Clear()
+        For Each tramite In tramiteEntregar
+            grid.Rows.Add(tramite.IDTRAMITE, tramite.CODIGOTRAMITE, tramite.NOMBRE, tramite.NUMERO_IDENTIDAD,
+                          "Entregar Trámite")
+        Next
+        'grid.DataSource = saltoEntregar
+    End Sub
+
+
 #End Region
 
 #Region "Disponibilidad"
@@ -311,5 +338,7 @@
     End Sub
 
 #End Region
+
+
 
 End Class

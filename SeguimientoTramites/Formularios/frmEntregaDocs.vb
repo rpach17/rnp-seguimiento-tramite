@@ -5,12 +5,12 @@ Public Class frmEntregaDocs
     Dim cnn As New OracleConnection(My.Settings.Miconexion)
 
     Private Sub frmEntregaDocs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        eAPPCA.TramitesEntregar(dgvTramites)
+        EntityTablas.TramitesEntregar(dgvTramites)
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnFiltrar.Click
-        eAPPCA.TramitesEntregar(dgvTramites, txtCodigoTramite.Text)
+        EntityTablas.TramitesEntregar(dgvTramites, txtCodigoTramite.Text)
     End Sub
 
     Private Tramitess As New List(Of TRAMITES)
@@ -67,7 +67,7 @@ Public Class frmEntregaDocs
         'eAPPCA.entregaTramite(DameID(dgvTramites))
         'eAPPCA.entregaTramite(DameID(dgvTramites))
         MsgBox(String.Format("Tramite {0} Entregado", DameID(dgvTramites, 1)))
-        eAPPCA.TramitesEntregar(dgvTramites)
+        EntityTablas.TramitesEntregar(dgvTramites)
 
     End Sub
 End Class
