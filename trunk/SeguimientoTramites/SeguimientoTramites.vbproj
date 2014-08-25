@@ -149,6 +149,12 @@
     <Compile Include="Formularios\frmDecidir.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\frmEntregaDocs.designer.vb">
+      <DependentUpon>frmEntregaDocs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmEntregaDocs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmErroresGestiones.Designer.vb">
       <DependentUpon>frmErroresGestiones.vb</DependentUpon>
     </Compile>
@@ -225,6 +231,12 @@
     <Compile Include="Formularios\RibbonFormMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reportes\rptRecibo.Designer.vb">
+      <DependentUpon>rptRecibo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\rptRecibo.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\rptReciboTramite.Designer.vb">
       <DependentUpon>rptReciboTramite.vb</DependentUpon>
     </Compile>
@@ -247,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmDecidir.resx">
       <DependentUpon>frmDecidir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmEntregaDocs.resx">
+      <DependentUpon>frmEntregaDocs.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmErroresGestiones.resx">
       <DependentUpon>frmErroresGestiones.vb</DependentUpon>
@@ -284,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\RibbonFormMain.resx">
       <DependentUpon>RibbonFormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rptRecibo.resx">
+      <DependentUpon>rptRecibo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptReciboTramite.resx">
       <DependentUpon>rptReciboTramite.vb</DependentUpon>
