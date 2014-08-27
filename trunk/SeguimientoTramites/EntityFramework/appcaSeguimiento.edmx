@@ -265,7 +265,7 @@
             <PropertyRef Name="IDTRAMITE" />
           </Key>
           <Property Name="IDTRAMITE" Type="number" Nullable="false" />
-          <Property Name="IDRSPONSABLE" Type="number" Nullable="false" />
+          <Property Name="IDRESPONSABLE" Type="number" Nullable="false" />
           <Property Name="IDGESTION" Type="number" Nullable="false" />
           <Property Name="CODIGOTRAMITE" Type="varchar2" MaxLength="13" />
           <Property Name="ACTIVO" Type="number" Nullable="false" />
@@ -492,7 +492,7 @@
               <PropertyRef Name="IDRESPONSABLE" />
             </Principal>
             <Dependent Role="TRAMITES">
-              <PropertyRef Name="IDRSPONSABLE" />
+              <PropertyRef Name="IDRESPONSABLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -545,7 +545,6 @@
           <EntitySet Name="PUESTO" EntityType="Modelo.PUESTO" />
           <EntitySet Name="RECEPCION_REQUISITOS" EntityType="Modelo.RECEPCION_REQUISITOS" />
           <EntitySet Name="REQUISITOS" EntityType="Modelo.REQUISITOS" />
-          <EntitySet Name="TRAMITES" EntityType="Modelo.TRAMITES" />
           <EntitySet Name="USUARIOS" EntityType="Modelo.USUARIOS" />
           <AssociationSet Name="DETALLE_GESTIONES_USUARIO_FK1" Association="Modelo.DETALLE_GESTIONES_USUARIO_FK1">
             <End Role="USUARIOS" EntitySet="USUARIOS" />
@@ -575,10 +574,6 @@
             <End Role="REQUISITOS" EntitySet="REQUISITOS" />
             <End Role="RECEPCION_REQUISITOS" EntitySet="RECEPCION_REQUISITOS" />
           </AssociationSet>
-          <AssociationSet Name="RECEPCION_REQUISITOS_FK2" Association="Modelo.RECEPCION_REQUISITOS_FK2">
-            <End Role="TRAMITES" EntitySet="TRAMITES" />
-            <End Role="RECEPCION_REQUISITOS" EntitySet="RECEPCION_REQUISITOS" />
-          </AssociationSet>
           <EntitySet Name="SUCURSALES" EntityType="Modelo.SUCURSALES" />
           <AssociationSet Name="DETALLE_SUCURSAL_OFICINA_FK1" Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK1">
             <End Role="SUCURSALES" EntitySet="SUCURSALES" />
@@ -593,15 +588,7 @@
             <End Role="GESTIONES" EntitySet="GESTIONES" />
             <End Role="REQUISITOS" EntitySet="REQUISITOS" />
           </AssociationSet>
-          <AssociationSet Name="TRAMITES_FK2" Association="Modelo.TRAMITES_FK2">
-            <End Role="GESTIONES" EntitySet="GESTIONES" />
-            <End Role="TRAMITES" EntitySet="TRAMITES" />
-          </AssociationSet>
           <EntitySet Name="DETALLE_TRAMITE" EntityType="Modelo.DETALLE_TRAMITE" />
-          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
-            <End Role="TRAMITES" EntitySet="TRAMITES" />
-            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
-          </AssociationSet>
           <EntitySet Name="SALTOS" EntityType="Modelo.SALTOS" />
           <AssociationSet Name="SALTOS_FK1" Association="Modelo.SALTOS_FK1">
             <End Role="GESTIONES" EntitySet="GESTIONES" />
@@ -620,16 +607,29 @@
             <End Role="GESTIONES" EntitySet="GESTIONES" />
             <End Role="ERRORES_GESTIONES" EntitySet="ERRORES_GESTIONES" />
           </AssociationSet>
-          <AssociationSet Name="DETALLE_ERRORES_GESTIONES" Association="Modelo.DETALLE_ERRORES_GESTIONES">
-            <End Role="ERRORES_GESTIONES" EntitySet="ERRORES_GESTIONES" />
+          <EntitySet Name="RESPONSABLE" EntityType="Modelo.RESPONSABLE" />
+          <EntitySet Name="IDENTIFICACION" EntityType="Modelo.IDENTIFICACION" />
+          <EntitySet Name="TRAMITES" EntityType="Modelo.TRAMITES" />
+          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="DETALLE_TRAMITE" EntitySet="DETALLE_TRAMITE" />
+          </AssociationSet>
+          <AssociationSet Name="TRAMITES_FK2" Association="Modelo.TRAMITES_FK2">
+            <End Role="GESTIONES" EntitySet="GESTIONES" />
             <End Role="TRAMITES" EntitySet="TRAMITES" />
           </AssociationSet>
-          <EntitySet Name="RESPONSABLE" EntityType="Modelo.RESPONSABLE" />
+          <AssociationSet Name="RECEPCION_REQUISITOS_FK2" Association="Modelo.RECEPCION_REQUISITOS_FK2">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="RECEPCION_REQUISITOS" EntitySet="RECEPCION_REQUISITOS" />
+          </AssociationSet>
           <AssociationSet Name="TRAMITES_FK1" Association="Modelo.TRAMITES_FK1">
             <End Role="RESPONSABLE" EntitySet="RESPONSABLE" />
             <End Role="TRAMITES" EntitySet="TRAMITES" />
           </AssociationSet>
-          <EntitySet Name="IDENTIFICACION" EntityType="Modelo.IDENTIFICACION" />
+          <AssociationSet Name="DETALLE_ERRORES_GESTIONES" Association="Modelo.DETALLE_ERRORES_GESTIONES">
+            <End Role="ERRORES_GESTIONES" EntitySet="ERRORES_GESTIONES" />
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DETALLE_GESTIONES_USUARIO">
           <Key>
@@ -713,24 +713,6 @@
           <Property Name="OPCIONAL" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="RECEPCION_REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK1" FromRole="REQUISITOS" ToRole="RECEPCION_REQUISITOS" />
           <NavigationProperty Name="GESTIONES" Relationship="Modelo.REQUISITOS_FK1" FromRole="REQUISITOS" ToRole="GESTIONES" />
-        </EntityType>
-        <EntityType Name="TRAMITES">
-          <Key>
-            <PropertyRef Name="IDTRAMITE" />
-          </Key>
-          <Property Name="IDTRAMITE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="IDRSPONSABLE" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="IDGESTION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="CODIGOTRAMITE" Type="String" MaxLength="13" Unicode="false" FixedLength="false" />
-          <Property Name="ACTIVO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <Property Name="FECHA" Type="DateTime" Nullable="false" />
-          <Property Name="NOTA" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
-          <Property Name="IDDETALLE_SUCURSAL_OFICINA" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
-          <NavigationProperty Name="RECEPCION_REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK2" FromRole="TRAMITES" ToRole="RECEPCION_REQUISITOS" />
-          <NavigationProperty Name="GESTIONES" Relationship="Modelo.TRAMITES_FK2" FromRole="TRAMITES" ToRole="GESTIONES" />
-          <NavigationProperty Name="DETALLE_TRAMITE" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_TRAMITE" />
-          <NavigationProperty Name="ERRORES_GESTIONES" Relationship="Modelo.DETALLE_ERRORES_GESTIONES" FromRole="TRAMITES" ToRole="ERRORES_GESTIONES" />
-          <NavigationProperty Name="RESPONSABLE" Relationship="Modelo.TRAMITES_FK1" FromRole="TRAMITES" ToRole="RESPONSABLE" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -834,18 +816,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="RECEPCION_REQUISITOS_FK2">
-          <End Role="TRAMITES" Type="Modelo.TRAMITES" Multiplicity="0..1" />
-          <End Role="RECEPCION_REQUISITOS" Type="Modelo.RECEPCION_REQUISITOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRAMITES">
-              <PropertyRef Name="IDTRAMITE" />
-            </Principal>
-            <Dependent Role="RECEPCION_REQUISITOS">
-              <PropertyRef Name="IDTRAMITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SUCURSALES">
           <Key>
             <PropertyRef Name="IDSUCURSAL" />
@@ -881,9 +851,9 @@
           <Property Type="Decimal" Name="TIEMPO" Precision="38" Scale="0" />
           <NavigationProperty Name="DETALLE_OFICINA_GESTIONES" Relationship="Modelo.DETALLE_OFICINA_GESTIONES_FK2" FromRole="GESTIONES" ToRole="DETALLE_OFICINA_GESTIONES" />
           <NavigationProperty Name="REQUISITOS" Relationship="Modelo.REQUISITOS_FK1" FromRole="GESTIONES" ToRole="REQUISITOS" />
-          <NavigationProperty Name="TRAMITES" Relationship="Modelo.TRAMITES_FK2" FromRole="GESTIONES" ToRole="TRAMITES" />
           <NavigationProperty Name="SALTOS" Relationship="Modelo.SALTOS_FK1" FromRole="GESTIONES" ToRole="SALTOS" />
           <NavigationProperty Name="ERRORES_GESTIONES" Relationship="Modelo.ERRORES_GESTIONES_FK1" FromRole="GESTIONES" ToRole="ERRORES_GESTIONES" />
+          <NavigationProperty Name="TRAMITES" Relationship="Modelo.TRAMITES_FK2" FromRole="GESTIONES" ToRole="TRAMITES" />
         </EntityType>
         <Association Name="DETALLE_OFICINA_GESTIONES_FK2">
           <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="0..1" />
@@ -909,18 +879,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TRAMITES_FK2">
-          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="1" />
-          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GESTIONES">
-              <PropertyRef Name="IDGESTION" />
-            </Principal>
-            <Dependent Role="TRAMITES">
-              <PropertyRef Name="IDGESTION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DETALLE_TRAMITE">
           <Key>
             <PropertyRef Name="ID_DETALLE_TRAMITE" />
@@ -934,18 +892,6 @@
           <Property Type="Decimal" Name="DESTINO" Precision="38" Scale="0" />
           <NavigationProperty Name="TRAMITES" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="DETALLE_TRAMITE" ToRole="TRAMITES" />
         </EntityType>
-        <Association Name="DETALLE_TRAMITE_FK1">
-          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="1" />
-          <End Type="Modelo.DETALLE_TRAMITE" Role="DETALLE_TRAMITE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRAMITES">
-              <PropertyRef Name="IDTRAMITE" />
-            </Principal>
-            <Dependent Role="DETALLE_TRAMITE">
-              <PropertyRef Name="IDTRAMITE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SALTOS">
           <Key>
             <PropertyRef Name="IDSALTO" />
@@ -1026,10 +972,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DETALLE_ERRORES_GESTIONES">
-          <End Type="Modelo.ERRORES_GESTIONES" Role="ERRORES_GESTIONES" Multiplicity="*" />
-          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
-        </Association>
         <EntityType Name="RESPONSABLE">
           <Key>
             <PropertyRef Name="IDRESPONSABLE" />
@@ -1043,18 +985,6 @@
           <Property Type="Decimal" Name="ACTIVO" Nullable="false" Precision="38" Scale="0" />
           <NavigationProperty Name="TRAMITES" Relationship="Modelo.TRAMITES_FK1" FromRole="RESPONSABLE" ToRole="TRAMITES" />
         </EntityType>
-        <Association Name="TRAMITES_FK1">
-          <End Type="Modelo.RESPONSABLE" Role="RESPONSABLE" Multiplicity="1" />
-          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RESPONSABLE">
-              <PropertyRef Name="IDRESPONSABLE" />
-            </Principal>
-            <Dependent Role="TRAMITES">
-              <PropertyRef Name="IDRSPONSABLE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="IDENTIFICACION">
           <Key>
             <PropertyRef Name="IDENTIDAD" />
@@ -1066,6 +996,76 @@
           <Property Type="String" Name="PRIMER_APELLIDO" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SEGUNDO_APELLIDO" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="TRAMITES">
+          <Key>
+            <PropertyRef Name="IDTRAMITE" />
+          </Key>
+          <Property Type="Decimal" Name="IDTRAMITE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDRESPONSABLE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDGESTION" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="CODIGOTRAMITE" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ACTIVO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="FECHA" Nullable="false" />
+          <Property Type="String" Name="NOTA" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="IDDETALLE_SUCURSAL_OFICINA" Nullable="false" Precision="38" Scale="0" />
+          <NavigationProperty Name="DETALLE_TRAMITE" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_TRAMITE" />
+          <NavigationProperty Name="GESTIONES" Relationship="Modelo.TRAMITES_FK2" FromRole="TRAMITES" ToRole="GESTIONES" />
+          <NavigationProperty Name="RECEPCION_REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK2" FromRole="TRAMITES" ToRole="RECEPCION_REQUISITOS" />
+          <NavigationProperty Name="RESPONSABLE" Relationship="Modelo.TRAMITES_FK1" FromRole="TRAMITES" ToRole="RESPONSABLE" />
+          <NavigationProperty Name="ERRORES_GESTIONES" Relationship="Modelo.DETALLE_ERRORES_GESTIONES" FromRole="TRAMITES" ToRole="ERRORES_GESTIONES" />
+        </EntityType>
+        <Association Name="DETALLE_TRAMITE_FK1">
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="1" />
+          <End Type="Modelo.DETALLE_TRAMITE" Role="DETALLE_TRAMITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="DETALLE_TRAMITE">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRAMITES_FK2">
+          <End Type="Modelo.GESTIONES" Role="GESTIONES" Multiplicity="1" />
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GESTIONES">
+              <PropertyRef Name="IDGESTION" />
+            </Principal>
+            <Dependent Role="TRAMITES">
+              <PropertyRef Name="IDGESTION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RECEPCION_REQUISITOS_FK2">
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="0..1" />
+          <End Type="Modelo.RECEPCION_REQUISITOS" Role="RECEPCION_REQUISITOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="RECEPCION_REQUISITOS">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TRAMITES_FK1">
+          <End Type="Modelo.RESPONSABLE" Role="RESPONSABLE" Multiplicity="1" />
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESPONSABLE">
+              <PropertyRef Name="IDRESPONSABLE" />
+            </Principal>
+            <Dependent Role="TRAMITES">
+              <PropertyRef Name="IDRESPONSABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_ERRORES_GESTIONES">
+          <End Type="Modelo.ERRORES_GESTIONES" Role="ERRORES_GESTIONES" Multiplicity="*" />
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1142,20 +1142,6 @@
                 <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
                 <ScalarProperty Name="NOMBRE_REQUISITO" ColumnName="NOMBRE_REQUISITO" />
                 <ScalarProperty Name="OPCIONAL" ColumnName="OPCIONAL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TRAMITES">
-            <EntityTypeMapping TypeName="Modelo.TRAMITES">
-              <MappingFragment StoreEntitySet="TRAMITES">
-                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
-                <ScalarProperty Name="IDRSPONSABLE" ColumnName="IDRSPONSABLE" />
-                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
-                <ScalarProperty Name="CODIGOTRAMITE" ColumnName="CODIGOTRAMITE" />
-                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
-                <ScalarProperty Name="IDDETALLE_SUCURSAL_OFICINA" ColumnName="IDDETALLE_SUCURSAL_OFICINA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1236,14 +1222,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DETALLE_ERRORES_GESTIONES" TypeName="Modelo.DETALLE_ERRORES_GESTIONES" StoreEntitySet="DETALLE_ERRORES_GESTIONES">
-            <EndProperty Name="TRAMITES">
-              <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
-            </EndProperty>
-            <EndProperty Name="ERRORES_GESTIONES">
-              <ScalarProperty Name="IDERROR" ColumnName="IDERROR" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="RESPONSABLE">
             <EntityTypeMapping TypeName="Modelo.RESPONSABLE">
               <MappingFragment StoreEntitySet="RESPONSABLE">
@@ -1269,6 +1247,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TRAMITES">
+            <EntityTypeMapping TypeName="Modelo.TRAMITES">
+              <MappingFragment StoreEntitySet="TRAMITES">
+                <ScalarProperty Name="IDDETALLE_SUCURSAL_OFICINA" ColumnName="IDDETALLE_SUCURSAL_OFICINA" />
+                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CODIGOTRAMITE" ColumnName="CODIGOTRAMITE" />
+                <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
+                <ScalarProperty Name="IDRESPONSABLE" ColumnName="IDRESPONSABLE" />
+                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DETALLE_ERRORES_GESTIONES" TypeName="Modelo.DETALLE_ERRORES_GESTIONES" StoreEntitySet="DETALLE_ERRORES_GESTIONES">
+            <EndProperty Name="TRAMITES">
+              <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
+            </EndProperty>
+            <EndProperty Name="ERRORES_GESTIONES">
+              <ScalarProperty Name="IDERROR" ColumnName="IDERROR" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1298,7 +1298,6 @@
         <EntityTypeShape EntityType="Modelo.PUESTO" Width="1.5" PointX="3" PointY="7.875" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.RECEPCION_REQUISITOS" Width="1.5" PointX="15" PointY="8.75" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.REQUISITOS" Width="1.5" PointX="12.75" PointY="4.875" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="Modelo.TRAMITES" Width="1.5" PointX="9.75" PointY="8.375" Height="2.9417936197916674" IsExpanded="true" />
         <EntityTypeShape EntityType="Modelo.USUARIOS" Width="1.5" PointX="7.5" PointY="2.875" Height="3.3263964843750031" IsExpanded="true" />
         <AssociationConnector Association="Modelo.DETALLE_GESTIONES_USUARIO_FK1" ManuallyRouted="false">
           <ConnectorPoint PointX="9" PointY="4.547841796875" />
@@ -1340,11 +1339,6 @@
           <ConnectorPoint PointX="15.75" PointY="5.9612939453125" />
           <ConnectorPoint PointX="15.75" PointY="8.75" />
         </AssociationConnector>
-        <AssociationConnector Association="Modelo.RECEPCION_REQUISITOS_FK2" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.25" PointY="11.376892903645835" />
-          <ConnectorPoint PointX="15.75" PointY="11.376892903645835" />
-          <ConnectorPoint PointX="15.75" PointY="10.922587890625" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="Modelo.SUCURSALES" Width="1.5" PointX="0.75" PointY="12" Height="2.5571907552083388" />
         <AssociationConnector Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" >
           <ConnectorPoint PointX="2.25" PointY="12.001152846153847" />
@@ -1370,28 +1364,21 @@
           <ConnectorPoint PointX="12.375" PointY="7.422587890625" />
           <ConnectorPoint PointX="12.75" PointY="7.047587890625" />
         </AssociationConnector>
-        <AssociationConnector Association="Modelo.TRAMITES_FK2" >
-          <ConnectorPoint PointX="1.5" PointY="11.057190755208339" />
-          <ConnectorPoint PointX="1.5" PointY="11.420146484375" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="11.420146484375" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="11.420146484375" />
-          <ConnectorPoint PointX="9.75" PointY="11.420146484375" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="Modelo.DETALLE_TRAMITE" Width="1.5" PointX="12" PointY="8.625" Height="2.5571907552083388" />
-        <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" >
-          <ConnectorPoint PointX="11.25" PointY="9.90359537760417" />
-          <ConnectorPoint PointX="12" PointY="9.90359537760417" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="Modelo.SALTOS" Width="1.5" PointX="5.375" PointY="7.75" />
         <AssociationConnector Association="Modelo.SALTOS_FK1" />
         <AssociationConnector Association="Modelo.PROCESOS_FK1" />
         <AssociationConnector Association="Modelo.SALTOS_FK2" />
         <EntityTypeShape EntityType="Modelo.ERRORES_GESTIONES" Width="1.5" PointX="4.625" PointY="12.125" />
         <AssociationConnector Association="Modelo.ERRORES_GESTIONES_FK1" />
-        <AssociationConnector Association="Modelo.DETALLE_ERRORES_GESTIONES" />
         <EntityTypeShape EntityType="Modelo.RESPONSABLE" Width="1.5" PointX="9.875" PointY="12.875" />
-        <AssociationConnector Association="Modelo.TRAMITES_FK1" />
         <EntityTypeShape EntityType="Modelo.IDENTIFICACION" Width="1.5" PointX="7.875" PointY="12.875" />
+        <EntityTypeShape EntityType="Modelo.TRAMITES" Width="1.5" PointX="4.625" PointY="15" />
+        <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" />
+        <AssociationConnector Association="Modelo.TRAMITES_FK2" />
+        <AssociationConnector Association="Modelo.RECEPCION_REQUISITOS_FK2" />
+        <AssociationConnector Association="Modelo.TRAMITES_FK1" />
+        <AssociationConnector Association="Modelo.DETALLE_ERRORES_GESTIONES" />
       </Diagram>
     </Diagrams>
   </Designer>
