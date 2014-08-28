@@ -142,7 +142,7 @@ Partial Class frmHistorial
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmHistorial"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Verificar disponibilidad"
+        Me.Text = "Historial Trámite"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).EndInit()

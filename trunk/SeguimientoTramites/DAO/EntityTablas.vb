@@ -271,10 +271,10 @@
             lbltramite.Text = tramite.NOMBRE
             If tramite.ACTIVO = 1 Then
                 lblActivo.Text = "Trámite en proceso"
-                lblActivo.ForeColor = Color.Green
+                lblActivo.ForeColor = Color.LightGreen
             Else
                 lblActivo.Text = "Trámite finalizado"
-                lblActivo.ForeColor = Color.CadetBlue
+                lblActivo.ForeColor = Color.GreenYellow
             End If
             grid.DataSource = dtt
         End If
