@@ -174,6 +174,7 @@ Partial Class RibbonFormMain
         '
         Me.BarButtonItem11.Caption = "Historial de Trámite"
         Me.BarButtonItem11.Id = 18
+        Me.BarButtonItem11.LargeGlyph = Global.SeguimientoTramites.My.Resources.Resources.File_History_icon
         Me.BarButtonItem11.Name = "BarButtonItem11"
         '
         'RibbonPage1
