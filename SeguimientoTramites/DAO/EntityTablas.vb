@@ -252,6 +252,34 @@
         'grid.DataSource = saltoEntregar
     End Sub
 
+    Shared Sub historial(ByVal codigo As String, ByVal lblcodigo As Label, ByVal lbltramite As Label, ByVal lblActivo As Label, ByVal grid As DataGridView)
+        Dim tramite = (From t In ctx.TRAMITES
+                      Where t.CODIGOTRAMITE = codigo
+                      Select t.CODIGOTRAMITE, t.GESTIONES.NOMBRE, t.ACTIVO).FirstOrDefault
+
+        Dim dtt = (From dt In ctx.DETALLE_TRAMITE
+                 Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
+                 Join us In ctx.USUARIOS On us.IDUSUARIO Equals dt.IDUSUARIO
+                 Where dt.TRAMITES.CODIGOTRAMITE = codigo
+                 Order By dt.ID_DETALLE_TRAMITE
+                 Select NPaso = s.NUMERO_SALTO, Descripcion = s.DESCRIPCION_SALTO, Fecha = dt.FECHA_RECEPCION, Responsable = us.NOMBRE + " " + us.APELLIDOS).ToList()
+
+        If tramite Is Nothing Then
+            MsgBox("Tramite ingresado no existe")
+        Else
+            lblcodigo.Text = tramite.CODIGOTRAMITE
+            lbltramite.Text = tramite.NOMBRE
+            If tramite.ACTIVO = 1 Then
+                lblActivo.Text = "Trámite en proceso"
+                lblActivo.ForeColor = Color.Green
+            Else
+                lblActivo.Text = "Trámite finalizado"
+                lblActivo.ForeColor = Color.CadetBlue
+            End If
+            grid.DataSource = dtt
+        End If
+
+    End Sub
 
 #End Region
 

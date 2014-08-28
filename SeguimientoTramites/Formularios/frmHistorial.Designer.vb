@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmVerificarDisponibilidad
+Partial Class frmHistorial
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,15 +23,14 @@ Partial Class frmVerificarDisponibilidad
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblTramite = New System.Windows.Forms.Label()
+        Me.lblActivo = New System.Windows.Forms.Label()
+        Me.lblCodigo = New System.Windows.Forms.Label()
         Me.dgvTramites = New System.Windows.Forms.DataGridView()
         Me.btnRecibirTramites = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.txtCodigoTramite = New System.Windows.Forms.TextBox()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -41,13 +40,47 @@ Partial Class frmVerificarDisponibilidad
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.lblTramite)
+        Me.Panel1.Controls.Add(Me.lblActivo)
+        Me.Panel1.Controls.Add(Me.lblCodigo)
         Me.Panel1.Controls.Add(Me.dgvTramites)
         Me.Panel1.Controls.Add(Me.btnRecibirTramites)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Location = New System.Drawing.Point(27, 18)
+        Me.Panel1.Location = New System.Drawing.Point(27, 23)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(654, 375)
+        Me.Panel1.Size = New System.Drawing.Size(654, 488)
         Me.Panel1.TabIndex = 4
+        '
+        'lblTramite
+        '
+        Me.lblTramite.AutoSize = True
+        Me.lblTramite.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTramite.Location = New System.Drawing.Point(36, 135)
+        Me.lblTramite.Name = "lblTramite"
+        Me.lblTramite.Size = New System.Drawing.Size(66, 24)
+        Me.lblTramite.TabIndex = 5
+        Me.lblTramite.Text = "Label1"
+        '
+        'lblActivo
+        '
+        Me.lblActivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblActivo.Location = New System.Drawing.Point(366, 105)
+        Me.lblActivo.Name = "lblActivo"
+        Me.lblActivo.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.lblActivo.Size = New System.Drawing.Size(261, 24)
+        Me.lblActivo.TabIndex = 5
+        Me.lblActivo.Text = "Label1"
+        Me.lblActivo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblCodigo
+        '
+        Me.lblCodigo.AutoSize = True
+        Me.lblCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCodigo.Location = New System.Drawing.Point(36, 105)
+        Me.lblCodigo.Name = "lblCodigo"
+        Me.lblCodigo.Size = New System.Drawing.Size(66, 24)
+        Me.lblCodigo.TabIndex = 5
+        Me.lblCodigo.Text = "Label1"
         '
         'dgvTramites
         '
@@ -56,11 +89,10 @@ Partial Class frmVerificarDisponibilidad
         Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvTramites.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
-        Me.dgvTramites.Location = New System.Drawing.Point(30, 98)
+        Me.dgvTramites.Location = New System.Drawing.Point(30, 162)
         Me.dgvTramites.Name = "dgvTramites"
         Me.dgvTramites.ReadOnly = True
-        Me.dgvTramites.Size = New System.Drawing.Size(597, 204)
+        Me.dgvTramites.Size = New System.Drawing.Size(597, 307)
         Me.dgvTramites.TabIndex = 4
         '
         'btnRecibirTramites
@@ -102,45 +134,17 @@ Partial Class frmVerificarDisponibilidad
         Me.txtCodigoTramite.Size = New System.Drawing.Size(197, 27)
         Me.txtCodigoTramite.TabIndex = 0
         '
-        'Column1
-        '
-        Me.Column1.HeaderText = "ID"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Visible = False
-        Me.Column1.Width = 43
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Nombre"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 69
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Apellido"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 69
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Número trámites"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 99
-        '
-        'frmVerificarDisponibilidad
+        'frmHistorial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(709, 412)
+        Me.ClientSize = New System.Drawing.Size(709, 531)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "frmVerificarDisponibilidad"
+        Me.Name = "frmHistorial"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Verificar disponibilidad"
         Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -153,8 +157,7 @@ Partial Class frmVerificarDisponibilidad
     Friend WithEvents lblInfo As System.Windows.Forms.Label
     Friend WithEvents txtCodigoTramite As System.Windows.Forms.TextBox
     Friend WithEvents dgvTramites As System.Windows.Forms.DataGridView
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lblTramite As System.Windows.Forms.Label
+    Friend WithEvents lblActivo As System.Windows.Forms.Label
+    Friend WithEvents lblCodigo As System.Windows.Forms.Label
 End Class

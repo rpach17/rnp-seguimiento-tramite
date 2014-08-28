@@ -131,6 +131,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>appcaSeguimiento.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmHistorial.Designer.vb">
+      <DependentUpon>frmHistorial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmHistorial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmAnimacion.Designer.vb">
       <DependentUpon>frmAnimacion.vb</DependentUpon>
     </Compile>
@@ -251,6 +257,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\frmHistorial.resx">
+      <DependentUpon>frmHistorial.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmAnimacion.resx">
       <DependentUpon>frmAnimacion.vb</DependentUpon>
     </EmbeddedResource>
