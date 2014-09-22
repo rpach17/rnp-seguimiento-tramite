@@ -171,6 +171,7 @@ Public Class frmTramite
                 myCMD.Parameters.Add("VNOTA", OracleDbType.NVarchar2, 200, Nothing, ParameterDirection.Input).Value = txtInfoAdicional.Text
                 myCMD.Parameters.Add("VIDDETALLE_SUCURSAL_OFICINA", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = SesionActiva.IdSucursalOficina
                 myCMD.Parameters.Add("VIDUSUARIO", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = SesionActiva.IdUsuario
+                myCMD.Parameters.Add("VIDUSUARIO_DESTINO", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = cboEnviarA.SelectedValue
                 myCMD.Parameters.Add("VTRAMITE", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Output)
                 myCMD.Parameters.Add("VCODIGO", OracleDbType.NVarchar2, 13, Nothing, ParameterDirection.Output)
                 myCMD.Parameters.Add("VFECHA", OracleDbType.NVarchar2, 22, Nothing, ParameterDirection.Output)
@@ -220,6 +221,8 @@ Public Class frmTramite
             'frmVentanilla.btnTramite.Enabled = False
             Close()
         Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+            MsgBox(ex.InnerException.Message, MsgBoxStyle.Critical, "Error")
         Finally
             cnn.Close()
         End Try
@@ -227,9 +230,11 @@ Public Class frmTramite
 
     Private Sub btnCambirTramite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCambirTramite.Click
         frmListadoGestiones.ShowDialog()
+        EntityTablas.CargarUsuariosDestino(cboEnviarA, IdGestion)
     End Sub
 
     Private Sub frmTramite_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         Dim i As Integer = IdGestion
     End Sub
+
 End Class

@@ -8,11 +8,18 @@
         If e.ColumnIndex = 4 Then
             Dim iddt As Integer = dgvTramites.CurrentRow().Cells(0).Value
             Dim ids As Integer = dgvTramites.CurrentRow().Cells(1).Value
-            Using frmDecidir
-                frmDecidir.Ids1 = ids
-                frmDecidir.Iddt1 = iddt
-                frmDecidir.ShowDialog()
+
+            Using frm As New frmFormulario
+                frm.StartPosition = FormStartPosition.CenterScreen
+                frm.WebBrowser1.Url = New Uri("http://google.com")
+                frm.ShowDialog()
             End Using
+
+            'Using frmDecidir
+            '    frmDecidir.Ids1 = ids
+            '    frmDecidir.Iddt1 = iddt
+            '    frmDecidir.ShowDialog()
+            'End Using
 
             EntityTablas.TramitesConDecision(dgvTramites)
         End If

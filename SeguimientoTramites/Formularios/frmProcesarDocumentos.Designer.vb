@@ -76,12 +76,12 @@ Partial Class frmProcesarDocumentos
         '
         'Column4
         '
-        Me.Column4.HeaderText = "Tomar decisión"
+        Me.Column4.HeaderText = "Acción"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
-        Me.Column4.Text = "Decidir"
+        Me.Column4.Text = "Procesar"
         Me.Column4.UseColumnTextForButtonValue = True
-        Me.Column4.Width = 77
+        Me.Column4.Width = 46
         '
         'frmProcesarDocumentos
         '

@@ -38,12 +38,11 @@
         'Dim saltosAtender = (From s In ctx.SALTOS
         '                     Where s.IDPUESTO = SesionActiva.IdPuesto And s.NUMERO_SALTO > 1
         '                     Select s.IDSALTO).ToList
-       
+
         'Se buscan los tramites que se pueden recibir
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                        Join u In ctx.USUARIOS On dt.IDUSUARIO Equals u.IDUSUARIO
                        Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
-                       Join g In ctx.GESTIONES On s.GRUPO_SALTOS.IDGESTION Equals g.IDGESTION
                        Where dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso dt.IDUSUARIO_DESTINO = SesionActiva.IdUsuario
                        Order By dt.TRAMITES.CODIGOTRAMITE
                        Select dt.TRAMITES.CODIGOTRAMITE, Gestion = dt.TRAMITES.GESTIONES.NOMBRE, u.NOMBRE, u.APELLIDOS, s.NUMERO_SALTO).ToList()
@@ -61,7 +60,7 @@
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                         Join s In ctx.SALTOS
                         On dt.IDSALTO Equals s.IDSALTO
-                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And s.DECISION = 1 And dt.DESTINO Is Nothing
+                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing
                         Order By dt.IDDETALLE_SEGUIMIENTO
                         Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
@@ -101,7 +100,18 @@
 
         tramite.ERRORES_GESTIONES.Add(err)
         ctx.SaveChanges()
+    End Sub
 
+    Shared Sub CargarUsuariosDestino(cbo As ComboBox, idg As Integer)
+        Dim usuarios = (From u In ctx.DETALLE_USUARIO_SALTOS
+                        Join s In ctx.SALTOS On u.IDSALTO Equals s.IDSALTO
+                        Where s.GRUPO_SALTOS.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso s.GRUPO_SALTOS.IDGESTION = idg AndAlso s.GRUPO_SALTOS.ACTIVO = 1 AndAlso s.NUMERO_SALTO = 2
+                        Order By u.PRIORIDAD Descending
+                        Select u.IDUSUARIO, nombre = u.USUARIOS.NOMBRE + " " + u.USUARIOS.APELLIDOS)
+
+        cbo.DataSource = usuarios
+        cbo.DisplayMember = "nombre"
+        cbo.ValueMember = "IDUSUARIO"
     End Sub
 
 #End Region
@@ -125,6 +135,8 @@
                                 Where r.NUMERO_IDENTIDAD = identidad
                                 Select r).Count
 
+        'Dim sql = ctx.
+
         If conteo = 1 Then
             Dim respon = (From r In ctx.RESPONSABLE
                           Join i In ctx.IDENTIFICACION On r.NUMERO_IDENTIDAD Equals i.IDENTIDAD
@@ -132,13 +144,15 @@
                                Select i.PRIMER_NOMBRE, i.SEGUNDO_NOMBRE, i.PRIMER_APELLIDO, _
                                i.SEGUNDO_APELLIDO, r.TELEFONO, r.CELULAR, r.CORREO).SingleOrDefault
 
-            txtPN.Text = respon.PRIMER_NOMBRE
-            txtSN.Text = respon.SEGUNDO_NOMBRE
-            txtPA.Text = respon.PRIMER_APELLIDO
-            txtSA.Text = respon.SEGUNDO_APELLIDO
-            txtT.Text = respon.TELEFONO
-            txtC.Text = respon.CELULAR
-            txtEmail.Text = respon.CORREO
+            If respon IsNot Nothing Then
+                txtPN.Text = respon.PRIMER_NOMBRE
+                txtSN.Text = respon.SEGUNDO_NOMBRE
+                txtPA.Text = respon.PRIMER_APELLIDO
+                txtSA.Text = respon.SEGUNDO_APELLIDO
+                txtT.Text = respon.TELEFONO
+                txtC.Text = respon.CELULAR
+                txtEmail.Text = respon.CORREO
+            End If
 
             Return 1
         Else
@@ -198,7 +212,7 @@
             ctx.RECEPCION_REQUISITOS.AddObject(req)
             ctx.SaveChanges()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.InnerException.Message)
         End Try
     End Sub
 
@@ -364,6 +378,8 @@
     End Sub
 
 #End Region
+
+
 
 
 

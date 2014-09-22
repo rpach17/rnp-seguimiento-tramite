@@ -90,6 +90,8 @@ Public Class frmRecepcionDocs
                 cnn.Open()
                 myCMD.ExecuteNonQuery()
             End Using
+        Catch ex As OracleException
+            lblInfo.Text = ex.Message
         Catch ex As Exception
             lblInfo.Text = ex.Message
         Finally
