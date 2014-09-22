@@ -25,11 +25,11 @@
             Exit Sub
         End If
 
-        If txtUser.Text = "" Then
+        If txtUser.Text.Trim = "" Then
             txtUser.Focus()
             Exit Sub
         End If
-        If txtPass.Text = "" Then
+        If txtPass.Text.Trim = "" Then
             txtPass.Focus()
             Exit Sub
         End If

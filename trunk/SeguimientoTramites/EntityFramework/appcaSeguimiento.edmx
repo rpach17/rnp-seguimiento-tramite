@@ -343,7 +343,7 @@
           <Key>
             <PropertyRef Name="ID_REC_REQUISITO" />
           </Key>
-          <Property Name="ID_REC_REQUISITO" Type="number" Nullable="false" />
+          <Property Name="ID_REC_REQUISITO" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="IDTRAMITE" Type="number" />
           <Property Name="IDREQUISITO" Type="number" />
           <Property Name="RECIBIDO" Type="number" />
@@ -1205,7 +1205,7 @@
           <Key>
             <PropertyRef Name="ID_REC_REQUISITO" />
           </Key>
-          <Property Type="Decimal" Name="ID_REC_REQUISITO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="ID_REC_REQUISITO" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Decimal" Name="IDTRAMITE" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDREQUISITO" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="RECIBIDO" Precision="38" Scale="0" />
@@ -2044,7 +2044,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="appcaSeguimiento" ZoomLevel="18">
+      <Diagram Name="appcaSeguimiento" ZoomLevel="72">
         <EntityTypeShape EntityType="Modelo.CAMPOS_FORM" Width="1.5" PointX="1.867729426300027" PointY="6.7797167779783329" />
         <EntityTypeShape EntityType="Modelo.DATOS_CAMPOS_FORM" Width="1.5" PointX="1.9631603387944216" PointY="28.653535409203513" />
         <EntityTypeShape EntityType="Modelo.DETALLE_GESTIONES_USUARIO" Width="1.5" PointX="10.863382832549226" PointY="16.652831219440714" />

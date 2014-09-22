@@ -35,6 +35,9 @@ Partial Class frmLogin
         '
         'Panel1
         '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.btnCerrar)
@@ -46,16 +49,16 @@ Partial Class frmLogin
         Me.Panel1.Controls.Add(Me.btnEntrar)
         Me.Panel1.Location = New System.Drawing.Point(5, 5)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(466, 256)
+        Me.Panel1.Size = New System.Drawing.Size(466, 240)
         Me.Panel1.TabIndex = 13
         '
         'btnCerrar
         '
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
-        Me.btnCerrar.Location = New System.Drawing.Point(428, 5)
+        Me.btnCerrar.Location = New System.Drawing.Point(428, 4)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(31, 30)
+        Me.btnCerrar.Size = New System.Drawing.Size(31, 31)
         Me.btnCerrar.TabIndex = 9
         Me.btnCerrar.Text = "X"
         Me.btnCerrar.UseVisualStyleBackColor = True
@@ -126,8 +129,8 @@ Partial Class frmLogin
         Me.AcceptButton = Me.btnEntrar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DarkGreen
-        Me.ClientSize = New System.Drawing.Size(476, 266)
+        Me.BackColor = System.Drawing.Color.DarkSeaGreen
+        Me.ClientSize = New System.Drawing.Size(476, 250)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmLogin"
