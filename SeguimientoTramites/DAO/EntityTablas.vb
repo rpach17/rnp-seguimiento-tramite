@@ -35,22 +35,20 @@
     Public Shared Sub TramitesRecibir(ByVal grid As DataGridView)
 
         ' Lista de los saltos que puede atender
-        Dim saltosAtender = (From s In ctx.SALTOS
-                             Where s.IDPUESTO = SesionActiva.IdPuesto And s.NUMERO_SALTO > 1
-                             Select s.IDSALTO).ToList
-
-
+        'Dim saltosAtender = (From s In ctx.SALTOS
+        '                     Where s.IDPUESTO = SesionActiva.IdPuesto And s.NUMERO_SALTO > 1
+        '                     Select s.IDSALTO).ToList
        
         'Se buscan los tramites que se pueden recibir
-        Dim tramites = (From dt In ctx.DETALLE_TRAMITE
+        Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                        Join u In ctx.USUARIOS On dt.IDUSUARIO Equals u.IDUSUARIO
                        Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
-                       Where dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso saltosAtender.Contains(dt.DESTINO)
+                       Join g In ctx.GESTIONES On s.GRUPO_SALTOS.IDGESTION Equals g.IDGESTION
+                       Where dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso dt.IDUSUARIO_DESTINO = SesionActiva.IdUsuario
                        Order By dt.TRAMITES.CODIGOTRAMITE
                        Select dt.TRAMITES.CODIGOTRAMITE, Gestion = dt.TRAMITES.GESTIONES.NOMBRE, u.NOMBRE, u.APELLIDOS, s.NUMERO_SALTO).ToList()
 
         's.DECISION = 0 OrElse (s.DECISION = 1 And Not dt.DESTINO Is Nothing AndAlso saltosAtender.Contains(dt.DESTINO)))
-
 
         grid.Rows.Clear()
         For Each tramite In tramites
@@ -60,17 +58,17 @@
     End Sub
 
     Shared Sub TramitesConDecision(ByVal grid As DataGridView)
-        Dim tramites = (From dt In ctx.DETALLE_TRAMITE
+        Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                         Join s In ctx.SALTOS
                         On dt.IDSALTO Equals s.IDSALTO
                         Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And s.DECISION = 1 And dt.DESTINO Is Nothing
-                        Order By dt.ID_DETALLE_TRAMITE
-                        Select dt.ID_DETALLE_TRAMITE, s.IDSALTO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
+                        Order By dt.IDDETALLE_SEGUIMIENTO
+                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
         grid.Rows.Clear()
 
         For Each tramite In tramites
-            grid.Rows.Add(tramite.ID_DETALLE_TRAMITE, tramite.IDSALTO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
+            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
         Next
 
         grid.Columns(0).Visible = False
@@ -85,7 +83,7 @@
     End Sub
 
     Shared Sub ActualizarDetalleTramite(ByVal iddetalle As Integer, ByVal iddecision As Integer)
-        Dim detalle = (From d In ctx.DETALLE_TRAMITE Where d.ID_DETALLE_TRAMITE = iddetalle Select d).FirstOrDefault
+        Dim detalle = (From d In ctx.DETALLE_SEGUIMIENTO Where d.IDDETALLE_SEGUIMIENTO = iddetalle Select d).FirstOrDefault
 
         With detalle
             .DESTINO = iddecision
@@ -96,8 +94,8 @@
 
     Shared Sub ErrorTramite(ByVal iddt As Integer, ByVal ide As Integer)
         Dim tramite As TRAMITES = (From t In ctx.TRAMITES
-                                  From dt In t.DETALLE_TRAMITE
-                                  Where dt.ID_DETALLE_TRAMITE = iddt
+                                  From dt In t.DETALLE_SEGUIMIENTO
+                                  Where dt.IDDETALLE_SEGUIMIENTO = iddt
                                   Select t).FirstOrDefault
         Dim err As ERRORES_GESTIONES = (From e In ctx.ERRORES_GESTIONES Where e.IDERROR = ide Select e).FirstOrDefault
 
@@ -231,17 +229,17 @@
         'Lista de los saltos recibidos y son ultimo salto
         Dim tramiteEntregar
         If busqueda = "" Then
-            tramiteEntregar = (From t In ctx.DETALLE_TRAMITE
+            tramiteEntregar = (From t In ctx.DETALLE_SEGUIMIENTO
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
                                Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.ID_DETALLE_TRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.IDDETALLE_SEGUIMIENTO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
         Else
-            tramiteEntregar = (From t In ctx.DETALLE_TRAMITE
+            tramiteEntregar = (From t In ctx.DETALLE_SEGUIMIENTO
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
                                Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1 AndAlso (t.TRAMITES.CODIGOTRAMITE.StartsWith(busqueda) OrElse t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD.StartsWith(busqueda))
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.ID_DETALLE_TRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.IDDETALLE_SEGUIMIENTO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
         End If
 
         grid.Rows.Clear()
@@ -257,11 +255,11 @@
                       Where t.CODIGOTRAMITE = codigo
                       Select t.CODIGOTRAMITE, t.GESTIONES.NOMBRE, t.ACTIVO).FirstOrDefault
 
-        Dim dtt = (From dt In ctx.DETALLE_TRAMITE
+        Dim dtt = (From dt In ctx.DETALLE_SEGUIMIENTO
                  Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
                  Join us In ctx.USUARIOS On us.IDUSUARIO Equals dt.IDUSUARIO
                  Where dt.TRAMITES.CODIGOTRAMITE = codigo
-                 Order By dt.ID_DETALLE_TRAMITE
+                 Order By dt.IDDETALLE_SEGUIMIENTO
                  Select NPaso = s.NUMERO_SALTO, Descripcion = s.DESCRIPCION_SALTO, Fecha = dt.FECHA_RECEPCION, Responsable = us.NOMBRE + " " + us.APELLIDOS).ToList()
 
         If tramite Is Nothing Then
@@ -289,14 +287,14 @@
         Dim tramite As Integer = (From t In ctx.TRAMITES Where t.CODIGOTRAMITE = codtramite Select t).Count()
 
         If tramite > 0 Then
-            Dim destinos = (From dt In ctx.DETALLE_TRAMITE
+            Dim destinos = (From dt In ctx.DETALLE_SEGUIMIENTO
                            Where dt.TRAMITES.CODIGOTRAMITE = codtramite And dt.FECHA_ENTREGA Is Nothing
-                           Order By dt.ID_DETALLE_TRAMITE Descending
+                           Order By dt.IDDETALLE_SEGUIMIENTO Descending
                            Select dt.DESTINO).SingleOrDefault
             If Not destinos Is Nothing Then
-                Dim PasoTramite As Integer = (From dt In ctx.DETALLE_TRAMITE
+                Dim PasoTramite As Integer = (From dt In ctx.DETALLE_SEGUIMIENTO
                                                Where dt.TRAMITES.CODIGOTRAMITE = codtramite And dt.FECHA_ENTREGA Is Nothing
-                                               Order By dt.ID_DETALLE_TRAMITE Descending
+                                               Order By dt.IDDETALLE_SEGUIMIENTO Descending
                                                Select dt.DESTINO).SingleOrDefault()
 
                 Dim Usuarios As List(Of USUARIOS) = New List(Of USUARIOS)
@@ -308,7 +306,7 @@
 
                 grid.Rows.Clear()
                 For Each us In Usuarios
-                    Dim c = (From dt In ctx.DETALLE_TRAMITE Where dt.IDUSUARIO = us.IDUSUARIO And dt.FECHA_ENTREGA Is Nothing AndAlso Not dt.DESTINO = 0 Select dt).Count
+                    Dim c = (From dt In ctx.DETALLE_SEGUIMIENTO Where dt.IDUSUARIO = us.IDUSUARIO And dt.FECHA_ENTREGA Is Nothing AndAlso Not dt.DESTINO = 0 Select dt).Count
                     grid.Rows.Add(us.IDUSUARIO.ToString, us.NOMBRE, us.APELLIDOS, c.ToString)
                 Next
 
@@ -332,8 +330,8 @@
 #Region "Error Tramite"
     Public Shared Sub CargarError(ByVal cbo As ComboBox, ByVal salto As Integer)
         Dim err = (From e In ctx.ERRORES_GESTIONES
-                   From s In e.GESTIONES.SALTOS
-                   Where s.IDSALTO = salto And e.IDGESTION = s.IDGESTION
+                   From s In e.GESTIONES.GRUPO_SALTOS
+                   Where s.IDGRUPO_SALTOS = salto And e.IDGESTION = s.IDGESTION
                    Order By e.DESCRIPCION
                    Select e).ToList()
 
@@ -345,14 +343,14 @@
 
     Public Shared Function Gestion(ByVal ids As Integer) As GESTIONES
         Dim ges = (From g In ctx.GESTIONES
-                   From s In g.SALTOS
-                   Where s.IDSALTO = ids And g.IDGESTION = s.IDGESTION
+                   From s In g.GRUPO_SALTOS
+                   Where s.IDGRUPO_SALTOS = ids And g.IDGESTION = s.IDGESTION
                    Select g).FirstOrDefault
         Return ges
     End Function
 
     Public Shared Sub AgregarError(ByVal codigo As String, ByVal descripcion As String, ByVal idSalto As Integer)
-        Dim gestion As Integer = (From s In ctx.SALTOS Where s.IDSALTO = idSalto Select s.IDGESTION).FirstOrDefault
+        Dim gestion As Integer = (From s In ctx.SALTOS Where s.IDSALTO = idSalto Select s.GRUPO_SALTOS.IDGESTION).FirstOrDefault
 
         Dim err As New ERRORES_GESTIONES With _
             {
