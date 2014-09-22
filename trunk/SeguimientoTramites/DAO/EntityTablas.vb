@@ -43,7 +43,7 @@
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                        Join u In ctx.USUARIOS On dt.IDUSUARIO Equals u.IDUSUARIO
                        Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
-                       Where dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso dt.IDUSUARIO_DESTINO = SesionActiva.IdUsuario
+                       Where dt.TRAMITES.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso dt.IDUSUARIO_DESTINO = SesionActiva.IdUsuario
                        Order By dt.TRAMITES.CODIGOTRAMITE
                        Select dt.TRAMITES.CODIGOTRAMITE, Gestion = dt.TRAMITES.GESTIONES.NOMBRE, u.NOMBRE, u.APELLIDOS, s.NUMERO_SALTO).ToList()
 
@@ -58,16 +58,16 @@
 
     Shared Sub TramitesConDecision(ByVal grid As DataGridView)
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
-                        Join s In ctx.SALTOS
-                        On dt.IDSALTO Equals s.IDSALTO
+                        Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
+                        Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
                         Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing
                         Order By dt.IDDETALLE_SEGUIMIENTO
-                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
+                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
         grid.Rows.Clear()
 
         For Each tramite In tramites
-            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
+            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
         Next
 
         grid.Columns(0).Visible = False

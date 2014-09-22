@@ -8,6 +8,7 @@
         If e.ColumnIndex = 4 Then
             Dim iddt As Integer = dgvTramites.CurrentRow().Cells(0).Value
             Dim ids As Integer = dgvTramites.CurrentRow().Cells(1).Value
+            Dim idF As Integer = dgvTramites.CurrentRow().Cells(2).Value
 
             Using frm As New frmFormulario
                 frm.StartPosition = FormStartPosition.CenterScreen
