@@ -25,6 +25,15 @@
             Exit Sub
         End If
 
+        If txtUser.Text = "" Then
+            txtUser.Focus()
+            Exit Sub
+        End If
+        If txtPass.Text = "" Then
+            txtPass.Focus()
+            Exit Sub
+        End If
+
         If EntityTablas.Login(txtUser.Text, SHA1(txtPass.Text)) Then
             RibbonFormMain.Show()
             Close()
