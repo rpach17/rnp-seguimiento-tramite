@@ -60,7 +60,7 @@
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                         Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
                         Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
-                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing
+                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing AndAlso f.ACTIVO = 1
                         Order By dt.IDDETALLE_SEGUIMIENTO
                         Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
