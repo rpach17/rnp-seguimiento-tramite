@@ -80,10 +80,10 @@
             grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
         Next
 
-        grid.Columns(0).Visible = False
+        'grid.Columns(0).Visible = False
         grid.Columns(1).Visible = False
         grid.Columns(2).Visible = False
-        grid.Columns(3).Visible = False
+        'grid.Columns(3).Visible = False
     End Sub
 
     Shared Sub DatosDecisionSalto(ByVal ids As Integer, ByVal lbl As Label, ByVal rdoV As RadioButton, ByVal rdoF As RadioButton)

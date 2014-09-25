@@ -43,8 +43,10 @@ Partial Class frmProcesarDocumentos
         Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column5, Me.Column7, Me.Column6, Me.Column2, Me.Column3, Me.Column4})
         Me.dgvTramites.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvTramites.Location = New System.Drawing.Point(0, 0)
+        Me.dgvTramites.MultiSelect = False
         Me.dgvTramites.Name = "dgvTramites"
         Me.dgvTramites.ReadOnly = True
+        Me.dgvTramites.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvTramites.Size = New System.Drawing.Size(817, 384)
         Me.dgvTramites.TabIndex = 0
         '
