@@ -24,7 +24,9 @@ Partial Class frmProcesarDocumentos
     Private Sub InitializeComponent()
         Me.dgvTramites = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -40,7 +42,7 @@ Partial Class frmProcesarDocumentos
         Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvTramites.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column5, Me.Column7, Me.Column6, Me.Column2, Me.Column3, Me.Column4})
+        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column8, Me.Column5, Me.Column9, Me.Column7, Me.Column6, Me.Column2, Me.Column3, Me.Column4})
         Me.dgvTramites.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvTramites.Location = New System.Drawing.Point(0, 0)
         Me.dgvTramites.MultiSelect = False
@@ -57,12 +59,26 @@ Partial Class frmProcesarDocumentos
         Me.Column1.ReadOnly = True
         Me.Column1.Width = 109
         '
+        'Column8
+        '
+        Me.Column8.HeaderText = "idGrupoSalto"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        Me.Column8.Width = 93
+        '
         'Column5
         '
         Me.Column5.HeaderText = "IdSalto"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         Me.Column5.Width = 65
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "numeroSalto"
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        Me.Column9.Width = 91
         '
         'Column7
         '
@@ -115,7 +131,9 @@ Partial Class frmProcesarDocumentos
     End Sub
     Friend WithEvents dgvTramites As System.Windows.Forms.DataGridView
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn

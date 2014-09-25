@@ -72,12 +72,12 @@
                         Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
                         Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing AndAlso f.ACTIVO = 1
                         Order By dt.IDDETALLE_SEGUIMIENTO
-                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, s.DECISION, f.IDFORMULARIO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
+                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDGRUPO_SALTOS, s.IDSALTO, s.NUMERO_SALTO, s.DECISION, f.IDFORMULARIO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
         grid.Rows.Clear()
 
         For Each tramite In tramites
-            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
+            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDGRUPO_SALTOS, tramite.IDSALTO, tramite.NUMERO_SALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
         Next
 
         'grid.Columns(0).Visible = False
@@ -420,9 +420,9 @@
         cbo.ValueMember = "IDUSUARIO"
     End Sub
 
-    Shared Function ObtenerSiguienteSalto() As Integer
+    Shared Function ObtenerSiguienteSalto(ByVal idGrupoS As Integer, ByVal numeroSalto As Integer) As Integer
         Dim siguiente As Integer = (From s In ctx.SALTOS
-                        Where s.IDGRUPO_SALTOS = 1 AndAlso s.NUMERO_SALTO = 1
+                        Where s.IDGRUPO_SALTOS = idGrupoS AndAlso s.NUMERO_SALTO = numeroSalto
                         Select s.IDSALTO).FirstOrDefault
 
         Return siguiente
