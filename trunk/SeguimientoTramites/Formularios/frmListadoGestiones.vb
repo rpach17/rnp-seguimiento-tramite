@@ -2,7 +2,7 @@
 
     Private Sub frmListadoGestiones_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         BottomRightFormLocation(e)
-        EntityTablas.ListadoGestiones(dgvGestiones)
+        EntityTablas.ListadoGestiones(dgvGestiones, "", SesionActiva.IdUsuario)
     End Sub
 
     Sub BottomRightFormLocation(ByVal evento As EventArgs)
@@ -13,7 +13,7 @@
 
     Private Sub txtBuscar_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBuscar.KeyPress
         If e.KeyChar = ChrW(13) Then
-            EntityTablas.ListadoGestiones(dgvGestiones, txtBuscar.Text)
+            EntityTablas.ListadoGestiones(dgvGestiones, txtBuscar.Text, SesionActiva.IdUsuario)
         End If
     End Sub
 
@@ -23,7 +23,8 @@
 
         With frmTramite
             .IdGestion1 = idGestion
-            .Text = nombreGestion
+            .NombreGestion1 = nombreGestion
+            .Text = String.Format("TRAMITE PARA {0}", nombreGestion)
             .CargarRequisitos()
         End With
 

@@ -45,6 +45,8 @@
             lblError.Visible = False
             cboError.Enabled = False
             btnAgregarError.Enabled = False
+            cboError.DataSource = Nothing
+            EntityTablas.CargarUsuariosDestinoSalto(cboUserDestino, rdoV.Tag)
         End If
 
         If rdoF.Checked Then
@@ -52,6 +54,7 @@
             cboError.Enabled = True
             btnAgregarError.Enabled = True
             EntityTablas.CargarError(cboError, ids)
+            EntityTablas.CargarUsuariosDestinoSalto(cboUserDestino, rdoF.Tag)
         End If
     End Sub
 

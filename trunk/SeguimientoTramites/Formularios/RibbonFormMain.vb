@@ -109,6 +109,11 @@ Public Class RibbonFormMain
 
         lblConectadoComo.Caption = String.Format("{0} ({1})", SesionActiva.Nombre, SesionActiva.Usuario)
         lblUbicacion.Caption = String.Format("{0}, {1}", SesionActiva.Sucursal, SesionActiva.Oficina)
+        If EntityTablas.PrimerPaso(SesionActiva.IdUsuario) Then
+            BarButtonItem9.Enabled = True
+        Else
+            BarButtonItem9.Enabled = False
+        End If
     End Sub
 
     Private Sub BarButtonItem10_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem10.ItemClick

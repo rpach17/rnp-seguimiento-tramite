@@ -42,6 +42,7 @@ Public Class frmRecepcionDocs
                 myCMD.Parameters.Add("VCODIGO", OracleDbType.NVarchar2, 12, Nothing, ParameterDirection.Input).Value = barcode
                 myCMD.Parameters.Add("VIDUSUARIO", OracleDbType.Decimal, 12, Nothing, ParameterDirection.Input).Value = SesionActiva.IdUsuario
                 myCMD.Parameters.Add("VIDDETALLE_SUCURSAL_OFICINA", OracleDbType.Decimal, 12, Nothing, ParameterDirection.Input).Value = SesionActiva.IdSucursalOficina
+                myCMD.Parameters.Add("VRETORNO", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
                 myCMD.Parameters.Add("EXISTE", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
                 myCMD.Parameters.Add("VACTIVO", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
                 myCMD.Parameters.Add("MISMAOFICINA", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
@@ -49,18 +50,35 @@ Public Class frmRecepcionDocs
                 cnn.Open()
                 myCMD.ExecuteNonQuery()
 
-                If myCMD.Parameters("EXISTE").Value = 0 Then
-                    lblInfo.Text = "El trámite ingresado no existe"
-                ElseIf myCMD.Parameters("VACTIVO").Value = 0 Then
-                    lblInfo.Text = "El trámite ingresado ya está finalizado"
-                ElseIf myCMD.Parameters("MISMAOFICINA").Value = 0 Then
-                    lblInfo.Text = "El trámite ingresa corresponde a otra oficina"
-                Else
+                Dim r = myCMD.Parameters("VRETORNO").Value
+
+                If r = 0 Then
                     txtCodigoTramite.Text = ""
                     EntityTablas.TramitesRecibir(dgvTramites)
                     txtCodigoTramite.Focus()
                     lblInfo.Text = "El trámite fue recibido"
+                ElseIf r = 1 Then
+                    lblInfo.Text = "El trámite ingresado no existe"
+                ElseIf r = 2 Then
+                    lblInfo.Text = "El trámite ingresado ya está finalizado"
+                ElseIf r = 3 Then
+                    lblInfo.Text = "El trámite ingresa corresponde a otra oficina"
+                ElseIf r = 4 Then
+                    lblInfo.Text = "El trámite en este momento no lo puede recibir"
                 End If
+
+                'If myCMD.Parameters("EXISTE").Value = 0 Then
+                '    lblInfo.Text = "El trámite ingresado no existe"
+                'ElseIf myCMD.Parameters("VACTIVO").Value = 0 Then
+                '    lblInfo.Text = "El trámite ingresado ya está finalizado"
+                'ElseIf myCMD.Parameters("MISMAOFICINA").Value = 0 Then
+                '    lblInfo.Text = "El trámite ingresa corresponde a otra oficina"
+                'Else
+                '    txtCodigoTramite.Text = ""
+                '    EntityTablas.TramitesRecibir(dgvTramites)
+                '    txtCodigoTramite.Focus()
+                '    lblInfo.Text = "El trámite fue recibido"
+                'End If
             End Using
         Catch ex As Exception
             lblInfo.Text = ex.Message
