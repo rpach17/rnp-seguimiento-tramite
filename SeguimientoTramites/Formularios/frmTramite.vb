@@ -29,6 +29,10 @@ Public Class frmTramite
     End Property
 
     Private Sub frmTramite_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If IdGestion = 0 Then
+            frmListadoGestiones.ShowDialog()
+            EntityTablas.CargarUsuariosDestino(cboEnviarA, IdGestion)
+        End If
         Text = String.Format("TRAMITE PARA {0}", NombreGestion)
         BottomRightFormLocation(e)
         ReqsObligatorios = 0

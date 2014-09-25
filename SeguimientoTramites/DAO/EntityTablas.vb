@@ -29,6 +29,16 @@
             Return False
         End If
     End Function
+
+    Public Shared Function PrimerPaso(ByVal idu As Integer) As Boolean
+        Dim primerSalto As Integer = (From dus In ctx.DETALLE_USUARIO_SALTOS
+                                      Where dus.IDUSUARIO = idu AndAlso dus.SALTOS.NUMERO_SALTO = 1).Count
+        If primerSalto >= 1 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 #End Region
 
 #Region "Recepcion de tramites"
@@ -56,22 +66,24 @@
         'grid.DataSource = tramites
     End Sub
 
-    Shared Sub TramitesConDecision(ByVal grid As DataGridView)
+    Shared Sub TramitesAProcesar(ByVal grid As DataGridView)
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                         Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
                         Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
                         Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing AndAlso f.ACTIVO = 1
                         Order By dt.IDDETALLE_SEGUIMIENTO
-                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
+                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDSALTO, s.DECISION, f.IDFORMULARIO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
         grid.Rows.Clear()
 
         For Each tramite In tramites
-            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
+            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE)
         Next
 
         grid.Columns(0).Visible = False
         grid.Columns(1).Visible = False
+        grid.Columns(2).Visible = False
+        grid.Columns(3).Visible = False
     End Sub
 
     Shared Sub DatosDecisionSalto(ByVal ids As Integer, ByVal lbl As Label, ByVal rdoV As RadioButton, ByVal rdoF As RadioButton)
@@ -216,9 +228,9 @@
         End Try
     End Sub
 
-    Shared Sub ListadoGestiones(ByVal grid As DataGridView, Optional ByVal buscar As String = "")
+    Shared Sub ListadoGestiones(ByVal grid As DataGridView, Optional ByVal buscar As String = "", Optional ByVal idu As Integer = 0)
 
-        If buscar = "" Then
+        If buscar = "" And idu = 0 Then
             Dim gestiones = (From o In ctx.DETALLE_SUCURSAL_OFICINA
                                     Join g In ctx.DETALLE_OFICINA_GESTIONES
                                     On o.IDOFICINA Equals g.IDOFICINA
@@ -227,12 +239,25 @@
 
             grid.DataSource = gestiones
             grid.Columns(0).Visible = False
+        ElseIf buscar = "" And idu <> 0 Then
+            Dim gestiones = (From gs In ctx.GRUPO_SALTOS
+                             From dus In ctx.DETALLE_USUARIO_SALTOS
+                             Where gs.IDGRUPO_SALTOS = dus.SALTOS.IDGRUPO_SALTOS AndAlso gs.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso dus.IDUSUARIO = idu
+                             Select gs.GESTIONES.IDGESTION, gs.GESTIONES.NOMBRE).ToList
+
+            grid.DataSource = gestiones
+            grid.Columns(0).Visible = False
         Else
-            Dim gestiones = (From o In ctx.DETALLE_SUCURSAL_OFICINA
-                                    Join g In ctx.DETALLE_OFICINA_GESTIONES
-                                    On o.IDOFICINA Equals g.IDOFICINA
-                                    Where o.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso g.GESTIONES.NOMBRE.StartsWith(buscar)
-                                    Select g.GESTIONES.IDGESTION, g.GESTIONES.NOMBRE).ToList
+            'Dim gestiones = (From o In ctx.DETALLE_SUCURSAL_OFICINA
+            '                        Join g In ctx.DETALLE_OFICINA_GESTIONES
+            '                        On o.IDOFICINA Equals g.IDOFICINA
+            '                        Where o.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso g.GESTIONES.NOMBRE.StartsWith(buscar)
+            '                        Select g.GESTIONES.IDGESTION, g.GESTIONES.NOMBRE).ToList
+
+            Dim gestiones = (From gs In ctx.GRUPO_SALTOS
+                             From dus In ctx.DETALLE_USUARIO_SALTOS
+                             Where gs.IDGRUPO_SALTOS = dus.SALTOS.IDGRUPO_SALTOS AndAlso gs.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso dus.IDUSUARIO = idu AndAlso gs.GESTIONES.NOMBRE.StartsWith(buscar)
+                             Select gs.GESTIONES.IDGESTION, gs.GESTIONES.NOMBRE).ToList
 
             grid.DataSource = gestiones
             grid.Columns(0).Visible = False
@@ -344,8 +369,9 @@
 #Region "Error Tramite"
     Public Shared Sub CargarError(ByVal cbo As ComboBox, ByVal salto As Integer)
         Dim err = (From e In ctx.ERRORES_GESTIONES
-                   From s In e.GESTIONES.GRUPO_SALTOS
-                   Where s.IDGRUPO_SALTOS = salto And e.IDGESTION = s.IDGESTION
+                   From gs In e.GESTIONES.GRUPO_SALTOS
+                   Join s In ctx.SALTOS On gs.IDGRUPO_SALTOS Equals s.IDGRUPO_SALTOS
+                   Where s.IDSALTO = salto And e.IDGESTION = gs.IDGESTION
                    Order By e.DESCRIPCION
                    Select e).ToList()
 
@@ -357,8 +383,9 @@
 
     Public Shared Function Gestion(ByVal ids As Integer) As GESTIONES
         Dim ges = (From g In ctx.GESTIONES
-                   From s In g.GRUPO_SALTOS
-                   Where s.IDGRUPO_SALTOS = ids And g.IDGESTION = s.IDGESTION
+                   From gs In g.GRUPO_SALTOS
+                   Join s In ctx.SALTOS On gs.IDGRUPO_SALTOS Equals s.IDGRUPO_SALTOS
+                   Where s.IDSALTO = ids And g.IDGESTION = gs.IDGESTION
                    Select g).FirstOrDefault
         Return ges
     End Function
@@ -377,6 +404,21 @@
 
     End Sub
 
+#End Region
+
+#Region "Procesar"
+    Shared Sub CargarUsuariosDestinoSalto(cbo As ComboBox, ids As Integer)
+        Dim usuarios = (From u In ctx.DETALLE_USUARIO_SALTOS
+                        Join s In ctx.SALTOS On u.IDSALTO Equals s.IDSALTO
+                        Where s.IDSALTO = ids
+                        Order By u.PRIORIDAD Descending
+                        Select u.IDUSUARIO, nombre = u.USUARIOS.NOMBRE + " " + u.USUARIOS.APELLIDOS)
+
+        cbo.DataSource = Nothing
+        cbo.DataSource = usuarios
+        cbo.DisplayMember = "nombre"
+        cbo.ValueMember = "IDUSUARIO"
+    End Sub
 #End Region
 
 
