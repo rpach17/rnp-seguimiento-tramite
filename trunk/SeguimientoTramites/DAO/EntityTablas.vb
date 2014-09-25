@@ -419,6 +419,15 @@
         cbo.DisplayMember = "nombre"
         cbo.ValueMember = "IDUSUARIO"
     End Sub
+
+    Shared Function ObtenerSiguienteSalto() As Integer
+        Dim siguiente As Integer = (From s In ctx.SALTOS
+                        Where s.IDGRUPO_SALTOS = 1 AndAlso s.NUMERO_SALTO = 1
+                        Select s.IDSALTO).FirstOrDefault
+
+        Return siguiente
+    End Function
+
 #End Region
 
 
