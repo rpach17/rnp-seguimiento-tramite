@@ -49,15 +49,15 @@ Partial Class frmProcesarDocumentos
         Me.dgvTramites.Name = "dgvTramites"
         Me.dgvTramites.ReadOnly = True
         Me.dgvTramites.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvTramites.Size = New System.Drawing.Size(817, 384)
+        Me.dgvTramites.Size = New System.Drawing.Size(823, 384)
         Me.dgvTramites.TabIndex = 0
         '
         'Column1
         '
-        Me.Column1.HeaderText = "IdDetalleTramite"
+        Me.Column1.HeaderText = "IdDetalleSeguimiento"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
-        Me.Column1.Width = 109
+        Me.Column1.Width = 132
         '
         'Column8
         '
@@ -121,7 +121,7 @@ Partial Class frmProcesarDocumentos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(817, 384)
+        Me.ClientSize = New System.Drawing.Size(823, 384)
         Me.Controls.Add(Me.dgvTramites)
         Me.Name = "frmProcesarDocumentos"
         Me.Text = "Procesar documentos"
