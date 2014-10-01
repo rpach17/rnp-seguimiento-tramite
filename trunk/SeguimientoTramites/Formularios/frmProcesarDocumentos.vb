@@ -6,8 +6,8 @@
 
     Private Sub dgvTramites_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvTramites.CellClick
         If e.ColumnIndex = 8 Then
-            'Dim iddt As Integer = dgvTramites.CurrentRow().Cells(0).Value
-            'Dim ids As Integer = dgvTramites.CurrentRow().Cells(1).Value
+            Dim iddt As Integer = dgvTramites.CurrentRow().Cells(0).Value
+            Dim ids As Integer = dgvTramites.CurrentRow().Cells(2).Value
             Dim idF As Integer = dgvTramites.CurrentRow().Cells(5).Value
 
             If dgvTramites.CurrentRow().Cells(4).Value = 0 Then
@@ -24,11 +24,11 @@
                 End Using
 
             Else
-                'Using frmDecidir
-                '    frmDecidir.Ids1 = ids
-                '    frmDecidir.Iddt1 = iddt
-                '    frmDecidir.ShowDialog()
-                'End Using
+                Using frmDecidir
+                    frmDecidir.Ids1 = ids
+                    frmDecidir.Iddt1 = iddt
+                    frmDecidir.ShowDialog()
+                End Using
             End If
 
             EntityTablas.TramitesAProcesar(dgvTramites)

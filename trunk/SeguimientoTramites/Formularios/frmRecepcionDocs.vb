@@ -100,6 +100,7 @@ Public Class frmRecepcionDocs
                     .Add("VCODIGO", OracleDbType.NVarchar2, 12, Nothing, ParameterDirection.Input).Value = barcode
                     .Add("VIDUSUARIO", OracleDbType.Decimal, 12, Nothing, ParameterDirection.Input).Value = SesionActiva.IdUsuario
                     .Add("VIDDETALLE_SUCURSAL_OFICINA", OracleDbType.Decimal, 12, Nothing, ParameterDirection.Input).Value = SesionActiva.IdSucursalOficina
+                    .Add("VRETORNO", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
                     .Add("EXISTE", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
                     .Add("VACTIVO", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
                     .Add("MISMAOFICINA", OracleDbType.Decimal, 1, Nothing, ParameterDirection.Output)
