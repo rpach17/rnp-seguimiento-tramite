@@ -25,12 +25,12 @@
 
     Private Sub btnDecidir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDecidir.Click
         If rdoV.Checked Then
-            EntityTablas.ActualizarDetalleTramite(iddt, rdoV.Tag)
+            EntityTablas.ActualizarDetalleTramite(iddt, rdoV.Tag, cboUserDestino.SelectedValue)
         End If
 
         If rdoF.Checked Then
             If cboError.SelectedValue > 0 Then
-                EntityTablas.ActualizarDetalleTramite(iddt, rdoF.Tag)
+                EntityTablas.ActualizarDetalleTramite(iddt, rdoF.Tag, cboUserDestino.SelectedValue)
                 EntityTablas.ErrorTramite(iddt, cboError.SelectedValue)
             Else
                 MsgBox("Debe seleccionar un error")

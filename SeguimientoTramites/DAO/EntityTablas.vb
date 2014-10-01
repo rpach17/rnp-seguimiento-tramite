@@ -93,13 +93,13 @@
         rdoF.Tag = info.IDSALTOF
     End Sub
 
-    Shared Sub ActualizarDetalleTramite(ByVal iddetalle As Integer, ByVal iddecision As Integer)
+    Shared Sub ActualizarDetalleTramite(ByVal iddetalle As Integer, ByVal iddecision As Integer, ByVal idUserDestino As Integer)
         Dim detalle = (From d In ctx.DETALLE_SEGUIMIENTO Where d.IDDETALLE_SEGUIMIENTO = iddetalle Select d).FirstOrDefault
 
         With detalle
             .DESTINO = iddecision
+            .IDUSUARIO_DESTINO = idUserDestino
         End With
-
         ctx.SaveChanges()
     End Sub
 
