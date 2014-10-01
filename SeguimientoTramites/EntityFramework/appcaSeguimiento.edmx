@@ -8,6 +8,7 @@
         <EntityContainer Name="ModeloStoreContainer">
           <EntitySet Name="CAMPOS_FORM" EntityType="Modelo.Store.CAMPOS_FORM" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="DATOS_CAMPOS_FORM" EntityType="Modelo.Store.DATOS_CAMPOS_FORM" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="DEPARTAMENTOS" EntityType="Modelo.Store.DEPARTAMENTOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="DETALLE_ERRORES_GESTIONES" EntityType="Modelo.Store.DETALLE_ERRORES_GESTIONES" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="DETALLE_GESTIONES_USUARIO" EntityType="Modelo.Store.DETALLE_GESTIONES_USUARIO" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="DETALLE_LISTA_DESPLEGABLE" EntityType="Modelo.Store.DETALLE_LISTA_DESPLEGABLE" store:Type="Tables" Schema="APPCA" />
@@ -23,6 +24,7 @@
           <EntitySet Name="GRUPO_SALTOS" EntityType="Modelo.Store.GRUPO_SALTOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="IDENTIFICACION" EntityType="Modelo.Store.IDENTIFICACION" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="LISTA_DESPLEGABLE" EntityType="Modelo.Store.LISTA_DESPLEGABLE" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="MUNICIPIOS" EntityType="Modelo.Store.MUNICIPIOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="OFICINAS" EntityType="Modelo.Store.OFICINAS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="PUESTO" EntityType="Modelo.Store.PUESTO" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="RECEPCION_REQUISITOS" EntityType="Modelo.Store.RECEPCION_REQUISITOS" store:Type="Tables" Schema="APPCA" />
@@ -114,6 +116,10 @@
             <End Role="GESTIONES" EntitySet="GESTIONES" />
             <End Role="GRUPO_SALTOS" EntitySet="GRUPO_SALTOS" />
           </AssociationSet>
+          <AssociationSet Name="MUNICIPIOS_FK1" Association="Modelo.Store.MUNICIPIOS_FK1">
+            <End Role="DEPARTAMENTOS" EntitySet="DEPARTAMENTOS" />
+            <End Role="MUNICIPIOS" EntitySet="MUNICIPIOS" />
+          </AssociationSet>
           <AssociationSet Name="PUESTO_FK1" Association="Modelo.Store.PUESTO_FK1">
             <End Role="OFICINAS" EntitySet="OFICINAS" />
             <End Role="PUESTO" EntitySet="PUESTO" />
@@ -137,6 +143,10 @@
           <AssociationSet Name="SALTOS_FK2" Association="Modelo.Store.SALTOS_FK2">
             <End Role="PUESTO" EntitySet="PUESTO" />
             <End Role="SALTOS" EntitySet="SALTOS" />
+          </AssociationSet>
+          <AssociationSet Name="SUCURSALES_FK1" Association="Modelo.Store.SUCURSALES_FK1">
+            <End Role="MUNICIPIOS" EntitySet="MUNICIPIOS" />
+            <End Role="SUCURSALES" EntitySet="SUCURSALES" />
           </AssociationSet>
           <AssociationSet Name="TRAMITES_FK1" Association="Modelo.Store.TRAMITES_FK1">
             <End Role="RESPONSABLE" EntitySet="RESPONSABLE" />
@@ -187,7 +197,17 @@
           <Property Name="IDDATO_CAMPO" Type="number" Nullable="false" />
           <Property Name="IDDETALLE_SEGUIMIENTO" Type="number" />
           <Property Name="IDFORMULARIO" Type="number" />
-          <Property Name="VALOR" Type="varchar2" MaxLength="100" />
+          <Property Name="VALOR" Type="varchar2" MaxLength="150" />
+          <Property Name="IDCAMPO_FORM" Type="number" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTOS">
+          <Key>
+            <PropertyRef Name="IDDEPARTAMENTO" />
+          </Key>
+          <Property Name="IDDEPARTAMENTO" Type="number" Nullable="false" />
+          <Property Name="IDPAIS" Type="number" Nullable="false" />
+          <Property Name="CODIGO_DEPTO" Type="varchar2" Nullable="false" MaxLength="2" />
+          <Property Name="NOMBRE_DEPTO" Type="varchar2" Nullable="false" MaxLength="30" />
         </EntityType>
         <EntityType Name="DETALLE_ERRORES_GESTIONES">
           <Key>
@@ -323,6 +343,15 @@
           </Key>
           <Property Name="IDLISTA_DESPLEGABLE" Type="number" Nullable="false" />
           <Property Name="DESCRIPCION" Type="nvarchar2" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="MUNICIPIOS">
+          <Key>
+            <PropertyRef Name="IDMUNICIPIO" />
+          </Key>
+          <Property Name="IDMUNICIPIO" Type="number" Nullable="false" />
+          <Property Name="IDDEPARTAMENTO" Type="number" />
+          <Property Name="CODIGO_MPIO" Type="varchar2" MaxLength="2" />
+          <Property Name="NOMBRE_MPIO" Type="varchar2" MaxLength="30" />
         </EntityType>
         <EntityType Name="OFICINAS">
           <Key>
@@ -693,6 +722,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="MUNICIPIOS_FK1">
+          <End Role="DEPARTAMENTOS" Type="Modelo.Store.DEPARTAMENTOS" Multiplicity="0..1" />
+          <End Role="MUNICIPIOS" Type="Modelo.Store.MUNICIPIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTAMENTOS">
+              <PropertyRef Name="IDDEPARTAMENTO" />
+            </Principal>
+            <Dependent Role="MUNICIPIOS">
+              <PropertyRef Name="IDDEPARTAMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PUESTO_FK1">
           <End Role="OFICINAS" Type="Modelo.Store.OFICINAS" Multiplicity="0..1" />
           <End Role="PUESTO" Type="Modelo.Store.PUESTO" Multiplicity="*" />
@@ -764,6 +805,18 @@
             </Principal>
             <Dependent Role="SALTOS">
               <PropertyRef Name="IDPUESTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUCURSALES_FK1">
+          <End Role="MUNICIPIOS" Type="Modelo.Store.MUNICIPIOS" Multiplicity="1" />
+          <End Role="SUCURSALES" Type="Modelo.Store.SUCURSALES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUNICIPIOS">
+              <PropertyRef Name="IDMUNICIPIO" />
+            </Principal>
+            <Dependent Role="SUCURSALES">
+              <PropertyRef Name="IDMUNICIPIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -995,6 +1048,16 @@
             <End Role="ERRORES_GESTIONES" EntitySet="ERRORES_GESTIONES" />
             <End Role="TRAMITES" EntitySet="TRAMITES" />
           </AssociationSet>
+          <EntitySet Name="DEPARTAMENTOS" EntityType="Modelo.DEPARTAMENTOS" />
+          <EntitySet Name="MUNICIPIOS" EntityType="Modelo.MUNICIPIOS" />
+          <AssociationSet Name="MUNICIPIOS_FK1" Association="Modelo.MUNICIPIOS_FK1">
+            <End Role="DEPARTAMENTOS" EntitySet="DEPARTAMENTOS" />
+            <End Role="MUNICIPIOS" EntitySet="MUNICIPIOS" />
+          </AssociationSet>
+          <AssociationSet Name="SUCURSALES_FK1" Association="Modelo.SUCURSALES_FK1">
+            <End Role="MUNICIPIOS" EntitySet="MUNICIPIOS" />
+            <End Role="SUCURSALES" EntitySet="SUCURSALES" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CAMPOS_FORM">
           <Key>
@@ -1022,9 +1085,10 @@
           <Property Type="Decimal" Name="IDDATO_CAMPO" Nullable="false" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDDETALLE_SEGUIMIENTO" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDFORMULARIO" Precision="38" Scale="0" />
-          <Property Type="String" Name="VALOR" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="VALOR" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DETALLE_SEGUIMIENTO" Relationship="Modelo.DATOS_CAMPOS_FORM_FK1" FromRole="DATOS_CAMPOS_FORM" ToRole="DETALLE_SEGUIMIENTO" />
           <NavigationProperty Name="FORMULARIOS" Relationship="Modelo.DATOS_CAMPOS_FORM_FK2" FromRole="DATOS_CAMPOS_FORM" ToRole="FORMULARIOS" />
+          <Property Type="Decimal" Name="IDCAMPO_FORM" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="DETALLE_GESTIONES_USUARIO">
           <Key>
@@ -1063,8 +1127,8 @@
           <Property Type="Decimal" Name="IDTRAMITE" Nullable="false" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDUSUARIO" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="DateTime" Name="FECHA_RECEPCION" Nullable="false" />
-          <Property Type="DateTime" Name="FECHA_ENTREGA" />
+          <Property Type="DateTime" Name="FECHA_RECEPCION" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="FECHA_ENTREGA" Precision="0" />
           <Property Type="Decimal" Name="DESTINO" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDUSUARIO_DESTINO" Precision="38" Scale="0" />
           <NavigationProperty Name="DATOS_CAMPOS_FORM" Relationship="Modelo.DATOS_CAMPOS_FORM_FK1" FromRole="DETALLE_SEGUIMIENTO" ToRole="DATOS_CAMPOS_FORM" />
@@ -1273,6 +1337,7 @@
           <Property Type="Decimal" Name="LATITUD" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="LONGITUD" Precision="38" Scale="0" />
           <NavigationProperty Name="DETALLE_SUCURSAL_OFICINA" Relationship="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" FromRole="SUCURSALES" ToRole="DETALLE_SUCURSAL_OFICINA" />
+          <NavigationProperty Name="MUNICIPIOS" Relationship="Modelo.SUCURSALES_FK1" FromRole="SUCURSALES" ToRole="MUNICIPIOS" />
         </EntityType>
         <EntityType Name="TIPO_REPRESENTANTE">
           <Key>
@@ -1300,7 +1365,7 @@
           <Property Type="Decimal" Name="IDGESTION" Nullable="false" Precision="38" Scale="0" />
           <Property Type="String" Name="CODIGOTRAMITE" MaxLength="13" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="ACTIVO" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="DateTime" Name="FECHA" Nullable="false" />
+          <Property Type="DateTime" Name="FECHA" Nullable="false" Precision="0" />
           <Property Type="String" Name="NOTA" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="IDDETALLE_SUCURSAL_OFICINA" Nullable="false" Precision="38" Scale="0" />
           <Property Type="String" Name="NUM_RECIBO" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -1706,6 +1771,51 @@
           <End Type="Modelo.ERRORES_GESTIONES" Role="ERRORES_GESTIONES" Multiplicity="*" />
           <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="*" />
         </Association>
+        <EntityType Name="DEPARTAMENTOS">
+          <Key>
+            <PropertyRef Name="IDDEPARTAMENTO" />
+          </Key>
+          <Property Type="Decimal" Name="IDDEPARTAMENTO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDPAIS" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="CODIGO_DEPTO" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NOMBRE_DEPTO" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MUNICIPIOS" Relationship="Modelo.MUNICIPIOS_FK1" FromRole="DEPARTAMENTOS" ToRole="MUNICIPIOS" />
+        </EntityType>
+        <EntityType Name="MUNICIPIOS">
+          <Key>
+            <PropertyRef Name="IDMUNICIPIO" />
+          </Key>
+          <Property Type="Decimal" Name="IDMUNICIPIO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDDEPARTAMENTO" Precision="38" Scale="0" />
+          <Property Type="String" Name="CODIGO_MPIO" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NOMBRE_MPIO" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DEPARTAMENTOS" Relationship="Modelo.MUNICIPIOS_FK1" FromRole="MUNICIPIOS" ToRole="DEPARTAMENTOS" />
+          <NavigationProperty Name="SUCURSALES" Relationship="Modelo.SUCURSALES_FK1" FromRole="MUNICIPIOS" ToRole="SUCURSALES" />
+        </EntityType>
+        <Association Name="MUNICIPIOS_FK1">
+          <End Type="Modelo.DEPARTAMENTOS" Role="DEPARTAMENTOS" Multiplicity="0..1" />
+          <End Type="Modelo.MUNICIPIOS" Role="MUNICIPIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTAMENTOS">
+              <PropertyRef Name="IDDEPARTAMENTO" />
+            </Principal>
+            <Dependent Role="MUNICIPIOS">
+              <PropertyRef Name="IDDEPARTAMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SUCURSALES_FK1">
+          <End Type="Modelo.MUNICIPIOS" Role="MUNICIPIOS" Multiplicity="1" />
+          <End Type="Modelo.SUCURSALES" Role="SUCURSALES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUNICIPIOS">
+              <PropertyRef Name="IDMUNICIPIO" />
+            </Principal>
+            <Dependent Role="SUCURSALES">
+              <PropertyRef Name="IDMUNICIPIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1733,6 +1843,7 @@
           <EntitySetMapping Name="DATOS_CAMPOS_FORM">
             <EntityTypeMapping TypeName="Modelo.DATOS_CAMPOS_FORM">
               <MappingFragment StoreEntitySet="DATOS_CAMPOS_FORM">
+                <ScalarProperty Name="IDCAMPO_FORM" ColumnName="IDCAMPO_FORM" />
                 <ScalarProperty Name="VALOR" ColumnName="VALOR" />
                 <ScalarProperty Name="IDFORMULARIO" ColumnName="IDFORMULARIO" />
                 <ScalarProperty Name="IDDETALLE_SEGUIMIENTO" ColumnName="IDDETALLE_SEGUIMIENTO" />
@@ -2024,6 +2135,26 @@
               <ScalarProperty Name="IDERROR" ColumnName="IDERROR" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="DEPARTAMENTOS">
+            <EntityTypeMapping TypeName="Modelo.DEPARTAMENTOS">
+              <MappingFragment StoreEntitySet="DEPARTAMENTOS">
+                <ScalarProperty Name="NOMBRE_DEPTO" ColumnName="NOMBRE_DEPTO" />
+                <ScalarProperty Name="CODIGO_DEPTO" ColumnName="CODIGO_DEPTO" />
+                <ScalarProperty Name="IDPAIS" ColumnName="IDPAIS" />
+                <ScalarProperty Name="IDDEPARTAMENTO" ColumnName="IDDEPARTAMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MUNICIPIOS">
+            <EntityTypeMapping TypeName="Modelo.MUNICIPIOS">
+              <MappingFragment StoreEntitySet="MUNICIPIOS">
+                <ScalarProperty Name="NOMBRE_MPIO" ColumnName="NOMBRE_MPIO" />
+                <ScalarProperty Name="CODIGO_MPIO" ColumnName="CODIGO_MPIO" />
+                <ScalarProperty Name="IDDEPARTAMENTO" ColumnName="IDDEPARTAMENTO" />
+                <ScalarProperty Name="IDMUNICIPIO" ColumnName="IDMUNICIPIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2103,6 +2234,10 @@
         <AssociationConnector Association="Modelo.TRAMITES_FK3" />
         <AssociationConnector Association="Modelo.USUARIOS_FK3" />
         <AssociationConnector Association="Modelo.DETALLE_ERRORES_GESTIONES" />
+        <EntityTypeShape EntityType="Modelo.DEPARTAMENTOS" Width="1.5" PointX="6.9593313294273482" PointY="7.6487838661525327" />
+        <EntityTypeShape EntityType="Modelo.MUNICIPIOS" Width="1.5" PointX="9.2267198791851843" PointY="19.355888509822957" />
+        <AssociationConnector Association="Modelo.MUNICIPIOS_FK1" />
+        <AssociationConnector Association="Modelo.SUCURSALES_FK1" />
       </Diagram>
     </Diagrams>
   </Designer>

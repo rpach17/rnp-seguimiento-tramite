@@ -10,6 +10,8 @@ Module ModuloFunciones
         Public Oficina As String
         Public IdPuesto As Integer
         Public NombrePuesto As String
+        Public Depto As String
+        Public Municipio As String
     End Structure
 
     Public SesionActiva As Sesion

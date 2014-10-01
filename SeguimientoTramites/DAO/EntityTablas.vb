@@ -19,6 +19,8 @@
                         .IdSucursalOficina = u.IDDETALLE_SUCURSAL_OFICINA
                         .IdPuesto = u.IDPUESTO
                         .NombrePuesto = u.PUESTO.NOMBRE_PUESTO
+                        .Municipio = u.DETALLE_SUCURSAL_OFICINA.SUCURSALES.MUNICIPIOS.NOMBRE_MPIO
+                        .Depto = u.DETALLE_SUCURSAL_OFICINA.SUCURSALES.MUNICIPIOS.DEPARTAMENTOS.NOMBRE_DEPTO
                     End With
                 Next
                 Return True
@@ -81,8 +83,8 @@
         Next
 
         'grid.Columns(0).Visible = False
-        grid.Columns(1).Visible = False
-        grid.Columns(2).Visible = False
+        'grid.Columns(1).Visible = False
+        'grid.Columns(2).Visible = False
         'grid.Columns(3).Visible = False
     End Sub
 
@@ -408,16 +410,17 @@
 
 #Region "Procesar"
     Shared Sub CargarUsuariosDestinoSalto(cbo As ComboBox, ids As Integer)
-        Dim usuarios = (From u In ctx.DETALLE_USUARIO_SALTOS
+        Dim usuarios = (From u In ctx.DETALLE_USUARIO_SALTOS.ToList
                         Join s In ctx.SALTOS On u.IDSALTO Equals s.IDSALTO
                         Where s.IDSALTO = ids
                         Order By u.PRIORIDAD Descending
-                        Select u.IDUSUARIO, nombre = u.USUARIOS.NOMBRE + " " + u.USUARIOS.APELLIDOS)
+                        Select u.IDUSUARIO, NOMBRECOMPLETO = u.USUARIOS.NOMBRE & " " & u.USUARIOS.APELLIDOS).ToList
 
-        cbo.DataSource = Nothing
+        'cbo.DataSource = Nothing
         cbo.DataSource = usuarios
-        cbo.DisplayMember = "nombre"
         cbo.ValueMember = "IDUSUARIO"
+        cbo.DisplayMember = "NOMBRECOMPLETO"
+
     End Sub
 
     Shared Function ObtenerSiguienteSalto(ByVal idGrupoS As Integer, ByVal numeroSalto As Integer) As Integer
@@ -429,9 +432,5 @@
     End Function
 
 #End Region
-
-
-
-
 
 End Class

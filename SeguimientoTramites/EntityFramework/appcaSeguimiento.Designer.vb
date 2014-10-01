@@ -18,7 +18,7 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 
-<Assembly: EdmSchemaAttribute("0647254d-4c56-444a-a13c-c2f181d309bc")>
+<Assembly: EdmSchemaAttribute("a4d37210-f7d3-4f37-b8dc-dc68ec88cbf1")>
 #Region "Metadatos de relaciones en EDM"
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK1", "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(FORMULARIOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK2", "TIPOS_CAMPOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TIPOS_CAMPOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
@@ -51,6 +51,8 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("Modelo", "TRAMITES_FK3", "TIPO_REPRESENTANTE", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(TIPO_REPRESENTANTE), "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(TRAMITES), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "USUARIOS_FK3", "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(USUARIOS), "USUARIOS1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(USUARIOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_ERRORES_GESTIONES", "ERRORES_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(ERRORES_GESTIONES), "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(TRAMITES))>
+<Assembly: EdmRelationshipAttribute("Modelo", "MUNICIPIOS_FK1", "DEPARTAMENTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(DEPARTAMENTOS), "MUNICIPIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(MUNICIPIOS), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "SUCURSALES_FK1", "MUNICIPIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(MUNICIPIOS), "SUCURSALES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SUCURSALES), True)>
 
 #End Region
 
@@ -480,6 +482,34 @@ Public Partial Class Entidades
 
     Private _USUARIOS As ObjectSet(Of USUARIOS)
 
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    Public ReadOnly Property DEPARTAMENTOS() As ObjectSet(Of DEPARTAMENTOS)
+        Get
+            If (_DEPARTAMENTOS Is Nothing) Then
+                _DEPARTAMENTOS = MyBase.CreateObjectSet(Of DEPARTAMENTOS)("DEPARTAMENTOS")
+            End If
+            Return _DEPARTAMENTOS
+        End Get
+    End Property
+
+    Private _DEPARTAMENTOS As ObjectSet(Of DEPARTAMENTOS)
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    Public ReadOnly Property MUNICIPIOS() As ObjectSet(Of MUNICIPIOS)
+        Get
+            If (_MUNICIPIOS Is Nothing) Then
+                _MUNICIPIOS = MyBase.CreateObjectSet(Of MUNICIPIOS)("MUNICIPIOS")
+            End If
+            Return _MUNICIPIOS
+        End Get
+    End Property
+
+    Private _MUNICIPIOS As ObjectSet(Of MUNICIPIOS)
+
     #End Region
 
     #Region "Métodos AddTo"
@@ -671,6 +701,20 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToUSUARIOS(ByVal uSUARIOS As USUARIOS)
         MyBase.AddObject("USUARIOS", uSUARIOS)
+    End Sub
+
+    ''' <summary>
+    ''' Método desusado para agregar un nuevo objeto al EntitySet DEPARTAMENTOS. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
+    ''' </summary>
+    Public Sub AddToDEPARTAMENTOS(ByVal dEPARTAMENTOS As DEPARTAMENTOS)
+        MyBase.AddObject("DEPARTAMENTOS", dEPARTAMENTOS)
+    End Sub
+
+    ''' <summary>
+    ''' Método desusado para agregar un nuevo objeto al EntitySet MUNICIPIOS. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
+    ''' </summary>
+    Public Sub AddToMUNICIPIOS(ByVal mUNICIPIOS As MUNICIPIOS)
+        MyBase.AddObject("MUNICIPIOS", mUNICIPIOS)
     End Sub
 
     #End Region
@@ -1219,6 +1263,31 @@ Public Partial Class DATOS_CAMPOS_FORM
     Private Partial Sub OnVALORChanged()
     End Sub
 
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property IDCAMPO_FORM() As Nullable(Of Global.System.Decimal)
+        Get
+            Return _IDCAMPO_FORM
+        End Get
+        Set
+            OnIDCAMPO_FORMChanging(value)
+            ReportPropertyChanging("IDCAMPO_FORM")
+            _IDCAMPO_FORM = StructuralObject.SetValidValue(value)
+            ReportPropertyChanged("IDCAMPO_FORM")
+            OnIDCAMPO_FORMChanged()
+        End Set
+    End Property
+
+    Private _IDCAMPO_FORM As Nullable(Of Global.System.Decimal)
+    Private Partial Sub OnIDCAMPO_FORMChanging(value As Nullable(Of Global.System.Decimal))
+    End Sub
+
+    Private Partial Sub OnIDCAMPO_FORMChanged()
+    End Sub
+
     #End Region
 
     #Region "Propiedades de navegación"
@@ -1281,6 +1350,164 @@ Public Partial Class DATOS_CAMPOS_FORM
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of FORMULARIOS)("Modelo.DATOS_CAMPOS_FORM_FK2", "FORMULARIOS", value)
+            End If
+        End Set
+    End Property
+
+    #End Region
+
+End Class
+
+''' <summary>
+''' No hay documentación de metadatos disponible.
+''' </summary>
+<EdmEntityTypeAttribute(NamespaceName:="Modelo", Name:="DEPARTAMENTOS")>
+<Serializable()>
+<DataContractAttribute(IsReference:=True)>
+Public Partial Class DEPARTAMENTOS
+    Inherits EntityObject
+    #Region "Método de generador"
+
+    ''' <summary>
+    ''' Crear un nuevo objeto DEPARTAMENTOS.
+    ''' </summary>
+    ''' <param name="iDDEPARTAMENTO">Valor inicial de la propiedad IDDEPARTAMENTO.</param>
+    ''' <param name="iDPAIS">Valor inicial de la propiedad IDPAIS.</param>
+    ''' <param name="cODIGO_DEPTO">Valor inicial de la propiedad CODIGO_DEPTO.</param>
+    ''' <param name="nOMBRE_DEPTO">Valor inicial de la propiedad NOMBRE_DEPTO.</param>
+    Public Shared Function CreateDEPARTAMENTOS(iDDEPARTAMENTO As Global.System.Decimal, iDPAIS As Global.System.Decimal, cODIGO_DEPTO As Global.System.String, nOMBRE_DEPTO As Global.System.String) As DEPARTAMENTOS
+        Dim dEPARTAMENTOS as DEPARTAMENTOS = New DEPARTAMENTOS
+        dEPARTAMENTOS.IDDEPARTAMENTO = iDDEPARTAMENTO
+        dEPARTAMENTOS.IDPAIS = iDPAIS
+        dEPARTAMENTOS.CODIGO_DEPTO = cODIGO_DEPTO
+        dEPARTAMENTOS.NOMBRE_DEPTO = nOMBRE_DEPTO
+        Return dEPARTAMENTOS
+    End Function
+
+    #End Region
+
+    #Region "Propiedades primitivas"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property IDDEPARTAMENTO() As Global.System.Decimal
+        Get
+            Return _IDDEPARTAMENTO
+        End Get
+        Set
+            If (_IDDEPARTAMENTO <> Value) Then
+                OnIDDEPARTAMENTOChanging(value)
+                ReportPropertyChanging("IDDEPARTAMENTO")
+                _IDDEPARTAMENTO = StructuralObject.SetValidValue(value)
+                ReportPropertyChanged("IDDEPARTAMENTO")
+                OnIDDEPARTAMENTOChanged()
+            End If
+        End Set
+    End Property
+
+    Private _IDDEPARTAMENTO As Global.System.Decimal
+    Private Partial Sub OnIDDEPARTAMENTOChanging(value As Global.System.Decimal)
+    End Sub
+
+    Private Partial Sub OnIDDEPARTAMENTOChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property IDPAIS() As Global.System.Decimal
+        Get
+            Return _IDPAIS
+        End Get
+        Set
+            OnIDPAISChanging(value)
+            ReportPropertyChanging("IDPAIS")
+            _IDPAIS = StructuralObject.SetValidValue(value)
+            ReportPropertyChanged("IDPAIS")
+            OnIDPAISChanged()
+        End Set
+    End Property
+
+    Private _IDPAIS As Global.System.Decimal
+    Private Partial Sub OnIDPAISChanging(value As Global.System.Decimal)
+    End Sub
+
+    Private Partial Sub OnIDPAISChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property CODIGO_DEPTO() As Global.System.String
+        Get
+            Return _CODIGO_DEPTO
+        End Get
+        Set
+            OnCODIGO_DEPTOChanging(value)
+            ReportPropertyChanging("CODIGO_DEPTO")
+            _CODIGO_DEPTO = StructuralObject.SetValidValue(value, false)
+            ReportPropertyChanged("CODIGO_DEPTO")
+            OnCODIGO_DEPTOChanged()
+        End Set
+    End Property
+
+    Private _CODIGO_DEPTO As Global.System.String
+    Private Partial Sub OnCODIGO_DEPTOChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnCODIGO_DEPTOChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property NOMBRE_DEPTO() As Global.System.String
+        Get
+            Return _NOMBRE_DEPTO
+        End Get
+        Set
+            OnNOMBRE_DEPTOChanging(value)
+            ReportPropertyChanging("NOMBRE_DEPTO")
+            _NOMBRE_DEPTO = StructuralObject.SetValidValue(value, false)
+            ReportPropertyChanged("NOMBRE_DEPTO")
+            OnNOMBRE_DEPTOChanged()
+        End Set
+    End Property
+
+    Private _NOMBRE_DEPTO As Global.System.String
+    Private Partial Sub OnNOMBRE_DEPTOChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnNOMBRE_DEPTOChanged()
+    End Sub
+
+    #End Region
+
+    #Region "Propiedades de navegación"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "MUNICIPIOS_FK1", "MUNICIPIOS")>
+     Public Property MUNICIPIOS() As EntityCollection(Of MUNICIPIOS)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of MUNICIPIOS)("Modelo.MUNICIPIOS_FK1", "MUNICIPIOS")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of MUNICIPIOS)("Modelo.MUNICIPIOS_FK1", "MUNICIPIOS", value)
             End If
         End Set
     End Property
@@ -3816,6 +4043,189 @@ End Class
 ''' <summary>
 ''' No hay documentación de metadatos disponible.
 ''' </summary>
+<EdmEntityTypeAttribute(NamespaceName:="Modelo", Name:="MUNICIPIOS")>
+<Serializable()>
+<DataContractAttribute(IsReference:=True)>
+Public Partial Class MUNICIPIOS
+    Inherits EntityObject
+    #Region "Método de generador"
+
+    ''' <summary>
+    ''' Crear un nuevo objeto MUNICIPIOS.
+    ''' </summary>
+    ''' <param name="iDMUNICIPIO">Valor inicial de la propiedad IDMUNICIPIO.</param>
+    Public Shared Function CreateMUNICIPIOS(iDMUNICIPIO As Global.System.Decimal) As MUNICIPIOS
+        Dim mUNICIPIOS as MUNICIPIOS = New MUNICIPIOS
+        mUNICIPIOS.IDMUNICIPIO = iDMUNICIPIO
+        Return mUNICIPIOS
+    End Function
+
+    #End Region
+
+    #Region "Propiedades primitivas"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property IDMUNICIPIO() As Global.System.Decimal
+        Get
+            Return _IDMUNICIPIO
+        End Get
+        Set
+            If (_IDMUNICIPIO <> Value) Then
+                OnIDMUNICIPIOChanging(value)
+                ReportPropertyChanging("IDMUNICIPIO")
+                _IDMUNICIPIO = StructuralObject.SetValidValue(value)
+                ReportPropertyChanged("IDMUNICIPIO")
+                OnIDMUNICIPIOChanged()
+            End If
+        End Set
+    End Property
+
+    Private _IDMUNICIPIO As Global.System.Decimal
+    Private Partial Sub OnIDMUNICIPIOChanging(value As Global.System.Decimal)
+    End Sub
+
+    Private Partial Sub OnIDMUNICIPIOChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property IDDEPARTAMENTO() As Nullable(Of Global.System.Decimal)
+        Get
+            Return _IDDEPARTAMENTO
+        End Get
+        Set
+            OnIDDEPARTAMENTOChanging(value)
+            ReportPropertyChanging("IDDEPARTAMENTO")
+            _IDDEPARTAMENTO = StructuralObject.SetValidValue(value)
+            ReportPropertyChanged("IDDEPARTAMENTO")
+            OnIDDEPARTAMENTOChanged()
+        End Set
+    End Property
+
+    Private _IDDEPARTAMENTO As Nullable(Of Global.System.Decimal)
+    Private Partial Sub OnIDDEPARTAMENTOChanging(value As Nullable(Of Global.System.Decimal))
+    End Sub
+
+    Private Partial Sub OnIDDEPARTAMENTOChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property CODIGO_MPIO() As Global.System.String
+        Get
+            Return _CODIGO_MPIO
+        End Get
+        Set
+            OnCODIGO_MPIOChanging(value)
+            ReportPropertyChanging("CODIGO_MPIO")
+            _CODIGO_MPIO = StructuralObject.SetValidValue(value, true)
+            ReportPropertyChanged("CODIGO_MPIO")
+            OnCODIGO_MPIOChanged()
+        End Set
+    End Property
+
+    Private _CODIGO_MPIO As Global.System.String
+    Private Partial Sub OnCODIGO_MPIOChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnCODIGO_MPIOChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property NOMBRE_MPIO() As Global.System.String
+        Get
+            Return _NOMBRE_MPIO
+        End Get
+        Set
+            OnNOMBRE_MPIOChanging(value)
+            ReportPropertyChanging("NOMBRE_MPIO")
+            _NOMBRE_MPIO = StructuralObject.SetValidValue(value, true)
+            ReportPropertyChanged("NOMBRE_MPIO")
+            OnNOMBRE_MPIOChanged()
+        End Set
+    End Property
+
+    Private _NOMBRE_MPIO As Global.System.String
+    Private Partial Sub OnNOMBRE_MPIOChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnNOMBRE_MPIOChanged()
+    End Sub
+
+    #End Region
+
+    #Region "Propiedades de navegación"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "MUNICIPIOS_FK1", "DEPARTAMENTOS")>
+    Public Property DEPARTAMENTOS() As DEPARTAMENTOS
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DEPARTAMENTOS)("Modelo.MUNICIPIOS_FK1", "DEPARTAMENTOS").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DEPARTAMENTOS)("Modelo.MUNICIPIOS_FK1", "DEPARTAMENTOS").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property DEPARTAMENTOSReference() As EntityReference(Of DEPARTAMENTOS)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DEPARTAMENTOS)("Modelo.MUNICIPIOS_FK1", "DEPARTAMENTOS")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of DEPARTAMENTOS)("Modelo.MUNICIPIOS_FK1", "DEPARTAMENTOS", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "SUCURSALES_FK1", "SUCURSALES")>
+     Public Property SUCURSALES() As EntityCollection(Of SUCURSALES)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of SUCURSALES)("Modelo.SUCURSALES_FK1", "SUCURSALES")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of SUCURSALES)("Modelo.SUCURSALES_FK1", "SUCURSALES", value)
+            End If
+        End Set
+    End Property
+
+    #End Region
+
+End Class
+
+''' <summary>
+''' No hay documentación de metadatos disponible.
+''' </summary>
 <EdmEntityTypeAttribute(NamespaceName:="Modelo", Name:="OFICINAS")>
 <Serializable()>
 <DataContractAttribute(IsReference:=True)>
@@ -5498,6 +5908,37 @@ Public Partial Class SUCURSALES
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of DETALLE_SUCURSAL_OFICINA)("Modelo.DETALLE_SUCURSAL_OFICINA_FK1", "DETALLE_SUCURSAL_OFICINA", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "SUCURSALES_FK1", "MUNICIPIOS")>
+    Public Property MUNICIPIOS() As MUNICIPIOS
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of MUNICIPIOS)("Modelo.SUCURSALES_FK1", "MUNICIPIOS").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of MUNICIPIOS)("Modelo.SUCURSALES_FK1", "MUNICIPIOS").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property MUNICIPIOSReference() As EntityReference(Of MUNICIPIOS)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of MUNICIPIOS)("Modelo.SUCURSALES_FK1", "MUNICIPIOS")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of MUNICIPIOS)("Modelo.SUCURSALES_FK1", "MUNICIPIOS", value)
             End If
         End Set
     End Property

@@ -108,7 +108,7 @@ Public Class RibbonFormMain
         tmNotificacion.Enabled = True
 
         lblConectadoComo.Caption = String.Format("{0} ({1})", SesionActiva.Nombre, SesionActiva.Usuario)
-        lblUbicacion.Caption = String.Format("{0}, {1}", SesionActiva.Sucursal, SesionActiva.Oficina)
+        lblUbicacion.Caption = String.Format("[{0}, {1}] - {2}, {3}", SesionActiva.Depto, SesionActiva.Municipio, SesionActiva.Sucursal, SesionActiva.Oficina)
         If EntityTablas.PrimerPaso(SesionActiva.IdUsuario) Then
             BarButtonItem9.Enabled = True
         Else
