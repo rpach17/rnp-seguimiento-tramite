@@ -30,6 +30,7 @@ Partial Class frmLogin
         Me.txtUser = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnEntrar = New System.Windows.Forms.Button()
+        Me.chkURL = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,6 +41,7 @@ Partial Class frmLogin
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.chkURL)
         Me.Panel1.Controls.Add(Me.btnCerrar)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label3)
@@ -59,7 +61,7 @@ Partial Class frmLogin
         Me.btnCerrar.Location = New System.Drawing.Point(428, 4)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(31, 31)
-        Me.btnCerrar.TabIndex = 9
+        Me.btnCerrar.TabIndex = 4
         Me.btnCerrar.Text = "X"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
@@ -80,7 +82,7 @@ Partial Class frmLogin
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label3.Location = New System.Drawing.Point(57, 113)
+        Me.Label3.Location = New System.Drawing.Point(57, 110)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(92, 20)
         Me.Label3.TabIndex = 6
@@ -89,26 +91,26 @@ Partial Class frmLogin
         'txtPass
         '
         Me.txtPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtPass.Location = New System.Drawing.Point(155, 107)
+        Me.txtPass.Location = New System.Drawing.Point(155, 104)
         Me.txtPass.Name = "txtPass"
         Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPass.Size = New System.Drawing.Size(211, 29)
-        Me.txtPass.TabIndex = 2
+        Me.txtPass.TabIndex = 1
         '
         'txtUser
         '
         Me.txtUser.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.txtUser.Location = New System.Drawing.Point(155, 75)
+        Me.txtUser.Location = New System.Drawing.Point(155, 72)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(211, 29)
-        Me.txtUser.TabIndex = 1
+        Me.txtUser.TabIndex = 0
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label2.Location = New System.Drawing.Point(85, 81)
+        Me.Label2.Location = New System.Drawing.Point(85, 78)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(64, 20)
         Me.Label2.TabIndex = 4
@@ -117,12 +119,22 @@ Partial Class frmLogin
         'btnEntrar
         '
         Me.btnEntrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
-        Me.btnEntrar.Location = New System.Drawing.Point(155, 160)
+        Me.btnEntrar.Location = New System.Drawing.Point(155, 161)
         Me.btnEntrar.Name = "btnEntrar"
         Me.btnEntrar.Size = New System.Drawing.Size(211, 47)
         Me.btnEntrar.TabIndex = 3
         Me.btnEntrar.Text = "Iniciar la sesión"
         Me.btnEntrar.UseVisualStyleBackColor = True
+        '
+        'chkURL
+        '
+        Me.chkURL.AutoSize = True
+        Me.chkURL.Location = New System.Drawing.Point(155, 140)
+        Me.chkURL.Name = "chkURL"
+        Me.chkURL.Size = New System.Drawing.Size(133, 17)
+        Me.chkURL.TabIndex = 2
+        Me.chkURL.Text = "Servidor de formularios"
+        Me.chkURL.UseVisualStyleBackColor = True
         '
         'frmLogin
         '
@@ -149,5 +161,6 @@ Partial Class frmLogin
     Friend WithEvents txtUser As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnEntrar As System.Windows.Forms.Button
+    Friend WithEvents chkURL As System.Windows.Forms.CheckBox
 
 End Class

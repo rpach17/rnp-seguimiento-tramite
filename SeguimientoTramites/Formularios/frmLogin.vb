@@ -5,6 +5,14 @@
             frmConfig.Show()
             Close()
         End If
+
+        If Not String.IsNullOrEmpty(My.Settings.URLForm) Then
+            chkURL.Enabled = True
+            chkURL.Checked = False
+        Else
+            chkURL.Enabled = False
+            chkURL.Checked = True
+        End If
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
@@ -35,7 +43,11 @@
         End If
 
         If EntityTablas.Login(txtUser.Text, SHA1(txtPass.Text)) Then
-            RibbonFormMain.Show()
+            If chkURL.Checked Then
+                frmConfigURL.Show()
+            Else
+                RibbonFormMain.Show()
+            End If
             Close()
         Else
             Dim s As String = "Error al iniciar sesión. Posibles razones:" & vbCrLf & vbCrLf & _
