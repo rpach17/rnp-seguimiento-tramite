@@ -19,6 +19,7 @@
           <EntitySet Name="DETALLE_USUARIO_SALTOS" EntityType="Modelo.Store.DETALLE_USUARIO_SALTOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="ERRORES_GESTIONES" EntityType="Modelo.Store.ERRORES_GESTIONES" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="ESTADOS_CIVILES" EntityType="Modelo.Store.ESTADOS_CIVILES" store:Type="Tables" Schema="APPCA" />
+          <EntitySet Name="FORM_URL" EntityType="Modelo.Store.FORM_URL" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="FORMULARIOS" EntityType="Modelo.Store.FORMULARIOS" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="GESTIONES" EntityType="Modelo.Store.GESTIONES" store:Type="Tables" Schema="APPCA" />
           <EntitySet Name="GRUPO_SALTOS" EntityType="Modelo.Store.GRUPO_SALTOS" store:Type="Tables" Schema="APPCA" />
@@ -295,6 +296,13 @@
           </Key>
           <Property Name="IDESTADO_CIVIL" Type="number" Nullable="false" />
           <Property Name="ESTADO_CIVIL" Type="varchar2" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FORM_URL">
+          <Key>
+            <PropertyRef Name="IDURL" />
+          </Key>
+          <Property Name="IDURL" Type="number" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="FORMULARIOS">
           <Key>
@@ -1058,6 +1066,7 @@
             <End Role="MUNICIPIOS" EntitySet="MUNICIPIOS" />
             <End Role="SUCURSALES" EntitySet="SUCURSALES" />
           </AssociationSet>
+          <EntitySet Name="FORM_URL" EntityType="Modelo.FORM_URL" />
         </EntityContainer>
         <EntityType Name="CAMPOS_FORM">
           <Key>
@@ -1816,6 +1825,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FORM_URL">
+          <Key>
+            <PropertyRef Name="IDURL" />
+          </Key>
+          <Property Type="Decimal" Name="IDURL" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="DIRECCION" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2155,6 +2171,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FORM_URL">
+            <EntityTypeMapping TypeName="Modelo.FORM_URL">
+              <MappingFragment StoreEntitySet="FORM_URL">
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="IDURL" ColumnName="IDURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2238,6 +2262,7 @@
         <EntityTypeShape EntityType="Modelo.MUNICIPIOS" Width="1.5" PointX="9.2267198791851843" PointY="19.355888509822957" />
         <AssociationConnector Association="Modelo.MUNICIPIOS_FK1" />
         <AssociationConnector Association="Modelo.SUCURSALES_FK1" />
+        <EntityTypeShape EntityType="Modelo.FORM_URL" Width="1.5" PointX="8.6916316415609938" PointY="15.007271043494004" />
       </Diagram>
     </Diagrams>
   </Designer>

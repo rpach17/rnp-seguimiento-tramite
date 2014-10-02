@@ -433,4 +433,14 @@
 
 #End Region
 
+#Region "URL"
+    Public Shared Function ObtenerURL(id As Integer) As String
+        Dim url = (From u In ctx.FORM_URL
+                   Where u.IDURL = id
+                   Select u.DIRECCION).SingleOrDefault
+
+        Return url.ToString
+    End Function
+#End Region
+
 End Class

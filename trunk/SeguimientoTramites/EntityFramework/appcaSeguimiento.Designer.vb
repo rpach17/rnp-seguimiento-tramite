@@ -18,7 +18,7 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 
-<Assembly: EdmSchemaAttribute("a4d37210-f7d3-4f37-b8dc-dc68ec88cbf1")>
+<Assembly: EdmSchemaAttribute("62bc2de0-7562-4c13-91d5-33ab8daeef23")>
 #Region "Metadatos de relaciones en EDM"
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK1", "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(FORMULARIOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK2", "TIPOS_CAMPOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TIPOS_CAMPOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
@@ -510,6 +510,20 @@ Public Partial Class Entidades
 
     Private _MUNICIPIOS As ObjectSet(Of MUNICIPIOS)
 
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    Public ReadOnly Property FORM_URL() As ObjectSet(Of FORM_URL)
+        Get
+            If (_FORM_URL Is Nothing) Then
+                _FORM_URL = MyBase.CreateObjectSet(Of FORM_URL)("FORM_URL")
+            End If
+            Return _FORM_URL
+        End Get
+    End Property
+
+    Private _FORM_URL As ObjectSet(Of FORM_URL)
+
     #End Region
 
     #Region "Métodos AddTo"
@@ -715,6 +729,13 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToMUNICIPIOS(ByVal mUNICIPIOS As MUNICIPIOS)
         MyBase.AddObject("MUNICIPIOS", mUNICIPIOS)
+    End Sub
+
+    ''' <summary>
+    ''' Método desusado para agregar un nuevo objeto al EntitySet FORM_URL. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
+    ''' </summary>
+    Public Sub AddToFORM_URL(ByVal fORM_URL As FORM_URL)
+        MyBase.AddObject("FORM_URL", fORM_URL)
     End Sub
 
     #End Region
@@ -3008,6 +3029,86 @@ Public Partial Class ESTADOS_CIVILES
     End Sub
 
     Private Partial Sub OnESTADO_CIVILChanged()
+    End Sub
+
+    #End Region
+
+End Class
+
+''' <summary>
+''' No hay documentación de metadatos disponible.
+''' </summary>
+<EdmEntityTypeAttribute(NamespaceName:="Modelo", Name:="FORM_URL")>
+<Serializable()>
+<DataContractAttribute(IsReference:=True)>
+Public Partial Class FORM_URL
+    Inherits EntityObject
+    #Region "Método de generador"
+
+    ''' <summary>
+    ''' Crear un nuevo objeto FORM_URL.
+    ''' </summary>
+    ''' <param name="iDURL">Valor inicial de la propiedad IDURL.</param>
+    Public Shared Function CreateFORM_URL(iDURL As Global.System.Decimal) As FORM_URL
+        Dim fORM_URL as FORM_URL = New FORM_URL
+        fORM_URL.IDURL = iDURL
+        Return fORM_URL
+    End Function
+
+    #End Region
+
+    #Region "Propiedades primitivas"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=true, IsNullable:=false)>
+    <DataMemberAttribute()>
+    Public Property IDURL() As Global.System.Decimal
+        Get
+            Return _IDURL
+        End Get
+        Set
+            If (_IDURL <> Value) Then
+                OnIDURLChanging(value)
+                ReportPropertyChanging("IDURL")
+                _IDURL = StructuralObject.SetValidValue(value)
+                ReportPropertyChanged("IDURL")
+                OnIDURLChanged()
+            End If
+        End Set
+    End Property
+
+    Private _IDURL As Global.System.Decimal
+    Private Partial Sub OnIDURLChanging(value As Global.System.Decimal)
+    End Sub
+
+    Private Partial Sub OnIDURLChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property DIRECCION() As Global.System.String
+        Get
+            Return _DIRECCION
+        End Get
+        Set
+            OnDIRECCIONChanging(value)
+            ReportPropertyChanging("DIRECCION")
+            _DIRECCION = StructuralObject.SetValidValue(value, true)
+            ReportPropertyChanged("DIRECCION")
+            OnDIRECCIONChanged()
+        End Set
+    End Property
+
+    Private _DIRECCION As Global.System.String
+    Private Partial Sub OnDIRECCIONChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnDIRECCIONChanged()
     End Sub
 
     #End Region
