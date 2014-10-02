@@ -36,8 +36,7 @@
     Private Sub cboUsuarioDestino_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboUsuarioDestino.SelectedIndexChanged
         Try
             Dim idUser As Integer = cboUsuarioDestino.SelectedValue
-            Dim script As String = EntityTablas.ObtenerURL(1)
-            Dim url As String = String.Format("{0}?idf={1}&idu={2}&idds={3}&depto={4}&munic={5}&suc={6}&ofi={7}", script, idForm, idUser, idDetalleSeguimiento, Replace(SesionActiva.Depto.ToLower, " ", "_"), Replace(SesionActiva.Municipio.ToLower, " ", "_"), Replace(SesionActiva.Sucursal.ToLower, " ", "_"), Replace(SesionActiva.Oficina.ToLower, " ", "_"))
+            Dim url As String = String.Format("{0}?idf={1}&idu={2}&idds={3}&depto={4}&munic={5}&suc={6}&ofi={7}", My.Settings.URLForm, idForm, idUser, idDetalleSeguimiento, Replace(SesionActiva.Depto.ToLower, " ", "_"), Replace(SesionActiva.Municipio.ToLower, " ", "_"), Replace(SesionActiva.Sucursal.ToLower, " ", "_"), Replace(SesionActiva.Oficina.ToLower, " ", "_"))
             WebBrowser1.Navigate(url)
             TextBox1.Text = url
         Catch ex As Exception
