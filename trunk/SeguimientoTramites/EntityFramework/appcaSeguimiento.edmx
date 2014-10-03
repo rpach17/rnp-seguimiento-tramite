@@ -398,7 +398,7 @@
           <Key>
             <PropertyRef Name="IDRESPONSABLE" />
           </Key>
-          <Property Name="IDRESPONSABLE" Type="number" Nullable="false" />
+          <Property Name="IDRESPONSABLE" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NUMERO_IDENTIDAD" Type="varchar2" MaxLength="13" />
           <Property Name="TELEFONO" Type="varchar2" MaxLength="9" />
           <Property Name="CELULAR" Type="varchar2" MaxLength="9" />
@@ -1300,7 +1300,7 @@
           <Key>
             <PropertyRef Name="IDRESPONSABLE" />
           </Key>
-          <Property Type="Decimal" Name="IDRESPONSABLE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDRESPONSABLE" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="NUMERO_IDENTIDAD" MaxLength="13" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="TELEFONO" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="CELULAR" MaxLength="9" FixedLength="false" Unicode="false" />

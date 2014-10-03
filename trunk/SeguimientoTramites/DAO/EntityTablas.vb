@@ -21,6 +21,7 @@
                         .NombrePuesto = u.PUESTO.NOMBRE_PUESTO
                         .Municipio = u.DETALLE_SUCURSAL_OFICINA.SUCURSALES.MUNICIPIOS.NOMBRE_MPIO
                         .Depto = u.DETALLE_SUCURSAL_OFICINA.SUCURSALES.MUNICIPIOS.DEPARTAMENTOS.NOMBRE_DEPTO
+                        .VinculadoCon = u.VINCULAR_CON
                     End With
                 Next
                 Return True
@@ -45,20 +46,33 @@
 
 #Region "Recepcion de tramites"
     Public Shared Sub TramitesRecibir(ByVal grid As DataGridView)
+        'Se verifica si usuario esta vinculado con alguien
+        Dim tramites
+        If SesionActiva.VinculadoCon IsNot Nothing Then
+            'Se buscan los tramites que se pueden recibir con su usuario y el vinculado
+            tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
+                           Join u In ctx.USUARIOS On dt.IDUSUARIO Equals u.IDUSUARIO
+                           Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
+                           Where dt.TRAMITES.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso (dt.IDUSUARIO_DESTINO = SesionActiva.IdUsuario Or dt.IDUSUARIO_DESTINO = SesionActiva.VinculadoCon)
+                           Order By dt.TRAMITES.CODIGOTRAMITE
+                           Select dt.TRAMITES.CODIGOTRAMITE, Gestion = dt.TRAMITES.GESTIONES.NOMBRE, u.NOMBRE, u.APELLIDOS, s.NUMERO_SALTO).ToList()
+        Else
+            'Se buscan los tramites que se pueden recibir
+            tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
+                           Join u In ctx.USUARIOS On dt.IDUSUARIO Equals u.IDUSUARIO
+                           Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
+                           Where dt.TRAMITES.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso dt.IDUSUARIO_DESTINO = SesionActiva.IdUsuario
+                           Order By dt.TRAMITES.CODIGOTRAMITE
+                           Select dt.TRAMITES.CODIGOTRAMITE, Gestion = dt.TRAMITES.GESTIONES.NOMBRE, u.NOMBRE, u.APELLIDOS, s.NUMERO_SALTO).ToList()
+
+        End If
 
         ' Lista de los saltos que puede atender
         'Dim saltosAtender = (From s In ctx.SALTOS
         '                     Where s.IDPUESTO = SesionActiva.IdPuesto And s.NUMERO_SALTO > 1
         '                     Select s.IDSALTO).ToList
 
-        'Se buscan los tramites que se pueden recibir
-        Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
-                       Join u In ctx.USUARIOS On dt.IDUSUARIO Equals u.IDUSUARIO
-                       Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
-                       Where dt.TRAMITES.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso dt.TRAMITES.ACTIVO = 1 And dt.FECHA_ENTREGA Is Nothing AndAlso dt.IDUSUARIO_DESTINO = SesionActiva.IdUsuario
-                       Order By dt.TRAMITES.CODIGOTRAMITE
-                       Select dt.TRAMITES.CODIGOTRAMITE, Gestion = dt.TRAMITES.GESTIONES.NOMBRE, u.NOMBRE, u.APELLIDOS, s.NUMERO_SALTO).ToList()
-
+        
         's.DECISION = 0 OrElse (s.DECISION = 1 And Not dt.DESTINO Is Nothing AndAlso saltosAtender.Contains(dt.DESTINO)))
 
         grid.Rows.Clear()
@@ -72,7 +86,7 @@
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                         Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
                         Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
-                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing AndAlso f.ACTIVO = 1
+                        Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing AndAlso f.ACTIVO = 1 AndAlso s.ULTIMOSALTO = 0
                         Order By dt.IDDETALLE_SEGUIMIENTO
                         Select dt.IDDETALLE_SEGUIMIENTO, s.IDGRUPO_SALTOS, s.IDSALTO, s.NUMERO_SALTO, s.DECISION, f.IDFORMULARIO, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
@@ -186,6 +200,7 @@
                 Exit Function
             End If
             'Buscar en las BD del registro
+            lbl.Text = "Numero de identidad no encontrado"
             lbl.Visible = True
 
             Return 0
@@ -274,13 +289,13 @@
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
                                Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.IDDETALLE_SEGUIMIENTO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.TRAMITES.IDTRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
         Else
             tramiteEntregar = (From t In ctx.DETALLE_SEGUIMIENTO
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
                                Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1 AndAlso (t.TRAMITES.CODIGOTRAMITE.StartsWith(busqueda) OrElse t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD.StartsWith(busqueda))
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.IDDETALLE_SEGUIMIENTO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.TRAMITES.IDTRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
         End If
 
         grid.Rows.Clear()
