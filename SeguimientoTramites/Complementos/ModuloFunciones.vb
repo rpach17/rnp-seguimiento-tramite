@@ -12,6 +12,7 @@ Module ModuloFunciones
         Public NombrePuesto As String
         Public Depto As String
         Public Municipio As String
+        Public VinculadoCon As Integer?
     End Structure
 
     Public SesionActiva As Sesion

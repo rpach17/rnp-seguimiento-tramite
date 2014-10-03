@@ -12,7 +12,8 @@
 
             If dgvTramites.CurrentRow().Cells(4).Value = 0 Then
 
-                Dim url As String = String.Format("http://win8virtual/forms/index.php?id={0}", idF)
+                'Dim url As String = String.Format("http://win8virtual/forms/index.php?id={0}", idf)
+                Dim url As String = String.Format("http://localhost/forms/index.php?id={0}", idf)
                 'Dim url As String = "http://getbootstrap.com/2.3.2/base-css.html#forms"
                 Using frm As New frmFormulario
                     frm.IdSalto1 = EntityTablas.ObtenerSiguienteSalto(dgvTramites.CurrentRow().Cells(1).Value, dgvTramites.CurrentRow().Cells(3).Value + 1)
