@@ -12,7 +12,8 @@
 
             If dgvTramites.CurrentRow().Cells(4).Value = 0 Then ' Comprueba si el salto tiene decision
                 If EntityTablas.SaltoDescargable(ids) Then
-
+                    frmDescargarDoc.Ids1 = ids
+                    frmDescargarDoc.ShowDialog()
                 Else
                     'Dim url As String = String.Format("http://win8virtual/forms/index.php?id={0}", idf)
                     'Dim url As String = String.Format("http://localhost/forms/index.php?id={0}", idf)

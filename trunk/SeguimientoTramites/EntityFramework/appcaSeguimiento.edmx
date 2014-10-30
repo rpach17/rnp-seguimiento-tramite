@@ -123,6 +123,10 @@
             <End Role="GESTIONES" EntitySet="GESTIONES" />
             <End Role="GRUPO_SALTOS" EntitySet="GRUPO_SALTOS" />
           </AssociationSet>
+          <AssociationSet Name="MARCADORES_FK2" Association="Modelo.Store.MARCADORES_FK2">
+            <End Role="ARCHIVOS" EntitySet="ARCHIVOS" />
+            <End Role="MARCADORES" EntitySet="MARCADORES" />
+          </AssociationSet>
           <AssociationSet Name="MUNICIPIOS_FK1" Association="Modelo.Store.MUNICIPIOS_FK1">
             <End Role="DEPARTAMENTOS" EntitySet="DEPARTAMENTOS" />
             <End Role="MUNICIPIOS" EntitySet="MUNICIPIOS" />
@@ -374,7 +378,7 @@
           </Key>
           <Property Name="IDMARCADOR" Type="number" Nullable="false" />
           <Property Name="IDARCHIVO" Type="number" />
-          <Property Name="IDCAMPO_FROM" Type="number" />
+          <Property Name="IDCAMPO_FORM" Type="number" />
           <Property Name="MARCADOR" Type="varchar2" MaxLength="30" />
         </EntityType>
         <EntityType Name="MUNICIPIOS">
@@ -767,6 +771,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="MARCADORES_FK2">
+          <End Role="ARCHIVOS" Type="Modelo.Store.ARCHIVOS" Multiplicity="0..1" />
+          <End Role="MARCADORES" Type="Modelo.Store.MARCADORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARCHIVOS">
+              <PropertyRef Name="IDARCHIVO" />
+            </Principal>
+            <Dependent Role="MARCADORES">
+              <PropertyRef Name="IDARCHIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="MUNICIPIOS_FK1">
           <End Role="DEPARTAMENTOS" Type="Modelo.Store.DEPARTAMENTOS" Multiplicity="0..1" />
           <End Role="MUNICIPIOS" Type="Modelo.Store.MUNICIPIOS" Multiplicity="*" />
@@ -1100,7 +1116,6 @@
           </AssociationSet>
           <EntitySet Name="FORM_URL" EntityType="Modelo.FORM_URL" />
           <EntitySet Name="ARCHIVOS" EntityType="Modelo.ARCHIVOS" />
-          <EntitySet Name="MARCADORES" EntityType="Modelo.MARCADORES" />
           <AssociationSet Name="ARCHIVOS_FK1" Association="Modelo.ARCHIVOS_FK1">
             <End Role="CAMPOS_FORM" EntitySet="CAMPOS_FORM" />
             <End Role="ARCHIVOS" EntitySet="ARCHIVOS" />
@@ -1109,6 +1124,11 @@
           <AssociationSet Name="DETALLE_LISTA_DESPLEGABLE_FK1" Association="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1">
             <End Role="LISTA_DESPLEGABLE" EntitySet="LISTA_DESPLEGABLE" />
             <End Role="DETALLE_LISTA_DESPLEGABLE" EntitySet="DETALLE_LISTA_DESPLEGABLE" />
+          </AssociationSet>
+          <EntitySet Name="MARCADORES" EntityType="Modelo.MARCADORES" />
+          <AssociationSet Name="MARCADORES_FK2" Association="Modelo.MARCADORES_FK2">
+            <End Role="ARCHIVOS" EntitySet="ARCHIVOS" />
+            <End Role="MARCADORES" EntitySet="MARCADORES" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CAMPOS_FORM">
@@ -1864,15 +1884,7 @@
           <Property Type="Binary" Name="ARCHIVO" MaxLength="Max" FixedLength="false" />
           <Property Type="Decimal" Name="IDFORMULARIO" Precision="38" Scale="0" />
           <NavigationProperty Name="CAMPOS_FORM" Relationship="Modelo.ARCHIVOS_FK1" FromRole="ARCHIVOS" ToRole="CAMPOS_FORM" />
-        </EntityType>
-        <EntityType Name="MARCADORES">
-          <Key>
-            <PropertyRef Name="IDMARCADOR" />
-          </Key>
-          <Property Type="Decimal" Name="IDMARCADOR" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDARCHIVO" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDCAMPO_FROM" Precision="38" Scale="0" />
-          <Property Type="String" Name="MARCADOR" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MARCADORES" Relationship="Modelo.MARCADORES_FK2" FromRole="ARCHIVOS" ToRole="MARCADORES" />
         </EntityType>
         <Association Name="ARCHIVOS_FK1">
           <End Type="Modelo.CAMPOS_FORM" Role="CAMPOS_FORM" Multiplicity="1" />
@@ -1905,6 +1917,28 @@
             </Principal>
             <Dependent Role="DETALLE_LISTA_DESPLEGABLE">
               <PropertyRef Name="IDLISTA_DESPLEGABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MARCADORES">
+          <Key>
+            <PropertyRef Name="IDMARCADOR" />
+          </Key>
+          <Property Type="Decimal" Name="IDMARCADOR" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDARCHIVO" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDCAMPO_FORM" Precision="38" Scale="0" />
+          <Property Type="String" Name="MARCADOR" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ARCHIVOS" Relationship="Modelo.MARCADORES_FK2" FromRole="MARCADORES" ToRole="ARCHIVOS" />
+        </EntityType>
+        <Association Name="MARCADORES_FK2">
+          <End Type="Modelo.ARCHIVOS" Role="ARCHIVOS" Multiplicity="0..1" />
+          <End Type="Modelo.MARCADORES" Role="MARCADORES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARCHIVOS">
+              <PropertyRef Name="IDARCHIVO" />
+            </Principal>
+            <Dependent Role="MARCADORES">
+              <PropertyRef Name="IDARCHIVO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2256,16 +2290,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MARCADORES">
-            <EntityTypeMapping TypeName="Modelo.MARCADORES">
-              <MappingFragment StoreEntitySet="MARCADORES">
-                <ScalarProperty Name="MARCADOR" ColumnName="MARCADOR" />
-                <ScalarProperty Name="IDCAMPO_FROM" ColumnName="IDCAMPO_FROM" />
-                <ScalarProperty Name="IDARCHIVO" ColumnName="IDARCHIVO" />
-                <ScalarProperty Name="IDMARCADOR" ColumnName="IDMARCADOR" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_LISTA_DESPLEGABLE">
             <EntityTypeMapping TypeName="Modelo.DETALLE_LISTA_DESPLEGABLE">
               <MappingFragment StoreEntitySet="DETALLE_LISTA_DESPLEGABLE">
@@ -2273,6 +2297,16 @@
                 <ScalarProperty Name="VALOR" ColumnName="VALOR" />
                 <ScalarProperty Name="IDLISTA_DESPLEGABLE" ColumnName="IDLISTA_DESPLEGABLE" />
                 <ScalarProperty Name="IDDETALLE_LISTA" ColumnName="IDDETALLE_LISTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARCADORES">
+            <EntityTypeMapping TypeName="Modelo.MARCADORES">
+              <MappingFragment StoreEntitySet="MARCADORES">
+                <ScalarProperty Name="MARCADOR" ColumnName="MARCADOR" />
+                <ScalarProperty Name="IDCAMPO_FORM" ColumnName="IDCAMPO_FORM" />
+                <ScalarProperty Name="IDARCHIVO" ColumnName="IDARCHIVO" />
+                <ScalarProperty Name="IDMARCADOR" ColumnName="IDMARCADOR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2359,10 +2393,11 @@
         <AssociationConnector Association="Modelo.SUCURSALES_FK1" />
         <EntityTypeShape EntityType="Modelo.FORM_URL" Width="1.5" PointX="8.6916316415609938" PointY="15.007271043494004" />
         <EntityTypeShape EntityType="Modelo.ARCHIVOS" Width="1.5" PointX="2.9990568696516831" PointY="15.703661925952725" />
-        <EntityTypeShape EntityType="Modelo.MARCADORES" Width="1.5" PointX="9.1750689154374729" PointY="9.53119981732741" />
         <AssociationConnector Association="Modelo.ARCHIVOS_FK1" />
         <EntityTypeShape EntityType="Modelo.DETALLE_LISTA_DESPLEGABLE" Width="1.5" PointX="10.010322040883043" PointY="3.3111743346374363" />
         <AssociationConnector Association="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1" />
+        <EntityTypeShape EntityType="Modelo.MARCADORES" Width="1.5" PointX="2.6537987173785451" PointY="8.0866231955991239" />
+        <AssociationConnector Association="Modelo.MARCADORES_FK2" />
       </Diagram>
     </Diagrams>
   </Designer>
