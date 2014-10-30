@@ -18,7 +18,7 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 
-<Assembly: EdmSchemaAttribute("7a6777af-1216-4cc2-90b6-09bad8564bba")>
+<Assembly: EdmSchemaAttribute("8c6abfba-eb7f-445e-9bb4-e03d5ecc9b4c")>
 #Region "Metadatos de relaciones en EDM"
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK1", "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(FORMULARIOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK2", "TIPOS_CAMPOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TIPOS_CAMPOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
@@ -54,6 +54,7 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("Modelo", "SUCURSALES_FK1", "MUNICIPIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(MUNICIPIOS), "SUCURSALES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SUCURSALES), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "ARCHIVOS_FK1", "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(CAMPOS_FORM), "ARCHIVOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(ARCHIVOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_LISTA_DESPLEGABLE_FK1", "LISTA_DESPLEGABLE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(LISTA_DESPLEGABLE), "DETALLE_LISTA_DESPLEGABLE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_LISTA_DESPLEGABLE), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "MARCADORES_FK2", "ARCHIVOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(ARCHIVOS), "MARCADORES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(MARCADORES), True)>
 
 #End Region
 
@@ -528,20 +529,6 @@ Public Partial Class Entidades
     ''' <summary>
     ''' No hay documentación de metadatos disponible.
     ''' </summary>
-    Public ReadOnly Property MARCADORES() As ObjectSet(Of MARCADORES)
-        Get
-            If (_MARCADORES Is Nothing) Then
-                _MARCADORES = MyBase.CreateObjectSet(Of MARCADORES)("MARCADORES")
-            End If
-            Return _MARCADORES
-        End Get
-    End Property
-
-    Private _MARCADORES As ObjectSet(Of MARCADORES)
-
-    ''' <summary>
-    ''' No hay documentación de metadatos disponible.
-    ''' </summary>
     Public ReadOnly Property DETALLE_LISTA_DESPLEGABLE() As ObjectSet(Of DETALLE_LISTA_DESPLEGABLE)
         Get
             If (_DETALLE_LISTA_DESPLEGABLE Is Nothing) Then
@@ -552,6 +539,20 @@ Public Partial Class Entidades
     End Property
 
     Private _DETALLE_LISTA_DESPLEGABLE As ObjectSet(Of DETALLE_LISTA_DESPLEGABLE)
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    Public ReadOnly Property MARCADORES() As ObjectSet(Of MARCADORES)
+        Get
+            If (_MARCADORES Is Nothing) Then
+                _MARCADORES = MyBase.CreateObjectSet(Of MARCADORES)("MARCADORES")
+            End If
+            Return _MARCADORES
+        End Get
+    End Property
+
+    Private _MARCADORES As ObjectSet(Of MARCADORES)
 
     #End Region
 
@@ -768,17 +769,17 @@ Public Partial Class Entidades
     End Sub
 
     ''' <summary>
-    ''' Método desusado para agregar un nuevo objeto al EntitySet MARCADORES. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
-    ''' </summary>
-    Public Sub AddToMARCADORES(ByVal mARCADORES As MARCADORES)
-        MyBase.AddObject("MARCADORES", mARCADORES)
-    End Sub
-
-    ''' <summary>
     ''' Método desusado para agregar un nuevo objeto al EntitySet DETALLE_LISTA_DESPLEGABLE. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
     ''' </summary>
     Public Sub AddToDETALLE_LISTA_DESPLEGABLE(ByVal dETALLE_LISTA_DESPLEGABLE As DETALLE_LISTA_DESPLEGABLE)
         MyBase.AddObject("DETALLE_LISTA_DESPLEGABLE", dETALLE_LISTA_DESPLEGABLE)
+    End Sub
+
+    ''' <summary>
+    ''' Método desusado para agregar un nuevo objeto al EntitySet MARCADORES. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
+    ''' </summary>
+    Public Sub AddToMARCADORES(ByVal mARCADORES As MARCADORES)
+        MyBase.AddObject("MARCADORES", mARCADORES)
     End Sub
 
     #End Region
@@ -948,6 +949,24 @@ Public Partial Class ARCHIVOS
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of CAMPOS_FORM)("Modelo.ARCHIVOS_FK1", "CAMPOS_FORM", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "MARCADORES_FK2", "MARCADORES")>
+     Public Property MARCADORES() As EntityCollection(Of MARCADORES)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of MARCADORES)("Modelo.MARCADORES_FK2", "MARCADORES")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of MARCADORES)("Modelo.MARCADORES_FK2", "MARCADORES", value)
             End If
         End Set
     End Property
@@ -4475,24 +4494,24 @@ Public Partial Class MARCADORES
     ''' </summary>
     <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
-    Public Property IDCAMPO_FROM() As Nullable(Of Global.System.Decimal)
+    Public Property IDCAMPO_FORM() As Nullable(Of Global.System.Decimal)
         Get
-            Return _IDCAMPO_FROM
+            Return _IDCAMPO_FORM
         End Get
         Set
-            OnIDCAMPO_FROMChanging(value)
-            ReportPropertyChanging("IDCAMPO_FROM")
-            _IDCAMPO_FROM = StructuralObject.SetValidValue(value)
-            ReportPropertyChanged("IDCAMPO_FROM")
-            OnIDCAMPO_FROMChanged()
+            OnIDCAMPO_FORMChanging(value)
+            ReportPropertyChanging("IDCAMPO_FORM")
+            _IDCAMPO_FORM = StructuralObject.SetValidValue(value)
+            ReportPropertyChanged("IDCAMPO_FORM")
+            OnIDCAMPO_FORMChanged()
         End Set
     End Property
 
-    Private _IDCAMPO_FROM As Nullable(Of Global.System.Decimal)
-    Private Partial Sub OnIDCAMPO_FROMChanging(value As Nullable(Of Global.System.Decimal))
+    Private _IDCAMPO_FORM As Nullable(Of Global.System.Decimal)
+    Private Partial Sub OnIDCAMPO_FORMChanging(value As Nullable(Of Global.System.Decimal))
     End Sub
 
-    Private Partial Sub OnIDCAMPO_FROMChanged()
+    Private Partial Sub OnIDCAMPO_FORMChanged()
     End Sub
 
     ''' <summary>
@@ -4519,6 +4538,41 @@ Public Partial Class MARCADORES
 
     Private Partial Sub OnMARCADORChanged()
     End Sub
+
+    #End Region
+
+    #Region "Propiedades de navegación"
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "MARCADORES_FK2", "ARCHIVOS")>
+    Public Property ARCHIVOS() As ARCHIVOS
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of ARCHIVOS)("Modelo.MARCADORES_FK2", "ARCHIVOS").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of ARCHIVOS)("Modelo.MARCADORES_FK2", "ARCHIVOS").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property ARCHIVOSReference() As EntityReference(Of ARCHIVOS)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of ARCHIVOS)("Modelo.MARCADORES_FK2", "ARCHIVOS")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of ARCHIVOS)("Modelo.MARCADORES_FK2", "ARCHIVOS", value)
+            End If
+        End Set
+    End Property
 
     #End Region
 
