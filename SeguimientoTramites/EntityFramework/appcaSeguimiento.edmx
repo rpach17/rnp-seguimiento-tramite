@@ -945,7 +945,6 @@
           <EntitySet Name="CAMPOS_FORM" EntityType="Modelo.CAMPOS_FORM" />
           <EntitySet Name="DATOS_CAMPOS_FORM" EntityType="Modelo.DATOS_CAMPOS_FORM" />
           <EntitySet Name="DETALLE_GESTIONES_USUARIO" EntityType="Modelo.DETALLE_GESTIONES_USUARIO" />
-          <EntitySet Name="DETALLE_LISTA_DESPLEGABLE" EntityType="Modelo.DETALLE_LISTA_DESPLEGABLE" />
           <EntitySet Name="DETALLE_OFICINA_GESTIONES" EntityType="Modelo.DETALLE_OFICINA_GESTIONES" />
           <EntitySet Name="DETALLE_SEGUIMIENTO" EntityType="Modelo.DETALLE_SEGUIMIENTO" />
           <EntitySet Name="DETALLE_SUCURSAL_OFICINA" EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" />
@@ -988,10 +987,6 @@
           <AssociationSet Name="DETALLE_GESTIONES_USUARIO_FK1" Association="Modelo.DETALLE_GESTIONES_USUARIO_FK1">
             <End Role="USUARIOS" EntitySet="USUARIOS" />
             <End Role="DETALLE_GESTIONES_USUARIO" EntitySet="DETALLE_GESTIONES_USUARIO" />
-          </AssociationSet>
-          <AssociationSet Name="DETALLE_LISTA_DESPLEGABLE_FK1" Association="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1">
-            <End Role="LISTA_DESPLEGABLE" EntitySet="LISTA_DESPLEGABLE" />
-            <End Role="DETALLE_LISTA_DESPLEGABLE" EntitySet="DETALLE_LISTA_DESPLEGABLE" />
           </AssociationSet>
           <AssociationSet Name="DETALLE_OFICINA_GESTIONES_FK1" Association="Modelo.DETALLE_OFICINA_GESTIONES_FK1">
             <End Role="OFICINAS" EntitySet="OFICINAS" />
@@ -1110,6 +1105,11 @@
             <End Role="CAMPOS_FORM" EntitySet="CAMPOS_FORM" />
             <End Role="ARCHIVOS" EntitySet="ARCHIVOS" />
           </AssociationSet>
+          <EntitySet Name="DETALLE_LISTA_DESPLEGABLE" EntityType="Modelo.DETALLE_LISTA_DESPLEGABLE" />
+          <AssociationSet Name="DETALLE_LISTA_DESPLEGABLE_FK1" Association="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1">
+            <End Role="LISTA_DESPLEGABLE" EntitySet="LISTA_DESPLEGABLE" />
+            <End Role="DETALLE_LISTA_DESPLEGABLE" EntitySet="DETALLE_LISTA_DESPLEGABLE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CAMPOS_FORM">
           <Key>
@@ -1152,16 +1152,6 @@
           <Property Type="Decimal" Name="IDUSUARIO" Nullable="false" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDPETICION" Nullable="false" Precision="38" Scale="0" />
           <NavigationProperty Name="USUARIOS" Relationship="Modelo.DETALLE_GESTIONES_USUARIO_FK1" FromRole="DETALLE_GESTIONES_USUARIO" ToRole="USUARIOS" />
-        </EntityType>
-        <EntityType Name="DETALLE_LISTA_DESPLEGABLE">
-          <Key>
-            <PropertyRef Name="IDDETALLE_LISTA" />
-          </Key>
-          <Property Type="Decimal" Name="IDDETALLE_LISTA" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDLISTA_DESPLEGABLE" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="VALOR" />
-          <Property Type="String" Name="TEXTO" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LISTA_DESPLEGABLE" Relationship="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1" FromRole="DETALLE_LISTA_DESPLEGABLE" ToRole="LISTA_DESPLEGABLE" />
         </EntityType>
         <EntityType Name="DETALLE_OFICINA_GESTIONES">
           <Key>
@@ -1514,18 +1504,6 @@
             </Principal>
             <Dependent Role="DETALLE_GESTIONES_USUARIO">
               <PropertyRef Name="IDUSUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DETALLE_LISTA_DESPLEGABLE_FK1">
-          <End Type="Modelo.LISTA_DESPLEGABLE" Role="LISTA_DESPLEGABLE" Multiplicity="1" />
-          <End Type="Modelo.DETALLE_LISTA_DESPLEGABLE" Role="DETALLE_LISTA_DESPLEGABLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LISTA_DESPLEGABLE">
-              <PropertyRef Name="IDLISTA_DESPLEGABLE" />
-            </Principal>
-            <Dependent Role="DETALLE_LISTA_DESPLEGABLE">
-              <PropertyRef Name="IDLISTA_DESPLEGABLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1908,6 +1886,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DETALLE_LISTA_DESPLEGABLE">
+          <Key>
+            <PropertyRef Name="IDDETALLE_LISTA" />
+          </Key>
+          <Property Type="Decimal" Name="IDDETALLE_LISTA" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDLISTA_DESPLEGABLE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="VALOR" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TEXTO" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LISTA_DESPLEGABLE" Relationship="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1" FromRole="DETALLE_LISTA_DESPLEGABLE" ToRole="LISTA_DESPLEGABLE" />
+        </EntityType>
+        <Association Name="DETALLE_LISTA_DESPLEGABLE_FK1">
+          <End Type="Modelo.LISTA_DESPLEGABLE" Role="LISTA_DESPLEGABLE" Multiplicity="1" />
+          <End Type="Modelo.DETALLE_LISTA_DESPLEGABLE" Role="DETALLE_LISTA_DESPLEGABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LISTA_DESPLEGABLE">
+              <PropertyRef Name="IDLISTA_DESPLEGABLE" />
+            </Principal>
+            <Dependent Role="DETALLE_LISTA_DESPLEGABLE">
+              <PropertyRef Name="IDLISTA_DESPLEGABLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1949,16 +1949,6 @@
               <MappingFragment StoreEntitySet="DETALLE_GESTIONES_USUARIO">
                 <ScalarProperty Name="IDPETICION" ColumnName="IDPETICION" />
                 <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_LISTA_DESPLEGABLE">
-            <EntityTypeMapping TypeName="Modelo.DETALLE_LISTA_DESPLEGABLE">
-              <MappingFragment StoreEntitySet="DETALLE_LISTA_DESPLEGABLE">
-                <ScalarProperty Name="TEXTO" ColumnName="TEXTO" />
-                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
-                <ScalarProperty Name="IDLISTA_DESPLEGABLE" ColumnName="IDLISTA_DESPLEGABLE" />
-                <ScalarProperty Name="IDDETALLE_LISTA" ColumnName="IDDETALLE_LISTA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2276,6 +2266,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_LISTA_DESPLEGABLE">
+            <EntityTypeMapping TypeName="Modelo.DETALLE_LISTA_DESPLEGABLE">
+              <MappingFragment StoreEntitySet="DETALLE_LISTA_DESPLEGABLE">
+                <ScalarProperty Name="TEXTO" ColumnName="TEXTO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="IDLISTA_DESPLEGABLE" ColumnName="IDLISTA_DESPLEGABLE" />
+                <ScalarProperty Name="IDDETALLE_LISTA" ColumnName="IDDETALLE_LISTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2300,7 +2300,6 @@
         <EntityTypeShape EntityType="Modelo.CAMPOS_FORM" Width="1.5" PointX="1.867729426300027" PointY="6.7797167779783329" />
         <EntityTypeShape EntityType="Modelo.DATOS_CAMPOS_FORM" Width="1.5" PointX="1.9631603387944216" PointY="28.653535409203513" />
         <EntityTypeShape EntityType="Modelo.DETALLE_GESTIONES_USUARIO" Width="1.5" PointX="10.863382832549226" PointY="16.652831219440714" />
-        <EntityTypeShape EntityType="Modelo.DETALLE_LISTA_DESPLEGABLE" Width="1.5" PointX="7.645114507360903" PointY="10.043538023737975" />
         <EntityTypeShape EntityType="Modelo.DETALLE_OFICINA_GESTIONES" Width="1.5" PointX="9.2672917886019182" PointY="11.815813993949357" />
         <EntityTypeShape EntityType="Modelo.DETALLE_SEGUIMIENTO" Width="1.5" PointX="1.3257953642521965" PointY="9.08711927062232" />
         <EntityTypeShape EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" Width="1.5" PointX="7.2576343450963652" PointY="30.900222479784965" />
@@ -2329,7 +2328,6 @@
         <AssociationConnector Association="Modelo.DATOS_CAMPOS_FORM_FK1" />
         <AssociationConnector Association="Modelo.DATOS_CAMPOS_FORM_FK2" />
         <AssociationConnector Association="Modelo.DETALLE_GESTIONES_USUARIO_FK1" />
-        <AssociationConnector Association="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1" />
         <AssociationConnector Association="Modelo.DETALLE_OFICINA_GESTIONES_FK1" />
         <AssociationConnector Association="Modelo.DETALLE_OFICINA_GESTIONES_FK2" />
         <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" />
@@ -2363,6 +2361,8 @@
         <EntityTypeShape EntityType="Modelo.ARCHIVOS" Width="1.5" PointX="2.9990568696516831" PointY="15.703661925952725" />
         <EntityTypeShape EntityType="Modelo.MARCADORES" Width="1.5" PointX="9.1750689154374729" PointY="9.53119981732741" />
         <AssociationConnector Association="Modelo.ARCHIVOS_FK1" />
+        <EntityTypeShape EntityType="Modelo.DETALLE_LISTA_DESPLEGABLE" Width="1.5" PointX="10.010322040883043" PointY="3.3111743346374363" />
+        <AssociationConnector Association="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1" />
       </Diagram>
     </Diagrams>
   </Designer>

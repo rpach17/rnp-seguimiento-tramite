@@ -18,14 +18,13 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 
-<Assembly: EdmSchemaAttribute("e4c3ba1b-916b-4065-889b-936dd6f81f2c")>
+<Assembly: EdmSchemaAttribute("7a6777af-1216-4cc2-90b6-09bad8564bba")>
 #Region "Metadatos de relaciones en EDM"
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK1", "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(FORMULARIOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK2", "TIPOS_CAMPOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TIPOS_CAMPOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(DETALLE_SEGUIMIENTO), "DATOS_CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DATOS_CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DATOS_CAMPOS_FORM_FK2", "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(FORMULARIOS), "DATOS_CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DATOS_CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_GESTIONES_USUARIO_FK1", "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(USUARIOS), "DETALLE_GESTIONES_USUARIO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_GESTIONES_USUARIO), True)>
-<Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_LISTA_DESPLEGABLE_FK1", "LISTA_DESPLEGABLE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(LISTA_DESPLEGABLE), "DETALLE_LISTA_DESPLEGABLE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_LISTA_DESPLEGABLE), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_OFICINA_GESTIONES_FK1", "OFICINAS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(OFICINAS), "DETALLE_OFICINA_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_OFICINA_GESTIONES), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_OFICINA_GESTIONES_FK2", "GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(GESTIONES), "DETALLE_OFICINA_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_OFICINA_GESTIONES), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_TRAMITE_FK1", "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TRAMITES), "DETALLE_SEGUIMIENTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_SEGUIMIENTO), True)>
@@ -54,6 +53,7 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("Modelo", "MUNICIPIOS_FK1", "DEPARTAMENTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(DEPARTAMENTOS), "MUNICIPIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(MUNICIPIOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "SUCURSALES_FK1", "MUNICIPIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(MUNICIPIOS), "SUCURSALES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SUCURSALES), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "ARCHIVOS_FK1", "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(CAMPOS_FORM), "ARCHIVOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(ARCHIVOS), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_LISTA_DESPLEGABLE_FK1", "LISTA_DESPLEGABLE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(LISTA_DESPLEGABLE), "DETALLE_LISTA_DESPLEGABLE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_LISTA_DESPLEGABLE), True)>
 
 #End Region
 
@@ -146,20 +146,6 @@ Public Partial Class Entidades
     End Property
 
     Private _DETALLE_GESTIONES_USUARIO As ObjectSet(Of DETALLE_GESTIONES_USUARIO)
-
-    ''' <summary>
-    ''' No hay documentación de metadatos disponible.
-    ''' </summary>
-    Public ReadOnly Property DETALLE_LISTA_DESPLEGABLE() As ObjectSet(Of DETALLE_LISTA_DESPLEGABLE)
-        Get
-            If (_DETALLE_LISTA_DESPLEGABLE Is Nothing) Then
-                _DETALLE_LISTA_DESPLEGABLE = MyBase.CreateObjectSet(Of DETALLE_LISTA_DESPLEGABLE)("DETALLE_LISTA_DESPLEGABLE")
-            End If
-            Return _DETALLE_LISTA_DESPLEGABLE
-        End Get
-    End Property
-
-    Private _DETALLE_LISTA_DESPLEGABLE As ObjectSet(Of DETALLE_LISTA_DESPLEGABLE)
 
     ''' <summary>
     ''' No hay documentación de metadatos disponible.
@@ -553,6 +539,20 @@ Public Partial Class Entidades
 
     Private _MARCADORES As ObjectSet(Of MARCADORES)
 
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    Public ReadOnly Property DETALLE_LISTA_DESPLEGABLE() As ObjectSet(Of DETALLE_LISTA_DESPLEGABLE)
+        Get
+            If (_DETALLE_LISTA_DESPLEGABLE Is Nothing) Then
+                _DETALLE_LISTA_DESPLEGABLE = MyBase.CreateObjectSet(Of DETALLE_LISTA_DESPLEGABLE)("DETALLE_LISTA_DESPLEGABLE")
+            End If
+            Return _DETALLE_LISTA_DESPLEGABLE
+        End Get
+    End Property
+
+    Private _DETALLE_LISTA_DESPLEGABLE As ObjectSet(Of DETALLE_LISTA_DESPLEGABLE)
+
     #End Region
 
     #Region "Métodos AddTo"
@@ -576,13 +576,6 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToDETALLE_GESTIONES_USUARIO(ByVal dETALLE_GESTIONES_USUARIO As DETALLE_GESTIONES_USUARIO)
         MyBase.AddObject("DETALLE_GESTIONES_USUARIO", dETALLE_GESTIONES_USUARIO)
-    End Sub
-
-    ''' <summary>
-    ''' Método desusado para agregar un nuevo objeto al EntitySet DETALLE_LISTA_DESPLEGABLE. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
-    ''' </summary>
-    Public Sub AddToDETALLE_LISTA_DESPLEGABLE(ByVal dETALLE_LISTA_DESPLEGABLE As DETALLE_LISTA_DESPLEGABLE)
-        MyBase.AddObject("DETALLE_LISTA_DESPLEGABLE", dETALLE_LISTA_DESPLEGABLE)
     End Sub
 
     ''' <summary>
@@ -779,6 +772,13 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToMARCADORES(ByVal mARCADORES As MARCADORES)
         MyBase.AddObject("MARCADORES", mARCADORES)
+    End Sub
+
+    ''' <summary>
+    ''' Método desusado para agregar un nuevo objeto al EntitySet DETALLE_LISTA_DESPLEGABLE. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
+    ''' </summary>
+    Public Sub AddToDETALLE_LISTA_DESPLEGABLE(ByVal dETALLE_LISTA_DESPLEGABLE As DETALLE_LISTA_DESPLEGABLE)
+        MyBase.AddObject("DETALLE_LISTA_DESPLEGABLE", dETALLE_LISTA_DESPLEGABLE)
     End Sub
 
     #End Region
@@ -1992,21 +1992,21 @@ Public Partial Class DETALLE_LISTA_DESPLEGABLE
     ''' </summary>
     <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
-    Public Property VALOR() As Nullable(Of Global.System.Decimal)
+    Public Property VALOR() As Global.System.String
         Get
             Return _VALOR
         End Get
         Set
             OnVALORChanging(value)
             ReportPropertyChanging("VALOR")
-            _VALOR = StructuralObject.SetValidValue(value)
+            _VALOR = StructuralObject.SetValidValue(value, true)
             ReportPropertyChanged("VALOR")
             OnVALORChanged()
         End Set
     End Property
 
-    Private _VALOR As Nullable(Of Global.System.Decimal)
-    Private Partial Sub OnVALORChanging(value As Nullable(Of Global.System.Decimal))
+    Private _VALOR As Global.System.String
+    Private Partial Sub OnVALORChanging(value As Global.System.String)
     End Sub
 
     Private Partial Sub OnVALORChanged()
