@@ -30,6 +30,9 @@ Partial Class frmEntregaDocs
         Me.dgvTramites = New System.Windows.Forms.DataGridView()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.IdTramite = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idds = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ids = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idf = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -96,7 +99,7 @@ Partial Class frmEntregaDocs
         Me.dgvTramites.AllowUserToDeleteRows = False
         Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdTramite, Me.Column1, Me.Column2, Me.Column3, Me.Entregar})
+        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdTramite, Me.idds, Me.ids, Me.idf, Me.Column1, Me.Column2, Me.Column3, Me.Entregar})
         Me.dgvTramites.Location = New System.Drawing.Point(30, 121)
         Me.dgvTramites.Name = "dgvTramites"
         Me.dgvTramites.Size = New System.Drawing.Size(597, 342)
@@ -118,6 +121,27 @@ Partial Class frmEntregaDocs
         Me.IdTramite.Name = "IdTramite"
         Me.IdTramite.Visible = False
         Me.IdTramite.Width = 76
+        '
+        'idds
+        '
+        Me.idds.HeaderText = "idDetalleSeguimiento"
+        Me.idds.Name = "idds"
+        Me.idds.Visible = False
+        Me.idds.Width = 131
+        '
+        'ids
+        '
+        Me.ids.HeaderText = "idSalto"
+        Me.ids.Name = "ids"
+        Me.ids.Visible = False
+        Me.ids.Width = 64
+        '
+        'idf
+        '
+        Me.idf.HeaderText = "idFormulario"
+        Me.idf.Name = "idf"
+        Me.idf.Visible = False
+        Me.idf.Width = 88
         '
         'Column1
         '
@@ -172,6 +196,9 @@ Partial Class frmEntregaDocs
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnFiltrar As System.Windows.Forms.Button
     Friend WithEvents IdTramite As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents idds As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ids As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents idf As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -20,6 +20,7 @@
                     frm.IdDetalleSeguimiento1 = idds
                     frm.Height = 700
                     frm.Width = 857
+                    frm.EsEntrega1 = False
                     frm.ShowDialog()
                 End Using
             Else
