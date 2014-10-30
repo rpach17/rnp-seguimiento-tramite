@@ -288,20 +288,22 @@
         If busqueda = "" Then
             tramiteEntregar = (From t In ctx.DETALLE_SEGUIMIENTO
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
+                               Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
                                Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.TRAMITES.IDTRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.TRAMITES.IDTRAMITE, t.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
         Else
             tramiteEntregar = (From t In ctx.DETALLE_SEGUIMIENTO
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
+                               Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
                                Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1 AndAlso (t.TRAMITES.CODIGOTRAMITE.StartsWith(busqueda) OrElse t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD.StartsWith(busqueda))
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.TRAMITES.IDTRAMITE, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.TRAMITES.IDTRAMITE, t.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
         End If
 
         grid.Rows.Clear()
         For Each tramite In tramiteEntregar
-            grid.Rows.Add(tramite.IDTRAMITE, tramite.CODIGOTRAMITE, tramite.NOMBRE, tramite.NUMERO_IDENTIDAD,
+            grid.Rows.Add(tramite.IDTRAMITE, tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE, tramite.NUMERO_IDENTIDAD,
                           "Entregar Trámite")
         Next
         'grid.DataSource = saltoEntregar
@@ -445,6 +447,19 @@
                         Select s.IDSALTO).FirstOrDefault
 
         Return siguiente
+    End Function
+
+    Shared Function SaltoDescargable(ByVal idSalto As Integer) As Boolean
+        Dim cuenta As Integer = (From s In ctx.SALTOS
+                                 Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
+                                 Join c In ctx.CAMPOS_FORM On f.IDFORMULARIO Equals c.FORMULARIOS.IDFORMULARIO
+                                 Where s.IDSALTO = idSalto And f.ACTIVO = 1 And c.TIPOS_CAMPOS.TIPO_CAMPO = "descargable"
+                                 Select s).Count()
+        If cuenta > 0 Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
 
 #End Region
