@@ -167,6 +167,12 @@
     <Compile Include="Formularios\frmConfigURL.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\frmDescargarDoc.Designer.vb">
+      <DependentUpon>frmDescargarDoc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmDescargarDoc.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmFormulario.Designer.vb">
       <DependentUpon>frmFormulario.vb</DependentUpon>
     </Compile>
@@ -302,6 +308,9 @@
     <EmbeddedResource Include="Formularios\frmConfigURL.resx">
       <DependentUpon>frmConfigURL.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmDescargarDoc.resx">
+      <DependentUpon>frmDescargarDoc.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmFormulario.resx">
       <DependentUpon>frmFormulario.vb</DependentUpon>
     </EmbeddedResource>
@@ -416,6 +425,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-rnp.ico" />
+    <None Include="Resources\document_check_compatibility.png" />
     <None Include="Resources\add1.png" />
     <None Include="Resources\add.png" />
     <None Include="Resources\File-History-icon.png" />
