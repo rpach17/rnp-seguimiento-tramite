@@ -72,7 +72,7 @@
         '                     Where s.IDPUESTO = SesionActiva.IdPuesto And s.NUMERO_SALTO > 1
         '                     Select s.IDSALTO).ToList
 
-        
+
         's.DECISION = 0 OrElse (s.DECISION = 1 And Not dt.DESTINO Is Nothing AndAlso saltosAtender.Contains(dt.DESTINO)))
 
         grid.Rows.Clear()
@@ -83,6 +83,7 @@
     End Sub
 
     Shared Sub TramitesAProcesar(ByVal grid As DataGridView)
+
         Dim tramites = (From dt In ctx.DETALLE_SEGUIMIENTO
                         Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
                         Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
