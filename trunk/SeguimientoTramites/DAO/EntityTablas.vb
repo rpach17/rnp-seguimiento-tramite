@@ -463,12 +463,18 @@
     End Function
 
     Shared Function DescargarArchivo(ByVal idSalto) As ARCHIVOS
+
         Dim idA As Integer = (From s In ctx.SALTOS
-                       Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
-                       Join cf In ctx.CAMPOS_FORM On f.IDFORMULARIO Equals cf.IDFORMULARIO
-                       Join a In ctx.ARCHIVOS On cf.IDCAMPO_FORM Equals a.IDCAMPO_FORM
-                       Where s.IDSALTO = idSalto
-                       Select a.IDARCHIVO).FirstOrDefault
+                              From f In s.FORMULARIOS
+                              From a In ctx.ARCHIVOS
+                              Where s.IDSALTO = idSalto AndAlso f.IDFORMULARIO = a.CAMPOS_FORM.IDFORMULARIO
+                              Select a.IDARCHIVO).FirstOrDefault
+        'Dim idA As Integer = (From s In ctx.SALTOS
+        '               Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
+        '               Join cf In ctx.CAMPOS_FORM On f.IDFORMULARIO Equals cf.IDFORMULARIO
+        '               Join a In ctx.ARCHIVOS On cf.IDCAMPO_FORM Equals a.IDCAMPO_FORM
+        '               Where s.IDSALTO = idSalto
+        '               Select a.IDARCHIVO).FirstOrDefault
 
         Dim archivo = (From a In ctx.ARCHIVOS
                      Where a.IDARCHIVO = idA
