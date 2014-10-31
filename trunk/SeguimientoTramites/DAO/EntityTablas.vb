@@ -261,7 +261,7 @@
             Dim gestiones = (From gs In ctx.GRUPO_SALTOS
                              From dus In ctx.DETALLE_USUARIO_SALTOS
                              Where gs.IDGRUPO_SALTOS = dus.SALTOS.IDGRUPO_SALTOS AndAlso gs.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso dus.IDUSUARIO = idu
-                             Select gs.GESTIONES.IDGESTION, gs.GESTIONES.NOMBRE).ToList
+                             Select gs.GESTIONES.IDGESTION, gs.GESTIONES.NOMBRE Distinct).ToList
 
             grid.DataSource = gestiones
             grid.Columns(0).Visible = False
