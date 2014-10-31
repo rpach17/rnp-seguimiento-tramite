@@ -33,6 +33,27 @@ Public Class frmDescargarDoc
         End Set
     End Property
 
+    Private IdGS As Integer
+    Public Property IdGS1 As Integer
+        Get
+            Return IdGS
+        End Get
+        Set(ByVal value As Integer)
+            IdGS = value
+        End Set
+    End Property
+
+    Private numSalto As Integer
+    Public Property NumSalto1 As Integer
+        Get
+            Return numSalto
+        End Get
+        Set(ByVal value As Integer)
+            numSalto = value
+        End Set
+    End Property
+
+
     Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
         Dim filename As String
 
@@ -73,4 +94,8 @@ Public Class frmDescargarDoc
         End Try
     End Sub
 
+    Private Sub frmDescargarDoc_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim idss As Integer = EntityTablas.ObtenerSiguienteSalto(IdGS, numSalto)
+        EntityTablas.CargarUsuariosDestinoSalto(cboUserDestino, idss)
+    End Sub
 End Class
