@@ -23,9 +23,8 @@ Partial Class frmDescargarDoc
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnGenerar = New System.Windows.Forms.Button()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'btnGenerar
@@ -40,29 +39,19 @@ Partial Class frmDescargarDoc
         Me.btnGenerar.Text = "Generar documento"
         Me.btnGenerar.UseVisualStyleBackColor = True
         '
-        'ListBox1
+        'TextBox1
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(36, 114)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 147)
-        Me.ListBox1.TabIndex = 1
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(184, 114)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(249, 147)
-        Me.DataGridView1.TabIndex = 2
+        Me.TextBox1.Location = New System.Drawing.Point(3, 146)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(525, 20)
+        Me.TextBox1.TabIndex = 1
         '
         'frmDescargarDoc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(519, 293)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.ListBox1)
+        Me.ClientSize = New System.Drawing.Size(540, 222)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.btnGenerar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -70,11 +59,11 @@ Partial Class frmDescargarDoc
         Me.Name = "frmDescargarDoc"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Generación de documento"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnGenerar As System.Windows.Forms.Button
-    Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class
