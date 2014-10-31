@@ -34,15 +34,12 @@ Public Class frmDescargarDoc
     End Property
 
     Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
+        Dim filename As String
 
-        If SaveFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            TextBox1.Text = SaveFileDialog1.FileName
+        FolderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments
+        If FolderBrowserDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            filename = String.Format("{0}\{1}.docx", FolderBrowserDialog1.SelectedPath, NombreDoc1)
         End If
-
-
-
-
-
 
         Dim a As ARCHIVOS = EntityTablas.DescargarArchivo(ids)
         Dim marcadores_datos = EntityTablas.Marcadores(idTramite, a.IDFORMULARIO)
@@ -50,8 +47,6 @@ Public Class frmDescargarDoc
         Dim K As Long = UBound(a.ARCHIVO)
 
         ' Se renombra el archivo, lo que causa que al abrir otro, no estoy invocando su nombre
-        Dim filename As String = String.Format("E:\{0}.docx", NombreDoc1)
-
         Dim MSWord As New Word.Application
         Dim MSDocumento As New Document
 

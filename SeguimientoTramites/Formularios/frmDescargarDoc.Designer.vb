@@ -23,8 +23,8 @@ Partial Class frmDescargarDoc
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnGenerar = New System.Windows.Forms.Button()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.SuspendLayout()
         '
         'btnGenerar
@@ -64,6 +64,6 @@ Partial Class frmDescargarDoc
 
     End Sub
     Friend WithEvents btnGenerar As System.Windows.Forms.Button
-    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
 End Class
