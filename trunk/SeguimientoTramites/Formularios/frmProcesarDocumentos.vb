@@ -5,14 +5,18 @@
     End Sub
 
     Private Sub dgvTramites_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvTramites.CellClick
-        If e.ColumnIndex = 8 Then
+        If e.ColumnIndex = 9 Then
             Dim idds As Integer = dgvTramites.CurrentRow().Cells(0).Value
             Dim ids As Integer = dgvTramites.CurrentRow().Cells(2).Value
             Dim idf As Integer = dgvTramites.CurrentRow().Cells(5).Value
+            Dim idt As Integer = dgvTramites.CurrentRow().Cells(6).Value
+            Dim codTram As String = dgvTramites.CurrentRow().Cells(7).Value
 
             If dgvTramites.CurrentRow().Cells(4).Value = 0 Then ' Comprueba si el salto tiene decision
                 If EntityTablas.SaltoDescargable(ids) Then
                     frmDescargarDoc.Ids1 = ids
+                    frmDescargarDoc.IdTramite1 = idt
+                    frmDescargarDoc.NombreDoc1 = codTram
                     frmDescargarDoc.ShowDialog()
                 Else
                     'Dim url As String = String.Format("http://win8virtual/forms/index.php?id={0}", idf)

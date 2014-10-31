@@ -29,6 +29,7 @@ Partial Class frmProcesarDocumentos
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -42,7 +43,7 @@ Partial Class frmProcesarDocumentos
         Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvTramites.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column8, Me.Column5, Me.Column9, Me.Column7, Me.Column6, Me.Column2, Me.Column3, Me.Column4})
+        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column8, Me.Column5, Me.Column9, Me.Column7, Me.Column6, Me.Column10, Me.Column2, Me.Column3, Me.Column4})
         Me.dgvTramites.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvTramites.Location = New System.Drawing.Point(0, 0)
         Me.dgvTramites.MultiSelect = False
@@ -94,6 +95,13 @@ Partial Class frmProcesarDocumentos
         Me.Column6.ReadOnly = True
         Me.Column6.Width = 88
         '
+        'Column10
+        '
+        Me.Column10.HeaderText = "idTramite"
+        Me.Column10.Name = "Column10"
+        Me.Column10.ReadOnly = True
+        Me.Column10.Width = 75
+        '
         'Column2
         '
         Me.Column2.HeaderText = "Código trámite"
@@ -136,6 +144,7 @@ Partial Class frmProcesarDocumentos
     Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewButtonColumn

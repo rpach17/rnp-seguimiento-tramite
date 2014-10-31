@@ -13,33 +13,59 @@ Public Class frmDescargarDoc
         End Set
     End Property
 
+    Private idTramite As Integer
+    Public Property IdTramite1 As Integer
+        Get
+            Return idTramite
+        End Get
+        Set(ByVal value As Integer)
+            idTramite = value
+        End Set
+    End Property
+
+    Private nombreDoc As String
+    Public Property NombreDoc1 As String
+        Get
+            Return nombreDoc
+        End Get
+        Set(ByVal value As String)
+            nombreDoc = value
+        End Set
+    End Property
 
     Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
+
+        If SaveFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            TextBox1.Text = SaveFileDialog1.FileName
+        End If
+
+
+
+
+
+
         Dim a As ARCHIVOS = EntityTablas.DescargarArchivo(ids)
+        Dim marcadores_datos = EntityTablas.Marcadores(idTramite, a.IDFORMULARIO)
 
         Dim K As Long = UBound(a.ARCHIVO)
-        Dim generador As Random = New Random()
-        Dim code As Integer = generador.Next(1, 1000)
 
         ' Se renombra el archivo, lo que causa que al abrir otro, no estoy invocando su nombre
-        Dim filename As String = String.Format("C:\Users\Josué\Documents\Plantilla_{0}.docx", code)
-
-        Using fs As New FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write)
-            fs.Write(a.ARCHIVO, 0, K)
-            fs.Close()
-        End Using
+        Dim filename As String = String.Format("E:\{0}.docx", NombreDoc1)
 
         Dim MSWord As New Word.Application
-        'Dim MSDocumento As New Document
+        Dim MSDocumento As New Document
 
         Try
-            'MSDocumento = MSWord.Documents.Open(filename)
-            'MSDocumento.Bookmarks.Item("nombre").Range.Text = campos.Nombre
-            'MSDocumento.Bookmarks.Item("apellido").Range.Text = campos.Apellido
-            'MSDocumento.Bookmarks.Item("direccion").Range.Text = campos.Direccion
-            'MSDocumento.Bookmarks.Item("correo").Range.Text = campos.Correo
-            'MSDocumento.Bookmarks.Item("telefono").Range.Text = campos.Telefono
-            'MSDocumento.Save()
+            Using fs As New FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write)
+                fs.Write(a.ARCHIVO, 0, K)
+                fs.Close()
+            End Using
+
+            MSDocumento = MSWord.Documents.Open(filename)
+            For Each elemento In marcadores_datos
+                MSDocumento.Bookmarks.Item(elemento.MARCADOR).Range.Text = elemento.VALOR
+            Next
+            MSDocumento.Save()
 
             Dim msg As String = String.Format("Documento guardado en: {0} {1} {0}{0}¿Desea abrirlo?", vbCrLf, filename)
             If MsgBox(msg, MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirme") = MsgBoxResult.Yes Then
@@ -48,9 +74,8 @@ Public Class frmDescargarDoc
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         Finally
-            'MSDocumento.Close()
+            MSDocumento.Close()
         End Try
-
-
     End Sub
+
 End Class
