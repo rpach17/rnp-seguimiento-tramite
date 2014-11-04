@@ -74,7 +74,6 @@ Partial Class frmDescargarDoc
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Generación de documento"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnGenerar As System.Windows.Forms.Button

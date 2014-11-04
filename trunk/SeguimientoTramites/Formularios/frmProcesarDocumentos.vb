@@ -28,7 +28,7 @@
                     'Dim url As String = String.Format("http://win8virtual/forms/index.php?id={0}", idf)
                     'Dim url As String = String.Format("http://localhost/forms/index.php?id={0}", idf)
                     'Dim url As String = "http://getbootstrap.com/2.3.2/base-css.html#forms"
-                    Using frm As New frmFormulario
+                    Using frm As New frmFormularioChrome
                         frm.IdSalto1 = EntityTablas.ObtenerSiguienteSalto(idgs, numS + 1)
                         frm.IdForm1 = idf
                         frm.IdDetalleSeguimiento1 = idds
