@@ -18,16 +18,14 @@ Imports System.Runtime.Serialization
 Imports System.Xml.Serialization
 
 
-<Assembly: EdmSchemaAttribute("73eb8ea6-6a38-4d75-8f20-4497b388df73")>
+<Assembly: EdmSchemaAttribute("fe099163-1a52-409e-9296-2905a59966d3")>
 #Region "Metadatos de relaciones en EDM"
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK1", "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(FORMULARIOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "CAMPOS_FORM_FK2", "TIPOS_CAMPOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TIPOS_CAMPOS), "CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(CAMPOS_FORM), True)>
-<Assembly: EdmRelationshipAttribute("Modelo", "DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(DETALLE_SEGUIMIENTO), "DATOS_CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DATOS_CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DATOS_CAMPOS_FORM_FK2", "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(FORMULARIOS), "DATOS_CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DATOS_CAMPOS_FORM), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_GESTIONES_USUARIO_FK1", "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(USUARIOS), "DETALLE_GESTIONES_USUARIO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_GESTIONES_USUARIO), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_OFICINA_GESTIONES_FK1", "OFICINAS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(OFICINAS), "DETALLE_OFICINA_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_OFICINA_GESTIONES), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_OFICINA_GESTIONES_FK2", "GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(GESTIONES), "DETALLE_OFICINA_GESTIONES", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_OFICINA_GESTIONES), True)>
-<Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_TRAMITE_FK1", "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TRAMITES), "DETALLE_SEGUIMIENTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_SEGUIMIENTO), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_SUCURSAL_OFICINA_FK1", "SUCURSALES", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(SUCURSALES), "DETALLE_SUCURSAL_OFICINA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_SUCURSAL_OFICINA), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_SUCURSAL_OFICINA_FK2", "OFICINAS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(OFICINAS), "DETALLE_SUCURSAL_OFICINA", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_SUCURSAL_OFICINA), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "USUARIOS_FK1", "DETALLE_SUCURSAL_OFICINA", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(DETALLE_SUCURSAL_OFICINA), "USUARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(USUARIOS), True)>
@@ -55,6 +53,8 @@ Imports System.Xml.Serialization
 <Assembly: EdmRelationshipAttribute("Modelo", "FORMULARIOS_FK1", "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(SALTOS), "FORMULARIOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(FORMULARIOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "SALTOS_FK1", "GRUPO_SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(GRUPO_SALTOS), "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SALTOS), True)>
 <Assembly: EdmRelationshipAttribute("Modelo", "SALTOS_FK2", "PUESTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(PUESTO), "SALTOS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(SALTOS), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, GetType(DETALLE_SEGUIMIENTO), "DATOS_CAMPOS_FORM", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DATOS_CAMPOS_FORM), True)>
+<Assembly: EdmRelationshipAttribute("Modelo", "DETALLE_TRAMITE_FK1", "TRAMITES", System.Data.Metadata.Edm.RelationshipMultiplicity.One, GetType(TRAMITES), "DETALLE_SEGUIMIENTO", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, GetType(DETALLE_SEGUIMIENTO), True)>
 
 #End Region
 
@@ -161,20 +161,6 @@ Public Partial Class Entidades
     End Property
 
     Private _DETALLE_OFICINA_GESTIONES As ObjectSet(Of DETALLE_OFICINA_GESTIONES)
-
-    ''' <summary>
-    ''' No hay documentación de metadatos disponible.
-    ''' </summary>
-    Public ReadOnly Property DETALLE_SEGUIMIENTO() As ObjectSet(Of DETALLE_SEGUIMIENTO)
-        Get
-            If (_DETALLE_SEGUIMIENTO Is Nothing) Then
-                _DETALLE_SEGUIMIENTO = MyBase.CreateObjectSet(Of DETALLE_SEGUIMIENTO)("DETALLE_SEGUIMIENTO")
-            End If
-            Return _DETALLE_SEGUIMIENTO
-        End Get
-    End Property
-
-    Private _DETALLE_SEGUIMIENTO As ObjectSet(Of DETALLE_SEGUIMIENTO)
 
     ''' <summary>
     ''' No hay documentación de metadatos disponible.
@@ -554,6 +540,20 @@ Public Partial Class Entidades
 
     Private _SALTOS As ObjectSet(Of SALTOS)
 
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    Public ReadOnly Property DETALLE_SEGUIMIENTO() As ObjectSet(Of DETALLE_SEGUIMIENTO)
+        Get
+            If (_DETALLE_SEGUIMIENTO Is Nothing) Then
+                _DETALLE_SEGUIMIENTO = MyBase.CreateObjectSet(Of DETALLE_SEGUIMIENTO)("DETALLE_SEGUIMIENTO")
+            End If
+            Return _DETALLE_SEGUIMIENTO
+        End Get
+    End Property
+
+    Private _DETALLE_SEGUIMIENTO As ObjectSet(Of DETALLE_SEGUIMIENTO)
+
     #End Region
 
     #Region "Métodos AddTo"
@@ -584,13 +584,6 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToDETALLE_OFICINA_GESTIONES(ByVal dETALLE_OFICINA_GESTIONES As DETALLE_OFICINA_GESTIONES)
         MyBase.AddObject("DETALLE_OFICINA_GESTIONES", dETALLE_OFICINA_GESTIONES)
-    End Sub
-
-    ''' <summary>
-    ''' Método desusado para agregar un nuevo objeto al EntitySet DETALLE_SEGUIMIENTO. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
-    ''' </summary>
-    Public Sub AddToDETALLE_SEGUIMIENTO(ByVal dETALLE_SEGUIMIENTO As DETALLE_SEGUIMIENTO)
-        MyBase.AddObject("DETALLE_SEGUIMIENTO", dETALLE_SEGUIMIENTO)
     End Sub
 
     ''' <summary>
@@ -780,6 +773,13 @@ Public Partial Class Entidades
     ''' </summary>
     Public Sub AddToSALTOS(ByVal sALTOS As SALTOS)
         MyBase.AddObject("SALTOS", sALTOS)
+    End Sub
+
+    ''' <summary>
+    ''' Método desusado para agregar un nuevo objeto al EntitySet DETALLE_SEGUIMIENTO. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet(Of T) asociada.
+    ''' </summary>
+    Public Sub AddToDETALLE_SEGUIMIENTO(ByVal dETALLE_SEGUIMIENTO As DETALLE_SEGUIMIENTO)
+        MyBase.AddObject("DETALLE_SEGUIMIENTO", dETALLE_SEGUIMIENTO)
     End Sub
 
     #End Region
@@ -1591,37 +1591,6 @@ Public Partial Class DATOS_CAMPOS_FORM
     <XmlIgnoreAttribute()>
     <SoapIgnoreAttribute()>
     <DataMemberAttribute()>
-    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO")>
-    Public Property DETALLE_SEGUIMIENTO() As DETALLE_SEGUIMIENTO
-        Get
-            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO").Value
-        End Get
-        Set
-            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO").Value = value
-        End Set
-    End Property
-    ''' <summary>
-    ''' No hay documentación de metadatos disponible.
-    ''' </summary>
-    <BrowsableAttribute(False)>
-    <DataMemberAttribute()>
-    Public Property DETALLE_SEGUIMIENTOReference() As EntityReference(Of DETALLE_SEGUIMIENTO)
-        Get
-            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO")
-        End Get
-        Set
-            If (Not value Is Nothing)
-                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO", value)
-            End If
-        End Set
-    End Property
-
-    ''' <summary>
-    ''' No hay documentación de metadatos disponible.
-    ''' </summary>
-    <XmlIgnoreAttribute()>
-    <SoapIgnoreAttribute()>
-    <DataMemberAttribute()>
     <EdmRelationshipNavigationPropertyAttribute("Modelo", "DATOS_CAMPOS_FORM_FK2", "FORMULARIOS")>
     Public Property FORMULARIOS() As FORMULARIOS
         Get
@@ -1643,6 +1612,37 @@ Public Partial Class DATOS_CAMPOS_FORM
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of FORMULARIOS)("Modelo.DATOS_CAMPOS_FORM_FK2", "FORMULARIOS", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO")>
+    Public Property DETALLE_SEGUIMIENTO() As DETALLE_SEGUIMIENTO
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO").Value
+        End Get
+        Set
+            CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO").Value = value
+        End Set
+    End Property
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <BrowsableAttribute(False)>
+    <DataMemberAttribute()>
+    Public Property DETALLE_SEGUIMIENTOReference() As EntityReference(Of DETALLE_SEGUIMIENTO)
+        Get
+            Return CType(Me, IEntityWithRelationships).RelationshipManager.GetRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedReference(Of DETALLE_SEGUIMIENTO)("Modelo.DATOS_CAMPOS_FORM_FK1", "DETALLE_SEGUIMIENTO", value)
             End If
         End Set
     End Property
@@ -2498,6 +2498,31 @@ Public Partial Class DETALLE_SEGUIMIENTO
     End Sub
 
     Private Partial Sub OnIDUSUARIO_DESTINOChanged()
+    End Sub
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
+    <DataMemberAttribute()>
+    Public Property FECHA_PROCESO() As Nullable(Of Global.System.DateTime)
+        Get
+            Return _FECHA_PROCESO
+        End Get
+        Set
+            OnFECHA_PROCESOChanging(value)
+            ReportPropertyChanging("FECHA_PROCESO")
+            _FECHA_PROCESO = StructuralObject.SetValidValue(value)
+            ReportPropertyChanged("FECHA_PROCESO")
+            OnFECHA_PROCESOChanged()
+        End Set
+    End Property
+
+    Private _FECHA_PROCESO As Nullable(Of Global.System.DateTime)
+    Private Partial Sub OnFECHA_PROCESOChanging(value As Nullable(Of Global.System.DateTime))
+    End Sub
+
+    Private Partial Sub OnFECHA_PROCESOChanged()
     End Sub
 
     #End Region
@@ -7029,27 +7054,34 @@ Public Partial Class TRAMITES
     Private Partial Sub OnIDTIPO_REPRESENTANTEChanged()
     End Sub
 
-    #End Region
-
-    #Region "Propiedades de navegación"
-
     ''' <summary>
     ''' No hay documentación de metadatos disponible.
     ''' </summary>
-    <XmlIgnoreAttribute()>
-    <SoapIgnoreAttribute()>
+    <EdmScalarPropertyAttribute(EntityKeyProperty:=false, IsNullable:=true)>
     <DataMemberAttribute()>
-    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DETALLE_TRAMITE_FK1", "DETALLE_SEGUIMIENTO")>
-     Public Property DETALLE_SEGUIMIENTO() As EntityCollection(Of DETALLE_SEGUIMIENTO)
+    Public Property CODIGOTRAMITES() As Global.System.String
         Get
-            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of DETALLE_SEGUIMIENTO)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_SEGUIMIENTO")
+            Return _CODIGOTRAMITES
         End Get
         Set
-            If (Not value Is Nothing)
-                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of DETALLE_SEGUIMIENTO)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_SEGUIMIENTO", value)
-            End If
+            OnCODIGOTRAMITESChanging(value)
+            ReportPropertyChanging("CODIGOTRAMITES")
+            _CODIGOTRAMITES = StructuralObject.SetValidValue(value, true)
+            ReportPropertyChanged("CODIGOTRAMITES")
+            OnCODIGOTRAMITESChanged()
         End Set
     End Property
+
+    Private _CODIGOTRAMITES As Global.System.String
+    Private Partial Sub OnCODIGOTRAMITESChanging(value As Global.System.String)
+    End Sub
+
+    Private Partial Sub OnCODIGOTRAMITESChanged()
+    End Sub
+
+    #End Region
+
+    #Region "Propiedades de navegación"
 
     ''' <summary>
     ''' No hay documentación de metadatos disponible.
@@ -7194,6 +7226,24 @@ Public Partial Class TRAMITES
         Set
             If (Not value Is Nothing)
                 CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of ERRORES_GESTIONES)("Modelo.DETALLE_ERRORES_GESTIONES", "ERRORES_GESTIONES", value)
+            End If
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' No hay documentación de metadatos disponible.
+    ''' </summary>
+    <XmlIgnoreAttribute()>
+    <SoapIgnoreAttribute()>
+    <DataMemberAttribute()>
+    <EdmRelationshipNavigationPropertyAttribute("Modelo", "DETALLE_TRAMITE_FK1", "DETALLE_SEGUIMIENTO")>
+     Public Property DETALLE_SEGUIMIENTO() As EntityCollection(Of DETALLE_SEGUIMIENTO)
+        Get
+            Return CType(Me,IEntityWithRelationships).RelationshipManager.GetRelatedCollection(Of DETALLE_SEGUIMIENTO)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_SEGUIMIENTO")
+        End Get
+        Set
+            If (Not value Is Nothing)
+                CType(Me, IEntityWithRelationships).RelationshipManager.InitializeRelatedCollection(Of DETALLE_SEGUIMIENTO)("Modelo.DETALLE_TRAMITE_FK1", "DETALLE_SEGUIMIENTO", value)
             End If
         End Set
     End Property

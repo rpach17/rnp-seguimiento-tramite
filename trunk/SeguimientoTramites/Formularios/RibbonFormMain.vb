@@ -26,11 +26,17 @@ Public Class RibbonFormMain
     End Sub
 
     Private Sub BarButtonItem2_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem2.ItemClick
+        Try
+            frmProcesarDocumentos.Close()            
+        Catch ex As Exception
+
+        End Try
         With frmProcesarDocumentos
             .MdiParent = Me
             .Show()
             .Focus()
         End With
+
     End Sub
 
     Private Sub BarButtonItem3_ItemClick(ByVal sender As Object, ByVal e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem3.ItemClick

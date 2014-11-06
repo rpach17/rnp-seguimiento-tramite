@@ -2,13 +2,16 @@
 Imports Oracle.DataAccess.Types
 Imports DevExpress.XtraReports.UI
 Imports System.Xml
+Imports System.Threading
 
 Public Class frmTramite
     Dim ReqsObligatorios As Integer
     Dim result As Integer
     Dim IdGestion As Integer
     Dim NombreGestion As String
-    Dim cnn As New OracleConnection(My.Settings.Miconexion)
+    Dim cnn As New OracleConnection(My.Settings.MiConexion)
+    Dim hilo As Thread
+
 
     Public Property IdGestion1() As Integer
         Get
@@ -31,13 +34,14 @@ Public Class frmTramite
     Private Sub frmTramite_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If IdGestion = 0 Then
             frmListadoGestiones.ShowDialog()
-            EntityTablas.CargarUsuariosDestino(cboEnviarA, IdGestion)
         End If
+        EntityTablas.CargarUsuariosDestino(cboEnviarA, IdGestion)
         Text = String.Format("TRAMITE PARA {0}", NombreGestion)
         BottomRightFormLocation(e)
         ReqsObligatorios = 0
         result = 0
 
+        EntityTablas.cagarTipoRespresentate(cboRepresentante)
         CargarRequisitos()
     End Sub
 
@@ -97,10 +101,19 @@ Public Class frmTramite
         Dim cant As Integer = txtIdentidad.TextLength
 
         If cant = 13 Then
+            Control.CheckForIllegalCrossThreadCalls = False
+            hilo = New Thread(AddressOf Animacion)
+            hilo.Start()
             result = EntityTablas.BuscarResponsable(txtIdentidad.Text, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtTelefonoFijo, txtTelefonoMovil, txtCorreo, lblInfo)
+            hilo.Abort()
         Else
             lblInfo.Visible = False
         End If
+    End Sub
+
+    Sub Animacion()
+        frmAnimacionProceso.lblTexto.Text = "¡Buscando Ciudadano!"
+        frmAnimacionProceso.ShowDialog()
     End Sub
 
     Private Sub txtIdentidad_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtIdentidad.KeyPress
@@ -176,6 +189,11 @@ Public Class frmTramite
                 myCMD.Parameters.Add("VIDDETALLE_SUCURSAL_OFICINA", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = SesionActiva.IdSucursalOficina
                 myCMD.Parameters.Add("VIDUSUARIO", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = SesionActiva.IdUsuario
                 myCMD.Parameters.Add("VIDUSUARIO_DESTINO", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = cboEnviarA.SelectedValue
+                myCMD.Parameters.Add("VRECIBO", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = txtNumeroRecibo.Text
+                myCMD.Parameters.Add("VRECIBO_MONTO", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = txtMontoRecibo.Text
+                myCMD.Parameters.Add("VCANTIDAD_DOCS", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = txtCantidadDocs.Value
+                myCMD.Parameters.Add("VTIPO_REPRESENTANTE", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Input).Value = cboRepresentante.SelectedValue
+                myCMD.Parameters.Add("VCODIGO_OPCIONAL", OracleDbType.NVarchar2, 30, Nothing, ParameterDirection.Input).Value = txtCodigoTramiteS.Text
                 myCMD.Parameters.Add("VTRAMITE", OracleDbType.Decimal, 10, Nothing, ParameterDirection.Output)
                 myCMD.Parameters.Add("VCODIGO", OracleDbType.NVarchar2, 13, Nothing, ParameterDirection.Output)
                 myCMD.Parameters.Add("VFECHA", OracleDbType.NVarchar2, 22, Nothing, ParameterDirection.Output)
@@ -213,7 +231,7 @@ Public Class frmTramite
                 End Using
 
                 ' Imprimir el recibo del trámite
-                Using rpt As New rptReciboTramite2(myCMD.Parameters("VCODIGO").Value.ToString, myCMD.Parameters("NGESTION").Value.ToString, myCMD.Parameters("VFECHA").Value.ToString, txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text)
+                Using rpt As New rptReciboTramite2(myCMD.Parameters("VCODIGO").Value.ToString, myCMD.Parameters("NGESTION").Value.ToString, myCMD.Parameters("VFECHA").Value.ToString, txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text, txtNumeroRecibo.Text, txtMontoRecibo.Text)
                     Using preview As New ReportPrintTool(rpt)
                         preview.Print()
                         'preview.ShowPreviewDialog()
@@ -240,5 +258,6 @@ Public Class frmTramite
     Private Sub frmTramite_Activated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         Dim i As Integer = IdGestion
     End Sub
+
 
 End Class

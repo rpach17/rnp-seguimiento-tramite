@@ -17,6 +17,7 @@
             If dgvTramites.CurrentRow().Cells(4).Value = 0 Then ' Comprueba si el salto tiene decision
                 If EntityTablas.SaltoDescargable(ids) Then
                     With frmDescargarDoc
+                        .Iddseguimiento1 = idds
                         .Ids1 = ids
                         .IdTramite1 = idt
                         .NombreDoc1 = codTram

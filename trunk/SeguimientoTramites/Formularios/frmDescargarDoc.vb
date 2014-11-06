@@ -3,6 +3,16 @@ Imports Microsoft.Office.Interop.Word
 Imports System.IO
 
 Public Class frmDescargarDoc
+    Private iddseguimiento As Integer
+    Public Property Iddseguimiento1 As Integer
+        Get
+            Return iddseguimiento
+        End Get
+        Set(ByVal value As Integer)
+            iddseguimiento = value
+        End Set
+    End Property
+
     Private ids As Integer
     Public Property Ids1 As Integer
         Get
@@ -87,6 +97,8 @@ Public Class frmDescargarDoc
             If MsgBox(msg, MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirme") = MsgBoxResult.Yes Then
                 Process.Start(filename)
             End If
+            EntityTablas.ActualizarDetalleTramiteDoc(iddseguimiento, cboUserDestino.SelectedValue)
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         Finally
