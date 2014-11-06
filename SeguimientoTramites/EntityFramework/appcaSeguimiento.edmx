@@ -275,6 +275,7 @@
           <Property Name="FECHA_ENTREGA" Type="date" />
           <Property Name="DESTINO" Type="number" />
           <Property Name="IDUSUARIO_DESTINO" Type="number" />
+          <Property Name="FECHA_PROCESO" Type="date" />
         </EntityType>
         <EntityType Name="DETALLE_SUCURSAL_OFICINA">
           <Key>
@@ -443,7 +444,7 @@
           <Key>
             <PropertyRef Name="IDSALTO" />
           </Key>
-          <Property Name="IDSALTO" Type="number" Nullable="false" />
+          <Property Name="IDSALTO" Type="number" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NUMERO_SALTO" Type="number" Nullable="false" />
           <Property Name="IDGRUPO_SALTOS" Type="number" Nullable="false" />
           <Property Name="IDPUESTO" Type="number" />
@@ -498,6 +499,7 @@
           <Property Name="MONTO_RECIBO" Type="number" />
           <Property Name="CANTIDAD_DOCS" Type="number" />
           <Property Name="IDTIPO_REPRESENTANTE" Type="number" />
+          <Property Name="CODIGOTRAMITES" Type="varchar2" MaxLength="30" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -961,7 +963,6 @@
           <EntitySet Name="DATOS_CAMPOS_FORM" EntityType="Modelo.DATOS_CAMPOS_FORM" />
           <EntitySet Name="DETALLE_GESTIONES_USUARIO" EntityType="Modelo.DETALLE_GESTIONES_USUARIO" />
           <EntitySet Name="DETALLE_OFICINA_GESTIONES" EntityType="Modelo.DETALLE_OFICINA_GESTIONES" />
-          <EntitySet Name="DETALLE_SEGUIMIENTO" EntityType="Modelo.DETALLE_SEGUIMIENTO" />
           <EntitySet Name="DETALLE_SUCURSAL_OFICINA" EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" />
           <EntitySet Name="DETALLE_TRAMITES" EntityType="Modelo.DETALLE_TRAMITES" />
           <EntitySet Name="DETALLE_USUARIO_SALTOS" EntityType="Modelo.DETALLE_USUARIO_SALTOS" />
@@ -990,10 +991,6 @@
             <End Role="TIPOS_CAMPOS" EntitySet="TIPOS_CAMPOS" />
             <End Role="CAMPOS_FORM" EntitySet="CAMPOS_FORM" />
           </AssociationSet>
-          <AssociationSet Name="DATOS_CAMPOS_FORM_FK1" Association="Modelo.DATOS_CAMPOS_FORM_FK1">
-            <End Role="DETALLE_SEGUIMIENTO" EntitySet="DETALLE_SEGUIMIENTO" />
-            <End Role="DATOS_CAMPOS_FORM" EntitySet="DATOS_CAMPOS_FORM" />
-          </AssociationSet>
           <AssociationSet Name="DATOS_CAMPOS_FORM_FK2" Association="Modelo.DATOS_CAMPOS_FORM_FK2">
             <End Role="FORMULARIOS" EntitySet="FORMULARIOS" />
             <End Role="DATOS_CAMPOS_FORM" EntitySet="DATOS_CAMPOS_FORM" />
@@ -1009,10 +1006,6 @@
           <AssociationSet Name="DETALLE_OFICINA_GESTIONES_FK2" Association="Modelo.DETALLE_OFICINA_GESTIONES_FK2">
             <End Role="GESTIONES" EntitySet="GESTIONES" />
             <End Role="DETALLE_OFICINA_GESTIONES" EntitySet="DETALLE_OFICINA_GESTIONES" />
-          </AssociationSet>
-          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
-            <End Role="TRAMITES" EntitySet="TRAMITES" />
-            <End Role="DETALLE_SEGUIMIENTO" EntitySet="DETALLE_SEGUIMIENTO" />
           </AssociationSet>
           <AssociationSet Name="DETALLE_SUCURSAL_OFICINA_FK1" Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK1">
             <End Role="SUCURSALES" EntitySet="SUCURSALES" />
@@ -1129,6 +1122,15 @@
             <End Role="PUESTO" EntitySet="PUESTO" />
             <End Role="SALTOS" EntitySet="SALTOS" />
           </AssociationSet>
+          <EntitySet Name="DETALLE_SEGUIMIENTO" EntityType="Modelo.DETALLE_SEGUIMIENTO" />
+          <AssociationSet Name="DATOS_CAMPOS_FORM_FK1" Association="Modelo.DATOS_CAMPOS_FORM_FK1">
+            <End Role="DETALLE_SEGUIMIENTO" EntitySet="DETALLE_SEGUIMIENTO" />
+            <End Role="DATOS_CAMPOS_FORM" EntitySet="DATOS_CAMPOS_FORM" />
+          </AssociationSet>
+          <AssociationSet Name="DETALLE_TRAMITE_FK1" Association="Modelo.DETALLE_TRAMITE_FK1">
+            <End Role="TRAMITES" EntitySet="TRAMITES" />
+            <End Role="DETALLE_SEGUIMIENTO" EntitySet="DETALLE_SEGUIMIENTO" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CAMPOS_FORM">
           <Key>
@@ -1159,9 +1161,9 @@
           <Property Type="Decimal" Name="IDDETALLE_SEGUIMIENTO" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDFORMULARIO" Precision="38" Scale="0" />
           <Property Type="String" Name="VALOR" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DETALLE_SEGUIMIENTO" Relationship="Modelo.DATOS_CAMPOS_FORM_FK1" FromRole="DATOS_CAMPOS_FORM" ToRole="DETALLE_SEGUIMIENTO" />
           <NavigationProperty Name="FORMULARIOS" Relationship="Modelo.DATOS_CAMPOS_FORM_FK2" FromRole="DATOS_CAMPOS_FORM" ToRole="FORMULARIOS" />
           <Property Type="Decimal" Name="IDCAMPO_FORM" Precision="38" Scale="0" />
+          <NavigationProperty Name="DETALLE_SEGUIMIENTO" Relationship="Modelo.DATOS_CAMPOS_FORM_FK1" FromRole="DATOS_CAMPOS_FORM" ToRole="DETALLE_SEGUIMIENTO" />
         </EntityType>
         <EntityType Name="DETALLE_GESTIONES_USUARIO">
           <Key>
@@ -1181,21 +1183,6 @@
           <Property Type="Decimal" Name="IDGESTION" Precision="38" Scale="0" />
           <NavigationProperty Name="OFICINAS" Relationship="Modelo.DETALLE_OFICINA_GESTIONES_FK1" FromRole="DETALLE_OFICINA_GESTIONES" ToRole="OFICINAS" />
           <NavigationProperty Name="GESTIONES" Relationship="Modelo.DETALLE_OFICINA_GESTIONES_FK2" FromRole="DETALLE_OFICINA_GESTIONES" ToRole="GESTIONES" />
-        </EntityType>
-        <EntityType Name="DETALLE_SEGUIMIENTO">
-          <Key>
-            <PropertyRef Name="IDDETALLE_SEGUIMIENTO" />
-          </Key>
-          <Property Type="Decimal" Name="IDDETALLE_SEGUIMIENTO" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDTRAMITE" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDUSUARIO" Nullable="false" Precision="38" Scale="0" />
-          <Property Type="DateTime" Name="FECHA_RECEPCION" Nullable="false" Precision="0" />
-          <Property Type="DateTime" Name="FECHA_ENTREGA" Precision="0" />
-          <Property Type="Decimal" Name="DESTINO" Precision="38" Scale="0" />
-          <Property Type="Decimal" Name="IDUSUARIO_DESTINO" Precision="38" Scale="0" />
-          <NavigationProperty Name="DATOS_CAMPOS_FORM" Relationship="Modelo.DATOS_CAMPOS_FORM_FK1" FromRole="DETALLE_SEGUIMIENTO" ToRole="DATOS_CAMPOS_FORM" />
-          <NavigationProperty Name="TRAMITES" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="DETALLE_SEGUIMIENTO" ToRole="TRAMITES" />
         </EntityType>
         <EntityType Name="DETALLE_SUCURSAL_OFICINA">
           <Key>
@@ -1414,13 +1401,14 @@
           <Property Type="Decimal" Name="MONTO_RECIBO" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="CANTIDAD_DOCS" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDTIPO_REPRESENTANTE" Precision="38" Scale="0" />
-          <NavigationProperty Name="DETALLE_SEGUIMIENTO" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_SEGUIMIENTO" />
           <NavigationProperty Name="DETALLE_TRAMITES" Relationship="Modelo.DETALLE_TRAMITES_FK2" FromRole="TRAMITES" ToRole="DETALLE_TRAMITES" />
           <NavigationProperty Name="GESTIONES" Relationship="Modelo.TRAMITES_FK2" FromRole="TRAMITES" ToRole="GESTIONES" />
           <NavigationProperty Name="RECEPCION_REQUISITOS" Relationship="Modelo.RECEPCION_REQUISITOS_FK2" FromRole="TRAMITES" ToRole="RECEPCION_REQUISITOS" />
           <NavigationProperty Name="RESPONSABLE" Relationship="Modelo.TRAMITES_FK1" FromRole="TRAMITES" ToRole="RESPONSABLE" />
           <NavigationProperty Name="TIPO_REPRESENTANTE" Relationship="Modelo.TRAMITES_FK3" FromRole="TRAMITES" ToRole="TIPO_REPRESENTANTE" />
           <NavigationProperty Name="ERRORES_GESTIONES" Relationship="Modelo.DETALLE_ERRORES_GESTIONES" FromRole="TRAMITES" ToRole="ERRORES_GESTIONES" />
+          <Property Type="String" Name="CODIGOTRAMITES" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_SEGUIMIENTO" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="TRAMITES" ToRole="DETALLE_SEGUIMIENTO" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -1466,18 +1454,6 @@
             </Principal>
             <Dependent Role="CAMPOS_FORM">
               <PropertyRef Name="IDTIPO_CAMPO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DATOS_CAMPOS_FORM_FK1">
-          <End Type="Modelo.DETALLE_SEGUIMIENTO" Role="DETALLE_SEGUIMIENTO" Multiplicity="0..1" />
-          <End Type="Modelo.DATOS_CAMPOS_FORM" Role="DATOS_CAMPOS_FORM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DETALLE_SEGUIMIENTO">
-              <PropertyRef Name="IDDETALLE_SEGUIMIENTO" />
-            </Principal>
-            <Dependent Role="DATOS_CAMPOS_FORM">
-              <PropertyRef Name="IDDETALLE_SEGUIMIENTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1528,18 +1504,6 @@
             </Principal>
             <Dependent Role="DETALLE_OFICINA_GESTIONES">
               <PropertyRef Name="IDGESTION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DETALLE_TRAMITE_FK1">
-          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="1" />
-          <End Type="Modelo.DETALLE_SEGUIMIENTO" Role="DETALLE_SEGUIMIENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TRAMITES">
-              <PropertyRef Name="IDTRAMITE" />
-            </Principal>
-            <Dependent Role="DETALLE_SEGUIMIENTO">
-              <PropertyRef Name="IDTRAMITE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1876,7 +1840,7 @@
           <Key>
             <PropertyRef Name="IDSALTO" />
           </Key>
-          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Decimal" Name="NUMERO_SALTO" Nullable="false" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDGRUPO_SALTOS" Nullable="false" Precision="38" Scale="0" />
           <Property Type="Decimal" Name="IDPUESTO" Precision="38" Scale="0" />
@@ -1940,6 +1904,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DETALLE_SEGUIMIENTO">
+          <Key>
+            <PropertyRef Name="IDDETALLE_SEGUIMIENTO" />
+          </Key>
+          <Property Type="Decimal" Name="IDDETALLE_SEGUIMIENTO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDTRAMITE" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDSALTO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDUSUARIO" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="FECHA_RECEPCION" Nullable="false" />
+          <Property Type="DateTime" Name="FECHA_ENTREGA" />
+          <Property Type="Decimal" Name="DESTINO" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="IDUSUARIO_DESTINO" Precision="38" Scale="0" />
+          <Property Type="DateTime" Name="FECHA_PROCESO" />
+          <NavigationProperty Name="DATOS_CAMPOS_FORM" Relationship="Modelo.DATOS_CAMPOS_FORM_FK1" FromRole="DETALLE_SEGUIMIENTO" ToRole="DATOS_CAMPOS_FORM" />
+          <NavigationProperty Name="TRAMITES" Relationship="Modelo.DETALLE_TRAMITE_FK1" FromRole="DETALLE_SEGUIMIENTO" ToRole="TRAMITES" />
+        </EntityType>
+        <Association Name="DATOS_CAMPOS_FORM_FK1">
+          <End Type="Modelo.DETALLE_SEGUIMIENTO" Role="DETALLE_SEGUIMIENTO" Multiplicity="0..1" />
+          <End Type="Modelo.DATOS_CAMPOS_FORM" Role="DATOS_CAMPOS_FORM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLE_SEGUIMIENTO">
+              <PropertyRef Name="IDDETALLE_SEGUIMIENTO" />
+            </Principal>
+            <Dependent Role="DATOS_CAMPOS_FORM">
+              <PropertyRef Name="IDDETALLE_SEGUIMIENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETALLE_TRAMITE_FK1">
+          <End Type="Modelo.TRAMITES" Role="TRAMITES" Multiplicity="1" />
+          <End Type="Modelo.DETALLE_SEGUIMIENTO" Role="DETALLE_SEGUIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRAMITES">
+              <PropertyRef Name="IDTRAMITE" />
+            </Principal>
+            <Dependent Role="DETALLE_SEGUIMIENTO">
+              <PropertyRef Name="IDTRAMITE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1990,20 +1994,6 @@
                 <ScalarProperty Name="IDGESTION" ColumnName="IDGESTION" />
                 <ScalarProperty Name="IDOFICINA" ColumnName="IDOFICINA" />
                 <ScalarProperty Name="IDDETALLE_OFICINA_GESTION" ColumnName="IDDETALLE_OFICINA_GESTION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_SEGUIMIENTO">
-            <EntityTypeMapping TypeName="Modelo.DETALLE_SEGUIMIENTO">
-              <MappingFragment StoreEntitySet="DETALLE_SEGUIMIENTO">
-                <ScalarProperty Name="IDUSUARIO_DESTINO" ColumnName="IDUSUARIO_DESTINO" />
-                <ScalarProperty Name="DESTINO" ColumnName="DESTINO" />
-                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
-                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
-                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
-                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
-                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
-                <ScalarProperty Name="IDDETALLE_SEGUIMIENTO" ColumnName="IDDETALLE_SEGUIMIENTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2191,6 +2181,7 @@
           <EntitySetMapping Name="TRAMITES">
             <EntityTypeMapping TypeName="Modelo.TRAMITES">
               <MappingFragment StoreEntitySet="TRAMITES">
+                <ScalarProperty Name="CODIGOTRAMITES" ColumnName="CODIGOTRAMITES" />
                 <ScalarProperty Name="IDTIPO_REPRESENTANTE" ColumnName="IDTIPO_REPRESENTANTE" />
                 <ScalarProperty Name="CANTIDAD_DOCS" ColumnName="CANTIDAD_DOCS" />
                 <ScalarProperty Name="MONTO_RECIBO" ColumnName="MONTO_RECIBO" />
@@ -2307,6 +2298,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_SEGUIMIENTO">
+            <EntityTypeMapping TypeName="Modelo.DETALLE_SEGUIMIENTO">
+              <MappingFragment StoreEntitySet="DETALLE_SEGUIMIENTO">
+                <ScalarProperty Name="FECHA_PROCESO" ColumnName="FECHA_PROCESO" />
+                <ScalarProperty Name="IDUSUARIO_DESTINO" ColumnName="IDUSUARIO_DESTINO" />
+                <ScalarProperty Name="DESTINO" ColumnName="DESTINO" />
+                <ScalarProperty Name="FECHA_ENTREGA" ColumnName="FECHA_ENTREGA" />
+                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDSALTO" ColumnName="IDSALTO" />
+                <ScalarProperty Name="IDTRAMITE" ColumnName="IDTRAMITE" />
+                <ScalarProperty Name="IDDETALLE_SEGUIMIENTO" ColumnName="IDDETALLE_SEGUIMIENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2327,12 +2333,11 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="appcaSeguimiento" ZoomLevel="46">
+      <Diagram Name="appcaSeguimiento" ZoomLevel="67">
         <EntityTypeShape EntityType="Modelo.CAMPOS_FORM" Width="1.5" PointX="19.25" PointY="4.875" />
         <EntityTypeShape EntityType="Modelo.DATOS_CAMPOS_FORM" Width="1.5" PointX="1.9631603387944216" PointY="28.653535409203513" />
         <EntityTypeShape EntityType="Modelo.DETALLE_GESTIONES_USUARIO" Width="1.5" PointX="21.625" PointY="17.625" />
         <EntityTypeShape EntityType="Modelo.DETALLE_OFICINA_GESTIONES" Width="1.5" PointX="9.2672917886019182" PointY="11.815813993949357" />
-        <EntityTypeShape EntityType="Modelo.DETALLE_SEGUIMIENTO" Width="1.5" PointX="2" PointY="32.875" />
         <EntityTypeShape EntityType="Modelo.DETALLE_SUCURSAL_OFICINA" Width="1.5" PointX="15.625" PointY="22.5" />
         <EntityTypeShape EntityType="Modelo.DETALLE_TRAMITES" Width="1.5" PointX="15.875" PointY="10.375" />
         <EntityTypeShape EntityType="Modelo.DETALLE_USUARIO_SALTOS" Width="1.5" PointX="0.75" PointY="16" />
@@ -2355,12 +2360,10 @@
         <EntityTypeShape EntityType="Modelo.USUARIOS" Width="1.5" PointX="15.5" PointY="14.375" />
         <AssociationConnector Association="Modelo.CAMPOS_FORM_FK1" />
         <AssociationConnector Association="Modelo.CAMPOS_FORM_FK2" />
-        <AssociationConnector Association="Modelo.DATOS_CAMPOS_FORM_FK1" />
         <AssociationConnector Association="Modelo.DATOS_CAMPOS_FORM_FK2" />
         <AssociationConnector Association="Modelo.DETALLE_GESTIONES_USUARIO_FK1" />
         <AssociationConnector Association="Modelo.DETALLE_OFICINA_GESTIONES_FK1" />
         <AssociationConnector Association="Modelo.DETALLE_OFICINA_GESTIONES_FK2" />
-        <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" />
         <AssociationConnector Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK1" />
         <AssociationConnector Association="Modelo.DETALLE_SUCURSAL_OFICINA_FK2" />
         <AssociationConnector Association="Modelo.USUARIOS_FK1" />
@@ -2390,11 +2393,14 @@
         <AssociationConnector Association="Modelo.DETALLE_LISTA_DESPLEGABLE_FK1" />
         <EntityTypeShape EntityType="Modelo.MARCADORES" Width="1.5" PointX="19.25" PointY="15.25" />
         <AssociationConnector Association="Modelo.MARCADORES_FK2" />
-        <EntityTypeShape EntityType="Modelo.SALTOS" Width="1.5" PointX="2.375" PointY="5.375" />
+        <EntityTypeShape EntityType="Modelo.SALTOS" Width="1.5" PointX="8.25" PointY="6.625" />
         <AssociationConnector Association="Modelo.DETALLE_USUARIO_SALTOS_FK2" />
         <AssociationConnector Association="Modelo.FORMULARIOS_FK1" />
         <AssociationConnector Association="Modelo.SALTOS_FK1" />
         <AssociationConnector Association="Modelo.SALTOS_FK2" />
+        <EntityTypeShape EntityType="Modelo.DETALLE_SEGUIMIENTO" Width="1.5" PointX="10.375" PointY="31" />
+        <AssociationConnector Association="Modelo.DATOS_CAMPOS_FORM_FK1" />
+        <AssociationConnector Association="Modelo.DETALLE_TRAMITE_FK1" />
       </Diagram>
     </Diagrams>
   </Designer>

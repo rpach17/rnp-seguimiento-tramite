@@ -80,8 +80,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Awesomium.Core, Version=1.7.4.2, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214" />
-    <Reference Include="Awesomium.Windows.Forms, Version=1.7.4.2, Culture=neutral, PublicKeyToken=9bd24830fbe304a0, processorArchitecture=x86" />
+    <Reference Include="Awesomium.Core, Version=1.7.4.2, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Awesomium.Windows.Forms, Version=1.7.4.2, Culture=neutral, PublicKeyToken=9bd24830fbe304a0, processorArchitecture=x86">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Charts.v13.1.Core, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -165,6 +169,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>appcaSeguimiento.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmAnimacionProceso.Designer.vb">
+      <DependentUpon>frmAnimacionProceso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmAnimacionProceso.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmFormularioChrome.Designer.vb">
       <DependentUpon>frmFormularioChrome.vb</DependentUpon>
@@ -316,6 +326,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\frmAnimacionProceso.resx">
+      <DependentUpon>frmAnimacionProceso.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmFormularioChrome.resx">
       <DependentUpon>frmFormularioChrome.vb</DependentUpon>
     </EmbeddedResource>

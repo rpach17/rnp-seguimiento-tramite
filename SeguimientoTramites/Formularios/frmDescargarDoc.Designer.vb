@@ -44,7 +44,7 @@ Partial Class frmDescargarDoc
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label1.Location = New System.Drawing.Point(43, 128)
+        Me.Label1.Location = New System.Drawing.Point(62, 121)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 20)
         Me.Label1.TabIndex = 8
@@ -54,7 +54,7 @@ Partial Class frmDescargarDoc
         '
         Me.cboUserDestino.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cboUserDestino.FormattingEnabled = True
-        Me.cboUserDestino.Location = New System.Drawing.Point(126, 125)
+        Me.cboUserDestino.Location = New System.Drawing.Point(145, 118)
         Me.cboUserDestino.Name = "cboUserDestino"
         Me.cboUserDestino.Size = New System.Drawing.Size(348, 28)
         Me.cboUserDestino.TabIndex = 7

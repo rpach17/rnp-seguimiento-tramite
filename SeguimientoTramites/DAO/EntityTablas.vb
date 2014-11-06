@@ -110,12 +110,15 @@
         rdoF.Tag = info.IDSALTOF
     End Sub
 
-    Shared Sub ActualizarDetalleTramite(ByVal iddetalle As Integer, ByVal iddecision As Integer, ByVal idUserDestino As Integer)
+    Shared Sub ActualizarDetalleTramite(ByVal iddetalle As Integer, ByVal idSaltoDestino As Integer, ByVal idUserDestino As Integer)
+        Dim query = ctx.ExecuteStoreQuery(Of Date)("select sysdate from dual")
+        Dim fecha As DateTime = query.First
         Dim detalle = (From d In ctx.DETALLE_SEGUIMIENTO Where d.IDDETALLE_SEGUIMIENTO = iddetalle Select d).FirstOrDefault
 
         With detalle
-            .DESTINO = iddecision
+            .DESTINO = idSaltoDestino
             .IDUSUARIO_DESTINO = idUserDestino
+            .FECHA_PROCESO = fecha
         End With
         ctx.SaveChanges()
     End Sub
@@ -156,16 +159,13 @@
                                  ByVal txtEmail As TextBox, _
                                  ByVal lbl As Label) As Integer
 
-        ' 1- Si existe localmente (Para hacer UPDATE)
+        ' 1- Si existe en responsable localmente (Para hacer UPDATE)
         ' 2- No existe y vienen los datos del RNP (INSERT)
         ' 0- No existe en local ni en DB de RNP (Mostrar mensaje)
 
         Dim conteo As Integer = (From r In ctx.RESPONSABLE.ToList
                                 Where r.NUMERO_IDENTIDAD = identidad
                                 Select r).Count
-
-        'Dim sql = ctx.
-
         If conteo = 1 Then
             Dim respon = (From r In ctx.RESPONSABLE
                           Join i In ctx.IDENTIFICACION On r.NUMERO_IDENTIDAD Equals i.IDENTIDAD
@@ -182,7 +182,6 @@
                 txtC.Text = respon.CELULAR
                 txtEmail.Text = respon.CORREO
             End If
-
             Return 1
         Else
             Dim CuentaID As Integer = (From i In ctx.IDENTIFICACION
@@ -199,6 +198,17 @@
                 txtSA.Text = respon.SEGUNDO_APELLIDO
                 Return 2
                 Exit Function
+            Else
+                Dim c = ctx.ExecuteStoreQuery(Of IDENTIFICACION)("select * from IDENTIFICACION where IDENTIDAD='{0}'", identidad).ToList
+                For Each dato In c
+                    txtPN.Text = dato.PRIMER_NOMBRE
+                    txtSN.Text = dato.SEGUNDO_NOMBRE
+                    txtPA.Text = dato.PRIMER_APELLIDO
+                    txtSA.Text = dato.SEGUNDO_APELLIDO
+                    txtT.Text = ""
+                    txtC.Text = ""
+                    txtEmail.Text = ""
+                Next
             End If
             'Buscar en las BD del registro
             lbl.Text = "Numero de identidad no encontrado"
@@ -336,6 +346,15 @@
             grid.DataSource = dtt
         End If
 
+    End Sub
+
+    Public Shared Sub cagarTipoRespresentate(ByVal cbo As ComboBox)
+        Dim tp = (From t In ctx.TIPO_REPRESENTANTE
+                  Select t.IDTIPO_REPRESENTANTE, t.DESCRIPCION).ToList
+        cbo.DataSource = tp
+        cbo.ValueMember = "IDTIPO_REPRESENTANTE"
+        cbo.DisplayMember = "DESCRIPCION"
+        cbo.SelectedItem = -1
     End Sub
 
 #End Region
@@ -495,6 +514,18 @@
 
         Return url.ToString
     End Function
+#End Region
+
+#Region "Descarga de Documento"
+    Shared Sub ActualizarDetalleTramiteDoc(ByVal iddetalle As Integer, ByVal idUserDestino As Integer)
+        Dim detalle = (From d In ctx.DETALLE_SEGUIMIENTO Where d.IDDETALLE_SEGUIMIENTO = iddetalle Select d).FirstOrDefault
+
+        With detalle
+            .IDUSUARIO_DESTINO = idUserDestino
+        End With
+        ctx.SaveChanges()
+    End Sub
+
 #End Region
 
 End Class

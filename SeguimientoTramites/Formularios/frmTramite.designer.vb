@@ -43,15 +43,28 @@ Partial Class frmTramite
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnCrearTramite = New System.Windows.Forms.Button()
-        Me.txtInfoAdicional = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.btnCambirTramite = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.cboEnviarA = New System.Windows.Forms.ComboBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtNumeroRecibo = New System.Windows.Forms.TextBox()
+        Me.txtInfoAdicional = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.cboEnviarA = New System.Windows.Forms.ComboBox()
+        Me.txtMontoRecibo = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtCodigoTramiteS = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cboRepresentante = New System.Windows.Forms.ComboBox()
+        Me.txtCantidadDocs = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        CType(Me.txtCantidadDocs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtIdentidad
@@ -83,12 +96,10 @@ Partial Class frmTramite
         '
         'txtPrimerNombre
         '
-        Me.txtPrimerNombre.Enabled = False
         Me.txtPrimerNombre.Location = New System.Drawing.Point(109, 45)
         Me.txtPrimerNombre.Name = "txtPrimerNombre"
-        Me.txtPrimerNombre.ReadOnly = True
         Me.txtPrimerNombre.Size = New System.Drawing.Size(158, 20)
-        Me.txtPrimerNombre.TabIndex = 4
+        Me.txtPrimerNombre.TabIndex = 1
         '
         'Label3
         '
@@ -101,12 +112,10 @@ Partial Class frmTramite
         '
         'txtSegundoNombre
         '
-        Me.txtSegundoNombre.Enabled = False
         Me.txtSegundoNombre.Location = New System.Drawing.Point(109, 71)
         Me.txtSegundoNombre.Name = "txtSegundoNombre"
-        Me.txtSegundoNombre.ReadOnly = True
         Me.txtSegundoNombre.Size = New System.Drawing.Size(158, 20)
-        Me.txtSegundoNombre.TabIndex = 5
+        Me.txtSegundoNombre.TabIndex = 2
         '
         'Label4
         '
@@ -119,12 +128,10 @@ Partial Class frmTramite
         '
         'txtPrimerApellido
         '
-        Me.txtPrimerApellido.Enabled = False
         Me.txtPrimerApellido.Location = New System.Drawing.Point(109, 97)
         Me.txtPrimerApellido.Name = "txtPrimerApellido"
-        Me.txtPrimerApellido.ReadOnly = True
         Me.txtPrimerApellido.Size = New System.Drawing.Size(158, 20)
-        Me.txtPrimerApellido.TabIndex = 6
+        Me.txtPrimerApellido.TabIndex = 3
         '
         'Label5
         '
@@ -137,12 +144,10 @@ Partial Class frmTramite
         '
         'txtSegundoApellido
         '
-        Me.txtSegundoApellido.Enabled = False
         Me.txtSegundoApellido.Location = New System.Drawing.Point(109, 123)
         Me.txtSegundoApellido.Name = "txtSegundoApellido"
-        Me.txtSegundoApellido.ReadOnly = True
         Me.txtSegundoApellido.Size = New System.Drawing.Size(158, 20)
-        Me.txtSegundoApellido.TabIndex = 7
+        Me.txtSegundoApellido.TabIndex = 4
         '
         'Label6
         '
@@ -176,7 +181,7 @@ Partial Class frmTramite
         Me.txtCorreo.Location = New System.Drawing.Point(109, 201)
         Me.txtCorreo.Name = "txtCorreo"
         Me.txtCorreo.Size = New System.Drawing.Size(200, 20)
-        Me.txtCorreo.TabIndex = 3
+        Me.txtCorreo.TabIndex = 7
         '
         'GroupBox1
         '
@@ -199,7 +204,7 @@ Partial Class frmTramite
         Me.GroupBox1.Location = New System.Drawing.Point(25, 25)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(323, 237)
-        Me.GroupBox1.TabIndex = 16
+        Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Responsable"
         '
@@ -209,7 +214,7 @@ Partial Class frmTramite
         Me.txtTelefonoMovil.Mask = "0000-0000"
         Me.txtTelefonoMovil.Name = "txtTelefonoMovil"
         Me.txtTelefonoMovil.Size = New System.Drawing.Size(100, 20)
-        Me.txtTelefonoMovil.TabIndex = 17
+        Me.txtTelefonoMovil.TabIndex = 6
         '
         'txtTelefonoFijo
         '
@@ -217,7 +222,7 @@ Partial Class frmTramite
         Me.txtTelefonoFijo.Mask = "0000-0000"
         Me.txtTelefonoFijo.Name = "txtTelefonoFijo"
         Me.txtTelefonoFijo.Size = New System.Drawing.Size(100, 20)
-        Me.txtTelefonoFijo.TabIndex = 16
+        Me.txtTelefonoFijo.TabIndex = 5
         '
         'lblInfo
         '
@@ -227,7 +232,7 @@ Partial Class frmTramite
         Me.lblInfo.ForeColor = System.Drawing.Color.Red
         Me.lblInfo.Location = New System.Drawing.Point(0, 0)
         Me.lblInfo.Name = "lblInfo"
-        Me.lblInfo.Size = New System.Drawing.Size(840, 30)
+        Me.lblInfo.Size = New System.Drawing.Size(1018, 30)
         Me.lblInfo.TabIndex = 17
         Me.lblInfo.Text = "Solo números"
         Me.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -240,53 +245,36 @@ Partial Class frmTramite
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(395, 218)
-        Me.FlowLayoutPanel1.TabIndex = 18
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(317, 153)
+        Me.FlowLayoutPanel1.TabIndex = 0
         Me.FlowLayoutPanel1.WrapContents = False
         '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.FlowLayoutPanel1)
-        Me.GroupBox2.Location = New System.Drawing.Point(354, 25)
+        Me.GroupBox2.Location = New System.Drawing.Point(25, 268)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(401, 237)
-        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.Size = New System.Drawing.Size(323, 172)
+        Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Requisitos ( * opcionales )"
         '
         'btnCrearTramite
         '
         Me.btnCrearTramite.Enabled = False
-        Me.btnCrearTramite.Location = New System.Drawing.Point(357, 300)
+        Me.btnCrearTramite.Location = New System.Drawing.Point(492, 365)
         Me.btnCrearTramite.Name = "btnCrearTramite"
-        Me.btnCrearTramite.Size = New System.Drawing.Size(123, 34)
-        Me.btnCrearTramite.TabIndex = 21
+        Me.btnCrearTramite.Size = New System.Drawing.Size(141, 53)
+        Me.btnCrearTramite.TabIndex = 4
         Me.btnCrearTramite.Text = "Verificar requisitos"
         Me.btnCrearTramite.UseVisualStyleBackColor = True
         '
-        'txtInfoAdicional
-        '
-        Me.txtInfoAdicional.Location = New System.Drawing.Point(25, 284)
-        Me.txtInfoAdicional.Multiline = True
-        Me.txtInfoAdicional.Name = "txtInfoAdicional"
-        Me.txtInfoAdicional.Size = New System.Drawing.Size(323, 50)
-        Me.txtInfoAdicional.TabIndex = 22
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(25, 268)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(107, 13)
-        Me.Label9.TabIndex = 16
-        Me.Label9.Text = "Información adicional"
-        '
         'btnCambirTramite
         '
-        Me.btnCambirTramite.Location = New System.Drawing.Point(481, 300)
+        Me.btnCambirTramite.Location = New System.Drawing.Point(641, 365)
         Me.btnCambirTramite.Name = "btnCambirTramite"
-        Me.btnCambirTramite.Size = New System.Drawing.Size(123, 34)
-        Me.btnCambirTramite.TabIndex = 23
+        Me.btnCambirTramite.Size = New System.Drawing.Size(141, 53)
+        Me.btnCambirTramite.TabIndex = 5
         Me.btnCambirTramite.Text = "Cambiar trámite"
         Me.btnCambirTramite.UseVisualStyleBackColor = True
         '
@@ -294,43 +282,163 @@ Partial Class frmTramite
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.GroupBox3)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.cboEnviarA)
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.btnCambirTramite)
         Me.Panel1.Controls.Add(Me.GroupBox2)
-        Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Controls.Add(Me.btnCrearTramite)
-        Me.Panel1.Controls.Add(Me.txtInfoAdicional)
-        Me.Panel1.Location = New System.Drawing.Point(31, 64)
+        Me.Panel1.Location = New System.Drawing.Point(77, 46)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(781, 355)
-        Me.Panel1.TabIndex = 24
+        Me.Panel1.Size = New System.Drawing.Size(863, 456)
+        Me.Panel1.TabIndex = 0
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.txtCantidadDocs)
+        Me.GroupBox3.Controls.Add(Me.cboRepresentante)
+        Me.GroupBox3.Controls.Add(Me.Label14)
+        Me.GroupBox3.Controls.Add(Me.Label15)
+        Me.GroupBox3.Controls.Add(Me.Label13)
+        Me.GroupBox3.Controls.Add(Me.Label12)
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Controls.Add(Me.Label9)
+        Me.GroupBox3.Controls.Add(Me.txtCodigoTramiteS)
+        Me.GroupBox3.Controls.Add(Me.txtMontoRecibo)
+        Me.GroupBox3.Controls.Add(Me.txtNumeroRecibo)
+        Me.GroupBox3.Controls.Add(Me.txtInfoAdicional)
+        Me.GroupBox3.Location = New System.Drawing.Point(354, 25)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(450, 237)
+        Me.GroupBox3.TabIndex = 1
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Informacón Adicional"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(7, 25)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(125, 13)
+        Me.Label11.TabIndex = 23
+        Me.Label11.Text = "Número de Recibo(TGR)"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(7, 152)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(30, 13)
+        Me.Label9.TabIndex = 23
+        Me.Label9.Text = "Nota"
+        '
+        'txtNumeroRecibo
+        '
+        Me.txtNumeroRecibo.Location = New System.Drawing.Point(138, 19)
+        Me.txtNumeroRecibo.Name = "txtNumeroRecibo"
+        Me.txtNumeroRecibo.Size = New System.Drawing.Size(150, 20)
+        Me.txtNumeroRecibo.TabIndex = 0
+        '
+        'txtInfoAdicional
+        '
+        Me.txtInfoAdicional.Location = New System.Drawing.Point(138, 152)
+        Me.txtInfoAdicional.Multiline = True
+        Me.txtInfoAdicional.Name = "txtInfoAdicional"
+        Me.txtInfoAdicional.Size = New System.Drawing.Size(290, 69)
+        Me.txtInfoAdicional.TabIndex = 5
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(361, 315)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(46, 13)
+        Me.Label10.TabIndex = 25
+        Me.Label10.Text = "Enviar a"
         '
         'cboEnviarA
         '
         Me.cboEnviarA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboEnviarA.FormattingEnabled = True
-        Me.cboEnviarA.Location = New System.Drawing.Point(406, 271)
+        Me.cboEnviarA.Location = New System.Drawing.Point(492, 312)
         Me.cboEnviarA.Name = "cboEnviarA"
-        Me.cboEnviarA.Size = New System.Drawing.Size(198, 21)
-        Me.cboEnviarA.TabIndex = 24
+        Me.cboEnviarA.Size = New System.Drawing.Size(290, 21)
+        Me.cboEnviarA.TabIndex = 3
         '
-        'Label10
+        'txtMontoRecibo
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(354, 275)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(46, 13)
-        Me.Label10.TabIndex = 25
-        Me.Label10.Text = "Enviar a"
+        Me.txtMontoRecibo.Location = New System.Drawing.Point(138, 45)
+        Me.txtMontoRecibo.Name = "txtMontoRecibo"
+        Me.txtMontoRecibo.Size = New System.Drawing.Size(150, 20)
+        Me.txtMontoRecibo.TabIndex = 1
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(7, 48)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(118, 13)
+        Me.Label12.TabIndex = 23
+        Me.Label12.Text = "Monto de Recibo(TGR)"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(7, 74)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(77, 13)
+        Me.Label13.TabIndex = 23
+        Me.Label13.Text = "Cantidad Docs"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(7, 100)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(101, 13)
+        Me.Label14.TabIndex = 23
+        Me.Label14.Text = "Tipo Representante"
+        '
+        'txtCodigoTramiteS
+        '
+        Me.txtCodigoTramiteS.Location = New System.Drawing.Point(138, 123)
+        Me.txtCodigoTramiteS.Name = "txtCodigoTramiteS"
+        Me.txtCodigoTramiteS.Size = New System.Drawing.Size(290, 20)
+        Me.txtCodigoTramiteS.TabIndex = 4
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(7, 126)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(78, 13)
+        Me.Label15.TabIndex = 23
+        Me.Label15.Text = "Codigo Trámite"
+        '
+        'cboRepresentante
+        '
+        Me.cboRepresentante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRepresentante.FormattingEnabled = True
+        Me.cboRepresentante.Location = New System.Drawing.Point(138, 97)
+        Me.cboRepresentante.Name = "cboRepresentante"
+        Me.cboRepresentante.Size = New System.Drawing.Size(290, 21)
+        Me.cboRepresentante.TabIndex = 3
+        '
+        'txtCantidadDocs
+        '
+        Me.txtCantidadDocs.Location = New System.Drawing.Point(138, 71)
+        Me.txtCantidadDocs.Name = "txtCantidadDocs"
+        Me.txtCantidadDocs.Size = New System.Drawing.Size(47, 20)
+        Me.txtCantidadDocs.TabIndex = 2
+        Me.txtCantidadDocs.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'frmTramite
         '
         Me.AccessibleDescription = ""
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(840, 458)
+        Me.ClientSize = New System.Drawing.Size(1018, 536)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lblInfo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -343,6 +451,9 @@ Partial Class frmTramite
         Me.GroupBox2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        CType(Me.txtCantidadDocs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -365,12 +476,23 @@ Partial Class frmTramite
     Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents btnCrearTramite As System.Windows.Forms.Button
-    Friend WithEvents txtInfoAdicional As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents txtTelefonoFijo As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtTelefonoMovil As System.Windows.Forms.MaskedTextBox
     Friend WithEvents btnCambirTramite As System.Windows.Forms.Button
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents cboEnviarA As System.Windows.Forms.ComboBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents txtNumeroRecibo As System.Windows.Forms.TextBox
+    Friend WithEvents txtInfoAdicional As System.Windows.Forms.TextBox
+    Friend WithEvents cboRepresentante As System.Windows.Forms.ComboBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents txtCodigoTramiteS As System.Windows.Forms.TextBox
+    Friend WithEvents txtMontoRecibo As System.Windows.Forms.TextBox
+    Friend WithEvents txtCantidadDocs As System.Windows.Forms.NumericUpDown
 End Class
