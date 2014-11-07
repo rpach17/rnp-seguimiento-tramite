@@ -82,6 +82,14 @@ Public Class frmDescargarDoc
         Dim MSDocumento As New Document
 
         Try
+            ' Intentar eliminar un archivo que ya existe para crearlo de nuevo
+            My.Computer.FileSystem.DeleteFile(filename)
+
+            ' Si el archivo no existe se levanta una excepción, por esa razón se ejecuta la eliminación en un bloque seguro
+        Catch ex As Exception
+        End Try
+
+        Try
             Using fs As New FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write)
                 fs.Write(a.ARCHIVO, 0, K)
                 fs.Close()
