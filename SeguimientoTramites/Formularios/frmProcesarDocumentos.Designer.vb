@@ -58,6 +58,7 @@ Partial Class frmProcesarDocumentos
         Me.Column1.HeaderText = "IdDetalleSeguimiento"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
+        Me.Column1.Visible = False
         Me.Column1.Width = 132
         '
         'Column8
@@ -65,6 +66,7 @@ Partial Class frmProcesarDocumentos
         Me.Column8.HeaderText = "idGrupoSalto"
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
+        Me.Column8.Visible = False
         Me.Column8.Width = 93
         '
         'Column5
@@ -72,6 +74,7 @@ Partial Class frmProcesarDocumentos
         Me.Column5.HeaderText = "IdSalto"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
+        Me.Column5.Visible = False
         Me.Column5.Width = 65
         '
         'Column9
@@ -86,6 +89,7 @@ Partial Class frmProcesarDocumentos
         Me.Column7.HeaderText = "tieneDesicion"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
+        Me.Column7.Visible = False
         Me.Column7.Width = 96
         '
         'Column6
@@ -93,6 +97,7 @@ Partial Class frmProcesarDocumentos
         Me.Column6.HeaderText = "idFormulario"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
+        Me.Column6.Visible = False
         Me.Column6.Width = 88
         '
         'Column10
@@ -100,6 +105,7 @@ Partial Class frmProcesarDocumentos
         Me.Column10.HeaderText = "idTramite"
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
+        Me.Column10.Visible = False
         Me.Column10.Width = 75
         '
         'Column2
