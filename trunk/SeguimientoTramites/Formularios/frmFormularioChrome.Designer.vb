@@ -58,6 +58,7 @@ Partial Class frmFormularioChrome
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(401, 20)
         Me.TextBox1.TabIndex = 3
+        Me.TextBox1.Visible = False
         '
         'WebControl1
         '
@@ -68,7 +69,7 @@ Partial Class frmFormularioChrome
         Me.WebControl1.Size = New System.Drawing.Size(759, 353)
         Me.WebControl1.TabIndex = 4
         '
-        'frmFormulario
+        'frmFormularioChrome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -81,7 +82,7 @@ Partial Class frmFormularioChrome
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmFormulario"
+        Me.Name = "frmFormularioChrome"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Formulario"
         Me.ResumeLayout(False)

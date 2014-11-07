@@ -496,7 +496,8 @@
         Dim idds = (From ds In ctx.DETALLE_SEGUIMIENTO
                      Join f In ctx.FORMULARIOS On ds.IDSALTO Equals f.IDSALTO
                      Where ds.TRAMITES.IDTRAMITE = idTramite AndAlso f.IDFORMULARIO = idFormulario
-                     Select ds.IDDETALLE_SEGUIMIENTO).SingleOrDefault
+                     Order By ds.IDDETALLE_SEGUIMIENTO Descending
+                     Select ds.IDDETALLE_SEGUIMIENTO).FirstOrDefault
         Dim lista = (From m In ctx.MARCADORES
                      Join d In ctx.DATOS_CAMPOS_FORM On m.IDCAMPO_FORM Equals d.IDCAMPO_FORM
                      Where d.IDDETALLE_SEGUIMIENTO = idds
