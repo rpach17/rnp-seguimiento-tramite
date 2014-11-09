@@ -3,6 +3,16 @@ Imports Microsoft.Office.Interop.Word
 Imports System.IO
 
 Public Class frmDescargarDoc
+    Private idf As Integer
+    Public Property Idf1 As Integer
+        Get
+            Return idf
+        End Get
+        Set(ByVal value As Integer)
+            idf = value
+        End Set
+    End Property
+
     Private iddseguimiento As Integer
     Public Property Iddseguimiento1 As Integer
         Get
@@ -65,52 +75,59 @@ Public Class frmDescargarDoc
 
 
     Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
-        Dim filename As String
-
-        FolderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments
-        If FolderBrowserDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-            filename = String.Format("{0}\{1}.docx", FolderBrowserDialog1.SelectedPath, NombreDoc1)
-        End If
-
-        Dim a As ARCHIVOS = EntityTablas.DescargarArchivo(ids)
-        Dim marcadores_datos = EntityTablas.Marcadores(idTramite, a.IDFORMULARIO)
-
-        Dim K As Long = UBound(a.ARCHIVO)
-
-        ' Se renombra el archivo, lo que causa que al abrir otro, no estoy invocando su nombre
-        Dim MSWord As New Word.Application
-        Dim MSDocumento As New Document
+        Dim filename As String = ""
 
         Try
-            ' Intentar eliminar un archivo que ya existe para crearlo de nuevo
-            My.Computer.FileSystem.DeleteFile(filename)
+            ' Intentar crear una aplicación de Word (generará una excepción si WOrd no está instalado
+            Dim MSWord As New Word.Application
+            Dim MSDocumento As New Document
 
-            ' Si el archivo no existe se levanta una excepción, por esa razón se ejecuta la eliminación en un bloque seguro
-        Catch ex As Exception
-        End Try
-
-        Try
-            Using fs As New FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write)
-                fs.Write(a.ARCHIVO, 0, K)
-                fs.Close()
-            End Using
-
-            MSDocumento = MSWord.Documents.Open(filename)
-            For Each elemento In marcadores_datos
-                MSDocumento.Bookmarks.Item(elemento.MARCADOR).Range.Text = elemento.VALOR
-            Next
-            MSDocumento.Save()
-
-            Dim msg As String = String.Format("Documento guardado en: {0} {1} {0}{0}¿Desea abrirlo?", vbCrLf, filename)
-            If MsgBox(msg, MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirme") = MsgBoxResult.Yes Then
-                Process.Start(filename)
+            ' Se obtiene la ruta donde se almacenará el documento junto con su nombre
+            FolderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments
+            If FolderBrowserDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+                filename = String.Format("{0}\{1}.docx", FolderBrowserDialog1.SelectedPath, NombreDoc1)
             End If
-            EntityTablas.ActualizarDetalleTramiteDoc(iddseguimiento, cboUserDestino.SelectedValue)
 
+            ' Se obtienen los marcadores del archivo de word con el cual se enlazará
+            Dim a As ARCHIVOS = EntityTablas.DescargarArchivo(ids)
+            Dim marcadores_datos = EntityTablas.Marcadores(idTramite, a.IDFORMULARIO)
+
+            Dim K As Long = UBound(a.ARCHIVO)
+
+            Try
+                ' Intentar eliminar un archivo que ya existe para crearlo de nuevo
+                My.Computer.FileSystem.DeleteFile(filename)
+
+                ' Si el archivo no existe se levanta una excepción, por esa razón se ejecuta la eliminación en un bloque seguro
+            Catch ex As Exception
+            End Try
+
+            Try
+                Using fs As New FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write)
+                    fs.Write(a.ARCHIVO, 0, K)
+                    fs.Close()
+                End Using
+
+                MSDocumento = MSWord.Documents.Open(filename)
+                For Each elemento In marcadores_datos
+                    MSDocumento.Bookmarks.Item(elemento.MARCADOR).Range.Text = elemento.VALOR
+                Next
+                MSDocumento.Save()
+
+                Dim msg As String = String.Format("Documento guardado en: {0} {1} {0}{0}¿Desea abrirlo?", vbCrLf, filename)
+                If MsgBox(msg, MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirme") = MsgBoxResult.Yes Then
+                    Process.Start(filename)
+                End If
+                EntityTablas.ActualizarDetalleTramiteDoc(iddseguimiento, cboUserDestino.SelectedValue)
+
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+            Finally
+                MSDocumento.Close()
+            End Try
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-        Finally
-            MSDocumento.Close()
+            ' Excepción si Word no está instalado
+            MsgBox(ex.Message)
         End Try
     End Sub
 
