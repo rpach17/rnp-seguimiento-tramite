@@ -18,6 +18,7 @@
                 If EntityTablas.SaltoDescargable(ids) Then
                     With frmDescargarDoc
                         .Iddseguimiento1 = idds
+                        .Idf1 = idf
                         .Ids1 = ids
                         .IdTramite1 = idt
                         .NombreDoc1 = codTram
