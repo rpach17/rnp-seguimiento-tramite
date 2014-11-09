@@ -94,7 +94,7 @@
         grid.Rows.Clear()
 
         For Each tramite In tramites
-            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDGRUPO_SALTOS, tramite.IDSALTO, tramite.NUMERO_SALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.IDTRAMITE, tramite.CODIGOTRAMITE, tramite.TITULO, tramite.NOMBRE)
+            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDGRUPO_SALTOS, tramite.IDSALTO, tramite.NUMERO_SALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.IDTRAMITE, tramite.CODIGOTRAMITE, tramite.NOMBRE, tramite.TITULO)
         Next
 
         'grid.Columns(0).Visible = False
