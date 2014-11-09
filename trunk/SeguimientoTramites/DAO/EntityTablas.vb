@@ -89,12 +89,12 @@
                         Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
                         Where dt.IDUSUARIO = SesionActiva.IdUsuario And dt.FECHA_ENTREGA Is Nothing And dt.IDUSUARIO_DESTINO Is Nothing AndAlso f.ACTIVO = 1 AndAlso s.ULTIMOSALTO = 0
                         Order By dt.IDDETALLE_SEGUIMIENTO
-                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDGRUPO_SALTOS, s.IDSALTO, s.NUMERO_SALTO, s.DECISION, f.IDFORMULARIO, dt.TRAMITES.IDTRAMITE, dt.TRAMITES.CODIGOTRAMITE, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
+                        Select dt.IDDETALLE_SEGUIMIENTO, s.IDGRUPO_SALTOS, s.IDSALTO, s.NUMERO_SALTO, s.DECISION, f.IDFORMULARIO, dt.TRAMITES.IDTRAMITE, dt.TRAMITES.CODIGOTRAMITE, f.TITULO, dt.TRAMITES.GESTIONES.NOMBRE).ToList()
 
         grid.Rows.Clear()
 
         For Each tramite In tramites
-            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDGRUPO_SALTOS, tramite.IDSALTO, tramite.NUMERO_SALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.IDTRAMITE, tramite.CODIGOTRAMITE, tramite.NOMBRE)
+            grid.Rows.Add(tramite.IDDETALLE_SEGUIMIENTO, tramite.IDGRUPO_SALTOS, tramite.IDSALTO, tramite.NUMERO_SALTO, tramite.DECISION, tramite.IDFORMULARIO, tramite.IDTRAMITE, tramite.CODIGOTRAMITE, tramite.TITULO, tramite.NOMBRE)
         Next
 
         'grid.Columns(0).Visible = False
@@ -121,6 +121,10 @@
             .FECHA_PROCESO = fecha
         End With
         ctx.SaveChanges()
+        If SesionActiva.IdUsuario = idUserDestino Then
+            frmRecepcionDocs.RecepcionarTramite(detalle.TRAMITES.CODIGOTRAMITE)
+        End If
+
     End Sub
 
     Shared Sub ErrorTramite(ByVal iddt As Integer, ByVal ide As Integer)
@@ -129,22 +133,15 @@
                                   Where dt.IDDETALLE_SEGUIMIENTO = iddt
                                   Select t).FirstOrDefault
         Dim err As ERRORES_GESTIONES = (From e In ctx.ERRORES_GESTIONES Where e.IDERROR = ide Select e).FirstOrDefault
+        Try
+            tramite.ERRORES_GESTIONES.Add(err)
+            ctx.SaveChanges()
+        Catch ex As Exception
 
-        tramite.ERRORES_GESTIONES.Add(err)
-        ctx.SaveChanges()
+        End Try        
     End Sub
 
-    Shared Sub CargarUsuariosDestino(cbo As ComboBox, idg As Integer)
-        Dim usuarios = (From u In ctx.DETALLE_USUARIO_SALTOS
-                        Join s In ctx.SALTOS On u.IDSALTO Equals s.IDSALTO
-                        Where s.GRUPO_SALTOS.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso s.GRUPO_SALTOS.IDGESTION = idg AndAlso s.GRUPO_SALTOS.ACTIVO = 1 AndAlso s.NUMERO_SALTO = 2
-                        Order By u.PRIORIDAD Descending
-                        Select u.IDUSUARIO, nombre = u.USUARIOS.NOMBRE + " " + u.USUARIOS.APELLIDOS)
 
-        cbo.DataSource = usuarios
-        cbo.DisplayMember = "nombre"
-        cbo.ValueMember = "IDUSUARIO"
-    End Sub
 
 #End Region
 
@@ -163,9 +160,9 @@
         ' 2- No existe y vienen los datos del RNP (INSERT)
         ' 0- No existe en local ni en DB de RNP (Mostrar mensaje)
 
-        Dim conteo As Integer = (From r In ctx.RESPONSABLE.ToList
+        Dim conteo As Integer = (From r In ctx.RESPONSABLE
                                 Where r.NUMERO_IDENTIDAD = identidad
-                                Select r).Count
+                                Select r).Count()
         If conteo = 1 Then
             Dim respon = (From r In ctx.RESPONSABLE
                           Join i In ctx.IDENTIFICACION On r.NUMERO_IDENTIDAD Equals i.IDENTIDAD
@@ -224,7 +221,8 @@
             ctx.SaveChanges()
             Return res.IDRESPONSABLE 'Después de SaveChanges(), EntityFramework carga el objeto 'res' con los datos y así retornamos el ID recien agregado
         Catch ex As UpdateException
-            Return ex.Message
+            MsgBox(ex.Message)
+            Return 0
         End Try
     End Function
 
@@ -355,6 +353,18 @@
         cbo.ValueMember = "IDTIPO_REPRESENTANTE"
         cbo.DisplayMember = "DESCRIPCION"
         cbo.SelectedItem = -1
+    End Sub
+
+    Shared Sub CargarUsuariosDestino(cbo As ComboBox, idg As Integer)
+        Dim usuarios = (From u In ctx.DETALLE_USUARIO_SALTOS
+                        Join s In ctx.SALTOS On u.IDSALTO Equals s.IDSALTO
+                        Where s.GRUPO_SALTOS.IDDETALLE_SUCURSAL_OFICINA = SesionActiva.IdSucursalOficina AndAlso s.GRUPO_SALTOS.IDGESTION = idg AndAlso s.GRUPO_SALTOS.ACTIVO = 1 AndAlso s.NUMERO_SALTO = 2
+                        Order By u.PRIORIDAD Descending
+                        Select u.IDUSUARIO, nombre = u.USUARIOS.NOMBRE + " " + u.USUARIOS.APELLIDOS)
+
+        cbo.DataSource = usuarios
+        cbo.DisplayMember = "nombre"
+        cbo.ValueMember = "IDUSUARIO"
     End Sub
 
 #End Region
