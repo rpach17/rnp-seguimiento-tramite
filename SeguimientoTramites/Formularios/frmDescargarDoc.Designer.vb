@@ -33,7 +33,7 @@ Partial Class frmDescargarDoc
         Me.btnGenerar.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.btnGenerar.Image = Global.SeguimientoTramites.My.Resources.Resources.document_check_compatibility
         Me.btnGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnGenerar.Location = New System.Drawing.Point(145, 44)
+        Me.btnGenerar.Location = New System.Drawing.Point(158, 96)
         Me.btnGenerar.Name = "btnGenerar"
         Me.btnGenerar.Size = New System.Drawing.Size(230, 58)
         Me.btnGenerar.TabIndex = 0
@@ -44,7 +44,7 @@ Partial Class frmDescargarDoc
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.Label1.Location = New System.Drawing.Point(62, 121)
+        Me.Label1.Location = New System.Drawing.Point(47, 55)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 20)
         Me.Label1.TabIndex = 8
@@ -54,7 +54,7 @@ Partial Class frmDescargarDoc
         '
         Me.cboUserDestino.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cboUserDestino.FormattingEnabled = True
-        Me.cboUserDestino.Location = New System.Drawing.Point(145, 118)
+        Me.cboUserDestino.Location = New System.Drawing.Point(130, 52)
         Me.cboUserDestino.Name = "cboUserDestino"
         Me.cboUserDestino.Size = New System.Drawing.Size(348, 28)
         Me.cboUserDestino.TabIndex = 7
@@ -74,6 +74,7 @@ Partial Class frmDescargarDoc
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Generación de documento"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnGenerar As System.Windows.Forms.Button

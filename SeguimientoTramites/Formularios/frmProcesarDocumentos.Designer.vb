@@ -32,6 +32,7 @@ Partial Class frmProcesarDocumentos
         Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombreFormulario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewButtonColumn()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -43,7 +44,7 @@ Partial Class frmProcesarDocumentos
         Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvTramites.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column8, Me.Column5, Me.Column9, Me.Column7, Me.Column6, Me.Column10, Me.Column2, Me.Column3, Me.Column4})
+        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column8, Me.Column5, Me.Column9, Me.Column7, Me.Column6, Me.Column10, Me.Column2, Me.Column3, Me.nombreFormulario, Me.Column4})
         Me.dgvTramites.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvTramites.Location = New System.Drawing.Point(0, 0)
         Me.dgvTramites.MultiSelect = False
@@ -122,6 +123,13 @@ Partial Class frmProcesarDocumentos
         Me.Column3.ReadOnly = True
         Me.Column3.Width = 67
         '
+        'nombreFormulario
+        '
+        Me.nombreFormulario.HeaderText = "Nombre de Formulario"
+        Me.nombreFormulario.Name = "nombreFormulario"
+        Me.nombreFormulario.ReadOnly = True
+        Me.nombreFormulario.Width = 123
+        '
         'Column4
         '
         Me.Column4.HeaderText = "Acción"
@@ -153,5 +161,6 @@ Partial Class frmProcesarDocumentos
     Friend WithEvents Column10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents nombreFormulario As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewButtonColumn
 End Class

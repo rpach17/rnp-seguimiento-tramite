@@ -30,7 +30,7 @@ Public Class frmRecepcionDocs
         End If
     End Sub
 
-    Private Sub RecepcionarTramite(ByVal barcode As String)
+    Public Sub RecepcionarTramite(ByVal barcode As String)
         Try
             Using myCMD As New OracleCommand() With
                 {
