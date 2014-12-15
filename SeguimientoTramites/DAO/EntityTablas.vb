@@ -1,5 +1,8 @@
-﻿Public Class EntityTablas
+﻿Imports Oracle.DataAccess.Client
+Imports Oracle.DataAccess.Types
+Public Class EntityTablas
     Shared ctx As New Entidades(My.Settings.CadenaAppcaSeguimiento)
+    Dim cnn As New OracleConnection(My.Settings.MiConexion)
 
 #Region "Login"
     Public Shared Function Login(ByVal user As String, ByVal pass As String) As Boolean
@@ -138,7 +141,7 @@
             ctx.SaveChanges()
         Catch ex As Exception
 
-        End Try        
+        End Try
     End Sub
 
 
@@ -164,15 +167,19 @@
                                 Where r.NUMERO_IDENTIDAD = identidad
                                 Select r).Count()
         If conteo = 1 Then
+            'Dim respon = (From r In ctx.RESPONSABLE
+            '              Join i In ctx.IDENTIFICACION On r.NUMERO_IDENTIDAD Equals i.IDENTIDAD
+            '                   Where r.NUMERO_IDENTIDAD = identidad
+            '                   Select i.PRIMER_NOMBRE, i.SEGUNDO_NOMBRE, i.PRIMER_APELLIDO, _
+            '                   i.SEGUNDO_APELLIDO, r.TELEFONO, r.CELULAR, r.CORREO).SingleOrDefault
             Dim respon = (From r In ctx.RESPONSABLE
-                          Join i In ctx.IDENTIFICACION On r.NUMERO_IDENTIDAD Equals i.IDENTIDAD
-                               Where r.NUMERO_IDENTIDAD = identidad
-                               Select i.PRIMER_NOMBRE, i.SEGUNDO_NOMBRE, i.PRIMER_APELLIDO, _
-                               i.SEGUNDO_APELLIDO, r.TELEFONO, r.CELULAR, r.CORREO).SingleOrDefault
+                          Where r.NUMERO_IDENTIDAD = identidad
+                          Select r.NOMBRE, r.PRIMER_APELLIDO, r.SEGUNDO_APELLIDO, r.TELEFONO, r.CELULAR, r.CORREO).FirstOrDefault
 
             If respon IsNot Nothing Then
-                txtPN.Text = respon.PRIMER_NOMBRE
-                txtSN.Text = respon.SEGUNDO_NOMBRE
+                Dim n As String() = respon.NOMBRE.Split(New [Char]() {" "c})
+                txtPN.Text = n(0)
+                txtSN.Text = n(1)
                 txtPA.Text = respon.PRIMER_APELLIDO
                 txtSA.Text = respon.SEGUNDO_APELLIDO
                 txtT.Text = respon.TELEFONO
@@ -196,16 +203,29 @@
                 Return 2
                 Exit Function
             Else
-                Dim c = ctx.ExecuteStoreQuery(Of IDENTIFICACION)("select * from IDENTIFICACION where IDENTIDAD='{0}'", identidad).ToList
-                For Each dato In c
-                    txtPN.Text = dato.PRIMER_NOMBRE
-                    txtSN.Text = dato.SEGUNDO_NOMBRE
-                    txtPA.Text = dato.PRIMER_APELLIDO
-                    txtSA.Text = dato.SEGUNDO_APELLIDO
+                'Using myCMD As New OracleCommand() With {.Connection = cnn, .CommandText = "SP_RESPONSABLE_BUSQUEDA", .CommandType = CommandType.StoredProcedure}
+                '    myCMD.Parameters.Add("VIDENTIDAD", OracleDbType.NVarchar2, 13, Nothing, ParameterDirection.Input).Value = identidad
+                '    cnn.Open()
+                '    myCMD.ExecuteNonQuery()
+                'End Using
+
+                'ctx.ExecuteStoreQuery(Of IDENTIFICACION)("EXECUTE ('{0}')", identidad)
+                Dim RES = (From r In ctx.RESPONSABLE
+                          Where r.NUMERO_IDENTIDAD = identidad
+                          Select r).FirstOrDefault
+                Try
+                    Dim n As String() = RES.NOMBRE.Split(New [Char]() {" "c})
+                    txtPN.Text = n(0)
+                    txtSN.Text = n(1)
+                    txtPA.Text = RES.PRIMER_APELLIDO
+                    txtSA.Text = RES.SEGUNDO_APELLIDO
                     txtT.Text = ""
                     txtC.Text = ""
                     txtEmail.Text = ""
-                Next
+
+                Catch ex As Exception
+
+                End Try
             End If
             'Buscar en las BD del registro
             lbl.Text = "Numero de identidad no encontrado"
@@ -297,22 +317,22 @@
             tramiteEntregar = (From t In ctx.DETALLE_SEGUIMIENTO
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
                                Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
-                               Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1
+                               Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1 AndAlso f.ACTIVO = 1
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.TRAMITES.IDTRAMITE, t.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.TRAMITES.IDTRAMITE, t.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD, CiudadanoN = t.TRAMITES.RESPONSABLE.NOMBRE, t.TRAMITES.RESPONSABLE.PRIMER_APELLIDO, t.TRAMITES.RESPONSABLE.SEGUNDO_APELLIDO).ToList()
         Else
             tramiteEntregar = (From t In ctx.DETALLE_SEGUIMIENTO
                                Join s In ctx.SALTOS On t.IDSALTO Equals s.IDSALTO
                                Join f In ctx.FORMULARIOS On s.IDSALTO Equals f.IDSALTO
-                               Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1 AndAlso (t.TRAMITES.CODIGOTRAMITE.StartsWith(busqueda) OrElse t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD.StartsWith(busqueda))
+                               Where t.TRAMITES.ACTIVO = 1 AndAlso t.IDUSUARIO = SesionActiva.IdUsuario AndAlso s.ULTIMOSALTO = 1 AndAlso f.ACTIVO = 1 AndAlso (t.TRAMITES.CODIGOTRAMITE.StartsWith(busqueda) OrElse t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD.StartsWith(busqueda))
                                Order By t.TRAMITES.CODIGOTRAMITE
-                               Select t.TRAMITES.IDTRAMITE, t.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD).ToList()
+                               Select t.TRAMITES.IDTRAMITE, t.IDDETALLE_SEGUIMIENTO, s.IDSALTO, f.IDFORMULARIO, t.TRAMITES.CODIGOTRAMITE, t.TRAMITES.GESTIONES.NOMBRE, t.TRAMITES.RESPONSABLE.NUMERO_IDENTIDAD, CiudadanoN = t.TRAMITES.RESPONSABLE.NOMBRE, t.TRAMITES.RESPONSABLE.PRIMER_APELLIDO, t.TRAMITES.RESPONSABLE.SEGUNDO_APELLIDO).ToList()
         End If
 
         grid.Rows.Clear()
         For Each tramite In tramiteEntregar
             grid.Rows.Add(tramite.IDTRAMITE, tramite.IDDETALLE_SEGUIMIENTO, tramite.IDSALTO, tramite.IDFORMULARIO, tramite.CODIGOTRAMITE, tramite.NOMBRE, tramite.NUMERO_IDENTIDAD,
-                          "Entregar Trámite")
+                          String.Format("{0} {1} {2}", tramite.CiudadanoN, tramite.PRIMER_APELLIDO, tramite.SEGUNDO_APELLIDO), "Entregar Trámite")
         Next
         'grid.DataSource = saltoEntregar
     End Sub
@@ -491,13 +511,12 @@
         End If
     End Function
 
-    Shared Function DescargarArchivo(ByVal idSalto As Integer)
+    Shared Function DescargarArchivo(ByVal idFormulario As Integer)
 
-        Dim idA = (From s In ctx.SALTOS
-                From f In s.FORMULARIOS
-                From a In ctx.ARCHIVOS
-                Where s.IDSALTO = idSalto AndAlso f.IDFORMULARIO = a.CAMPOS_FORM.IDFORMULARIO
-                Select a).SingleOrDefault
+        Dim idA = (From f In ctx.FORMULARIOS
+                   From a In ctx.ARCHIVOS
+                   Where f.IDFORMULARIO = idFormulario AndAlso f.IDFORMULARIO = a.CAMPOS_FORM.IDFORMULARIO
+                Select a).FirstOrDefault
 
         Return idA
     End Function

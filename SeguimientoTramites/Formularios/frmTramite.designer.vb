@@ -46,25 +46,28 @@ Partial Class frmTramite
         Me.btnCambirTramite = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.txtCantidadDocs = New System.Windows.Forms.NumericUpDown()
+        Me.cboRepresentante = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtCodigoTramiteS = New System.Windows.Forms.TextBox()
+        Me.txtMontoRecibo = New System.Windows.Forms.TextBox()
         Me.txtNumeroRecibo = New System.Windows.Forms.TextBox()
         Me.txtInfoAdicional = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cboEnviarA = New System.Windows.Forms.ComboBox()
-        Me.txtMontoRecibo = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtCodigoTramiteS = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.cboRepresentante = New System.Windows.Forms.ComboBox()
-        Me.txtCantidadDocs = New System.Windows.Forms.NumericUpDown()
+        Me.txtNumTramites = New System.Windows.Forms.NumericUpDown()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.txtCantidadDocs, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtNumTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtIdentidad
@@ -282,6 +285,8 @@ Partial Class frmTramite
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.txtNumTramites)
+        Me.Panel1.Controls.Add(Me.Label16)
         Me.Panel1.Controls.Add(Me.GroupBox3)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.cboEnviarA)
@@ -315,6 +320,59 @@ Partial Class frmTramite
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Informacón Adicional"
         '
+        'txtCantidadDocs
+        '
+        Me.txtCantidadDocs.Location = New System.Drawing.Point(138, 71)
+        Me.txtCantidadDocs.Name = "txtCantidadDocs"
+        Me.txtCantidadDocs.Size = New System.Drawing.Size(47, 20)
+        Me.txtCantidadDocs.TabIndex = 2
+        Me.txtCantidadDocs.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'cboRepresentante
+        '
+        Me.cboRepresentante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRepresentante.FormattingEnabled = True
+        Me.cboRepresentante.Location = New System.Drawing.Point(138, 97)
+        Me.cboRepresentante.Name = "cboRepresentante"
+        Me.cboRepresentante.Size = New System.Drawing.Size(290, 21)
+        Me.cboRepresentante.TabIndex = 3
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(7, 100)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(101, 13)
+        Me.Label14.TabIndex = 23
+        Me.Label14.Text = "Tipo Representante"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(7, 126)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(78, 13)
+        Me.Label15.TabIndex = 23
+        Me.Label15.Text = "Codigo Trámite"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(7, 74)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(77, 13)
+        Me.Label13.TabIndex = 23
+        Me.Label13.Text = "Cantidad Docs"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(7, 48)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(118, 13)
+        Me.Label12.TabIndex = 23
+        Me.Label12.Text = "Monto de Recibo(TGR)"
+        '
         'Label11
         '
         Me.Label11.AutoSize = True
@@ -332,6 +390,20 @@ Partial Class frmTramite
         Me.Label9.Size = New System.Drawing.Size(30, 13)
         Me.Label9.TabIndex = 23
         Me.Label9.Text = "Nota"
+        '
+        'txtCodigoTramiteS
+        '
+        Me.txtCodigoTramiteS.Location = New System.Drawing.Point(138, 123)
+        Me.txtCodigoTramiteS.Name = "txtCodigoTramiteS"
+        Me.txtCodigoTramiteS.Size = New System.Drawing.Size(290, 20)
+        Me.txtCodigoTramiteS.TabIndex = 4
+        '
+        'txtMontoRecibo
+        '
+        Me.txtMontoRecibo.Location = New System.Drawing.Point(138, 45)
+        Me.txtMontoRecibo.Name = "txtMontoRecibo"
+        Me.txtMontoRecibo.Size = New System.Drawing.Size(150, 20)
+        Me.txtMontoRecibo.TabIndex = 1
         '
         'txtNumeroRecibo
         '
@@ -366,72 +438,22 @@ Partial Class frmTramite
         Me.cboEnviarA.Size = New System.Drawing.Size(290, 21)
         Me.cboEnviarA.TabIndex = 3
         '
-        'txtMontoRecibo
+        'txtNumTramites
         '
-        Me.txtMontoRecibo.Location = New System.Drawing.Point(138, 45)
-        Me.txtMontoRecibo.Name = "txtMontoRecibo"
-        Me.txtMontoRecibo.Size = New System.Drawing.Size(150, 20)
-        Me.txtMontoRecibo.TabIndex = 1
+        Me.txtNumTramites.Location = New System.Drawing.Point(492, 340)
+        Me.txtNumTramites.Name = "txtNumTramites"
+        Me.txtNumTramites.Size = New System.Drawing.Size(47, 20)
+        Me.txtNumTramites.TabIndex = 28
+        Me.txtNumTramites.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'Label12
+        'Label16
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(7, 48)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(118, 13)
-        Me.Label12.TabIndex = 23
-        Me.Label12.Text = "Monto de Recibo(TGR)"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(7, 74)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(77, 13)
-        Me.Label13.TabIndex = 23
-        Me.Label13.Text = "Cantidad Docs"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(7, 100)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(101, 13)
-        Me.Label14.TabIndex = 23
-        Me.Label14.Text = "Tipo Representante"
-        '
-        'txtCodigoTramiteS
-        '
-        Me.txtCodigoTramiteS.Location = New System.Drawing.Point(138, 123)
-        Me.txtCodigoTramiteS.Name = "txtCodigoTramiteS"
-        Me.txtCodigoTramiteS.Size = New System.Drawing.Size(290, 20)
-        Me.txtCodigoTramiteS.TabIndex = 4
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(7, 126)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(78, 13)
-        Me.Label15.TabIndex = 23
-        Me.Label15.Text = "Codigo Trámite"
-        '
-        'cboRepresentante
-        '
-        Me.cboRepresentante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboRepresentante.FormattingEnabled = True
-        Me.cboRepresentante.Location = New System.Drawing.Point(138, 97)
-        Me.cboRepresentante.Name = "cboRepresentante"
-        Me.cboRepresentante.Size = New System.Drawing.Size(290, 21)
-        Me.cboRepresentante.TabIndex = 3
-        '
-        'txtCantidadDocs
-        '
-        Me.txtCantidadDocs.Location = New System.Drawing.Point(138, 71)
-        Me.txtCantidadDocs.Name = "txtCantidadDocs"
-        Me.txtCantidadDocs.Size = New System.Drawing.Size(47, 20)
-        Me.txtCantidadDocs.TabIndex = 2
-        Me.txtCantidadDocs.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(361, 343)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(107, 13)
+        Me.Label16.TabIndex = 29
+        Me.Label16.Text = "Cantidad de Tramites"
         '
         'frmTramite
         '
@@ -454,6 +476,7 @@ Partial Class frmTramite
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.txtCantidadDocs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtNumTramites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -495,4 +518,6 @@ Partial Class frmTramite
     Friend WithEvents txtCodigoTramiteS As System.Windows.Forms.TextBox
     Friend WithEvents txtMontoRecibo As System.Windows.Forms.TextBox
     Friend WithEvents txtCantidadDocs As System.Windows.Forms.NumericUpDown
+    Friend WithEvents txtNumTramites As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label16 As System.Windows.Forms.Label
 End Class

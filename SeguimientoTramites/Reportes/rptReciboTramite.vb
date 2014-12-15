@@ -11,7 +11,8 @@ Public Class rptReciboTramite
                    cel As String, _
                    correo As String, _
                    nota As String, _
-                   url As String)
+                   url As String,
+                   codigoRNP As String)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -38,5 +39,6 @@ Public Class rptReciboTramite
         cellCelular.Text = cel
         cellCorreo.Text = correo
         cellNota.Text = nota
+        CellCodigoRNP.Text = codigoRNP
     End Sub
 End Class

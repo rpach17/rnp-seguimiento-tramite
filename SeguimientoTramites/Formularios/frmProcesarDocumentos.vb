@@ -5,7 +5,7 @@
     End Sub
 
     Private Sub dgvTramites_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvTramites.CellClick
-        If e.ColumnIndex = 9 Then
+        If e.ColumnIndex = 10 Then
             Dim idds As Integer = dgvTramites.CurrentRow().Cells(0).Value
             Dim idgs As Integer = dgvTramites.CurrentRow().Cells(1).Value
             Dim ids As Integer = dgvTramites.CurrentRow().Cells(2).Value
