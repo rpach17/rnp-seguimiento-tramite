@@ -12,6 +12,8 @@ Public Class frmTramite
     Dim cnn As New OracleConnection(My.Settings.MiConexion)
     Dim hilo As Thread
 
+    Public listaReporte As New List(Of DatosReporte)
+
 
     Public Property IdGestion1() As Integer
         Get
@@ -159,7 +161,15 @@ Public Class frmTramite
             
             End If
 
-            crearTramite(EntityTablas.ActualizarResponsable(txtIdentidad.Text, txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text))
+            If txtNumTramites.Value = 1 Then
+                crearTramite(EntityTablas.ActualizarResponsable(txtIdentidad.Text, txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text))
+            ElseIf txtNumTramites.Value > 1 Then
+                Dim resposnable As Integer = EntityTablas.ActualizarResponsable(txtIdentidad.Text, txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text)
+                For t As Integer = 1 To txtNumTramites.Value - 1
+                    crearTramite(resposnable)
+                Next
+                crearTramite(resposnable)
+            End If
 
         ElseIf result = 2 Then  'Nuevo codigo para insert
             If txtCorreo.Text.Trim <> "" Then
@@ -169,17 +179,68 @@ Public Class frmTramite
                     Exit Sub
                 End If
             End If
+            Dim responsable As Integer = EntityTablas.NuevoResponsable(New RESPONSABLE With _
+                                                             {
+                                                                 .NUMERO_IDENTIDAD = txtIdentidad.Text,
+                                                                 .TELEFONO = txtTelefonoFijo.Text,
+                                                                 .CELULAR = txtTelefonoMovil.Text,
+                                                                 .CORREO = txtCorreo.Text
+                                                             })
+            If txtNumTramites.Value = 1 Then
+                crearTramite(responsable)
+            ElseIf txtNumTramites.Value > 1 Then
+                For t As Integer = 1 To txtNumTramites.Value - 1
+                    crearTramite(responsable)
+                Next
+                crearTramite(responsable)
+            End If
+        End If
+        imprimir()
+        Close()
+    End Sub
 
-            crearTramite(EntityTablas.NuevoResponsable(New RESPONSABLE With _
-                                                 {
-                                                     .NUMERO_IDENTIDAD = txtIdentidad.Text,
-                                                     .TELEFONO = txtTelefonoFijo.Text,
-                                                     .CELULAR = txtTelefonoMovil.Text,
-                                                     .CORREO = txtCorreo.Text
-                                                 }))
+    Private Sub imprimir()
+        If listaReporte.Count > 1 Then
+
+            For Each r In listaReporte
+                Using rpt As New rptReciboTramite2(r.codigo, r.nGestion, r.fecha, r.identidad, _
+                                                   r.nombreCiudadano, r.tFijo, r.tMovil, _
+                                                   r.email, r.nota, r.nRecibo, r.monto, r.codigoRNP)
+                    Using preview As New ReportPrintTool(rpt)
+                        'preview.Print()
+                        preview.ShowPreviewDialog()
+                    End Using
+                End Using
+            Next
+            Using rpt As New rptReciboTramiteVarios(listaReporte)
+                Using preview As New ReportPrintTool(rpt)
+                    'preview.Print()
+                    preview.ShowPreviewDialog()
+                End Using
+            End Using
+
+        Else
+            For Each r In listaReporte
+                Using rpt As New rptReciboTramite2(r.codigo, r.nGestion, r.fecha, r.identidad, _
+                                                   r.nombreCiudadano, r.tFijo, r.tMovil, _
+                                                   r.email, r.nota, r.nRecibo, r.monto, r.codigoRNP)
+                    Using preview As New ReportPrintTool(rpt)
+                        'preview.Print()
+                        preview.ShowPreviewDialog()
+                    End Using
+                End Using
+                Using rpt As New rptReciboTramite(r.codigo, r.nGestion, r.fecha, r.identidad, r.nombreCiudadano, r.tFijo, r.tMovil, r.email, r.nota, String.Format("http://tramites.rnp.hn/{0}", r.codigo), r.codigoRNP)
+                    Using preview As New ReportPrintTool(rpt)
+                        'preview.Print()
+                        preview.ShowPreviewDialog()
+                    End Using
+                End Using
+            Next
 
         End If
+
     End Sub
+
     Private Sub crearTramite(ByVal idResponsable As Integer)
         Try
             Using myCMD As New OracleCommand() With {.Connection = cnn, .CommandText = "SP_TRAMITES", .CommandType = CommandType.StoredProcedure}
@@ -219,29 +280,58 @@ Public Class frmTramite
                 'Using rpt As New rptReciboTramite()
                 '    'rpt.Print()
                 'End Using
-                Dim url As String = String.Format("http://tramite.rnp.hn/{0}", myCMD.Parameters("VCODIGO").Value.ToString)
+                Dim url As String = String.Format("http://tramites.rnp.hn/{0}", myCMD.Parameters("VCODIGO").Value.ToString)
 
+                Dim rte As New DatosReporte With _
+                    {
+                        .codigo = myCMD.Parameters("VCODIGO").Value.ToString,
+                        .nGestion = myCMD.Parameters("NGESTION").Value.ToString,
+                        .fecha = myCMD.Parameters("VFECHA").Value.ToString,
+                        .identidad = txtIdentidad.Text,
+                        .nombreCiudadano = String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text),
+                        .tFijo = txtTelefonoFijo.Text,
+                        .tMovil = txtTelefonoMovil.Text,
+                        .email = txtCorreo.Text,
+                        .nota = txtInfoAdicional.Text,
+                        .nRecibo = txtNumeroRecibo.Text,
+                        .monto = txtMontoRecibo.Text,
+                        .codigoRNP = txtCodigoTramiteS.Text
+                    }
 
+                listaReporte.Add(rte)
 
+                'If varios Then
+                '    Using rpt As New rptReciboTramite2(myCMD.Parameters("VCODIGO").Value.ToString, _
+                '                                       myCMD.Parameters("NGESTION").Value.ToString, _
+                '                                       myCMD.Parameters("VFECHA").Value.ToString, _
+                '                                       txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), _
+                '                                       txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text, txtNumeroRecibo.Text, txtMontoRecibo.Text)
+                '        Using preview As New ReportPrintTool(rpt)
+                '            'preview.Print()
+                '            preview.ShowPreviewDialog()
+                '        End Using
+                '    End Using
+                'Else
+                '    Using rpt As New rptReciboTramite(myCMD.Parameters("VCODIGO").Value.ToString, myCMD.Parameters("NGESTION").Value.ToString, myCMD.Parameters("VFECHA").Value.ToString, txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text, url)
+                '        Using preview As New ReportPrintTool(rpt)
+                '            'preview.Print()
+                '            preview.ShowPreviewDialog()
+                '        End Using
+                '    End Using
 
-                Using rpt As New rptReciboTramite(myCMD.Parameters("VCODIGO").Value.ToString, myCMD.Parameters("NGESTION").Value.ToString, myCMD.Parameters("VFECHA").Value.ToString, txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text, url)
-                    Using preview As New ReportPrintTool(rpt)
-                        preview.Print()
-                    End Using
-                End Using
-
-                ' Imprimir el recibo del trámite
-                Using rpt As New rptReciboTramite2(myCMD.Parameters("VCODIGO").Value.ToString, myCMD.Parameters("NGESTION").Value.ToString, myCMD.Parameters("VFECHA").Value.ToString, txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text, txtNumeroRecibo.Text, txtMontoRecibo.Text)
-                    Using preview As New ReportPrintTool(rpt)
-                        preview.Print()
-                        'preview.ShowPreviewDialog()
-                    End Using
-                End Using
+                '    ' Imprimir el recibo del trámite
+                '    Using rpt As New rptReciboTramite2(myCMD.Parameters("VCODIGO").Value.ToString, myCMD.Parameters("NGESTION").Value.ToString, myCMD.Parameters("VFECHA").Value.ToString, txtIdentidad.Text, String.Format("{0} {1} {2} {3}", txtPrimerNombre.Text, txtSegundoNombre.Text, txtPrimerApellido.Text, txtSegundoApellido.Text), txtTelefonoFijo.Text, txtTelefonoMovil.Text, txtCorreo.Text, txtInfoAdicional.Text, txtNumeroRecibo.Text, txtMontoRecibo.Text)
+                '        Using preview As New ReportPrintTool(rpt)
+                '            'preview.Print()
+                '            preview.ShowPreviewDialog()
+                '        End Using
+                '    End Using
+                'End If
             End Using
-            MsgBox("El trámite ha sido registrado con éxito", MsgBoxStyle.Information, "Trámite")
+            'MsgBox("El trámite ha sido registrado con éxito", MsgBoxStyle.Information, "Trámite")
             'frmTrm.btnCrear.Enabled = False
             'frmVentanilla.btnTramite.Enabled = False
-            Close()
+            'Close()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
             MsgBox(ex.InnerException.Message, MsgBoxStyle.Critical, "Error")

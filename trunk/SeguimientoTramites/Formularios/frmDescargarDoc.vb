@@ -89,7 +89,7 @@ Public Class frmDescargarDoc
             End If
 
             ' Se obtienen los marcadores del archivo de word con el cual se enlazará
-            Dim a As ARCHIVOS = EntityTablas.DescargarArchivo(ids)
+            Dim a As ARCHIVOS = EntityTablas.DescargarArchivo(idf)
             Dim marcadores_datos = EntityTablas.Marcadores(idTramite, a.IDFORMULARIO)
 
             Dim K As Long = UBound(a.ARCHIVO)

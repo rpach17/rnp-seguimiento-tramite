@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Public Class rptReciboTramite
+Partial Public Class rptReciboTramiteVarios
     Inherits DevExpress.XtraReports.UI.XtraReport
 
     'XtraReport overrides dispose to clean up the component list.
@@ -25,11 +25,11 @@ Partial Public Class rptReciboTramite
         Me.XrTableRow11 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell4 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrBarCode1 = New DevExpress.XtraReports.UI.XRBarCode()
-        Me.XrTable4 = New DevExpress.XtraReports.UI.XRTable()
-        Me.XrTableRow2 = New DevExpress.XtraReports.UI.XRTableRow()
-        Me.cellCodeBar = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.XrTableRow10 = New DevExpress.XtraReports.UI.XRTableRow()
-        Me.cellFecha = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTable3 = New DevExpress.XtraReports.UI.XRTable()
+        Me.XrTableRow12 = New DevExpress.XtraReports.UI.XRTableRow()
+        Me.cellCodigos = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTableRow9 = New DevExpress.XtraReports.UI.XRTableRow()
+        Me.cellNota = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTable2 = New DevExpress.XtraReports.UI.XRTable()
         Me.XrTableRow3 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell1 = New DevExpress.XtraReports.UI.XRTableCell()
@@ -50,26 +50,28 @@ Partial Public Class rptReciboTramite
         Me.XrTableRow8 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell11 = New DevExpress.XtraReports.UI.XRTableCell()
         Me.cellCorreo = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.XrTable3 = New DevExpress.XtraReports.UI.XRTable()
-        Me.XrTableRow9 = New DevExpress.XtraReports.UI.XRTableRow()
-        Me.cellNota = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTable4 = New DevExpress.XtraReports.UI.XRTable()
+        Me.XrTableRow2 = New DevExpress.XtraReports.UI.XRTableRow()
+        Me.cellCodeBar = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTableRow10 = New DevExpress.XtraReports.UI.XRTableRow()
+        Me.cellFecha = New DevExpress.XtraReports.UI.XRTableCell()
         Me.TopMargin = New DevExpress.XtraReports.UI.TopMarginBand()
         Me.BottomMargin = New DevExpress.XtraReports.UI.BottomMarginBand()
-        Me.XrTableRow12 = New DevExpress.XtraReports.UI.XRTableRow()
-        Me.XrTableCell3 = New DevExpress.XtraReports.UI.XRTableCell()
-        Me.CellCodigoRNP = New DevExpress.XtraReports.UI.XRTableCell()
         Me.XrTableRow13 = New DevExpress.XtraReports.UI.XRTableRow()
+        Me.XrTableCell3 = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.cellCodigoRNP = New DevExpress.XtraReports.UI.XRTableCell()
+        Me.XrTableRow14 = New DevExpress.XtraReports.UI.XRTableRow()
         Me.XrTableCell8 = New DevExpress.XtraReports.UI.XRTableCell()
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.XrTable4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.XrTable2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.XrTable3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrTable2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrTable4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1, Me.XrTable4, Me.XrTable2, Me.XrTable3})
-        Me.Detail.HeightF = 320.6866!
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrTable1, Me.XrTable3, Me.XrTable2, Me.XrTable4})
+        Me.Detail.HeightF = 384.0333!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
@@ -118,46 +120,55 @@ Partial Public Class rptReciboTramite
         Me.XrBarCode1.Text = "http://tramite.rnp.hn/06201400100001"
         Me.XrBarCode1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrTable4
+        'XrTable3
         '
-        Me.XrTable4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
-        Me.XrTable4.LocationFloat = New DevExpress.Utils.PointFloat(0.00003178914!, 174.2166!)
-        Me.XrTable4.Name = "XrTable4"
-        Me.XrTable4.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow2, Me.XrTableRow10, Me.XrTableRow13})
-        Me.XrTable4.SizeF = New System.Drawing.SizeF(216.67!, 104.53!)
-        Me.XrTable4.StylePriority.UseBorders = False
+        Me.XrTable3.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.XrTable3.LocationFloat = New DevExpress.Utils.PointFloat(0.0!, 278.7466!)
+        Me.XrTable3.Name = "XrTable3"
+        Me.XrTable3.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow12, Me.XrTableRow9})
+        Me.XrTable3.SizeF = New System.Drawing.SizeF(650.0!, 83.88!)
+        Me.XrTable3.StylePriority.UseBorders = False
         '
-        'XrTableRow2
+        'XrTableRow12
         '
-        Me.XrTableRow2.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.cellCodeBar})
-        Me.XrTableRow2.Name = "XrTableRow2"
-        Me.XrTableRow2.Weight = 1.0R
+        Me.XrTableRow12.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.cellCodigos})
+        Me.XrTableRow12.Name = "XrTableRow12"
+        Me.XrTableRow12.Weight = 1.0R
         '
-        'cellCodeBar
+        'cellCodigos
         '
-        Me.cellCodeBar.Font = New System.Drawing.Font("Arial", 9.75!)
-        Me.cellCodeBar.Name = "cellCodeBar"
-        Me.cellCodeBar.StylePriority.UseFont = False
-        Me.cellCodeBar.StylePriority.UseTextAlignment = False
-        Me.cellCodeBar.Text = "061400100001"
-        Me.cellCodeBar.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.cellCodeBar.Weight = 3.0R
+        Me.cellCodigos.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.cellCodigos.Font = New System.Drawing.Font("Times New Roman", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.cellCodigos.Name = "cellCodigos"
+        Me.cellCodigos.Padding = New DevExpress.XtraPrinting.PaddingInfo(10, 10, 10, 10, 100.0!)
+        Me.cellCodigos.StylePriority.UseBorders = False
+        Me.cellCodigos.StylePriority.UseFont = False
+        Me.cellCodigos.StylePriority.UsePadding = False
+        Me.cellCodigos.Text = "Tramites : - 010100100000"
+        Me.cellCodigos.Weight = 3.0R
         '
-        'XrTableRow10
+        'XrTableRow9
         '
-        Me.XrTableRow10.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.cellFecha})
-        Me.XrTableRow10.Name = "XrTableRow10"
-        Me.XrTableRow10.Weight = 1.0R
+        Me.XrTableRow9.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.cellNota})
+        Me.XrTableRow9.Name = "XrTableRow9"
+        Me.XrTableRow9.Weight = 1.0R
         '
-        'cellFecha
+        'cellNota
         '
-        Me.cellFecha.Font = New System.Drawing.Font("Arial", 9.75!)
-        Me.cellFecha.Name = "cellFecha"
-        Me.cellFecha.StylePriority.UseFont = False
-        Me.cellFecha.StylePriority.UseTextAlignment = False
-        Me.cellFecha.Text = "cellFecha"
-        Me.cellFecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.cellFecha.Weight = 3.0R
+        Me.cellNota.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.cellNota.Font = New System.Drawing.Font("Arial", 9.75!)
+        Me.cellNota.Name = "cellNota"
+        Me.cellNota.StylePriority.UseBorders = False
+        Me.cellNota.StylePriority.UseFont = False
+        Me.cellNota.StylePriority.UseTextAlignment = False
+        Me.cellNota.Text = "cellNota"
+        Me.cellNota.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.cellNota.Weight = 3.0R
         '
         'XrTable2
         '
@@ -166,7 +177,7 @@ Partial Public Class rptReciboTramite
         Me.XrTable2.Font = New System.Drawing.Font("Arial", 9.75!)
         Me.XrTable2.LocationFloat = New DevExpress.Utils.PointFloat(216.67!, 0.00001907349!)
         Me.XrTable2.Name = "XrTable2"
-        Me.XrTable2.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow3, Me.XrTableRow1, Me.XrTableRow4, Me.XrTableRow5, Me.XrTableRow6, Me.XrTableRow7, Me.XrTableRow8, Me.XrTableRow12})
+        Me.XrTable2.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow3, Me.XrTableRow1, Me.XrTableRow4, Me.XrTableRow5, Me.XrTableRow6, Me.XrTableRow7, Me.XrTableRow8, Me.XrTableRow13})
         Me.XrTable2.SizeF = New System.Drawing.SizeF(433.33!, 278.7466!)
         Me.XrTable2.StylePriority.UseBorders = False
         Me.XrTable2.StylePriority.UseFont = False
@@ -331,35 +342,49 @@ Partial Public Class rptReciboTramite
         Me.cellCorreo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         Me.cellCorreo.Weight = 2.0R
         '
-        'XrTable3
+        'XrTable4
         '
-        Me.XrTable3.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Right) _
+        Me.XrTable4.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top), DevExpress.XtraPrinting.BorderSide)
+        Me.XrTable4.LocationFloat = New DevExpress.Utils.PointFloat(0.00003178914!, 174.2166!)
+        Me.XrTable4.Name = "XrTable4"
+        Me.XrTable4.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow2, Me.XrTableRow10, Me.XrTableRow14})
+        Me.XrTable4.SizeF = New System.Drawing.SizeF(216.67!, 104.53!)
+        Me.XrTable4.StylePriority.UseBorders = False
+        '
+        'XrTableRow2
+        '
+        Me.XrTableRow2.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.cellCodeBar})
+        Me.XrTableRow2.Name = "XrTableRow2"
+        Me.XrTableRow2.Weight = 1.0R
+        '
+        'cellCodeBar
+        '
+        Me.cellCodeBar.Font = New System.Drawing.Font("Arial", 9.75!)
+        Me.cellCodeBar.Name = "cellCodeBar"
+        Me.cellCodeBar.StylePriority.UseFont = False
+        Me.cellCodeBar.StylePriority.UseTextAlignment = False
+        Me.cellCodeBar.Text = "061400100001"
+        Me.cellCodeBar.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.cellCodeBar.Weight = 3.0R
+        '
+        'XrTableRow10
+        '
+        Me.XrTableRow10.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.cellFecha})
+        Me.XrTableRow10.Name = "XrTableRow10"
+        Me.XrTableRow10.Weight = 1.0R
+        '
+        'cellFecha
+        '
+        Me.cellFecha.Borders = CType(((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
             Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.XrTable3.LocationFloat = New DevExpress.Utils.PointFloat(0.00003178914!, 278.7466!)
-        Me.XrTable3.Name = "XrTable3"
-        Me.XrTable3.Rows.AddRange(New DevExpress.XtraReports.UI.XRTableRow() {Me.XrTableRow9})
-        Me.XrTable3.SizeF = New System.Drawing.SizeF(650.0!, 41.94!)
-        Me.XrTable3.StylePriority.UseBorders = False
-        '
-        'XrTableRow9
-        '
-        Me.XrTableRow9.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.cellNota})
-        Me.XrTableRow9.Name = "XrTableRow9"
-        Me.XrTableRow9.Weight = 1.0R
-        '
-        'cellNota
-        '
-        Me.cellNota.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
-            Or DevExpress.XtraPrinting.BorderSide.Right) _
-            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
-        Me.cellNota.Font = New System.Drawing.Font("Arial", 9.75!)
-        Me.cellNota.Name = "cellNota"
-        Me.cellNota.StylePriority.UseBorders = False
-        Me.cellNota.StylePriority.UseFont = False
-        Me.cellNota.StylePriority.UseTextAlignment = False
-        Me.cellNota.Text = "cellNota"
-        Me.cellNota.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-        Me.cellNota.Weight = 3.0R
+        Me.cellFecha.Font = New System.Drawing.Font("Arial", 9.75!)
+        Me.cellFecha.Name = "cellFecha"
+        Me.cellFecha.StylePriority.UseBorders = False
+        Me.cellFecha.StylePriority.UseFont = False
+        Me.cellFecha.StylePriority.UseTextAlignment = False
+        Me.cellFecha.Text = "cellFecha"
+        Me.cellFecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.cellFecha.Weight = 3.0R
         '
         'TopMargin
         '
@@ -374,52 +399,62 @@ Partial Public Class rptReciboTramite
         Me.BottomMargin.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
         Me.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft
         '
-        'XrTableRow12
-        '
-        Me.XrTableRow12.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell3, Me.CellCodigoRNP})
-        Me.XrTableRow12.Name = "XrTableRow12"
-        Me.XrTableRow12.Weight = 1.0R
-        '
-        'XrTableCell3
-        '
-        Me.XrTableCell3.Name = "XrTableCell3"
-        Me.XrTableCell3.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100.0!)
-        Me.XrTableCell3.StylePriority.UsePadding = False
-        Me.XrTableCell3.StylePriority.UseTextAlignment = False
-        Me.XrTableCell3.Text = "Codigo"
-        Me.XrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
-        Me.XrTableCell3.Weight = 1.0R
-        '
-        'CellCodigoRNP
-        '
-        Me.CellCodigoRNP.Name = "CellCodigoRNP"
-        Me.CellCodigoRNP.Padding = New DevExpress.XtraPrinting.PaddingInfo(10, 0, 0, 0, 100.0!)
-        Me.CellCodigoRNP.StylePriority.UsePadding = False
-        Me.CellCodigoRNP.StylePriority.UseTextAlignment = False
-        Me.CellCodigoRNP.Text = "codigo"
-        Me.CellCodigoRNP.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
-        Me.CellCodigoRNP.Weight = 2.0R
-        '
         'XrTableRow13
         '
-        Me.XrTableRow13.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell8})
+        Me.XrTableRow13.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell3, Me.cellCodigoRNP})
         Me.XrTableRow13.Name = "XrTableRow13"
         Me.XrTableRow13.Weight = 1.0R
         '
+        'XrTableCell3
+        '
+        Me.XrTableCell3.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.XrTableCell3.Name = "XrTableCell3"
+        Me.XrTableCell3.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100.0!)
+        Me.XrTableCell3.StylePriority.UseBorders = False
+        Me.XrTableCell3.StylePriority.UsePadding = False
+        Me.XrTableCell3.StylePriority.UseTextAlignment = False
+        Me.XrTableCell3.Text = "Codigo:"
+        Me.XrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight
+        Me.XrTableCell3.Weight = 1.0R
+        '
+        'cellCodigoRNP
+        '
+        Me.cellCodigoRNP.Borders = CType((((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Top) _
+            Or DevExpress.XtraPrinting.BorderSide.Right) _
+            Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
+        Me.cellCodigoRNP.Name = "cellCodigoRNP"
+        Me.cellCodigoRNP.Padding = New DevExpress.XtraPrinting.PaddingInfo(10, 0, 0, 0, 100.0!)
+        Me.cellCodigoRNP.StylePriority.UseBorders = False
+        Me.cellCodigoRNP.StylePriority.UsePadding = False
+        Me.cellCodigoRNP.StylePriority.UseTextAlignment = False
+        Me.cellCodigoRNP.Text = "cellCodigoRNP"
+        Me.cellCodigoRNP.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.cellCodigoRNP.Weight = 2.0R
+        '
+        'XrTableRow14
+        '
+        Me.XrTableRow14.Cells.AddRange(New DevExpress.XtraReports.UI.XRTableCell() {Me.XrTableCell8})
+        Me.XrTableRow14.Name = "XrTableRow14"
+        Me.XrTableRow14.Weight = 1.0R
+        '
         'XrTableCell8
         '
+        Me.XrTableCell8.Borders = CType((DevExpress.XtraPrinting.BorderSide.Left Or DevExpress.XtraPrinting.BorderSide.Bottom), DevExpress.XtraPrinting.BorderSide)
         Me.XrTableCell8.Name = "XrTableCell8"
+        Me.XrTableCell8.StylePriority.UseBorders = False
         Me.XrTableCell8.Weight = 3.0R
         '
-        'rptReciboTramite
+        'rptReciboTramiteVarios
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin})
         Me.Margins = New System.Drawing.Printing.Margins(100, 100, 56, 100)
         Me.Version = "13.1"
         CType(Me.XrTable1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.XrTable4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.XrTable2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.XrTable3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrTable2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrTable4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -430,11 +465,11 @@ Partial Public Class rptReciboTramite
     Friend WithEvents XrTableRow11 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell4 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrBarCode1 As DevExpress.XtraReports.UI.XRBarCode
-    Friend WithEvents XrTable4 As DevExpress.XtraReports.UI.XRTable
-    Friend WithEvents XrTableRow2 As DevExpress.XtraReports.UI.XRTableRow
-    Friend WithEvents cellCodeBar As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents XrTableRow10 As DevExpress.XtraReports.UI.XRTableRow
-    Friend WithEvents cellFecha As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XrTable3 As DevExpress.XtraReports.UI.XRTable
+    Friend WithEvents XrTableRow12 As DevExpress.XtraReports.UI.XRTableRow
+    Friend WithEvents cellCodigos As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XrTableRow9 As DevExpress.XtraReports.UI.XRTableRow
+    Friend WithEvents cellNota As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTable2 As DevExpress.XtraReports.UI.XRTable
     Friend WithEvents XrTableRow3 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell1 As DevExpress.XtraReports.UI.XRTableCell
@@ -455,12 +490,14 @@ Partial Public Class rptReciboTramite
     Friend WithEvents XrTableRow8 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell11 As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents cellCorreo As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents XrTable3 As DevExpress.XtraReports.UI.XRTable
-    Friend WithEvents XrTableRow9 As DevExpress.XtraReports.UI.XRTableRow
-    Friend WithEvents cellNota As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XrTable4 As DevExpress.XtraReports.UI.XRTable
+    Friend WithEvents XrTableRow2 As DevExpress.XtraReports.UI.XRTableRow
+    Friend WithEvents cellCodeBar As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XrTableRow10 As DevExpress.XtraReports.UI.XRTableRow
+    Friend WithEvents cellFecha As DevExpress.XtraReports.UI.XRTableCell
     Friend WithEvents XrTableRow13 As DevExpress.XtraReports.UI.XRTableRow
-    Friend WithEvents XrTableCell8 As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents XrTableRow12 As DevExpress.XtraReports.UI.XRTableRow
     Friend WithEvents XrTableCell3 As DevExpress.XtraReports.UI.XRTableCell
-    Friend WithEvents CellCodigoRNP As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents cellCodigoRNP As DevExpress.XtraReports.UI.XRTableCell
+    Friend WithEvents XrTableRow14 As DevExpress.XtraReports.UI.XRTableRow
+    Friend WithEvents XrTableCell8 As DevExpress.XtraReports.UI.XRTableCell
 End Class

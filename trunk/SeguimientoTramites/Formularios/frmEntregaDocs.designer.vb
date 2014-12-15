@@ -28,7 +28,6 @@ Partial Class frmEntregaDocs
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.txtCodigoTramite = New System.Windows.Forms.TextBox()
         Me.dgvTramites = New System.Windows.Forms.DataGridView()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.IdTramite = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idds = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ids = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -36,7 +35,9 @@ Partial Class frmEntregaDocs
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombreCiudadano = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Entregar = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,9 +49,9 @@ Partial Class frmEntregaDocs
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.dgvTramites)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Location = New System.Drawing.Point(4, 6)
+        Me.Panel1.Location = New System.Drawing.Point(83, 31)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(654, 491)
+        Me.Panel1.Size = New System.Drawing.Size(827, 491)
         Me.Panel1.TabIndex = 4
         '
         'GroupBox1
@@ -60,7 +61,7 @@ Partial Class frmEntregaDocs
         Me.GroupBox1.Controls.Add(Me.txtCodigoTramite)
         Me.GroupBox1.Location = New System.Drawing.Point(30, 32)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(597, 60)
+        Me.GroupBox1.Size = New System.Drawing.Size(769, 60)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Ingrese Código de trámite o Número de Identidad"
@@ -88,7 +89,7 @@ Partial Class frmEntregaDocs
         '
         Me.txtCodigoTramite.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
         Me.txtCodigoTramite.Location = New System.Drawing.Point(25, 22)
-        Me.txtCodigoTramite.MaxLength = 12
+        Me.txtCodigoTramite.MaxLength = 13
         Me.txtCodigoTramite.Name = "txtCodigoTramite"
         Me.txtCodigoTramite.Size = New System.Drawing.Size(197, 27)
         Me.txtCodigoTramite.TabIndex = 0
@@ -99,11 +100,74 @@ Partial Class frmEntregaDocs
         Me.dgvTramites.AllowUserToDeleteRows = False
         Me.dgvTramites.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvTramites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdTramite, Me.idds, Me.ids, Me.idf, Me.Column1, Me.Column2, Me.Column3, Me.Entregar})
+        Me.dgvTramites.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdTramite, Me.idds, Me.ids, Me.idf, Me.Column1, Me.Column2, Me.Column3, Me.nombreCiudadano, Me.Entregar})
         Me.dgvTramites.Location = New System.Drawing.Point(30, 121)
         Me.dgvTramites.Name = "dgvTramites"
-        Me.dgvTramites.Size = New System.Drawing.Size(597, 342)
+        Me.dgvTramites.Size = New System.Drawing.Size(769, 342)
         Me.dgvTramites.TabIndex = 2
+        '
+        'IdTramite
+        '
+        Me.IdTramite.HeaderText = "IdTramite"
+        Me.IdTramite.Name = "IdTramite"
+        Me.IdTramite.Visible = False
+        Me.IdTramite.Width = 74
+        '
+        'idds
+        '
+        Me.idds.HeaderText = "idDetalleSeguimiento"
+        Me.idds.Name = "idds"
+        Me.idds.Visible = False
+        Me.idds.Width = 129
+        '
+        'ids
+        '
+        Me.ids.HeaderText = "idSalto"
+        Me.ids.Name = "ids"
+        Me.ids.Visible = False
+        Me.ids.Width = 62
+        '
+        'idf
+        '
+        Me.idf.HeaderText = "idFormulario"
+        Me.idf.Name = "idf"
+        Me.idf.Visible = False
+        Me.idf.Width = 86
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Código trámite"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.Width = 89
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Trámite"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 65
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "ID Ciudadano"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        Me.Column3.Width = 87
+        '
+        'nombreCiudadano
+        '
+        Me.nombreCiudadano.HeaderText = "Nombre del Ciudadano"
+        Me.nombreCiudadano.Name = "nombreCiudadano"
+        Me.nombreCiudadano.Width = 126
+        '
+        'Entregar
+        '
+        Me.Entregar.HeaderText = "Entregar"
+        Me.Entregar.Name = "Entregar"
+        Me.Entregar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Entregar.Text = "Entregar"
+        Me.Entregar.Width = 51
         '
         'Label2
         '
@@ -115,68 +179,11 @@ Partial Class frmEntregaDocs
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Recepción de trámites"
         '
-        'IdTramite
-        '
-        Me.IdTramite.HeaderText = "IdTramite"
-        Me.IdTramite.Name = "IdTramite"
-        Me.IdTramite.Visible = False
-        Me.IdTramite.Width = 76
-        '
-        'idds
-        '
-        Me.idds.HeaderText = "idDetalleSeguimiento"
-        Me.idds.Name = "idds"
-        Me.idds.Visible = False
-        Me.idds.Width = 131
-        '
-        'ids
-        '
-        Me.ids.HeaderText = "idSalto"
-        Me.ids.Name = "ids"
-        Me.ids.Visible = False
-        Me.ids.Width = 64
-        '
-        'idf
-        '
-        Me.idf.HeaderText = "idFormulario"
-        Me.idf.Name = "idf"
-        Me.idf.Visible = False
-        Me.idf.Width = 88
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Código trámite"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 99
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Trámite"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 67
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "ID Ciudadano"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 97
-        '
-        'Entregar
-        '
-        Me.Entregar.HeaderText = "Entregar"
-        Me.Entregar.Name = "Entregar"
-        Me.Entregar.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Entregar.Text = "Entregar"
-        Me.Entregar.Width = 53
-        '
         'frmEntregaDocs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(668, 503)
+        Me.ClientSize = New System.Drawing.Size(999, 552)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmEntregaDocs"
         Me.Text = "Entrega de Trámites"
@@ -202,5 +209,6 @@ Partial Class frmEntregaDocs
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents nombreCiudadano As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Entregar As System.Windows.Forms.DataGridViewButtonColumn
 End Class
