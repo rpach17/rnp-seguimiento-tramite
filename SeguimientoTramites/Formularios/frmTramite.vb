@@ -182,6 +182,9 @@ Public Class frmTramite
             Dim responsable As Integer = EntityTablas.NuevoResponsable(New RESPONSABLE With _
                                                              {
                                                                  .NUMERO_IDENTIDAD = txtIdentidad.Text,
+                                                                 .NOMBRE = String.Format("{0} {1}", txtPrimerNombre.Text, txtSegundoNombre.Text),
+                                                                 .PRIMER_APELLIDO = txtPrimerApellido.Text,
+                                                                 .SEGUNDO_APELLIDO = txtSegundoApellido.Text,
                                                                  .TELEFONO = txtTelefonoFijo.Text,
                                                                  .CELULAR = txtTelefonoMovil.Text,
                                                                  .CORREO = txtCorreo.Text
