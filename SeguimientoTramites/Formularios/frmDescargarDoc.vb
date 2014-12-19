@@ -85,7 +85,7 @@ Public Class frmDescargarDoc
             ' Se obtiene la ruta donde se almacenará el documento junto con su nombre
             FolderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments
             If FolderBrowserDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                filename = String.Format("{0}\{1}.docx", FolderBrowserDialog1.SelectedPath, NombreDoc1)
+                filename = String.Format("{0}\{1}.doc", FolderBrowserDialog1.SelectedPath, NombreDoc1)
             End If
 
             ' Se obtienen los marcadores del archivo de word con el cual se enlazará
