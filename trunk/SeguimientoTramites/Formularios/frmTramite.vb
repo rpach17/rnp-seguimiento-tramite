@@ -107,7 +107,11 @@ Public Class frmTramite
             hilo = New Thread(AddressOf Animacion)
             hilo.Start()
             result = EntityTablas.BuscarResponsable(txtIdentidad.Text, txtPrimerNombre, txtSegundoNombre, txtPrimerApellido, txtSegundoApellido, txtTelefonoFijo, txtTelefonoMovil, txtCorreo, lblInfo)
-            hilo.Abort()
+            Try
+                hilo.Abort()
+            Catch ex As Exception
+
+            End Try
         Else
             lblInfo.Visible = False
         End If
@@ -210,15 +214,15 @@ Public Class frmTramite
                                                    r.nombreCiudadano, r.tFijo, r.tMovil, _
                                                    r.email, r.nota, r.nRecibo, r.monto, r.codigoRNP)
                     Using preview As New ReportPrintTool(rpt)
-                        'preview.Print()
-                        preview.ShowPreviewDialog()
+                        preview.Print()
+                        'preview.ShowPreviewDialog()
                     End Using
                 End Using
             Next
             Using rpt As New rptReciboTramiteVarios(listaReporte)
                 Using preview As New ReportPrintTool(rpt)
-                    'preview.Print()
-                    preview.ShowPreviewDialog()
+                    preview.Print()
+                    'preview.ShowPreviewDialog()
                 End Using
             End Using
 
@@ -228,14 +232,14 @@ Public Class frmTramite
                                                    r.nombreCiudadano, r.tFijo, r.tMovil, _
                                                    r.email, r.nota, r.nRecibo, r.monto, r.codigoRNP)
                     Using preview As New ReportPrintTool(rpt)
-                        'preview.Print()
-                        preview.ShowPreviewDialog()
+                        preview.Print()
+                        'preview.ShowPreviewDialog()
                     End Using
                 End Using
                 Using rpt As New rptReciboTramite(r.codigo, r.nGestion, r.fecha, r.identidad, r.nombreCiudadano, r.tFijo, r.tMovil, r.email, r.nota, String.Format("http://tramites.rnp.hn/{0}", r.codigo), r.codigoRNP)
                     Using preview As New ReportPrintTool(rpt)
-                        'preview.Print()
-                        preview.ShowPreviewDialog()
+                        preview.Print()
+                        'preview.ShowPreviewDialog()
                     End Using
                 End Using
             Next
