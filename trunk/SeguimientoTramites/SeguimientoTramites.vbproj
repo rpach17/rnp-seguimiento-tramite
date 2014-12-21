@@ -136,6 +136,9 @@
     <Reference Include="DevExpress.XtraReports.v13.1.Extensions, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -143,6 +146,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Deployment" />
@@ -175,6 +179,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>appcaSeguimiento.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\EReportes.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EReportes.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\EReportes.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EReportes.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\EReportes.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmFormularioChromeEntrega.Designer.vb">
       <DependentUpon>frmFormularioChromeEntrega.vb</DependentUpon>
@@ -435,6 +454,23 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <EntityDeploy Include="EntityFramework\EReportes.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EReportes.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityFramework\EReportes.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EReportes.edmx</DependentUpon>
+      <LastGenOutput>EReportes.Context.vb</LastGenOutput>
+    </None>
+    <None Include="EntityFramework\EReportes.edmx.diagram">
+      <DependentUpon>EReportes.edmx</DependentUpon>
+    </None>
+    <None Include="EntityFramework\EReportes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EReportes.edmx</DependentUpon>
+      <LastGenOutput>EReportes.vb</LastGenOutput>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -445,6 +481,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
     <None Include="SeguimientoTramites_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -708,7 +745,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
