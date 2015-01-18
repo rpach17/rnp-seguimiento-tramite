@@ -20,6 +20,7 @@
     End Sub
 
     Private Sub btnEntrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEntrar.Click
+        Cursor = System.Windows.Forms.Cursors.WaitCursor
         If txtUser.Text = "RNPAPPCA" AndAlso txtPass.Text = "Rnp2014!" Then
             With SesionActiva
                 .Usuario = "Administrador"
@@ -57,5 +58,6 @@
                                "4 - El usuario no existe"
             MsgBox(s, MsgBoxStyle.Exclamation, "Error")
         End If
+        Cursor = System.Windows.Forms.Cursors.Default
     End Sub
 End Class

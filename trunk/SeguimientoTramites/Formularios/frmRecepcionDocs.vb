@@ -136,4 +136,21 @@ Public Class frmRecepcionDocs
         txtCodigoTramite.Focus()
         lblInfo.Text = "Los trámites fueron recibidos"
     End Sub
+
+
+    Private Sub BtnSeleccionar_Click(sender As Object, e As EventArgs) Handles BtnSeleccionar.Click
+        Cursor = System.Windows.Forms.Cursors.WaitCursor
+        If dgvTramites.Rows.Count >= 1 And BtnSeleccionar.Text = "Seleccionar todos" Then
+            For Each row In dgvTramites.Rows
+                row.cells(4).value = True
+            Next
+            BtnSeleccionar.Text = "Quitar todo"
+        ElseIf dgvTramites.Rows.Count >= 1 And BtnSeleccionar.Text = "Quitar todo" Then
+            For Each row In dgvTramites.Rows
+                row.cells(4).value = False
+            Next
+            BtnSeleccionar.Text = "Seleccionar todos"
+        End If
+        Cursor = System.Windows.Forms.Cursors.Default
+    End Sub
 End Class
