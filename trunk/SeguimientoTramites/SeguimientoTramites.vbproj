@@ -30,7 +30,7 @@
     <UpdateUrl>http://192.168.1.115/aplicacion-ticket/seguimiento/</UpdateUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>18</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -180,20 +180,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>appcaSeguimiento.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\EReportes.Context.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EReportes.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityFramework\EReportes.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EReportes.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\EReportes.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmFormularioChromeEntrega.Designer.vb">
       <DependentUpon>frmFormularioChromeEntrega.vb</DependentUpon>
@@ -458,18 +448,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EReportes.Designer.vb</LastGenOutput>
     </EntityDeploy>
-    <None Include="EntityFramework\EReportes.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EReportes.edmx</DependentUpon>
-      <LastGenOutput>EReportes.Context.vb</LastGenOutput>
-    </None>
     <None Include="EntityFramework\EReportes.edmx.diagram">
       <DependentUpon>EReportes.edmx</DependentUpon>
-    </None>
-    <None Include="EntityFramework\EReportes.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EReportes.edmx</DependentUpon>
-      <LastGenOutput>EReportes.vb</LastGenOutput>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -513,6 +493,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-rnp.ico" />
+    <Content Include="mfc71.dll" />
+    <Content Include="msvcr71.dll" />
+    <Content Include="oci.dll" />
+    <Content Include="ocijdbc11.dll" />
+    <Content Include="ociw32.dll" />
+    <Content Include="orannzsbb11.dll" />
+    <Content Include="oraocci11.dll" />
+    <Content Include="oraociei11.dll" />
+    <Content Include="oraociicus11.dll" />
+    <Content Include="OraOps11w.dll" />
     <None Include="Resources\document_check_compatibility.png" />
     <None Include="Resources\add1.png" />
     <None Include="Resources\add.png" />
