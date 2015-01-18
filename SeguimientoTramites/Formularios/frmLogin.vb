@@ -30,16 +30,19 @@
                 .Oficina = "No disponible"
             End With
             RibbonFormMain.Show()
+            Cursor = System.Windows.Forms.Cursors.Default
             Close()
             Exit Sub
         End If
 
         If txtUser.Text.Trim = "" Then
             txtUser.Focus()
+            Cursor = System.Windows.Forms.Cursors.Default
             Exit Sub
         End If
         If txtPass.Text.Trim = "" Then
             txtPass.Focus()
+            Cursor = System.Windows.Forms.Cursors.Default
             Exit Sub
         End If
 
@@ -49,6 +52,7 @@
             Else
                 RibbonFormMain.Show()
             End If
+            Cursor = System.Windows.Forms.Cursors.Default
             Close()
         Else
             Dim s As String = "Error al iniciar sesión. Posibles razones:" & vbCrLf & vbCrLf & _
