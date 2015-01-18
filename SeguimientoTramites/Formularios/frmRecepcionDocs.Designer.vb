@@ -34,6 +34,7 @@ Partial Class frmRecepcionDocs
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnSeleccionar = New System.Windows.Forms.Button()
         Me.btnRecibirTramites = New System.Windows.Forms.Button()
         CType(Me.dgvTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -76,21 +77,21 @@ Partial Class frmRecepcionDocs
         Me.Column1.HeaderText = "Código trámite"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
-        Me.Column1.Width = 109
+        Me.Column1.Width = 107
         '
         'Column2
         '
         Me.Column2.HeaderText = "Trámite"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
-        Me.Column2.Width = 77
+        Me.Column2.Width = 75
         '
         'Column3
         '
         Me.Column3.HeaderText = "Enviado por"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
-        Me.Column3.Width = 99
+        Me.Column3.Width = 97
         '
         'Column5
         '
@@ -103,7 +104,7 @@ Partial Class frmRecepcionDocs
         '
         Me.Column4.HeaderText = "Recepcionar"
         Me.Column4.Name = "Column4"
-        Me.Column4.Width = 84
+        Me.Column4.Width = 82
         '
         'Label2
         '
@@ -139,6 +140,7 @@ Partial Class frmRecepcionDocs
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.BtnSeleccionar)
         Me.Panel1.Controls.Add(Me.btnRecibirTramites)
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.dgvTramites)
@@ -147,6 +149,16 @@ Partial Class frmRecepcionDocs
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(630, 457)
         Me.Panel1.TabIndex = 3
+        '
+        'BtnSeleccionar
+        '
+        Me.BtnSeleccionar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.BtnSeleccionar.Location = New System.Drawing.Point(453, 406)
+        Me.BtnSeleccionar.Name = "BtnSeleccionar"
+        Me.BtnSeleccionar.Size = New System.Drawing.Size(160, 35)
+        Me.BtnSeleccionar.TabIndex = 4
+        Me.BtnSeleccionar.Text = "Seleccionar todos"
+        Me.BtnSeleccionar.UseVisualStyleBackColor = True
         '
         'btnRecibirTramites
         '
@@ -187,4 +199,5 @@ Partial Class frmRecepcionDocs
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents BtnSeleccionar As System.Windows.Forms.Button
 End Class
