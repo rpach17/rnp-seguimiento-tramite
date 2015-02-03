@@ -151,10 +151,36 @@ Public Class frmTramite
     End Sub
 
     Private Sub btnCrearTramite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCrearTramite.Click
-        If result = 0 Then
+        If result = 0 And Not chkExtranjero.Checked Then
             lblInfo.Visible = True
             lblInfo.Text = "Corregir número de identidad del responsable"
             txtIdentidad.Focus()
+        ElseIf result = 0 And chkExtranjero.Checked Then
+            If txtCorreo.Text.Trim <> "" Then
+                If Not ValidarCorreo(txtCorreo.Text) Then
+                    MsgBox("El correo electrónico no es correcto", MsgBoxStyle.Exclamation, "Verificar correo")
+                    txtCorreo.Focus()
+                    Exit Sub
+                End If
+            End If
+            Dim responsable As Integer = EntityTablas.NuevoResponsable(New RESPONSABLE With _
+                                                             {
+                                                                 .NUMERO_IDENTIDAD = txtIdentidad.Text,
+                                                                 .NOMBRE = String.Format("{0} {1}", txtPrimerNombre.Text, txtSegundoNombre.Text),
+                                                                 .PRIMER_APELLIDO = txtPrimerApellido.Text,
+                                                                 .SEGUNDO_APELLIDO = txtSegundoApellido.Text,
+                                                                 .TELEFONO = txtTelefonoFijo.Text,
+                                                                 .CELULAR = txtTelefonoMovil.Text,
+                                                                 .CORREO = txtCorreo.Text
+                                                             })
+            If txtNumTramites.Value = 1 Then
+                crearTramite(responsable)
+            ElseIf txtNumTramites.Value > 1 Then
+                For t As Integer = 1 To txtNumTramites.Value - 1
+                    crearTramite(responsable)
+                Next
+                crearTramite(responsable)
+            End If
         ElseIf result = 1 Then 'Existe en local (UPDATE)
             If txtCorreo.Text.Trim <> "" Then
                 If Not ValidarCorreo(txtCorreo.Text) Then
@@ -162,7 +188,7 @@ Public Class frmTramite
                     txtCorreo.Focus()
                     Exit Sub
                 End If
-            
+
             End If
 
             If txtNumTramites.Value = 1 Then

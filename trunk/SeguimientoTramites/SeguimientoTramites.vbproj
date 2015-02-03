@@ -493,16 +493,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-rnp.ico" />
-    <Content Include="mfc71.dll" />
-    <Content Include="msvcr71.dll" />
-    <Content Include="oci.dll" />
-    <Content Include="ocijdbc11.dll" />
-    <Content Include="ociw32.dll" />
-    <Content Include="orannzsbb11.dll" />
-    <Content Include="oraocci11.dll" />
-    <Content Include="oraociei11.dll" />
-    <Content Include="oraociicus11.dll" />
-    <Content Include="OraOps11w.dll" />
     <None Include="Resources\document_check_compatibility.png" />
     <None Include="Resources\add1.png" />
     <None Include="Resources\add.png" />
