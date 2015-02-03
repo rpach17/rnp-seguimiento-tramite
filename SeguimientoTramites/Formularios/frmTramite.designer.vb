@@ -45,6 +45,8 @@ Partial Class frmTramite
         Me.btnCrearTramite = New System.Windows.Forms.Button()
         Me.btnCambirTramite = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtNumTramites = New System.Windows.Forms.NumericUpDown()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.txtCantidadDocs = New System.Windows.Forms.NumericUpDown()
         Me.cboRepresentante = New System.Windows.Forms.ComboBox()
@@ -60,14 +62,13 @@ Partial Class frmTramite
         Me.txtInfoAdicional = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cboEnviarA = New System.Windows.Forms.ComboBox()
-        Me.txtNumTramites = New System.Windows.Forms.NumericUpDown()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.chkExtranjero = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.txtNumTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         CType(Me.txtCantidadDocs, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtNumTramites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtIdentidad
@@ -285,6 +286,7 @@ Partial Class frmTramite
         '
         Me.Panel1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.chkExtranjero)
         Me.Panel1.Controls.Add(Me.txtNumTramites)
         Me.Panel1.Controls.Add(Me.Label16)
         Me.Panel1.Controls.Add(Me.GroupBox3)
@@ -298,6 +300,23 @@ Partial Class frmTramite
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(863, 456)
         Me.Panel1.TabIndex = 0
+        '
+        'txtNumTramites
+        '
+        Me.txtNumTramites.Location = New System.Drawing.Point(492, 340)
+        Me.txtNumTramites.Name = "txtNumTramites"
+        Me.txtNumTramites.Size = New System.Drawing.Size(47, 20)
+        Me.txtNumTramites.TabIndex = 28
+        Me.txtNumTramites.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(361, 343)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(107, 13)
+        Me.Label16.TabIndex = 29
+        Me.Label16.Text = "Cantidad de Tramites"
         '
         'GroupBox3
         '
@@ -438,22 +457,15 @@ Partial Class frmTramite
         Me.cboEnviarA.Size = New System.Drawing.Size(290, 21)
         Me.cboEnviarA.TabIndex = 3
         '
-        'txtNumTramites
+        'chkExtranjero
         '
-        Me.txtNumTramites.Location = New System.Drawing.Point(492, 340)
-        Me.txtNumTramites.Name = "txtNumTramites"
-        Me.txtNumTramites.Size = New System.Drawing.Size(47, 20)
-        Me.txtNumTramites.TabIndex = 28
-        Me.txtNumTramites.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(361, 343)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(107, 13)
-        Me.Label16.TabIndex = 29
-        Me.Label16.Text = "Cantidad de Tramites"
+        Me.chkExtranjero.AutoSize = True
+        Me.chkExtranjero.Location = New System.Drawing.Point(556, 342)
+        Me.chkExtranjero.Name = "chkExtranjero"
+        Me.chkExtranjero.Size = New System.Drawing.Size(77, 17)
+        Me.chkExtranjero.TabIndex = 30
+        Me.chkExtranjero.Text = "Extrangero"
+        Me.chkExtranjero.UseVisualStyleBackColor = True
         '
         'frmTramite
         '
@@ -473,10 +485,10 @@ Partial Class frmTramite
         Me.GroupBox2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.txtNumTramites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         CType(Me.txtCantidadDocs, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtNumTramites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -520,4 +532,5 @@ Partial Class frmTramite
     Friend WithEvents txtCantidadDocs As System.Windows.Forms.NumericUpDown
     Friend WithEvents txtNumTramites As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents chkExtranjero As System.Windows.Forms.CheckBox
 End Class
