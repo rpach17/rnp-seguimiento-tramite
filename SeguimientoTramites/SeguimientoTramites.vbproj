@@ -14,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://192.168.1.115/aplicacion-ticket/seguimiento/</PublishUrl>
     <Install>true</Install>
@@ -142,13 +143,14 @@
     <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+    <Reference Include="Oracle.DataAccess, Version=4.121.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -185,12 +187,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EReportes.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\frmFormularioChromeEntrega.Designer.vb">
-      <DependentUpon>frmFormularioChromeEntrega.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\frmFormularioChromeEntrega.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Formularios\frmAnimacionProceso.Designer.vb">
       <DependentUpon>frmAnimacionProceso.vb</DependentUpon>
     </Compile>
@@ -219,6 +215,12 @@
       <DependentUpon>frmFormulario.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmFormulario.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmFormularioChromeEntrega.designer.vb">
+      <DependentUpon>frmFormularioChromeEntrega.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmFormularioChromeEntrega.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmHistorial.Designer.vb">
@@ -353,9 +355,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formularios\frmFormularioChromeEntrega.resx">
-      <DependentUpon>frmFormularioChromeEntrega.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmAnimacionProceso.resx">
       <DependentUpon>frmAnimacionProceso.vb</DependentUpon>
     </EmbeddedResource>
@@ -370,6 +369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmFormulario.resx">
       <DependentUpon>frmFormulario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmFormularioChromeEntrega.resx">
+      <DependentUpon>frmFormularioChromeEntrega.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmHistorial.resx">
       <DependentUpon>frmHistorial.vb</DependentUpon>
