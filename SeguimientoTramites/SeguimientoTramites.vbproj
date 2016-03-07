@@ -302,6 +302,18 @@
     <Compile Include="Formularios\frmTramite.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\frmTramiteEditar.designer.vb">
+      <DependentUpon>frmTramiteEditar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmTramiteEditar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmTramitesListar.designer.vb">
+      <DependentUpon>frmTramitesListar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmTramitesListar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\frmVerificarDisponibilidad.Designer.vb">
       <DependentUpon>frmVerificarDisponibilidad.vb</DependentUpon>
     </Compile>
@@ -411,6 +423,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmTramite.resx">
       <DependentUpon>frmTramite.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmTramiteEditar.resx">
+      <DependentUpon>frmTramiteEditar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmTramitesListar.resx">
+      <DependentUpon>frmTramitesListar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmVerificarDisponibilidad.resx">
       <DependentUpon>frmVerificarDisponibilidad.vb</DependentUpon>
