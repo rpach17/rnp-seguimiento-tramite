@@ -366,6 +366,43 @@ Public Class EntityTablas
 
     End Sub
 
+    Shared Sub historialTramitesIniciados(ByVal grid As DataGridView, Optional ByVal codigo As String = "")
+        '', Optional ByVal lblcodigo As Label = Label, Optional ByVal lbltramite As Label, Optional ByVal lblActivo As Label)
+        ' pasos a seguir obtener todos los tramies iniciados por el usuario
+
+
+        Dim tramite = (From t In ctx.TRAMITES
+                       Join ds In ctx.DETALLE_SEGUIMIENTO On t.IDTRAMITE Equals ds.IDTRAMITE
+                      Where ds.IDUSUARIO = SesionActiva.IdUsuario
+                      Select t.CODIGOTRAMITE, t.GESTIONES.NOMBRE, t.ACTIVO).FirstOrDefault
+
+        Dim dtt = (From dt In ctx.DETALLE_SEGUIMIENTO
+                 Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
+                 Join us In ctx.USUARIOS On us.IDUSUARIO Equals dt.IDUSUARIO
+                 Where dt.IDUSUARIO = SesionActiva.IdUsuario
+                 Order By dt.IDDETALLE_SEGUIMIENTO
+                 Select CodigoTramite = dt.TRAMITES.CODIGOTRAMITE, Descripcion = s.DESCRIPCION_SALTO,
+                 Fecha = dt.FECHA_RECEPCION, Responsable = us.NOMBRE + " " + us.APELLIDOS).ToList()
+
+        grid.DataSource = dtt
+        'If tramite Is Nothing Then
+        '    MsgBox("Tramite ingresado no existe")
+        'Else
+        '    lblcodigo.Text = tramite.CODIGOTRAMITE
+        '    lbltramite.Text = tramite.NOMBRE
+        '    If tramite.ACTIVO = 1 Then
+        '        lblActivo.Text = "Trámite en proceso"
+        '        lblActivo.ForeColor = Color.LightGreen
+        '    Else
+        '        lblActivo.Text = "Trámite finalizado"
+        '        lblActivo.ForeColor = Color.GreenYellow
+        '    End If
+        '    grid.DataSource = dtt
+        'End If
+
+    End Sub
+
+
     Public Shared Sub cagarTipoRespresentate(ByVal cbo As ComboBox)
         Dim tp = (From t In ctx.TIPO_REPRESENTANTE
                   Select t.IDTIPO_REPRESENTANTE, t.DESCRIPCION).ToList

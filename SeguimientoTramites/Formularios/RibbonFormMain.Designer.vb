@@ -45,6 +45,7 @@ Partial Class RibbonFormMain
         Me.XTabManager = New DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(Me.components)
         Me.tmNotificacion = New System.Windows.Forms.Timer(Me.components)
         Me.DefaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
+        Me.BarButtonItem12 = New DevExpress.XtraBars.BarButtonItem()
         CType(Me.RibbonControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ApplicationMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ClientPanel, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,9 +57,9 @@ Partial Class RibbonFormMain
         Me.RibbonControl.ApplicationButtonDropDownControl = Me.ApplicationMenu1
         Me.RibbonControl.ApplicationButtonText = Nothing
         Me.RibbonControl.ExpandCollapseItem.Id = 0
-        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.BarButtonItem5, Me.BarButtonItem6, Me.BarButtonItem7, Me.BarStaticItem1, Me.lblConectadoComo, Me.BarStaticItem2, Me.lblUbicacion, Me.BarButtonItem8, Me.BarButtonItem9, Me.BarButtonItem10, Me.BarButtonItem11})
+        Me.RibbonControl.Items.AddRange(New DevExpress.XtraBars.BarItem() {Me.RibbonControl.ExpandCollapseItem, Me.BarButtonItem1, Me.BarButtonItem2, Me.BarButtonItem3, Me.BarButtonItem4, Me.BarButtonItem5, Me.BarButtonItem6, Me.BarButtonItem7, Me.BarStaticItem1, Me.lblConectadoComo, Me.BarStaticItem2, Me.lblUbicacion, Me.BarButtonItem8, Me.BarButtonItem9, Me.BarButtonItem10, Me.BarButtonItem11, Me.BarButtonItem12})
         Me.RibbonControl.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonControl.MaxItemId = 19
+        Me.RibbonControl.MaxItemId = 20
         Me.RibbonControl.Name = "RibbonControl"
         Me.RibbonControl.Pages.AddRange(New DevExpress.XtraBars.Ribbon.RibbonPage() {Me.RibbonPage1})
         Me.RibbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010
@@ -196,6 +197,7 @@ Partial Class RibbonFormMain
         '
         Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem9)
         Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem10)
+        Me.RibbonPageGroup2.ItemLinks.Add(Me.BarButtonItem12)
         Me.RibbonPageGroup2.Name = "RibbonPageGroup2"
         Me.RibbonPageGroup2.Text = "Trámites"
         '
@@ -232,6 +234,13 @@ Partial Class RibbonFormMain
         'DefaultLookAndFeel1
         '
         Me.DefaultLookAndFeel1.LookAndFeel.SkinName = "Office 2013"
+        '
+        'BarButtonItem12
+        '
+        Me.BarButtonItem12.Caption = "Editar Trámite"
+        Me.BarButtonItem12.Id = 19
+        Me.BarButtonItem12.LargeGlyph = Global.SeguimientoTramites.My.Resources.Resources.Icono_Registro
+        Me.BarButtonItem12.Name = "BarButtonItem12"
         '
         'RibbonFormMain
         '
@@ -280,6 +289,7 @@ Partial Class RibbonFormMain
     Friend WithEvents BarButtonItem10 As DevExpress.XtraBars.BarButtonItem
     Friend WithEvents RibbonPageGroup2 As DevExpress.XtraBars.Ribbon.RibbonPageGroup
     Friend WithEvents BarButtonItem11 As DevExpress.XtraBars.BarButtonItem
+    Friend WithEvents BarButtonItem12 As DevExpress.XtraBars.BarButtonItem
 
 
 End Class
