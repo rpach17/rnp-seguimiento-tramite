@@ -266,12 +266,27 @@ Public Class EntityTablas
     End Function
 
     Shared Sub AgregarRequisito(ByVal req As RECEPCION_REQUISITOS)
-        Try
-            ctx.RECEPCION_REQUISITOS.AddObject(req)
-            ctx.SaveChanges()
-        Catch ex As Exception
-            MsgBox(ex.InnerException.Message)
-        End Try
+        Dim r = (From re In ctx.RECEPCION_REQUISITOS Where re.IDTRAMITE = req.IDTRAMITE AndAlso re.IDREQUISITO = req.IDREQUISITO).ToList()
+        If r.Count = 0 Then
+            Try
+                ctx.RECEPCION_REQUISITOS.AddObject(req)
+                ctx.SaveChanges()
+            Catch ex As Exception
+                MsgBox(ex.InnerException.Message)
+            End Try
+        End If
+    End Sub
+
+    Shared Sub EliminarRequisito(ByVal IdR As Integer, ByVal tra As Integer)
+        Dim req = (From re In ctx.RECEPCION_REQUISITOS Where re.IDTRAMITE = tra AndAlso re.IDREQUISITO = IdR).ToList()
+        For Each r In req
+            Try
+                ctx.RECEPCION_REQUISITOS.DeleteObject(r)
+                ctx.SaveChanges()
+            Catch ex As Exception
+                MsgBox(ex.InnerException.Message)
+            End Try
+        Next
     End Sub
 
     Shared Sub ListadoGestiones(ByVal grid As DataGridView, Optional ByVal buscar As String = "", Optional ByVal idu As Integer = 0)
@@ -382,25 +397,64 @@ Public Class EntityTablas
                      Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
                      Join us In ctx.USUARIOS On us.IDUSUARIO Equals dt.IDUSUARIO
                      Where primerosSaltos.Contains(dt.IDSALTO) AndAlso dt.IDUSUARIO = SesionActiva.IdUsuario AndAlso dt.FECHA_ENTREGA Is Nothing
-                     Order By dt.IDDETALLE_SEGUIMIENTO
+                     Order By dt.IDDETALLE_SEGUIMIENTO Descending
                      Select CodigoTramite = dt.TRAMITES.CODIGOTRAMITE, Descripcion = s.DESCRIPCION_SALTO,
                      Fecha = dt.FECHA_RECEPCION, Responsable = us.NOMBRE + " " + us.APELLIDOS).ToList()
             grid.DataSource = dtt
+            ''AndAlso dt.FECHA_ENTREGA Is Nothing
         Else
             Dim dtt = (From dt In ctx.DETALLE_SEGUIMIENTO
                        Join s In ctx.SALTOS On dt.IDSALTO Equals s.IDSALTO
                        Join us In ctx.USUARIOS On us.IDUSUARIO Equals dt.IDUSUARIO
-                       Where primerosSaltos.Contains(dt.IDSALTO) AndAlso dt.IDUSUARIO = SesionActiva.IdUsuario AndAlso dt.FECHA_ENTREGA Is Nothing AndAlso dt.TRAMITES.CODIGOTRAMITE = codigo
-                       Order By dt.IDDETALLE_SEGUIMIENTO
+                       Where primerosSaltos.Contains(dt.IDSALTO) AndAlso dt.IDUSUARIO = SesionActiva.IdUsuario AndAlso dt.TRAMITES.CODIGOTRAMITE = codigo AndAlso dt.FECHA_ENTREGA Is Nothing
+                       Order By dt.IDDETALLE_SEGUIMIENTO Descending
                        Select CodigoTramite = dt.TRAMITES.CODIGOTRAMITE, Descripcion = s.DESCRIPCION_SALTO,
                        Fecha = dt.FECHA_RECEPCION, Responsable = us.NOMBRE + " " + us.APELLIDOS).ToList()
             grid.DataSource = dtt
+            ' AndAlso dt.FECHA_ENTREGA Is Nothing 
         End If
-
-
-
     End Sub
 
+    Public Shared Sub updateTramite(ByVal tramite As TRAMITES, ByVal idUsuarioDestino As Integer)
+        Dim tra = (From t In ctx.TRAMITES Where t.IDTRAMITE = tramite.IDTRAMITE Select t).SingleOrDefault()
+        Dim ds = (From d In ctx.DETALLE_SEGUIMIENTO Where d.IDTRAMITE = tramite.IDTRAMITE Order By d.IDDETALLE_SEGUIMIENTO).FirstOrDefault()
+        Try
+            tra.IDRESPONSABLE = tramite.IDRESPONSABLE
+            tra.NOTA = tramite.NOTA
+            tra.NUM_RECIBO = tramite.NUM_RECIBO
+            tra.MONTO_RECIBO = tramite.MONTO_RECIBO
+            tra.CANTIDAD_DOCS = tramite.CANTIDAD_DOCS
+            tra.IDTIPO_REPRESENTANTE = tramite.IDTIPO_REPRESENTANTE
+            tra.CODIGOTRAMITES = tramite.CODIGOTRAMITES
+
+            ds.IDUSUARIO_DESTINO = idUsuarioDestino
+
+            ctx.SaveChanges()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Public Shared Function cargarTramite(ByVal codigo As String)
+        Dim tramite = (From t In ctx.TRAMITES
+                        Where t.CODIGOTRAMITE = codigo
+                        Select t).FirstOrDefault()
+        Return tramite
+    End Function
+
+    Public Shared Sub cagarTipoRespresentateEditar(ByVal cbo As ComboBox, ByVal tipoRepresente As Nullable(Of Integer))
+        Dim tp = (From t In ctx.TIPO_REPRESENTANTE
+                  Select t.IDTIPO_REPRESENTANTE, t.DESCRIPCION).ToList
+        cbo.DataSource = tp
+        cbo.ValueMember = "IDTIPO_REPRESENTANTE"
+        cbo.DisplayMember = "DESCRIPCION"
+        If tipoRepresente Is Nothing Then
+            cbo.SelectedItem = -1
+        Else
+            cbo.SelectedIndex = tipoRepresente
+        End If
+ 
+    End Sub
 
     Public Shared Sub cagarTipoRespresentate(ByVal cbo As ComboBox)
         Dim tp = (From t In ctx.TIPO_REPRESENTANTE

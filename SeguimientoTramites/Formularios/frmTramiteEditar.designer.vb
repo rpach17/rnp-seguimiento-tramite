@@ -43,8 +43,9 @@ Partial Class frmTramiteEditar
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnCrearTramite = New System.Windows.Forms.Button()
-        Me.btnCambirTramite = New System.Windows.Forms.Button()
+        Me.btnCambiarTramite = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.chkExtranjero = New System.Windows.Forms.CheckBox()
         Me.txtNumTramites = New System.Windows.Forms.NumericUpDown()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -62,7 +63,6 @@ Partial Class frmTramiteEditar
         Me.txtInfoAdicional = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cboEnviarA = New System.Windows.Forms.ComboBox()
-        Me.chkExtranjero = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -265,22 +265,21 @@ Partial Class frmTramiteEditar
         '
         'btnCrearTramite
         '
-        Me.btnCrearTramite.Enabled = False
         Me.btnCrearTramite.Location = New System.Drawing.Point(492, 365)
         Me.btnCrearTramite.Name = "btnCrearTramite"
         Me.btnCrearTramite.Size = New System.Drawing.Size(141, 53)
         Me.btnCrearTramite.TabIndex = 4
-        Me.btnCrearTramite.Text = "Verificar requisitos"
+        Me.btnCrearTramite.Text = "Imprimir"
         Me.btnCrearTramite.UseVisualStyleBackColor = True
         '
-        'btnCambirTramite
+        'btnCambiarTramite
         '
-        Me.btnCambirTramite.Location = New System.Drawing.Point(641, 365)
-        Me.btnCambirTramite.Name = "btnCambirTramite"
-        Me.btnCambirTramite.Size = New System.Drawing.Size(141, 53)
-        Me.btnCambirTramite.TabIndex = 5
-        Me.btnCambirTramite.Text = "Cambiar trámite"
-        Me.btnCambirTramite.UseVisualStyleBackColor = True
+        Me.btnCambiarTramite.Location = New System.Drawing.Point(641, 365)
+        Me.btnCambiarTramite.Name = "btnCambiarTramite"
+        Me.btnCambiarTramite.Size = New System.Drawing.Size(141, 53)
+        Me.btnCambiarTramite.TabIndex = 5
+        Me.btnCambiarTramite.Text = "Editar trámite"
+        Me.btnCambiarTramite.UseVisualStyleBackColor = True
         '
         'Panel1
         '
@@ -293,13 +292,23 @@ Partial Class frmTramiteEditar
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.cboEnviarA)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Controls.Add(Me.btnCambirTramite)
+        Me.Panel1.Controls.Add(Me.btnCambiarTramite)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.btnCrearTramite)
         Me.Panel1.Location = New System.Drawing.Point(77, 46)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(863, 456)
         Me.Panel1.TabIndex = 0
+        '
+        'chkExtranjero
+        '
+        Me.chkExtranjero.AutoSize = True
+        Me.chkExtranjero.Location = New System.Drawing.Point(556, 342)
+        Me.chkExtranjero.Name = "chkExtranjero"
+        Me.chkExtranjero.Size = New System.Drawing.Size(77, 17)
+        Me.chkExtranjero.TabIndex = 30
+        Me.chkExtranjero.Text = "Extrangero"
+        Me.chkExtranjero.UseVisualStyleBackColor = True
         '
         'txtNumTramites
         '
@@ -457,17 +466,7 @@ Partial Class frmTramiteEditar
         Me.cboEnviarA.Size = New System.Drawing.Size(290, 21)
         Me.cboEnviarA.TabIndex = 3
         '
-        'chkExtranjero
-        '
-        Me.chkExtranjero.AutoSize = True
-        Me.chkExtranjero.Location = New System.Drawing.Point(556, 342)
-        Me.chkExtranjero.Name = "chkExtranjero"
-        Me.chkExtranjero.Size = New System.Drawing.Size(77, 17)
-        Me.chkExtranjero.TabIndex = 30
-        Me.chkExtranjero.Text = "Extrangero"
-        Me.chkExtranjero.UseVisualStyleBackColor = True
-        '
-        'frmTramite
+        'frmTramiteEditar
         '
         Me.AccessibleDescription = ""
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -477,7 +476,7 @@ Partial Class frmTramiteEditar
         Me.Controls.Add(Me.lblInfo)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
-        Me.Name = "frmTramite"
+        Me.Name = "frmTramiteEditar"
         Me.Text = "Trámite"
         Me.TopMost = True
         Me.GroupBox1.ResumeLayout(False)
@@ -513,7 +512,7 @@ Partial Class frmTramiteEditar
     Friend WithEvents btnCrearTramite As System.Windows.Forms.Button
     Friend WithEvents txtTelefonoFijo As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtTelefonoMovil As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents btnCambirTramite As System.Windows.Forms.Button
+    Friend WithEvents btnCambiarTramite As System.Windows.Forms.Button
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents cboEnviarA As System.Windows.Forms.ComboBox

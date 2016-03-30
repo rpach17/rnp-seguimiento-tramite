@@ -5,6 +5,21 @@ Imports Oracle.DataAccess.Types
 Public Class RibbonFormMain
     Dim cnn As New OracleConnection(My.Settings.MiConexion)
 
+    Private Sub RibbonFormMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        CargarTramitesAtrasados()
+        tmNotificacion.Enabled = True
+
+        lblConectadoComo.Caption = String.Format("{0} ({1})", SesionActiva.Nombre, SesionActiva.Usuario)
+        lblUbicacion.Caption = String.Format("[{0}, {1}] - {2}, {3}", SesionActiva.Depto, SesionActiva.Municipio, SesionActiva.Sucursal, SesionActiva.Oficina)
+        If EntityTablas.PrimerPaso(SesionActiva.IdUsuario) Then
+            BarButtonItem9.Enabled = True
+            BarButtonItem12.Enabled = True
+        Else
+            BarButtonItem9.Enabled = False
+            BarButtonItem12.Enabled = False
+        End If
+    End Sub
+
     Private Sub GestionarPanel()
         If XTabManager.Pages.Count = 0 Then
             ClientPanel.Visible = True
@@ -109,18 +124,7 @@ Public Class RibbonFormMain
         CargarTramitesAtrasados()
     End Sub
 
-    Private Sub RibbonFormMain_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        CargarTramitesAtrasados()
-        tmNotificacion.Enabled = True
 
-        lblConectadoComo.Caption = String.Format("{0} ({1})", SesionActiva.Nombre, SesionActiva.Usuario)
-        lblUbicacion.Caption = String.Format("[{0}, {1}] - {2}, {3}", SesionActiva.Depto, SesionActiva.Municipio, SesionActiva.Sucursal, SesionActiva.Oficina)
-        If EntityTablas.PrimerPaso(SesionActiva.IdUsuario) Then
-            BarButtonItem9.Enabled = True
-        Else
-            BarButtonItem9.Enabled = False
-        End If
-    End Sub
 
     Private Sub BarButtonItem10_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem10.ItemClick
         With frmEntregaDocs
