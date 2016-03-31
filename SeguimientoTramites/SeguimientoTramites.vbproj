@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>http://192.168.1.115/aplicacion-ticket/seguimiento/</PublishUrl>
+    <PublishUrl>http://tramites.rnp.hn/aplicacion-ticket/dseguimiento/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -27,11 +27,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://192.168.1.115/aplicacion-ticket/seguimiento/</InstallUrl>
-    <UpdateUrl>http://192.168.1.115/aplicacion-ticket/seguimiento/</UpdateUrl>
+    <InstallUrl>http://tramites.rnp.hn/aplicacion-ticket/dseguimiento/</InstallUrl>
+    <UpdateUrl>http://tramites.rnp.hn/aplicacion-ticket/dseguimiento/</UpdateUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -74,7 +74,7 @@
     <ApplicationIcon>icon-rnp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>292D7821DF12E40FDE75DB04BBA591E2B610D424</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D0A028A77D898FFA1980698DA3E401F86636C4B3</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>SeguimientoTramites_TemporaryKey.pfx</ManifestKeyFile>
